@@ -1,0 +1,646 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>督导听课系统</title>
+    <link rel="shortcut icon" href="/images/00.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+  	<link rel="stylesheet" href="/css/sas.css">
+  	<link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/tabs.css">
+	<!--[if IE]>
+		<script src="http://libs.useso.com/js/html5shiv/3.7/html5shiv.min.js"></script>
+	<![endif]-->
+</head>
+<body background="/images/10.jpg">
+<div id="container">
+  <div class="header">
+<span class=" dd-title-center dd-title-white">   督导听课</span><span class="dd-title-blue">系统<a href="/" class="admin admin-text">欢迎您，管理员</a><img src="/images/14.png"class="admin admin-1"></span>
+  </div>
+<div id="page">
+  <div class="container-fluid">
+    <div id="wrapper" class="wrapper">
+     <div class="contain">        
+    <ul class="tabs">  
+        <li class="active"><a href="#tab1">临时表</a></li>  
+        <li><a href="#tab2">确认表</a></li>  
+        <li><a href="#tab3">发送日志</a></li>
+    </ul> 
+        <div class="tab_container">  
+        <div id="tab1" class="tab_content" style="display: block; ">
+          <div class="row">           
+            <div class="col-lg-3 col-sm-5 col-xs-12">
+              <a href="#" class="button green">添加</a>
+              <a href="#" class="button orange">修改</a>
+              <a href="#" class="button blue">保存</a>
+             </div>
+       <div class="col-lg-6 col-sm-3 col-xs-0"></div>
+        <div class="col-lg-3 col-sm-4 col-xs-12">
+      
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="输入你想搜索的信息">
+             <span class="input-group-btn">
+               <button class="btn btn-default" type="button">搜索</button>
+                 </span>
+               </div><!-- /input-group -->
+           </div><!-- /.col-lg-6 -->
+         </div><!-- /.row -->
+                <div >
+                <p></p>
+                 <table class="table table-condensed table-hover table-responsive ove" >
+                   <tr bgcolor="f5f5f5">
+                    <th width=2%>
+                        <form>
+                         <input id="checkall" type="checkbox" name="checkall">
+                        </form>
+                    </th>
+                    <th><p>课程</p></th>
+                    <th><p>授课内容</p></th>
+                    <th><p>授课方式</p></th>
+                    <th><p>专业</p></th>
+                    <th><p>教室</p></th>
+                    <th><p>教师</p></th>
+                    <th><p>周次</p></th>
+                    <th><p>听课时间</p></th>   
+                    <th><p>人员安排</p></th>                                      
+                   </tr>
+                   <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                   </tr> 
+                   <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                   </tr>  
+                   <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                   </tr>  
+                   <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                   </tr>  
+                   <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                   </tr> 
+                   <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                   </tr>  
+                   <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                   </tr> 
+                   <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                   </tr>  
+                   <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                   </tr>  
+                   <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                   </tr>
+                    <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                   </tr>  
+                   <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                   </tr>    
+                 </table>
+                </div><!-- /.table -->
+              <div class="row">
+                <div class="col-lg-9 col-sm-6 col-xs-4"></div>
+                  <div class="col-lg-3 col-sm-6 col-xs-8">
+                    <div class="pagese">
+                    <p>页数：</p>
+                     <form method="get">
+                      <input type="text" name="pages"/>
+                      </form>  
+
+                    <a href="#" class="button gray">下一页</a>
+                    <a href="#" class="button gray">上一页</a>    
+                    <a href="#" class="button gray">转到</a>                         
+                   </div>
+               </div><!-- /.row -->
+             </div>
+       </div>    
+        <div id="tab2" class="tab_content" style="display: none; ">  
+           <div class="row">           
+            <div class="col-lg-5 col-sm-12 col-xs-12">
+               <a href="#" class="button orange">修改</a>
+               <a href="#" class="button red">删除</a>
+               <a href="#" class="button blue">发送安排</a>
+               <a href="#" class="button green">发送结果</a>             
+               <a href="#" class="button orange">导出Excel</a>
+             </div>
+          </div>
+              <div><!-- /table开始 -->
+              <br />
+                 <table class="table table-condensed table-hover table-responsive ove" >
+                   <tr bgcolor="#f5f5f5">
+                    <th width=2%>
+                        <form>
+                         <input id="checkall" type="checkbox" name="checkall">
+                        </form>
+                    </th>
+                    <th><p>课程</p></th>
+                    <th><p>授课内容</p></th>
+                    <th><p>授课方式</p></th>
+                    <th><p>专业</p></th>
+                    <th><p>教室</p></th>
+                    <th><p>教师</p></th>
+                    <th><p>周次</p></th>
+                    <th><p>听课时间</p></th>   
+                    <th><p>人员安排</p></th> 
+                    <th><p>分数</p></th>                                     
+                   </tr>
+                   <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                   </tr>  
+                   <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                   </tr>                  
+                   <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                   </tr>  
+                   <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                   </tr>  
+                   <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                   </tr>  
+                   <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                   </tr> 
+                   <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                   </tr>  
+                   <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                   </tr> 
+                   <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                   </tr>  
+                   <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                   </tr>  
+                   <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                   </tr>    
+                   <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                   </tr>  
+                 </table>
+                </div><!-- /.table -->
+               <div class="row">
+                 <div class="col-lg-9 col-sm-6 col-xs-4"></div>
+                   <div class="col-lg-3 col-sm-6 col-xs-8">
+                     <div class="pages">
+                    <p>页数：</p>
+                     <form method="get">
+                      <input type="text" name="pages"/>
+                      </form>  
+                   <a href="#" class="button gray">下一页</a>
+                    <a href="#" class="button gray">上一页</a>    
+                    <a href="#" class="button gray">转到</a>                              
+                     </div>
+                  </div>
+               </div> 
+        </div>  
+        <div id="tab3" class="tab_content" style="display: none; ">  
+            <div class="row">           
+             <div class="col-lg-3 col-sm-4 col-xs-9" >
+               <a href="#" class="button green">重发</a>             
+               <a href="#" class="button red">删除</a>
+             </div>
+          </div> 
+              <div><!-- /.table开始 -->
+                <br />
+                 <table class="table table-condensed table-hover table-responsive ove" >
+                   <tr bgcolor="#f5f5f5">
+                    <th width=2%>
+                        <form>
+                         <input id="checkall" type="checkbox" name="checkall">
+                        </form>
+                    </th>
+                    <th><p>收件人</p></th>
+                    <th><p>身份</p></th>
+                    <th><p>主题</p></th>
+                    <th><p>时间</p></th>
+                    <th><p>类型</p></th>
+                    <th><p>状态</p></th>                                     
+                   </tr>                    
+                   <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                   </tr>  
+                   <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                   </tr> 
+                   <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                   </tr>  
+                   <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                   </tr> 
+                   <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                   </tr>  
+                   <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                   </tr> 
+                   <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                   </tr>  
+                   <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                   </tr> 
+                   <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                   </tr>  
+                   <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                   </tr>  
+                   <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                   </tr>    
+                   <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                   </tr>  
+                 </table>
+                </div><!-- /.table -->
+                  <div class="row">
+                   <div class="col-lg-9 col-sm-6 col-xs-4"></div>
+                    <div class="col-lg-3 col-sm-6 col-xs-8">
+                    <div class="pages">
+                    <p>页数：</p>
+                     <form method="get">
+                      <input type="text" name="pages"/>
+                      </form>  
+                    <a href="#" class="button gray">下一页</a>
+                    <a href="#" class="button gray">上一页</a>    
+                    <a href="#" class="button gray">转到</a>                             
+                  </div>
+                    </div>
+                  </div>
+        
+    </div>  
+</div>
+ </div> 
+</div>
+  <button id="mm-menu-toggle" class="mm-menu-toggle"></button>
+  <nav id="mm-menu" class="mm-menu">
+    <div class="mm-menu__header">
+    </div>
+    <ul class="mm-menu__items">
+      <li class="mm-menu__item">
+         <a class="mm-menu__link" href="/HomePage/Index">
+            <img src="/images/1.png"><div class="mm-menu__link-text">主页</div>
+         </a>
+      </li>
+      <li class="mm-menu__item">
+        <a class="mm-menu__link" href="/Schedule/Classes">
+          <img src="/images/2.png"><div class="mm-menu__link-text">进度表</div>
+        </a> 
+      </li>
+      <li class="mm-menu__item">
+          <a class="mm-menu__link" href="reference.html">
+          <img src="/images/3.png"><div class="mm-menu__link-text">排课参考</div>
+          </a>
+      </li>  
+      <li class="mm-menu__item">
+        <a class="mm-menu__link" href="auto.html">
+          <img src="/images/4.png"><div class="mm-menu__link-text">自动生成</div>
+        </a>
+      </li> 
+      <li class="mm-menu__item">
+        <a class="mm-menu__link" href="teacher.html">
+          <img src="/images/5.png"><div class="mm-menu__link-text">教师信息</div>
+        </a>
+      </li>
+      <li class="mm-menu__item">
+        <a class="mm-menu__link" href="/SupervisorPage/supervisor">
+          <img src="/images/6.png"><div class="mm-menu__link-text">督导信息</div>
+        </a>
+      </li>
+      <li class="mm-menu__item">
+        <a class="mm-menu__link" href="/Power/PowerManger">
+          <img src="/images/7.png"><div class="mm-menu__link-text">权限管理</div>
+        </a>
+      </li>
+      
+      <li class="mm-menu__item">
+        <a class="mm-menu__link" href="/ConfigPage/Setting">
+          <img src="/images/8.png"><div class="mm-menu__link-text">设置</div>
+        </a>
+      </li>
+        
+    </ul>
+  </nav><!-- /nav -->
+</div><!--page-->
+<div id="footer"><span class="foot-white">CopyRight </span><span class="foot-blue">破晓技术团队.</span><span class="foot-white">All Rights Resevered.</span></div>
+</div><!--container-->
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/tabs.js"></script>
+  <script src="/js/materialMenu.js"></script>
+  
+  <script>
+    var menu = new Menu;
+  </script> 
+</body>
+</html>

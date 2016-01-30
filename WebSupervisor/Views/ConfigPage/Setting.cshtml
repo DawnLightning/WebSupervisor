@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>督导听课系统</title>
+    <link rel="shortcut icon" href="/images/00.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/sas.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/tabs.css">
+  <!--[if IE]>
+    <script src="http://libs.useso.com/js/html5shiv/3.7/html5shiv.min.js"></script>
+  <![endif]-->
+</head>
+<body background="/images/10.jpg">
+<div id="container">
+  <div class="header">
+<span class=" dd-title-center dd-title-white">   督导&nbsp;|&nbsp;</span><span class="dd-title-blue">设置<a href="/" class="admin admin-text">超级管理员</a><img src="/images/14.png"class="admin admin-1"></span>
+  </div>
+<div id="page">
+  <div class="container-fluid">
+    <div id="wrapper" class="wrapper">
+     <div class="set-contain">        
+    <ul class="set-tabs">  
+        <li class="active"><a href="#tab1"><span class="set-title">个人信息</span></a></li>  
+        <li><a href="#tab2"><span class="set-title">开学信息</span></a></li>  
+    </ul> 
+    <div class="set-tab_container">  
+        <div id="tab1" class="set-tab_content" style="display: block; "> 
+          <input name="电话"type="text"placeholder="请输入电话"style="width:50%; height:40px;" maxlength="11"class=" form-control text-style color-mar1"/>
+          <!--设置电话长度为11-->
+
+          <input name="邮箱"type="text"placeholder="example@email.com"style="width:50%; height:40px;" class=" form-control text-style color-mar2"/>
+          <input name="密码"type="text"placeholder="请输入密码"style="width:50%; height:40px;" class=" form-control text-style color-mar3"/>
+          <input name="保存"type="button"style="width:25%; height:40px;" class="text-style3 color-mar4"value="保存" /> 
+        </div><!--tab1-->  
+
+        <div id="tab2" class="set-tab_content" style="display: none; ">  
+           <form class="form-inline color-mar6">                           
+               <input type="text" class="form-control text-style" style=" width:80px;height:40px;" id="年" placeholder="2016">
+               <label for="年" class="time-color">年</label>                      
+               <input type="text" class="form-control text-style" style=" width:80px;height:40px;" id="月" placeholder="02">
+               <label for="月" class="time-color">月</label>
+               <input type="text" class="form-control text-style" style=" width:80px;height:40px;" id="日" placeholder="29">
+               <label for="日" class="time-color">日</label>           
+           </form>
+           <input name="保存"type="button"style="width:25%; height:40px;" class="text-style3 color-mar6"value="保存" /> 
+        </div><!--tab2--> 
+
+    </div><!--set-tab_container-->  
+</div><!--set-contain-->
+ </div><!--wrapper-->
+</div><!--container-fluid-->
+  <button id="mm-menu-toggle" class="mm-menu-toggle"></button>
+  <nav id="mm-menu" class="mm-menu">
+    <div class="mm-menu__header">
+    </div>
+    <ul class="mm-menu__items">
+        <li class="mm-menu__item">
+            <a class="mm-menu__link" href="/HomePage/Index">
+                <img src="/images/1.png"><div class="mm-menu__link-text">主页</div>
+            </a>
+        </li>
+        <li class="mm-menu__item">
+            <a class="mm-menu__link" href="/Schedule/Classes">
+                <img src="/images/2.png"><div class="mm-menu__link-text">进度表</div>
+            </a>
+        </li>
+        <li class="mm-menu__item">
+            <a class="mm-menu__link" href="reference.html">
+                <img src="/images/3.png"><div class="mm-menu__link-text">排课参考</div>
+            </a>
+        </li>
+        <li class="mm-menu__item">
+            <a class="mm-menu__link" href="auto.html">
+                <img src="/images/4.png"><div class="mm-menu__link-text">自动生成</div>
+            </a>
+        </li>
+        <li class="mm-menu__item">
+            <a class="mm-menu__link" href="teacher.html">
+                <img src="/images/5.png"><div class="mm-menu__link-text">教师信息</div>
+            </a>
+        </li>
+        <li class="mm-menu__item">
+            <a class="mm-menu__link" href="/SupervisorPage/supervisor">
+                <img src="/images/6.png"><div class="mm-menu__link-text">督导信息</div>
+            </a>
+        </li>
+        <li class="mm-menu__item">
+            <a class="mm-menu__link" href="/Power/PowerManger">
+                <img src="/images/7.png"><div class="mm-menu__link-text">权限管理</div>
+            </a>
+        </li>
+
+        <li class="mm-menu__item">
+            <a class="mm-menu__link" href="/ConfigPage/Setting">
+                <img src="/images/8.png"><div class="mm-menu__link-text">设置</div>
+            </a>
+        </li>
+        
+    </ul>
+  </nav><!-- /nav -->
+</div><!--page-->
+<div id="footer"><span class="foot-white">CopyRight </span><span class="foot-blue">破晓技术团队.</span><span class="foot-white">All Rights Resevered.</span></div>
+</div><!--container-->
+  <script src="/js/jQuery.min.js"></script>
+  <script src="/js/materialMenu.js"></script>
+  <script src="/js/tabs.js"></script>
+  <script>
+    var menu = new Menu;
+  </script> 
+</body>
+</html>

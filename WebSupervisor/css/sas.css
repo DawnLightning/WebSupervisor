@@ -1,0 +1,436 @@
+
+/* CSS Document */
+
+/* =============================================================================
+  base
+============================================================================= */
+html,body{ height:100%; margin:0; padding:0;}
+html{
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+body{
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size:cover;
+	font;100% Tahoma, Geneva, sans-serif;
+  font-family: Microsoft YaHei;
+	}
+ul,li{
+	list-style:none;
+  text-align: center;}
+img{
+	border:0;
+  margin:20px auto;
+  padding: 0;
+  overflow: hidden;
+}
+
+a{
+  color: rgb(215,213,212);
+  text-decoration: none;
+}
+a:hover{
+  text-decoration: none;
+  color: #fff;
+}
+
+
+.ico{
+  width: 50%;
+  height: 50%;
+}
+/* =============================================================================
+  title
+============================================================================= */
+.dd-title-white{
+  font-size: 24px;
+  color: #fff;
+}
+.dd-title-blue{
+  font-size:24px;
+  color: rgb(205,239,229);
+}
+.dd-title-center{
+  margin-top: 60px;
+  padding-left: 5px;
+}
+
+/*foot*/
+.foot-white{
+  font-size: 10px;
+  color: #fff;
+}
+.foot-blue{
+  font-size: 10px;
+  color: rgb(205,239,229);
+}
+
+/* =============================================================================
+  textbox
+============================================================================= */
+.margin-lg{
+  margin-top: 9%;
+}
+.margin-md{
+  margin-top: 1em;
+}
+.btn-margin{
+  margin-left:20%;
+  margin-top: 1.5em;
+}
+.text-style1{
+  border-radius: 10px;
+  border-color: rgba(255,255,255,.1);
+  -moz-box-shadow:1px 1px 1px rgba(0,0,0,.24) inset; /* For Firefox3.6+ */ 
+  -webkit-box-shadow:1px 1px 1px rgba(0,0,0,.24) inset; /* For Chrome5+, Safari5+ */ 
+  box-shadow:1px 1px 1px rgba(0,0,0,.24) inset; /* For Latest Opera */
+  background-color: rgb(45,62,106);
+  outline:none;
+  color: rgb(229,222,189);
+  font-size: 1em;
+}
+.text-style2{
+  border-radius: 10px;
+  border-color: rgba(255,255,255,.1);
+  -moz-box-shadow:1px 1px 1px rgba(0,0,0,.24) inset; /* For Firefox3.6+ */ 
+  -webkit-box-shadow:1px 1px 1px rgba(0,0,0,.24) inset; /* For Chrome5+, Safari5+ */ 
+  box-shadow:1px 1px 1px rgba(0,0,0,.24) inset; /* For Latest Opera */
+  background-color: rgb(56,83,130);
+  outline:none;
+  color: rgb(229,222,189);
+  font-size: 1em;
+}
+.text-style3{
+  border-radius: 10px;
+  border-color: rgba(215,213,12,.2);
+  background-color: #fff;
+  color: rgb(56,83,130);
+  outline:none;
+}
+/* =============================================================================
+  test
+============================================================================= */
+
+
+#container {
+min-height:100%;
+height: auto !important;
+height: 100%; 
+position: relative;
+}
+#header {
+padding-left: 15px;
+padding-right: 15px;
+}
+.header{
+  padding-top: 4px;
+  padding-left: 40px;
+}
+#page {
+width: 100%;
+margin: 0 auto;
+padding-bottom: 30px;
+}
+#footer {
+position:absolute;
+bottom: 0;
+width: 90%;
+height: 30px;
+clear:both;
+padding-left: 10px;
+}
+/* =============================================================================
+  welcome admin
+============================================================================= */
+.admin{
+  float: right;
+  margin: 2px;
+}
+.admin-1{
+    padding-top: 3px;
+}
+.admin-text{
+  color: #496a7f;
+  font-size: 10px;
+  margin-right: 20px;
+}
+/* =============================================================================
+  set -tabs
+============================================================================= */
+.set-contain{
+  height:428px;
+  width:300px;
+  margin-top:5%;   /*可改标签切换与上面的距离*/
+  padding:0;
+}
+ul.set-tabs {
+  margin: 0;
+  padding: 0;
+  float: left;
+  position:absolute;
+  left:35%;
+  list-style: none;
+  color:#fff;
+  font-size:0.8em;}
+ul.set-tabs li {
+  float: left;
+  margin:0; 
+  padding: 0;
+  height: 28px;
+  line-height: 28px;
+  border: 0px;
+  border-left: none;
+  margin: 0px auto;
+  overflow: hidden;
+  position: relative;
+
+}
+ul.set-tabs li a {
+  text-decoration: none;
+  display: block;
+  font-size: 1.2em;
+  padding: 0 20px;
+  border: 0px;
+}
+html ul.set-tabs li, html ul.set-tabs li a:link {
+  color:#FFF; 
+}
+html ul.set-tabs li, html ul.set-tabs li a:visited  {
+  color:#FFF;
+}
+html ul.set-tabs li.active, html ul.set-tabs li.active {
+  border-bottom: 2px solid #fff;
+  color:#FFF;
+}
+
+.set-tab_container {
+  position:absolute;
+  float:left;
+  left:25%;
+  height:400px;
+  width:50%;
+  overflow:hidden;
+  text-align:center;
+  margin-top: 28px;
+  margin-bottom: 0;
+  padding:0;
+}
+.set-tab_content {
+  padding: 0px;
+  font-size: 1.2em;
+}
+.set-title{
+  color:rgb(205,239,229)
+}
+/* =============================================================================
+  set -btn
+============================================================================= */
+.text-style{
+  border-radius: 10px;
+  border-color: rgba(255,255,255,.1);
+  -moz-box-shadow:1px 1px 1px rgba(0,0,0,.24) inset; /* For Firefox3.6+ */ 
+  -webkit-box-shadow:1px 1px 1px rgba(0,0,0,.24) inset; /* For Chrome5+, Safari5+ */ 
+  box-shadow:1px 1px 1px rgba(0,0,0,.24) inset; /* For Latest Opera */
+  background-color: rgb(45,62,106);
+  outline:none;
+  color: rgb(229,222,189);
+  font-size: .875em;
+}
+.color-mar1{
+  margin-top: 10%;
+  margin-left:25%;
+  background-color: rgb(43,58,101);
+}
+.color-mar2{
+  margin-top: 2.5%;
+  margin-left:25%;
+  background-color: rgb(49,68,113);
+}
+.color-mar3{
+  margin-top: 2.5%;
+  margin-left:25%;
+  background-color: rgb(56,80,128);
+}
+.color-mar4{
+  margin-top: 5%;
+}
+.color-mar5{
+  margin-top: 16%;
+}
+.color-mar6{
+  margin-top:15%;
+}
+.remember{
+  color: #fff;
+  font-size: .625em;
+  float: left;
+  margin-left: 26%;
+  margin-top: 1%;
+}
+.time-color{
+  color: #fff;
+  font-size: .875em;
+  font-weight: normal;
+}
+/* =============================================================================
+  schedule
+============================================================================= */
+.sch-contain{
+  height:528px;
+  width:100%;
+  margin-top: 30px;   /*可改标签切换与上面的距离*/
+  padding:0;
+}
+ul.sch-tabs {
+  margin: 0;
+  padding: 0;
+  float: left;
+  position:absolute;
+  left:10.5%;
+  list-style: none;
+  color:#fff;
+  font-size:0.8em;}
+ul.sch-tabs li {
+  float: left;
+  margin:0; 
+  padding: 0;
+  height: 28px;
+  line-height: 28px;
+  border: 0px;
+  border-left: none;
+  margin: 0px auto;
+  overflow: hidden;
+  position: relative;
+
+}
+ul.sch-tabs li a {
+  text-decoration: none;
+  display: block;
+  font-size: 1.2em;
+  padding: 0 20px;
+  border: 0px;
+}
+html ul.sch-tabs li, html ul.sch-tabs li a:link {
+  color:#FFF; 
+}
+html ul.sch-tabs li, html ul.sch-tabs li a:visited  {
+  color:#FFF;
+}
+html ul.sch-tabs li.active, html ul.sch-tabs li.active {
+  border-bottom: 3px solid #82BA43;
+  color:#FFF;
+}
+
+.sch-tab_container {
+  position:absolute;
+  float:left;
+  left:10%;
+  background-color:#FFF;
+  height:500px;
+  width:80%;
+  overflow:hidden;
+  text-align:center;
+  margin-top: 28px;
+  margin-bottom: 0;
+  padding:0;
+  box-shadow: 6px 10px 7px #333333;
+  border:2px solid #FFF;
+  border-radius:7px;
+}
+.sch-tab_content {
+  padding: 0px;
+  font-size: 1.2em;
+}
+/* =============================================================================
+  schedule-导出
+============================================================================= */
+.caret-color{
+  color: blue;
+  margin-left: 4px;
+}
+.drop-title{
+  font-size: .75em;
+  color: #222222;
+  margin-right: 60px;
+}
+.drop-title:link,
+.drop-title:visited,
+.drop-title:hover,
+.drop-title:active{
+  color: #222222;
+  text-decoration: none;
+}
+.po-right{
+  float: right;
+}
+.po-left{
+  float: left;
+}
+.sch-btn{
+  display: inline-block;
+  margin:9px;
+  width:70px;
+  height:25px;
+  top:10px;
+  text-decoration: none;
+  font: normal 0.65em/2em Microsoft YaHei;/*字大小跟字距*/
+  text-shadow: 0.2px 0.2px 0.1px rgba(255,255,255, .22);
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-shadow: 2px 2px 2px rgba(0,0,0, .29);
+  -moz-box-shadow: 2px 2px 2px rgba(0,0,0, .29);
+  box-shadow: 2px 2px 2px rgba(0,0,0, .29);
+  -webkit-transition: all 0.1s ease;
+  -moz-transition: all 0.1s ease;
+  -o-transition: all 0.1s ease;
+  -ms-transition: all 0.1s ease;
+  transition: all 0.1s ease;
+}
+.sch-btn:link {
+  color:#FFF;
+  text-decoration:none;
+}
+.sch-btn:visited {
+  color:#FFF; 
+  text-decoration:none;  
+}
+.sch-btn:hover {
+  color:#FFF;
+  text-decoration:none;
+  background-color:#034B91;
+  box-shadow: 0px 0px 0px rgba(225,225,225,0);
+  -webkit-box-shadow:0px 0px 0px rgba(225,225,225,0);
+  -moz-box-shadow:0px 0px 0px rgba(225,225,225,0);
+}
+.sch-btn:active {
+  color:#FFF; 
+  text-decoration:none;
+  box-shadow: 0px 0px 0px rgba(225,225,225,0);
+  -webkit-box-shadow:0px 0px 0px rgba(225,225,225,0);
+  -moz-box-shadow:0px 0px 0px rgba(225,225,225,0);
+} 
+.red1{
+  color: red;
+  font-weight: bold;
+}
+.green1{
+  color: green;
+}
+/* =============================================================================
+  datapicker
+============================================================================= */
+.datapicker{
+  border: 0;
+  width: 25px;
+  height: 25px;
+
+}
+.datapicker:active{
+  border: 0;
+}
+/* =============================================================================
+  nav
+============================================================================= */
