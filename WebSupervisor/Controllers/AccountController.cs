@@ -26,28 +26,45 @@ namespace WebSupervisor.Controllers
         [HttpPost]
         public ActionResult Login(FormCollection fc)
         {
-            string name = fc["账号"];
+            string username = fc["账号"];
             string password = fc["密码"];
-            Admin user = new Admin();
-            user=DBHelper.ExexuteEntity<Admin>("select * from [admin] where username='admin'",CommandType.Text,null);
-            if (user.password==password)
+
+            List<AdminModel> lstuser = new List<AdminModel>();
+            lstuser = DBHelper.ExecuteList<AdminModel>("select * from [admin]", CommandType.Text, null);
+            foreach (AdminModel user in lstuser)
             {
-                return RedirectToAction("Index", "Homepage", "");
+                if (user.Password == password && user.UserName == username)
+                {
+                    if (user.Power == 0)
+                        return RedirectToAction("Index", "Homepage", "");
+                    else if (user.Power == 1)
+                        return RedirectToAction("Index", "Power", "");
+                }
+                else
+                {
+                    return JavaScript("alert('用户不存在，请检查账号和密码!')");
+                }
+                    
             }
-            else
-            {
-                return View();
-            }
+            //user=DBHelper.ExexuteEntity<AdminModel>("select * from [admin] where username='admin'",CommandType.Text,null);
+            //if (user.Password==password)
+            //{
+            //    return RedirectToAction("Index", "Homepage", "");
+            //}
+            //else
+            //{
+            //    return View();
+            //}
             //if (name==me&&password==pass)
             //{
             //    return RedirectToAction("Index","Homepage","");
             //}
             //else
             //{
-           
+
 
             //}
-
+            return View();
         }
         public ActionResult Home()
         {
