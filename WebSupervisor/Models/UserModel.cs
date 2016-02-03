@@ -5,9 +5,13 @@ using System.Web;
 
 namespace WebSupervisor.Models
 {
+
+    /// <summary>
+    /// 管理员登录模型
+    /// </summary>
     public class AdminModel
     {
-        public int UserId{ set; get; }
+        public int UId{ set; get; }
 
         public string UserName { set; get; }
 
@@ -16,11 +20,15 @@ namespace WebSupervisor.Models
         public int NumSMS { set; get; }
 
         public int Power { set; get; }
-        public AdminModel()
-        {
-
-        }
-
+    }
+    /// <summary>
+    /// 督导老师登录模型
+    /// </summary>
+    public class SupervisorModle
+    {
+    
+        public string Password { get; set; }
+        public string Phone { get; set; }
 
     }
 }
