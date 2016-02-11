@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>教学质量评估系统</title>
+    <link rel="shortcut icon" href="~/image/00.ico" type="image/x-icon">
+    <link rel="stylesheet" href="~/css/bootstrap.css">
+    <link rel="stylesheet" href="~/css/sas.css">
+    <link rel="stylesheet" href="~/css/style.css">
+    <link rel="stylesheet" href="~/css/tabs.css">
+    <!--[if IE]>
+        <script src="http://libs.useso.com/js/html5shiv/3.7/html5shiv.min.js"></script>
+    <![endif]-->
+</head>
+<body background="~/image/10.jpg">
+    <div id="container">
+        <div class="header">
+            <span class=" dd-title-center dd-title-white">   教学&nbsp;|&nbsp;</span><span class="dd-title-blue">质量评估<a href="/" class="admin admin-text">欢迎您，管理员</a><img src="image/14.png" class="admin admin-1"></span>
+        </div>
+        <div id="page">
+            <div class="container-fluid">
+                <div id="wrapper" class="wrapper">
+                    <div class="contain">
+                        <div class="tab_container">
+
+                            <!--白板宽度-->
+                            <div style="width:1226px overflow: hidden">
+                                <!--同督导信息的vrtab的overflow产生滚动条-->
+                                <div class="vltab">
+                                    <ul id="navtab">
+                                        <li class="aa" id="tb_1" onClick="i:hoverli(1);">&nbsp;</li>
+                                        <li class="aa" id="tb_2" onClick="x:hoverli(2);">&nbsp;</li>
+                                        <li class="aa" id="tb_3" onClick="x:hoverli(3);">&nbsp;</li>
+                                        <li class="aa" id="tb_4" onClick="x:hoverli(4);">&nbsp;</li>
+                                        <li class="aa" id="tb_5" onClick="x:hoverli(5);">&nbsp;</li>
+                                        <li class="aa" id="tb_6" onClick="x:hoverli(6);">&nbsp;</li>
+                                        <li class="aa" id="tb_7" onClick="x:hoverli(7);">&nbsp;</li>
+                                        <li class="aa" id="tb_8" onClick="x:hoverli(8);">&nbsp;</li>
+                                        <li class="aa" id="tb_9" onClick="x:hoverli(9);">&nbsp;</li>
+                                        <li class="aa" id="tb_10" onClick="x:hoverli(10);">&nbsp;</li>
+                                        <li class="aa" id="tb_11" onClick="x:hoverli(11);">&nbsp;</li>
+                                        <li class="aa" id="tb_12" onClick="x:hoverli(12);">&nbsp;</li>
+                                        <li class="aa" id="tb_13" onClick="x:hoverli(13);">&nbsp;</li>
+                                    </ul>
+                                </div>
+                                <div class="vrtab">
+                                    @RenderBody()
+                                </div>
+                            </div>
+                        </div>  <!-- tab_container -->
+                    </div><!-- contain -->
+                </div> <!-- wrapper -->
+            </div><!-- container-fluid -->
+        </div><!--container-->
+        <script src="~/js/jquery.min.js"></script>
+        <script src="~/js/tabs.js"></script>
+        <script src="~/js/materialMenu.js"></script>
+        <script src="~/js/vtab.js"></script>
+        <script src="~/js/selectcheckbox.js"></script>
+        <script>
+    var menu = new Menu;
+        </script>
+</body>
+</html>

@@ -37,31 +37,23 @@ namespace WebSupervisor.Controllers
                 if (admin.Password == password && admin.UserName == username)
                 {
                     if (admin.Power == 0)
-                        return RedirectToAction("Index", "Homepage", "");
+                        return RedirectToAction("Index", "HomePage", "");
                     else if (admin.Power == 1)
-                        return RedirectToAction("Index", "Power", "");
-                }
-                else
-                {
-                    if (lstsupervisor.Count != 0)
-                    {
-                        foreach (SupervisorModle supervisor in lstsupervisor)
-                        {
-                            if (supervisor.Phone == username && supervisor.Password == password)
-                                return RedirectToAction("Index", "SupervisorPage", "");
-                            else return JavaScript("alert('用户不存在，请检查账号和密码!');");
-                        }
-                    }
-                   else
-                        return JavaScript("alert('用户不存在，请检查账号和密码!');");
-                    //this.Login.RegisterStartupScript(" ", "<script>alert(' 弹出的消息 '); </script> ");
-                    //this.view
-                    //return JavaScript("windows.confirm('用户不存在，请检查账号和密码!');");
+                        return RedirectToAction("PowerManger", "Power", "");
                 }
                     
             }
-        
-
+            foreach (SupervisorModle supervisor in lstsupervisor)
+            {
+                if (supervisor.Phone == username && supervisor.Password == password)
+                {
+                    if (supervisor.indentity == 0)
+                        return RedirectToAction("ChiefSupervisor", "SupervisorPage", "");
+                    else if (supervisor.indentity == 1)
+                        return RedirectToAction("NormalSupervisor", "SupervisorPage", "");
+                }
+            }
+             return JavaScript("alert('用户不存在，请检查账号和密码!');");
             //user=DBHelper.ExexuteEntity<AdminModel>("select * from [admin] where username='admin'",CommandType.Text,null);
             //if (user.Password==password)
             //{
@@ -80,7 +72,6 @@ namespace WebSupervisor.Controllers
 
 
             //}
-            return View();
         }
         public ActionResult Home()
         {

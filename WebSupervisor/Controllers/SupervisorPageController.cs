@@ -9,11 +9,11 @@ namespace WebSupervisor.Controllers
     public class SupervisorPageController : Controller
     {
         // GET: SupervisorPage
-        public ActionResult Index()
+        public ActionResult CheifSupervisor()
         {
             return View();
         }
-        public ActionResult supervisor()
+        public ActionResult NormalSupervisor()
         {
             return View();
         }
