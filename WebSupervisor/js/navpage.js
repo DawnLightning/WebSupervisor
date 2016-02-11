@@ -12,9 +12,11 @@ function showpage(pagename){
     alert ("Browser does not support HTTP Request");
     return;
   }
-  var url=document.URL;
+  
+  /* var url=document.URL;
   url= url.substring(0,url.split('#')[0].lastIndexOf('/')+1);
-  url += "includes/"+pagename+".html";
+  url += "includes/"+pagename+".html"; */
+  var url = "/includes/"+pagename+".html";
   xmlhttp.onreadystatechange=function()
   {
     if (xmlhttp.readyState==4 || xmlhttp.readyState=="complete")
