@@ -1,11 +1,12 @@
 ﻿@{
+    ViewBag.Title = "主页";
     Layout = "~/Views/Shared/LayoutIndex.cshtml";
 }
 欢迎您，超级管理员
 @section MasterPart{
 <li class="mm-menu__item">
         <a class="mm-menu__link" onclick="navpage('key','督导','权限管理')">
-            <img src="image/7.png">
+            <img src="~/image/7.png">
             <div class="mm-menu__link-text">
                 权限管理
             </div>
@@ -13,7 +14,7 @@
     </li>
     <li class="mm-menu__item">
         <a class="mm-menu__link" onclick="navpage('set','督导','设置')">
-            <img src="image/8.png">
+            <img src="~/image/8.png">
             <div class="mm-menu__link-text">
                 设置
             </div>

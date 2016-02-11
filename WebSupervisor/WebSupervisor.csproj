@@ -276,7 +276,7 @@
     <Content Include="Views\Schedule\Classes.cshtml" />
     <Content Include="Views\SupervisorPage\CheifSupervisor.cshtml" />
     <Content Include="Views\Shared\LayoutIndex.cshtml" />
-    <Content Include="Views\Shared\Layoutsupervisior.cshtml" />
+    <Content Include="Views\Shared\Layoutsupervisor.cshtml" />
     <Content Include="Views\SupervisorPage\NormalSupervisor.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

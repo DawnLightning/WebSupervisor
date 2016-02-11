@@ -47,11 +47,9 @@ namespace WebSupervisor.Controllers
             {
                 if (supervisor.Phone == username && supervisor.Password == password)
                 {
-                    if (supervisor.indentity == 0)
-                        return RedirectToAction("ChiefSupervisor", "SupervisorPage", "");
-                    else if (supervisor.indentity == 1)
-                        return RedirectToAction("NormalSupervisor", "SupervisorPage", "");
+                        return RedirectToAction("CheifSupervisor", "SupervisorPage", "");
                 }
+            
             }
              return JavaScript("alert('用户不存在，请检查账号和密码!');");
             //user=DBHelper.ExexuteEntity<AdminModel>("select * from [admin] where username='admin'",CommandType.Text,null);
