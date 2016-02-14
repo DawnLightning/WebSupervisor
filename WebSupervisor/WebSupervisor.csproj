@@ -273,11 +273,12 @@
     <Content Include="Views\ConfigPage\Setting.cshtml" />
     <Content Include="Views\HomePage\Index.cshtml" />
     <Content Include="Views\Power\PowerManger.cshtml" />
-    <Content Include="Views\Schedule\Classes.cshtml" />
     <Content Include="Views\SupervisorPage\CheifSupervisor.cshtml" />
     <Content Include="Views\Shared\LayoutIndex.cshtml" />
     <Content Include="Views\Shared\Layoutsupervisor.cshtml" />
     <Content Include="Views\SupervisorPage\NormalSupervisor.cshtml" />
+    <Content Include="Views\Schedule\Schedule.cshtml" />
+    <Content Include="Views\Shared\LayoutPower.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
