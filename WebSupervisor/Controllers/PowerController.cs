@@ -13,7 +13,19 @@ namespace WebSupervisor.Controllers
         {
             return View();
         }
-        public ActionResult PowerManger()
+        public ActionResult Confirm()
+        {
+            return View();
+        }
+        public ActionResult Schedule()
+        {
+            return View();
+        }
+        public ActionResult Reference()
+        {
+            return View();
+        }
+        public ActionResult Auto()
         {
             return View();
         }

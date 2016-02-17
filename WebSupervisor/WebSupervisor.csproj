@@ -144,11 +144,11 @@
     <Content Include="image\7.png" />
     <Content Include="image\8.png" />
     <Content Include="image\9.gif" />
-    <Content Include="includes\auto.html" />
-    <Content Include="includes\confirm.html" />
+    <None Include="Views\Power\Auto.cshtml" />
+    <None Include="Views\Power\Confirm.cshtml" />
     <Content Include="includes\key.html" />
-    <Content Include="includes\reference.html" />
-    <Content Include="includes\schedule.html" />
+    <None Include="Views\Power\Reference.cshtml" />
+    <None Include="Views\Power\Schedule.cshtml" />
     <Content Include="includes\set.html" />
     <Content Include="includes\supervisor.html" />
     <Content Include="includes\teacher.html" />
@@ -163,8 +163,14 @@
     <Content Include="js\vtab.js" />
     <Content Include="scripts\ai.0.15.0-build58334.js" />
     <Content Include="scripts\ai.0.15.0-build58334.min.js" />
+    <Content Include="scripts\bootstrap.js" />
+    <Content Include="scripts\bootstrap.min.js" />
+    <None Include="scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="scripts\jquery-1.10.2.js" />
+    <Content Include="scripts\jquery-1.10.2.min.js" />
     <Content Include="scripts\jquery-1.11.2.min.js" />
     <Content Include="scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="scripts\modernizr-2.6.2.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -172,7 +178,6 @@
     <Compile Include="Code\Sql\DbHelper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ConfigPageController.cs" />
-    <Compile Include="Controllers\HomePageController.cs" />
     <Compile Include="Controllers\PowerController.cs" />
     <Compile Include="Controllers\ScheduleController.cs" />
     <Compile Include="Controllers\SupervisorPageController.cs" />
@@ -271,14 +276,15 @@
     <Content Include="Views\Account\Home.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\ConfigPage\Setting.cshtml" />
-    <Content Include="Views\HomePage\Index.cshtml" />
-    <Content Include="Views\Power\PowerManger.cshtml" />
+    <Content Include="Views\Power\Index.cshtml" />
     <Content Include="Views\SupervisorPage\CheifSupervisor.cshtml" />
-    <Content Include="Views\Shared\LayoutIndex.cshtml" />
     <Content Include="Views\Shared\Layoutsupervisor.cshtml" />
     <Content Include="Views\SupervisorPage\NormalSupervisor.cshtml" />
     <Content Include="Views\Schedule\Schedule.cshtml" />
-    <Content Include="Views\Shared\LayoutPower.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Menu.cshtml" />
+    <Content Include="scripts\jquery-1.10.2.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -293,9 +299,6 @@
     <Folder Include="Code\Excel\" />
     <Folder Include="Code\Placement\" />
     <Folder Include="Code\Word\" />
-    <Folder Include="ControlModels\" />
-    <Folder Include="libs\" />
-    <Folder Include="ViewModels\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

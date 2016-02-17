@@ -1,0 +1,60 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Page.Title = "主页";
+}
+
+@section Scripts {
+    <script src="~/js/jquery.min.js">
+    </script>
+    <script src="~/js/bootstrap.min.js">
+    </script>
+    <script src="~/js/tabs.js">
+    </script>
+    <script src="~/js/materialMenu.js">
+    </script>
+    <script src="~/js/navpage.js">
+    </script>
+    <script>
+        var act = window.location.hash;
+        if (act.substring(0, 3) == "#!/") {
+            showpage(act.substring(2));
+        } else {
+            showpage("/Power/Confirm");
+        }
+        var menu = new Menu;
+    </script>
+}
+
+<div class="header">
+    <span class=" dd-title-center dd-title-white" id="title1">
+        督导听课系统
+    </span>
+
+
+    <span class="dd-title-blue">
+        <span id="title2">
+        </span>
+        <a href="~/Account/Manage" class="admin admin-text" title="Manage">
+            管理员
+        </a>
+        <img src="~/image/14.png" class="admin admin-1" id="image">
+
+    </span>
+
+</div>
+
+<div id="page">
+
+
+
+    <div class="container-fluid">
+        <div id="wrapper" class="wrapper">
+            @* 这里才是放内容的地方 -- Jier *@
+
+
+
+        </div>
+        @RenderPage("~/Views/Shared/_Menu.cshtml")
+    </div>
+
+</div>
