@@ -13,10 +13,6 @@ namespace WebSupervisor.Controllers
     public class AccountController : Controller
     {
         // GET: Account
-        public ActionResult Index()
-        {
-            return View();
-        }
         public ActionResult Login()
         {
 
@@ -26,8 +22,9 @@ namespace WebSupervisor.Controllers
         [HttpPost]
         public ActionResult Login(FormCollection fc)
         {
-            string username = fc["账号"];
-            string password = fc["密码"];
+           
+            string username = fc["username"];
+            string password = fc["password"];
             List<SupervisorModle> lstsupervisor = new List<SupervisorModle>();
             List<AdminModel> lstadmin = new List<AdminModel>();
             lstadmin = DBHelper.ExecuteList<AdminModel>("select * from [admin]", CommandType.Text, null);
@@ -37,9 +34,16 @@ namespace WebSupervisor.Controllers
                 if (admin.Password == password && admin.UserName == username)
                 {
                     if (admin.Power == 0)
-                        return RedirectToAction("Index", "HomePage", "");
+                    {
+                        ViewData["admin"] = "管理员";
+                        return RedirectToAction("Index", "Home", "");
+                    }
                     else if (admin.Power == 1)
-                        return RedirectToAction("PowerManger", "Power", "");
+                    {
+                        ViewData["admin"] = "超级管理员";
+                        return RedirectToAction("Index", "Home", "");
+                    }
+                        
                 }
                     
             }
@@ -47,34 +51,11 @@ namespace WebSupervisor.Controllers
             {
                 if (supervisor.Phone == username && supervisor.Password == password)
                 {
-                        return RedirectToAction("CheifSupervisor", "SupervisorPage", "");
+                        return RedirectToAction("CheifSupervisor", "Supervisor", "");
                 }
             
             }
-             return JavaScript("alert('用户不存在，请检查账号和密码!');");
-            //user=DBHelper.ExexuteEntity<AdminModel>("select * from [admin] where username='admin'",CommandType.Text,null);
-            //if (user.Password==password)
-            //{
-            //    return RedirectToAction("Index", "Homepage", "");
-            //}
-            //else
-            //{
-            //    return View();
-            //}
-            //if (name==me&&password==pass)
-            //{
-            //    return RedirectToAction("Index","Homepage","");
-            //}
-            //else
-            //{
-
-
-            //}
-        }
-        public ActionResult Home()
-        {
-
-            return View();
+            return Content("<script language='javascript' type='text/javascript'>alert('账号或者密码有误，请核对后再登录！！');window.location.href= '/Account/Login'</script>");
         }
     }
 }

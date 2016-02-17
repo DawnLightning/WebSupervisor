@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace WebSupervisor.Controllers
 {
-    public class SupervisorPageController : Controller
+    public class SupervisorController : Controller
     {
         // GET: SupervisorPage
         public ActionResult CheifSupervisor()
@@ -16,6 +16,10 @@ namespace WebSupervisor.Controllers
         public ActionResult NormalSupervisor()
         {
             return View();
+        }
+        public PartialViewResult Supervisor()
+        {
+            return PartialView();
         }
     }
 }

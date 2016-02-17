@@ -164,18 +164,30 @@
     <Content Include="scripts\ai.0.15.0-build58334.js" />
     <Content Include="scripts\ai.0.15.0-build58334.min.js" />
     <Content Include="scripts\jquery-1.11.2.min.js" />
+    <None Include="scripts\jquery-1.8.0.intellisense.js" />
+    <Content Include="scripts\jquery-1.8.0.js" />
+    <Content Include="scripts\jquery-1.8.0.min.js" />
+    <Content Include="scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="scripts\jquery.unobtrusive-ajax.min.js" />
+    <None Include="Views\Home\Confirm.cshtml" />
+    <None Include="Views\Schedule\Auto.cshtml" />
+    <None Include="Views\Power\Key.cshtml" />
+    <None Include="Views\Schedule\Reference.cshtml" />
+    <None Include="Views\Home\Set.cshtml" />
+    <Content Include="Views\Schedule\Schedule.cshtml" />
+    <None Include="Views\Supervisor\Supervisor.cshtml" />
+    <None Include="Views\Home\Teacher.cshtml" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Code\Sql\DbHelper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\ConfigPageController.cs" />
-    <Compile Include="Controllers\HomePageController.cs" />
+    <Compile Include="Controllers\ConfigController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PowerController.cs" />
     <Compile Include="Controllers\ScheduleController.cs" />
-    <Compile Include="Controllers\SupervisorPageController.cs" />
+    <Compile Include="Controllers\SupervisorController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -270,15 +282,9 @@
     <Content Include="less\mixins\vendor-prefixes.less" />
     <Content Include="Views\Account\Home.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\ConfigPage\Setting.cshtml" />
-    <Content Include="Views\HomePage\Index.cshtml" />
-    <Content Include="Views\Power\PowerManger.cshtml" />
-    <Content Include="Views\SupervisorPage\CheifSupervisor.cshtml" />
-    <Content Include="Views\Shared\LayoutIndex.cshtml" />
-    <Content Include="Views\Shared\Layoutsupervisor.cshtml" />
-    <Content Include="Views\SupervisorPage\NormalSupervisor.cshtml" />
-    <Content Include="Views\Schedule\Schedule.cshtml" />
-    <Content Include="Views\Shared\LayoutPower.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Supervisor\CheifSupervisor.cshtml" />
+    <Content Include="Views\Supervisor\NormalSupervisor.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -296,6 +302,7 @@
     <Folder Include="ControlModels\" />
     <Folder Include="libs\" />
     <Folder Include="ViewModels\" />
+    <Folder Include="Views\Config\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

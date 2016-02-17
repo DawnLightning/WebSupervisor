@@ -31,8 +31,8 @@
                 <span id="title2">
                 </span>
                 <a href="/" class="admin admin-text">
-                    超级管理员
-                </a>
+                    @ViewData["admin"]
+                  </a>
                 <img src="~/image/14.png" class="admin admin-1">
             </span>
         </div>
@@ -46,7 +46,7 @@
                     </div>
                     <ul class="mm-menu__items">
                         <li class="mm-menu__item">
-                            <a class="mm-menu__link" onclick="navpage('/HomePage/Index','督导听课系统','')">
+                            <a class="mm-menu__link" onclick="navpage('/Home/Confirm','督导','主页')">
                                 <img src="~/image/1.png">
                                 <div class="mm-menu__link-text">
                                     主页
@@ -54,15 +54,15 @@
                             </a>
                         </li>
                         <li class="mm-menu__item">
-                            <a class="mm-menu__link" onclick="navpage('/Power/schedule','督导','进度表')">
+                            <a class="mm-menu__link" onclick="navpage('/Schedule/Schedule','督导','进度表')">
                                 <img src="~/image/2.png">
                                 <div class="mm-menu__link-text">
                                     进度表
                                 </div>
                             </a>
                         </li>
-                        <li class="mm-menu__item">
-                            <a class="mm-menu__link" onclick="navpage('/Power/reference','督导','排课参考')">
+                        <li class="mm-menu__item" onclick="navpage('/Schedule/Reference','督导','排课参考')">
+                            <a class="mm-menu__link" >
                                 <img src="~/image/3.png">
                                 <div class="mm-menu__link-text">
                                     排课参考
@@ -70,7 +70,7 @@
                             </a>
                         </li>
                         <li class="mm-menu__item">
-                            <a class="mm-menu__link" onclick="navpage('/Power/auto','督导','自动生成')">
+                            <a class="mm-menu__link" onclick="navpage('/Schedule/Auto','督导','自动生成')">
                                 <img src="~/image/4.png">
                                 <div class="mm-menu__link-text">
                                     自动生成
@@ -78,7 +78,7 @@
                             </a>
                         </li>
                         <li class="mm-menu__item">
-                            <a class="mm-menu__link" onclick="navpage('/Power/teacher','督导','教师信息')">
+                            <a class="mm-menu__link" onclick="navpage('/Home/Teacher','督导','教师信息')">
                                 <img src="~/image/5.png">
                                 <div class="mm-menu__link-text">
                                     教师信息
@@ -86,7 +86,7 @@
                             </a>
                         </li>
                         <li class="mm-menu__item">
-                            <a class="mm-menu__link" onclick="navpage('/Power/supervisor','督导','督导信息')">
+                            <a class="mm-menu__link" onclick="navpage('/Supervisor/Supervisor','督导','督导信息')">
                                 <img src="~/image/6.png">
                                 <div class="mm-menu__link-text">
                                     督导信息
@@ -94,16 +94,8 @@
                             </a>
                         </li>
                         <li class="mm-menu__item">
-                            <a class="mm-menu__link" onclick="navpage('key','督导','权限管理')">
-                                <img src="~/image/7.png">
-                                <div class="mm-menu__link-text">
-                                    权限管理
-                                </div>
-                            </a>
-                        </li>
-                        <li class="mm-menu__item">
-                            <a class="mm-menu__link" onclick="navpage('set','督导','设置')">
-                                <img src="~/image/8.png">
+                            <a class="mm-menu__link" onclick="navpage('/Home/Set','督导','设置')">
+                                <img src="image/8.png">
                                 <div class="mm-menu__link-text">
                                     设置
                                 </div>
@@ -129,7 +121,7 @@
                 </nav>
                 <!-- /nav -->
             </div>
-            @RenderBody()
+            
             <!--page-->
             <div id="footer">
                 <span class="foot-white">
@@ -155,14 +147,14 @@
         <script src="~/js/navpage.js">
         </script>
         <script>
-  var act=window.location.hash;
-if(act.substring(0,3)=="#!/")
-{
-  showpage(act.substring(3));
-}else{
-  showpage("/Power/confirm");
-}
-var menu = new Menu;
+          var act=window.location.hash;
+        if(act.substring(0,3)=="#!/")
+        {
+          showpage(act.substring(3));
+        }else{
+          showpage("/Home/Confirm");
+        }
+        var menu = new Menu;
         </script>
 </body>
 

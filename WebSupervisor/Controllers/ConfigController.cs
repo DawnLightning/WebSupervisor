@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace WebSupervisor.Controllers
 {
-    public class ConfigPageController : Controller
+    public class ConfigController : Controller
     {
         public ActionResult Index()
         {

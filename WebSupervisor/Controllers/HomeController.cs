@@ -6,18 +6,23 @@ using System.Web.Mvc;
 
 namespace WebSupervisor.Controllers
 {
-    public class ScheduleController : Controller
+    public class HomeController : Controller
     {
-        // GET: Schedule
-        public PartialViewResult Schedule()
+        // GET: HomePage
+        public ActionResult Index()
+        {
+            return View();
+        }
+        public PartialViewResult Confirm()
+        {
+
+            return PartialView();
+        }
+        public PartialViewResult Set()
         {
             return PartialView();
         }
-        public PartialViewResult Auto()
-        {
-            return PartialView();
-        }
-        public PartialViewResult Reference()
+        public PartialViewResult Teacher()
         {
             return PartialView();
         }
