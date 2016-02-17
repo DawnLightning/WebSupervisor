@@ -9,8 +9,9 @@ namespace WebSupervisor.Controllers
     public class HomeController : Controller
     {
         // GET: HomePage
-        public ActionResult Index()
+        public ActionResult Index(string role)
         {
+            ViewBag.role = role;
             return View();
         }
         public PartialViewResult Confirm()

@@ -31,7 +31,7 @@
                 <span id="title2">
                 </span>
                 <a href="/" class="admin admin-text">
-                    @ViewData["admin"]
+                    @ViewBag.role
                   </a>
                 <img src="~/image/14.png" class="admin admin-1">
             </span>
@@ -101,14 +101,18 @@
                                 </div>
                             </a>
                         </li>
-                        @*<li class="mm-menu__item">
-                                <a class="mm-menu__link" onclick="navpage('/Power/key','督导','权限管理')">
-                                    <img src="image/7.png">
-                                    <div class="mm-menu__link-text">
-                                        权限管理
-                                    </div>
-                                </a>
-                            </li>*@
+                        <li class="mm-menu__item">
+                            @{ if (ViewBag.role == "超级管理员")
+                                {
+                                    <a class="mm-menu__link" onclick="navpage('/Power/key','督导','权限管理')">
+                                        <img src="image/7.png">
+                                        <div class="mm-menu__link-text">
+                                            权限管理
+                                        </div>
+                                    </a>
+                                }
+                            }
+                            </li>
                         @*<li class="mm-menu__item">
                                 <a class="mm-menu__link" onclick="navpage('/Power/set1','督导','设置')">
                                     <img src="image/8.png">

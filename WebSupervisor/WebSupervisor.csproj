@@ -169,14 +169,13 @@
     <Content Include="scripts\jquery-1.8.0.min.js" />
     <Content Include="scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="scripts\jquery.unobtrusive-ajax.min.js" />
-    <None Include="Views\Home\Confirm.cshtml" />
-    <None Include="Views\Schedule\Auto.cshtml" />
-    <None Include="Views\Power\Key.cshtml" />
-    <None Include="Views\Schedule\Reference.cshtml" />
-    <None Include="Views\Home\Set.cshtml" />
+    <Content Include="Views\Home\Confirm.cshtml" />
+    <Content Include="Views\Home\Set.cshtml" />
+    <Content Include="Views\Home\Teacher.cshtml" />
+    <Content Include="Views\Power\Key.cshtml" />
     <Content Include="Views\Schedule\Schedule.cshtml" />
-    <None Include="Views\Supervisor\Supervisor.cshtml" />
-    <None Include="Views\Home\Teacher.cshtml" />
+    <Content Include="Views\Schedule\Auto.cshtml" />
+    <Content Include="Views\Schedule\Reference.cshtml" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -280,11 +279,11 @@
     <Content Include="less\mixins\text-emphasis.less" />
     <Content Include="less\mixins\text-overflow.less" />
     <Content Include="less\mixins\vendor-prefixes.less" />
-    <Content Include="Views\Account\Home.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Supervisor\CheifSupervisor.cshtml" />
     <Content Include="Views\Supervisor\NormalSupervisor.cshtml" />
+    <Content Include="Views\Supervisor\Supervisor.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -34,14 +34,12 @@ namespace WebSupervisor.Controllers
                 if (admin.Password == password && admin.UserName == username)
                 {
                     if (admin.Power == 0)
-                    {
-                        ViewData["admin"] = "管理员";
-                        return RedirectToAction("Index", "Home", "");
+                    { 
+                        return RedirectToAction("Index", "Home", new {role= "管理员" });
                     }
                     else if (admin.Power == 1)
                     {
-                        ViewData["admin"] = "超级管理员";
-                        return RedirectToAction("Index", "Home", "");
+                        return RedirectToAction("Index", "Home", new { role = "超级管理员" });
                     }
                         
                 }

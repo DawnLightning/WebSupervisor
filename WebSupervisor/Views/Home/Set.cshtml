@@ -1,56 +1,57 @@
-<div class="set-contain">
-  <ul class="set-tabs">
-    <li class="active">
-      <a href="#tab1">
-        <span class="set-title">
-          个人信息
-        </span>
-      </a>
-    </li>
-    <li>
-      <a href="#tab2">
-        <span class="set-title">
-          开学信息
-        </span>
-      </a>
-    </li>
-  </ul>
-  <div class="set-tab_container">
-    <div id="tab1" class="set-tab_content" style="display: block; ">
-      <input name="电话" type="text" placeholder="请输入电话" style="width:50%; height:40px;"
-      maxlength="11" class=" form-control text-style color-mar1" />
-      <!--设置电话长度为11-->
-      <input name="邮箱" type="text" placeholder="example@email.com" style="width:50%; height:40px;"
-      class=" form-control text-style color-mar2" />
-      <input name="密码" type="text" placeholder="请输入密码" style="width:50%; height:40px;"
-      class=" form-control text-style color-mar3" />
-      <input name="保存" type="button" style="width:25%; height:40px;" class="text-style3 color-mar4"
-      value="保存" />
+﻿<div class="set-contain">
+    <ul class="set-tabs">
+        <li class="active">
+            <a href="#tab1">
+                <span class="set-title">
+                    个人信息
+                </span>
+            </a>
+        </li>
+        <li>
+            <a href="#tab2">
+                <span class="set-title">
+                    开学信息
+                </span>
+            </a>
+        </li>
+    </ul>
+    <div class="set-tab_container">
+        <div id="tab1" class="set-tab_content" style="display: block; ">
+            <input name="电话" type="text" placeholder="请输入电话" style="width:50%; height:40px;"
+                   maxlength="11" class=" form-control text-style color-mar1" />
+            <!--设置电话长度为11-->
+            <input name="邮箱" type="text" placeholder="example@email.com" style="width:50%; height:40px;"
+                   class=" form-control text-style color-mar2" />
+            <input name="密码" type="text" placeholder="请输入密码" style="width:50%; height:40px;"
+                   class=" form-control text-style color-mar3" />
+            <input name="保存" type="button" style="width:25%; height:40px;" class="text-style3 color-mar4"
+                   value="保存" />
+        </div>
+        <!--tab1-->
+        <div id="tab2" class="set-tab_content" style="display: none; ">
+            <form class="form-inline color-mar6">
+                <input type="text" class="form-control text-style" style=" width:80px;height:40px;"
+                       id="年" placeholder="2016">
+                <label for="年" class="time-color">
+                    年
+                </label>
+                <input type="text" class="form-control text-style" style=" width:80px;height:40px;"
+                       id="月" placeholder="02">
+                <label for="月" class="time-color">
+                    月
+                </label>
+                <input type="text" class="form-control text-style" style=" width:80px;height:40px;"
+                       id="日" placeholder="29">
+                <label for="日" class="time-color">
+                    日
+                </label>
+            </form>
+            <input name="保存" type="button" style="width:25%; height:40px;" class="text-style3 color-mar6"
+                   value="保存" />
+        </div>
+        <!--tab2-->
     </div>
-    <!--tab1-->
-    <div id="tab2" class="set-tab_content" style="display: none; ">
-      <form class="form-inline color-mar6">
-        <input type="text" class="form-control text-style" style=" width:80px;height:40px;"
-        id="年" placeholder="2016">
-        <label for="年" class="time-color">
-          年
-        </label>
-        <input type="text" class="form-control text-style" style=" width:80px;height:40px;"
-        id="月" placeholder="02">
-        <label for="月" class="time-color">
-          月
-        </label>
-        <input type="text" class="form-control text-style" style=" width:80px;height:40px;"
-        id="日" placeholder="29">
-        <label for="日" class="time-color">
-          日
-        </label>
-      </form>
-      <input name="保存" type="button"  style="width:25%; height:40px;" class="text-style3 color-mar6"
-      value="保存" />
-    </div>
-    <!--tab2-->
-  </div>
-  <!--set-tab_container-->
+    <!--set-tab_container-->
 </div>
 <!--set-contain-->
+
