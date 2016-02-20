@@ -7,6 +7,7 @@ using WebSupervisor.Models;
 using WebDAL;
 using System.Data;
 using System.Data.SqlClient;
+using WebSupervisor.Code.Classes;
 
 namespace WebSupervisor.Controllers
 {
@@ -34,11 +35,13 @@ namespace WebSupervisor.Controllers
                 if (admin.Password == password && admin.UserName == username)
                 {
                     if (admin.Power == 0)
-                    { 
+                    {
+                        Session["UserName"] = username;
                         return RedirectToAction("Index", "Home", new {role= "管理员" });
                     }
                     else if (admin.Power == 1)
                     {
+                        Session["UserName"] = username;
                         return RedirectToAction("Index", "Home", new { role = "超级管理员" });
                     }
                         
@@ -49,7 +52,8 @@ namespace WebSupervisor.Controllers
             {
                 if (supervisor.Phone == username && supervisor.Password == password)
                 {
-                        return RedirectToAction("CheifSupervisor", "Supervisor", "");
+                    Session["UserName"] = username;
+                    return RedirectToAction("CheifSupervisor", "Supervisor", "");
                 }
             
             }

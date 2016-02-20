@@ -1,4 +1,15 @@
-﻿
+﻿@*<style type="text/css">
+    #filelist {
+        background-color: #FFF;
+        border-radius: 3px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+        height: 103px;
+        margin-bottom: 10px;
+        overflow: auto;
+        padding: 5px 10px;
+        width: 300px;
+    }
+</style>*@
 <div class="contain">
     <ul class="tabs">
         <li class="active">
@@ -416,9 +427,9 @@
                             <!--规则名称-->
                         </div>
                         <!--btn-group-->
-                        <span>
-                            <button type="button" class="sch-btn blue">
-                                导入
+                       <div id="filelist"></div>
+                        <span>                                                 
+                            <button type="button" class="sch-btn blue"  id="upload"  value="read">
                             </button>
                         </span>
                     </div>
@@ -929,6 +940,9 @@
         </div>
     </div>
 </div>
+<script src="~/js/jquery.js"></script>
+<script src="~/js/jquery.Huploadify.js"></script>
+<script src="~/js/btn.js"></script>
 <script>
   $(function() {
     $(".dropdown-menu li a").bind("click",

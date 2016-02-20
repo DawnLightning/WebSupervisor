@@ -154,7 +154,10 @@
     <Content Include="includes\teacher.html" />
     <Content Include="js\bootstrap.js" />
     <Content Include="js\bootstrap.min.js" />
+    <Content Include="js\btn.js" />
     <Content Include="js\html5shiv.min.js" />
+    <Content Include="js\jquery.Huploadify.js" />
+    <Content Include="js\jquery.js" />
     <Content Include="js\jquery.min.js" />
     <Content Include="js\materialMenu.js" />
     <Content Include="js\npm.js" />
@@ -180,6 +183,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Code\Classes\Common.cs" />
     <Compile Include="Code\Sql\DbHelper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ConfigController.cs" />
@@ -293,7 +297,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Code\Classes\" />
     <Folder Include="Code\Email\" />
     <Folder Include="Code\Excel\" />
     <Folder Include="Code\Placement\" />

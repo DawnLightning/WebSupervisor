@@ -15,10 +15,12 @@
     <link rel="stylesheet" href="~/css/sas.css">
     <link rel="stylesheet" href="~/css/style.css">
     <link rel="stylesheet" href="~/css/tabs.css">
+   
     <!--[if IE]>
         <script src="http://libs.useso.com/js/html5shiv/3.7/html5shiv.min.js">
-        </script>
+    </script>
         <![endif]-->
+    
 </head>
 
 <body background="~/image/10.jpg">
@@ -125,7 +127,6 @@
                 </nav>
                 <!-- /nav -->
             </div>
-            
             <!--page-->
             <div id="footer">
                 <span class="foot-white">
@@ -150,6 +151,74 @@
         </script>
         <script src="~/js/navpage.js">
         </script>
+        <script type="text/javascript">
+    //    $(function () {
+    //        $('#uploadify').uploadify({
+    //            uploader: '/Schedule/Schedule',           // 服务器端处理地址
+    //            swf: '/uploadify/uploadify.swf',    // 上传使用的 Flash
+
+    //            width: 60,                          // 按钮的宽度
+    //            height: 23,                         // 按钮的高度
+    //            buttonText: "上传",                 // 按钮上的文字
+    //            buttonCursor: 'hand',                // 按钮的鼠标图标
+
+    //            fileObjName: 'Filedata',            // 上传参数名称
+
+    //            // 两个配套使用
+    //            fileTypeExts: "*.jpg;*.png",             // 扩展名
+    //            fileTypeDesc: "请选择 jpg png 文件",     // 文件说明
+
+    //            auto: true,                // 选择之后，自动开始上传
+    //            multi: true,               // 是否支持同时上传多个文件
+    //            queueSizeLimit: 5          // 允许多文件上传的时候，同时上传文件的个数
+    //        });
+    //    });
+    //function makeFileList(){
+    //    var input = document.getElementById("filesToUpload");
+    //    var ul = document.getElementById("fileList");
+    //    while (ul.hasChildNodes()){
+    //        ul.removeChild(ul.firstChild);
+    //    }
+    //    for(var i = 0; i < input.files.length; i++){
+    //        var li = document.createElement("li");
+    //        li.innerHTML = input.files[i].name;
+    //        ul.appendChild(li);
+    //    }
+    //    if(!ul.hasChildNodes()){
+    //        var li = document.createElement("li");
+    //        li.innerHTML = "没有文件被选中.";
+    //        ul.appendChild(li);
+    //    }
+    //}
+    //    function ReadExcel() {
+    //       var tempStr = "";
+    //       //得到文件路径的值
+    //       var filePath = document.getElementById("filesToUpload").value;
+    //       //创建操作EXCEL应用程序的实例
+    //       var oXL = new ActiveXObject("Excel.application");
+    //        //打开指定路径的excel文件
+    //       var oWB = oXL.Workbooks.open(filePath);
+    //       //操作第一个sheet(从一开始，而非零)
+    //       oWB.worksheets(1).select();
+    //       var oSheet = oWB.ActiveSheet;
+    //       //使用的行数
+    //     var rows =  oSheet .usedrange.rows.count;
+    //       try {
+    //          for (var i = 2; i <= rows; i++) {
+    //             if (oSheet.Cells(i, 2).value == "null" || oSheet.Cells(i, 3).value == "null") break;
+    //             var a = oSheet.Cells(i, 2).value.toString() == "undefined" ? "": oSheet.Cells(i, 2).value;
+    //             tempStr += (" " + oSheet.Cells(i, 2).value + " " + oSheet.Cells(i, 3).value + " " + oSheet.Cells(i, 4).value + " " + oSheet.Cells(i, 5).value + " " + oSheet.Cells(i, 6).value + "\n");
+    //          }
+    //       } catch(e) {
+    //          document.getElementById("txtArea").value = tempStr;
+    //       }
+    //       document.getElementById("txtArea").value = tempStr;
+    //       //退出操作excel的实例对象
+    //       oXL.Application.Quit();
+    //        //手动调用垃圾收集器
+    //       CollectGarbage();
+    //    }
+        </script>  
         <script>
           var act=window.location.hash;
         if(act.substring(0,3)=="#!/")
