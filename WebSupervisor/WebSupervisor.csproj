@@ -183,7 +183,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Code\Classes\Common.cs" />
     <Compile Include="Code\Sql\DbHelper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ConfigController.cs" />
@@ -288,6 +287,8 @@
     <Content Include="Views\Supervisor\CheifSupervisor.cshtml" />
     <Content Include="Views\Supervisor\NormalSupervisor.cshtml" />
     <Content Include="Views\Supervisor\Supervisor.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_Menu.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -297,13 +298,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Code\Classes\" />
     <Folder Include="Code\Email\" />
     <Folder Include="Code\Excel\" />
     <Folder Include="Code\Placement\" />
     <Folder Include="Code\Word\" />
-    <Folder Include="ControlModels\" />
-    <Folder Include="libs\" />
-    <Folder Include="ViewModels\" />
     <Folder Include="Views\Config\" />
   </ItemGroup>
   <PropertyGroup>

@@ -7,7 +7,6 @@ using WebSupervisor.Models;
 using WebDAL;
 using System.Data;
 using System.Data.SqlClient;
-using WebSupervisor.Code.Classes;
 
 namespace WebSupervisor.Controllers
 {

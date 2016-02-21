@@ -17,5 +17,9 @@ namespace WebSupervisor.Controllers
         {
             return View();
         }
+        public ActionResult Key()
+        {
+            return View();
+        }
     }
 }

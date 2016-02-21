@@ -1,235 +1,60 @@
-﻿
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Page.Title = "主页";
+}
 
-<!DOCTYPE html>
-<html lang="zh-CN">
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>
-        督导听课系统
-    </title>
-    <link rel="shortcut icon" href="~/image/00.ico" type="image/x-icon">
-    <link rel="stylesheet" href="~/css/bootstrap.css">
-    <link rel="stylesheet" href="~/css/sas.css">
-    <link rel="stylesheet" href="~/css/style.css">
-    <link rel="stylesheet" href="~/css/tabs.css">
-   
-    <!--[if IE]>
-        <script src="http://libs.useso.com/js/html5shiv/3.7/html5shiv.min.js">
+@section Scripts {
+    <script src="~/js/jquery.min.js">
     </script>
-        <![endif]-->
-    
-</head>
-
-<body background="~/image/10.jpg">
-    <div id="container">
-        <div class="header">
-            <span class=" dd-title-center dd-title-white" id="title1">
-                督导听课系统
-            </span>
-            <span class="dd-title-blue">
-                <span id="title2">
-                </span>
-                <a href="/" class="admin admin-text">
-                    @ViewBag.role
-                  </a>
-                <img src="~/image/14.png" class="admin admin-1">
-            </span>
-        </div>
-        <div id="page">
-            <div class="container-fluid">
-                <div id="wrapper" class="wrapper">
-                </div>
-                <button id="mm-menu-toggle" class="mm-menu-toggle"></button>
-                <nav id="mm-menu" class="mm-menu">
-                    <div class="mm-menu__header">
-                    </div>
-                    <ul class="mm-menu__items">
-                        <li class="mm-menu__item">
-                            <a class="mm-menu__link" onclick="navpage('/Home/Confirm','督导','主页')">
-                                <img src="~/image/1.png">
-                                <div class="mm-menu__link-text">
-                                    主页
-                                </div>
-                            </a>
-                        </li>
-                        <li class="mm-menu__item">
-                            <a class="mm-menu__link" onclick="navpage('/Schedule/Schedule','督导','进度表')">
-                                <img src="~/image/2.png">
-                                <div class="mm-menu__link-text">
-                                    进度表
-                                </div>
-                            </a>
-                        </li>
-                        <li class="mm-menu__item" onclick="navpage('/Schedule/Reference','督导','排课参考')">
-                            <a class="mm-menu__link" >
-                                <img src="~/image/3.png">
-                                <div class="mm-menu__link-text">
-                                    排课参考
-                                </div>
-                            </a>
-                        </li>
-                        <li class="mm-menu__item">
-                            <a class="mm-menu__link" onclick="navpage('/Schedule/Auto','督导','自动生成')">
-                                <img src="~/image/4.png">
-                                <div class="mm-menu__link-text">
-                                    自动生成
-                                </div>
-                            </a>
-                        </li>
-                        <li class="mm-menu__item">
-                            <a class="mm-menu__link" onclick="navpage('/Home/Teacher','督导','教师信息')">
-                                <img src="~/image/5.png">
-                                <div class="mm-menu__link-text">
-                                    教师信息
-                                </div>
-                            </a>
-                        </li>
-                        <li class="mm-menu__item">
-                            <a class="mm-menu__link" onclick="navpage('/Supervisor/Supervisor','督导','督导信息')">
-                                <img src="~/image/6.png">
-                                <div class="mm-menu__link-text">
-                                    督导信息
-                                </div>
-                            </a>
-                        </li>
-                        <li class="mm-menu__item">
-                            <a class="mm-menu__link" onclick="navpage('/Home/Set','督导','设置')">
-                                <img src="image/8.png">
-                                <div class="mm-menu__link-text">
-                                    设置
-                                </div>
-                            </a>
-                        </li>
-                        <li class="mm-menu__item">
-                            @{ if (ViewBag.role == "超级管理员")
-                                {
-                                    <a class="mm-menu__link" onclick="navpage('/Power/key','督导','权限管理')">
-                                        <img src="image/7.png">
-                                        <div class="mm-menu__link-text">
-                                            权限管理
-                                        </div>
-                                    </a>
-                                }
-                            }
-                            </li>
-                        @*<li class="mm-menu__item">
-                                <a class="mm-menu__link" onclick="navpage('/Power/set1','督导','设置')">
-                                    <img src="image/8.png">
-                                    <div class="mm-menu__link-text">
-                                        设置
-                                    </div>
-                                </a>
-                            </li>*@
-                    </ul>
-                </nav>
-                <!-- /nav -->
-            </div>
-            <!--page-->
-            <div id="footer">
-                <span class="foot-white">
-                    CopyRight
-                </span>
-                <span class="foot-blue">
-                    破晓技术团队.
-                </span>
-                <span class="foot-white">
-                    All Rights Resevered.
-                </span>
-            </div>
-        </div>
-        <!--container-->
-        <script src="~/js/jquery.min.js">
-        </script>
-        <script src="~/js/bootstrap.min.js">
-        </script>
-        <script src="~/js/tabs.js">
-        </script>
-        <script src="~/js/materialMenu.js">
-        </script>
-        <script src="~/js/navpage.js">
-        </script>
-        <script type="text/javascript">
-    //    $(function () {
-    //        $('#uploadify').uploadify({
-    //            uploader: '/Schedule/Schedule',           // 服务器端处理地址
-    //            swf: '/uploadify/uploadify.swf',    // 上传使用的 Flash
-
-    //            width: 60,                          // 按钮的宽度
-    //            height: 23,                         // 按钮的高度
-    //            buttonText: "上传",                 // 按钮上的文字
-    //            buttonCursor: 'hand',                // 按钮的鼠标图标
-
-    //            fileObjName: 'Filedata',            // 上传参数名称
-
-    //            // 两个配套使用
-    //            fileTypeExts: "*.jpg;*.png",             // 扩展名
-    //            fileTypeDesc: "请选择 jpg png 文件",     // 文件说明
-
-    //            auto: true,                // 选择之后，自动开始上传
-    //            multi: true,               // 是否支持同时上传多个文件
-    //            queueSizeLimit: 5          // 允许多文件上传的时候，同时上传文件的个数
-    //        });
-    //    });
-    //function makeFileList(){
-    //    var input = document.getElementById("filesToUpload");
-    //    var ul = document.getElementById("fileList");
-    //    while (ul.hasChildNodes()){
-    //        ul.removeChild(ul.firstChild);
-    //    }
-    //    for(var i = 0; i < input.files.length; i++){
-    //        var li = document.createElement("li");
-    //        li.innerHTML = input.files[i].name;
-    //        ul.appendChild(li);
-    //    }
-    //    if(!ul.hasChildNodes()){
-    //        var li = document.createElement("li");
-    //        li.innerHTML = "没有文件被选中.";
-    //        ul.appendChild(li);
-    //    }
-    //}
-    //    function ReadExcel() {
-    //       var tempStr = "";
-    //       //得到文件路径的值
-    //       var filePath = document.getElementById("filesToUpload").value;
-    //       //创建操作EXCEL应用程序的实例
-    //       var oXL = new ActiveXObject("Excel.application");
-    //        //打开指定路径的excel文件
-    //       var oWB = oXL.Workbooks.open(filePath);
-    //       //操作第一个sheet(从一开始，而非零)
-    //       oWB.worksheets(1).select();
-    //       var oSheet = oWB.ActiveSheet;
-    //       //使用的行数
-    //     var rows =  oSheet .usedrange.rows.count;
-    //       try {
-    //          for (var i = 2; i <= rows; i++) {
-    //             if (oSheet.Cells(i, 2).value == "null" || oSheet.Cells(i, 3).value == "null") break;
-    //             var a = oSheet.Cells(i, 2).value.toString() == "undefined" ? "": oSheet.Cells(i, 2).value;
-    //             tempStr += (" " + oSheet.Cells(i, 2).value + " " + oSheet.Cells(i, 3).value + " " + oSheet.Cells(i, 4).value + " " + oSheet.Cells(i, 5).value + " " + oSheet.Cells(i, 6).value + "\n");
-    //          }
-    //       } catch(e) {
-    //          document.getElementById("txtArea").value = tempStr;
-    //       }
-    //       document.getElementById("txtArea").value = tempStr;
-    //       //退出操作excel的实例对象
-    //       oXL.Application.Quit();
-    //        //手动调用垃圾收集器
-    //       CollectGarbage();
-    //    }
-        </script>  
-        <script>
-          var act=window.location.hash;
-        if(act.substring(0,3)=="#!/")
-        {
-          showpage(act.substring(3));
-        }else{
-          showpage("/Home/Confirm");
+    <script src="~/js/bootstrap.min.js">
+    </script>
+    <script src="~/js/tabs.js">
+    </script>
+    <script src="~/js/materialMenu.js">
+    </script>
+    <script src="~/js/navpage.js">
+    </script>
+    <script>
+        var act = window.location.hash;
+        if (act.substring(0, 3) == "#!/") {
+            showpage(act.substring(2));
+        } else {
+            showpage("/Home/Confirm");
         }
         var menu = new Menu;
-        </script>
-</body>
+    </script>
+}
 
-</html>
+<div class="header">
+    <span class=" dd-title-center dd-title-white" id="title1">
+        督导听课系统
+    </span>
 
+
+    <span class="dd-title-blue">
+        <span id="title2">
+        </span>
+        <a href="~/Account/Manage" class="admin admin-text" title="Manage">
+            管理员
+        </a>
+        <img src="~/image/14.png" class="admin admin-1" id="image">
+
+    </span>
+
+</div>
+
+<div id="page">
+
+
+
+    <div class="container-fluid">
+        <div id="wrapper" class="wrapper">
+            @* 这里才是放内容的地方 -- Jier *@
+
+
+
+        </div>
+        @RenderPage("~/Views/Shared/_Menu.cshtml")
+    </div>
+
+</div>
