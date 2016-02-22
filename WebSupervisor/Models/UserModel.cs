@@ -27,7 +27,7 @@ namespace WebSupervisor.Models
     public class SupervisorModle
     {
     
-        public int indentity { get; set; }
+        //public int indentity { get; set; }
         public string Password { get; set; }
         public string Phone { get; set; }
 

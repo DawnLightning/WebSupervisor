@@ -81,10 +81,41 @@ namespace WebDAL
                 cmd = new SqlCommand(commandText, con as SqlConnection);
             }
             cmd.CommandType = commandType;
-            if (param != null)
+            //for(int i=0;i<param.Length;i++)
+            //{
+                if (param != null)
+                {
+                    cmd.Parameters.Add(param);
+                }
+            //}
+            return cmd;
+        }
+        private static IDbCommand GetCommand1(string commandText, CommandType commandType, IDbConnection con, params IDbDataParameter[] param)
+        {
+            IDbCommand cmd = null;
+            if (conType == DBType.SQLServer.ToString())
             {
-               
-                cmd.Parameters.Add(param);
+                cmd = new SqlCommand(commandText, con as SqlConnection);
+            }
+            else if (conType == DBType.OleDb.ToString())
+            {
+                cmd = new OleDbCommand(commandText, con as OleDbConnection);
+            }
+            else if (conType == DBType.ODBC.ToString())
+            {
+                cmd = new OdbcCommand(commandText, con as OdbcConnection);
+            }
+            else
+            {
+                cmd = new SqlCommand(commandText, con as SqlConnection);
+            }
+            cmd.CommandType = commandType;
+            for (int i = 0; i < param.Length; i++)
+            {
+                if (param[i] != null)
+                {
+                    cmd.Parameters.Add(param[i]);
+                }
             }
             return cmd;
         }
@@ -170,7 +201,7 @@ namespace WebDAL
             try
             {
                 IDbConnection con = GetConnection();
-                IDbCommand cmd = GetCommand(commandText, commandType, con, param);
+                IDbCommand cmd = GetCommand1(commandText, commandType, con, param);
                 using (con)
                 {
                     using (cmd)

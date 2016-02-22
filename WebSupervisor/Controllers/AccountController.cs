@@ -35,6 +35,7 @@ namespace WebSupervisor.Controllers
                 {
                     if (admin.Power == 0)
                     {
+                        Session["College"] = admin.College;
                         Session["UserName"] = username;
                         return RedirectToAction("Index", "Home", new {role= "管理员" });
                     }

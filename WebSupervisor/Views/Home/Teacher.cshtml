@@ -6,26 +6,32 @@
                     <button type="button" class="button green" onClick="show()" >
                     添加
                     </button>
+                    @*@using (Html.BeginForm("AddTeacher", "Home", FormMethod.Post))
+                    {*@
+                    <form action="/Home/AddTeacher" method="post">
                     <div id="div1" style="display:none">
                         教师号:
-                        <input type="text" id="teacherNo" />
+                        <input type="text" id="teacherNo" name="teacherNo" />
                         <br />
                         教师姓名:
-                        <input type="text" id="teacherName" />
+                        <input type="text" id="teacherName" name="teacherName" />
                         <br />
                         职称:
-                        <input type="text" id="teacherTitle" />
+                        <input type="text" id="teacherTitle" name="teacherTitle" />
                         <br />
                         教研室:
-                        <input type="text" id="teacherRoom" />
+                        <input type="text" id="teacherRoom" name="teacherRoom" />
                         <br />
                         联系电话:
-                        <input type="text" id="teacherTel" />
+                        <input type="text" id="teacherTel" name="teacherTel"/>
                         <br />
                         邮箱:
-                        <input type="text" id="teacherEmail" />
-                        <input type="button" id="btn1" value="添加" />
+                        <input type="text" id="teacherEmail" name="teacherEmail"/>
+                        <input type="hidden" id="islimit" value=1 name="islimit"/>
+                        <input type="hidden" id="college" value=@Session["College"] name="college"/>
+                        <input type="submit" id="btn1" value="添加" />
                     </div>
+                    </form>
                     <!--div1-->
                     <button type="button" class="button orange">
                         修改

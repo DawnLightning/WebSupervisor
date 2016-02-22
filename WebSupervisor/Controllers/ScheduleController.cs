@@ -54,11 +54,13 @@ namespace WebSupervisor.Controllers
 
             //创建文件夹，保存文件
             string path = Path.GetDirectoryName(fullFileName);
-            if(Directory.Exists(path))
+            if(!Directory.Exists(path))
                Directory.CreateDirectory(path);
             if (!System.IO.File.Exists(fullFileName))
             {
                 Filedata.SaveAs(fullFileName);
+                ExcelHelper excel = new ExcelHelper();
+                excel.Import(fullFileName);
             }
 
             return this.Json(new { });
