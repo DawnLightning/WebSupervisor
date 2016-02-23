@@ -36,7 +36,11 @@ namespace WebSupervisor.Controllers
             //try
             //{
             //string a = fc["teacherNo"];
-            int a = 0;
+            int a;
+            string ischeck = fc["checkall"];
+            if (ischeck == "on")
+                a = 1;
+            else a = 0;
                 //SqlParameterCollection
                 SqlParameter[] sqlpara = new SqlParameter[9];
                 sqlpara[0] = new SqlParameter("@tid", fc["teacherNO"]);

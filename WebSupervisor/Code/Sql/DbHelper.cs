@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using System.Data.OleDb;
 using System.Data.Odbc;
 using System.Reflection;
+using WebSupervisor.Models;
 namespace WebDAL
 {
     public class DBHelper
@@ -298,6 +299,52 @@ namespace WebDAL
             return list;
         }
         #endregion
+        //public void insert<T>(int num, string dtname)
+        //{
+        //    T obj = default (T);
+        //    try
+        //    {
+        //        Type type = typeof(T);
+        //        obj = (T)Activator.CreateInstance(type);//使用默认构造器初始化对象
+
+        //        PropertyInfo[] propertyInfos = type.GetProperties();
+        //        foreach (PropertyInfo propertyinfo in propertyInfos)
+        //        {
+        //            for (int i = 0; i < reader.FieldCount; i++)
+        //            {
+        //                string filedName = reader.GetName(i);
+        //                if (filedName.ToLower() == propertyinfo.Name.ToLower())
+        //                {
+        //                    Object value = reader[propertyinfo.Name];
+        //                    if (value != null && value != DBNull.Value)
+        //                    {
+        //                        propertyinfo.SetValue(obj, value, null);
+        //                        break;
+        //                    }
+        //                }
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //    //switch (dtname)
+        //    //{
+        //    //    case "classes":
+        //    //        obj = new ClassesModel();
+
+
+
+        //    //}
+
+        //    //SqlParameter[] sqlpara = new SqlParameter[num];
+        //    //for (int i = 0; i < num; i++)
+        //    //{
+        //    //    sqlpara[i] = new SqlParameter(s[i],)
+        //    //}
+
+        //}
     }
     #region 数据库类型枚举
     /// <summary>
