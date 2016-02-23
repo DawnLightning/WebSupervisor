@@ -179,7 +179,6 @@
     <Content Include="js\npm.js" />
     <Content Include="js\respond.min.js" />
     <Content Include="js\sas.js" />
-    <Content Include="js\tabs.js" />
     <Content Include="js\vtab.js" />
     <Content Include="scripts\ai.0.15.0-build58334.js" />
     <Content Include="scripts\ai.0.15.0-build58334.min.js" />
