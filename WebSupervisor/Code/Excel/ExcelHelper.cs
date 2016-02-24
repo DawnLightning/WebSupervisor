@@ -193,7 +193,7 @@ namespace WebSupervisor
                             //sqlparament[9] = new SqlParameter("@checknumber", 1);
                             //DBHelper.ExecuteNonQuery("insert into classes values(@cid,@teachername,@classname,@classcontent,@classtype,@address,@week,@day,@classnumber,@checknumber)", CommandType.Text, sqlparament);
                             //drClass_information["day"] = j;
-
+                            
 
                             //drClass_information["Teachername"] = teachernamepick;
                             //drClass_information["CID"] = teachernamepick + Excel_dt.Rows[i][name[0]].ToString() + j.ToString() + strclassname.Substring(0, classnumindex) + strclassname.Substring(classnumindex + 1) + classname.Substring(5) + Excel_dt.Rows[i][name[3]] + banji;
