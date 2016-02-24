@@ -20,7 +20,7 @@ namespace WebSupervisor.Models
         public string Address { get; set; }
         public int Week { get; set; }
         public int Day { get; set; }
-        public string ClassNumber { get; set; }
-        public string CheckNumber { get; set; }
+        public int ClassNumber { get; set; }
+        public int CheckNumber { get; set; }
     }
 }

@@ -10,6 +10,7 @@ using NPOI.SS.UserModel;
 using NPOI.HSSF.UserModel;
 using System.IO;
 using WebDAL;
+using WebSupervisor.Models;
 
 namespace WebSupervisor
 {
@@ -165,17 +166,32 @@ namespace WebSupervisor
                             //schedule.Address = (string)Excel_dt.Rows[i][name[3]];
 
                             //DataRow drClass_information = dt.NewRow();
-                            sqlparament[7] = new SqlParameter("@day", j);
-                            sqlparament[1] = new SqlParameter("@teachername", teachernamepick);
-                            sqlparament[2] = new SqlParameter("@classname", classname.Substring(5));
-                            sqlparament[0] = new SqlParameter("@cid", "00" + Excel_dt.Rows[i][name[0]].ToString() + j.ToString() + strclassname.Substring(0, classnumindex) + strclassname.Substring(classnumindex + 1));
-                            sqlparament[3] = new SqlParameter("@classcontent", Excel_dt.Rows[i][name[5]]);
-                            sqlparament[6] = new SqlParameter("@week", Excel_dt.Rows[i][name[0]]);
-                            sqlparament[5] = new SqlParameter("@address", Excel_dt.Rows[i][name[3]]);
-                            sqlparament[4] = new SqlParameter("@classtype", Excel_dt.Rows[i][name[6]]);
-                            sqlparament[8] = new SqlParameter("@classnumber", Convert.ToInt32(strclassname.Substring(0, classnumindex) + strclassname.Substring(classnumindex + 1)));
-                            sqlparament[9] = new SqlParameter("@checknumber", 1);
-                            DBHelper.ExecuteNonQuery("insert into classes values(@cid,@teachername,@classname,@classcontent,@classtype,@address,@week,@day,@classnumber,@checknumber)", CommandType.Text, sqlparament);
+                            ///--------------------------------------------------------------------------------------------
+                            ClassesModel model = new ClassesModel();
+                            model.Cid = "00" + Excel_dt.Rows[i][name[0]].ToString() + j.ToString() + strclassname.Substring(0, classnumindex) + strclassname.Substring(classnumindex + 1);
+                            model.Day = j;
+                            model.ClassNumber = Convert.ToInt32(strclassname.Substring(0, classnumindex) + strclassname.Substring(classnumindex + 1));
+                            model.ClassType = Excel_dt.Rows[i][name[6]].ToString();
+                            model.Address = Excel_dt.Rows[i][name[3]].ToString();
+                            model.TeacherName = teachernamepick;
+                            model.Week = Convert.ToInt32(Excel_dt.Rows[i][name[0]]);
+                            model.ClassName = classname.Substring(5);
+                            model.ClassContent = Excel_dt.Rows[i][name[5]].ToString();
+                            model.CheckNumber = 0;
+                            DBHelper.Insert<ClassesModel>(model);
+                            // DBHelper.Insert<ClassesModel>(model, "insert into classes values(@cid,@teachername,@classname,@classcontent,@classtype,@address,@week,@day,@classnumber,@checknumber)");
+                            ///---------------------------------------------------------------------------------------------
+                            //sqlparament[7] = new SqlParameter("@day", j);
+                            //sqlparament[1] = new SqlParameter("@teachername", teachernamepick);
+                            //sqlparament[2] = new SqlParameter("@classname", classname.Substring(5));
+                            //sqlparament[0] = new SqlParameter("@cid", "00" + Excel_dt.Rows[i][name[0]].ToString() + j.ToString() + strclassname.Substring(0, classnumindex) + strclassname.Substring(classnumindex + 1));
+                            //sqlparament[3] = new SqlParameter("@classcontent", Excel_dt.Rows[i][name[5]]);
+                            //sqlparament[6] = new SqlParameter("@week", Excel_dt.Rows[i][name[0]]);
+                            //sqlparament[5] = new SqlParameter("@address", Excel_dt.Rows[i][name[3]]);
+                            //sqlparament[4] = new SqlParameter("@classtype", Excel_dt.Rows[i][name[6]]);
+                            //sqlparament[8] = new SqlParameter("@classnumber", Convert.ToInt32(strclassname.Substring(0, classnumindex) + strclassname.Substring(classnumindex + 1)));
+                            //sqlparament[9] = new SqlParameter("@checknumber", 1);
+                            //DBHelper.ExecuteNonQuery("insert into classes values(@cid,@teachername,@classname,@classcontent,@classtype,@address,@week,@day,@classnumber,@checknumber)", CommandType.Text, sqlparament);
                             //drClass_information["day"] = j;
 
 

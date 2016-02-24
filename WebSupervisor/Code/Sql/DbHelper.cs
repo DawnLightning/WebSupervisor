@@ -82,44 +82,49 @@ namespace WebDAL
                 cmd = new SqlCommand(commandText, con as SqlConnection);
             }
             cmd.CommandType = commandType;
+
             //for(int i=0;i<param.Length;i++)
             //{
                 if (param != null)
                 {
-                    cmd.Parameters.Add(param);
+                foreach (IDbDataParameter Idbparam in param)
+                {
+                    cmd.Parameters.Add(Idbparam);
+                }
+               
                 }
             //}
             return cmd;
         }
-        private static IDbCommand GetCommand1(string commandText, CommandType commandType, IDbConnection con, params IDbDataParameter[] param)
-        {
-            IDbCommand cmd = null;
-            if (conType == DBType.SQLServer.ToString())
-            {
-                cmd = new SqlCommand(commandText, con as SqlConnection);
-            }
-            else if (conType == DBType.OleDb.ToString())
-            {
-                cmd = new OleDbCommand(commandText, con as OleDbConnection);
-            }
-            else if (conType == DBType.ODBC.ToString())
-            {
-                cmd = new OdbcCommand(commandText, con as OdbcConnection);
-            }
-            else
-            {
-                cmd = new SqlCommand(commandText, con as SqlConnection);
-            }
-            cmd.CommandType = commandType;
-            for (int i = 0; i < param.Length; i++)
-            {
-                if (param[i] != null)
-                {
-                    cmd.Parameters.Add(param[i]);
-                }
-            }
-            return cmd;
-        }
+        //private static IDbCommand GetCommand1(string commandText, CommandType commandType, IDbConnection con, params IDbDataParameter[] param)
+        //{
+        //    IDbCommand cmd = null;
+        //    if (conType == DBType.SQLServer.ToString())
+        //    {
+        //        cmd = new SqlCommand(commandText, con as SqlConnection);
+        //    }
+        //    else if (conType == DBType.OleDb.ToString())
+        //    {
+        //        cmd = new OleDbCommand(commandText, con as OleDbConnection);
+        //    }
+        //    else if (conType == DBType.ODBC.ToString())
+        //    {
+        //        cmd = new OdbcCommand(commandText, con as OdbcConnection);
+        //    }
+        //    else
+        //    {
+        //        cmd = new SqlCommand(commandText, con as SqlConnection);
+        //    }
+        //    cmd.CommandType = commandType;
+        //    for (int i = 0; i < param.Length; i++)
+        //    {
+        //        if (param[i] != null)
+        //        {
+        //            cmd.Parameters.Add(param[i]);
+        //        }
+        //    }
+        //    return cmd;
+        //}
         /// <summary>
         /// 执行返回一条记录的泛型集合对象
         /// </summary>
@@ -202,7 +207,7 @@ namespace WebDAL
             try
             {
                 IDbConnection con = GetConnection();
-                IDbCommand cmd = GetCommand1(commandText, commandType, con, param);
+                IDbCommand cmd = GetCommand(commandText, commandType, con, param);
                 using (con)
                 {
                     using (cmd)
@@ -299,52 +304,47 @@ namespace WebDAL
             return list;
         }
         #endregion
-        //public void insert<T>(int num, string dtname)
-        //{
-        //    T obj = default (T);
-        //    try
-        //    {
-        //        Type type = typeof(T);
-        //        obj = (T)Activator.CreateInstance(type);//使用默认构造器初始化对象
+        /// <summary>
+        /// 用于指定对象的全属性插入
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="model">实例化的对象</param>
+        public static void Insert<T>(T model)
+        {
+            T obj = default(T);
+          
+            try
+            {
+              
+                Type type = typeof(T);
+                obj = (T)Activator.CreateInstance(type);//使用默认构造器初始化对象
+                string tablename = type.Name.ToLower().ToString().Substring(0, type.Name.ToLower().IndexOf("model"));
+                PropertyInfo[] propertyInfos = type.GetProperties();
+                
+                string commandText = "insert into "+tablename+" values({0})";
+                string param = "";
+ 
+                 SqlParameter[] arrayparams = new SqlParameter[propertyInfos.Length];
+                for (int i = 0; i < propertyInfos.Length; i++)
+                {
 
-        //        PropertyInfo[] propertyInfos = type.GetProperties();
-        //        foreach (PropertyInfo propertyinfo in propertyInfos)
-        //        {
-        //            for (int i = 0; i < reader.FieldCount; i++)
-        //            {
-        //                string filedName = reader.GetName(i);
-        //                if (filedName.ToLower() == propertyinfo.Name.ToLower())
-        //                {
-        //                    Object value = reader[propertyinfo.Name];
-        //                    if (value != null && value != DBNull.Value)
-        //                    {
-        //                        propertyinfo.SetValue(obj, value, null);
-        //                        break;
-        //                    }
-        //                }
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
-        //    //switch (dtname)
-        //    //{
-        //    //    case "classes":
-        //    //        obj = new ClassesModel();
+                    arrayparams[i] = new SqlParameter("@" + propertyInfos[i].Name.ToLower().ToString(), propertyInfos[i].GetValue(model, null));
+                   
 
-
-
-        //    //}
-
-        //    //SqlParameter[] sqlpara = new SqlParameter[num];
-        //    //for (int i = 0; i < num; i++)
-        //    //{
-        //    //    sqlpara[i] = new SqlParameter(s[i],)
-        //    //}
-
-        //}
+             
+                    param = param+"@" + propertyInfos[i].Name.ToLower().ToString() + ",";
+                }
+                param = param.Substring(0, param.Length - 1);
+                commandText = string.Format(commandText,param);
+                ExecuteNonQuery(commandText, CommandType.Text, arrayparams);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+           
+           
+        }
     }
     #region 数据库类型枚举
     /// <summary>
