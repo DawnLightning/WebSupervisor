@@ -177,6 +177,7 @@
     <Content Include="js\jquery.min.js" />
     <Content Include="js\materialMenu.js" />
     <Content Include="js\npm.js" />
+    <Content Include="js\pikaday.js" />
     <Content Include="js\respond.min.js" />
     <Content Include="js\sas.js" />
     <Content Include="js\vtab.js" />
