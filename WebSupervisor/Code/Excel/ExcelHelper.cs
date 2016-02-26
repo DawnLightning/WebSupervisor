@@ -157,6 +157,8 @@ namespace WebSupervisor
                             string strclassname = Excel_dt.Rows[i][name[2]].ToString();
 
                             int classnumindex = strclassname.IndexOf("-");
+                            int tnum = teachernamepick.IndexOf("(");//获取教师姓名列中的第一个"("的位置
+                            string tname= teachernamepick.Substring(0, tnum);//截取老师名字
                             //int classnumindex = strclassname.IndexOf("-");
                             //schedule.Day = j;
                             //schedule.TeacherName = teachernamepick;
@@ -167,17 +169,18 @@ namespace WebSupervisor
 
                             //DataRow drClass_information = dt.NewRow();
                             ///--------------------------------------------------------------------------------------------
+                            string tid = DBHelper.ExexuteEntity<string>("select tid from teachers where teachername=" + tname, CommandType.Text, null);
                             ClassesModel model = new ClassesModel();
-                            model.Cid = "00" + Excel_dt.Rows[i][name[0]].ToString() + j.ToString() + strclassname.Substring(0, classnumindex) + strclassname.Substring(classnumindex + 1);
+                            model.Cid = tid + Excel_dt.Rows[i][name[0]].ToString() + j.ToString() + strclassname.Substring(0, classnumindex) + strclassname.Substring(classnumindex + 1);
                             model.Day = j;
                             model.ClassNumber = Convert.ToInt32(strclassname.Substring(0, classnumindex) + strclassname.Substring(classnumindex + 1));
                             model.ClassType = Excel_dt.Rows[i][name[6]].ToString();
                             model.Address = Excel_dt.Rows[i][name[3]].ToString();
-                            model.TeacherName = teachernamepick;
+                            model.TeacherName = tname;
                             model.Week = Convert.ToInt32(Excel_dt.Rows[i][name[0]]);
                             model.ClassName = classname.Substring(5);
                             model.ClassContent = Excel_dt.Rows[i][name[5]].ToString();
-                            model.CheckNumber = 0;
+                            model.CheckNumber = 0;                      
                             DBHelper.Insert<ClassesModel>(model);
                             // DBHelper.Insert<ClassesModel>(model, "insert into classes values(@cid,@teachername,@classname,@classcontent,@classtype,@address,@week,@day,@classnumber,@checknumber)");
                             ///---------------------------------------------------------------------------------------------

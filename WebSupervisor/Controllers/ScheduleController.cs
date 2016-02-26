@@ -32,7 +32,7 @@ namespace WebSupervisor.Controllers
 
             //获取文件完整文件名
             string filename = Path.GetFileName(Filedata.FileName);
-            //文件存放路径格式：/files/upload/{日期}/{md5}.{后缀名}
+            //文件存放路径格式：~/App_Data/用户名/文件名
             string virtualPath = string.Format("~/App_Data/{0}/{1}",Session["UserName"] ,filename);
 
             ////例如：/files/upload/20130913/43CA215D947F8C1F1DDFCED383C4D706.jpg
