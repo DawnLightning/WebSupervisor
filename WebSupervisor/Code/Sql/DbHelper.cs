@@ -268,6 +268,68 @@ namespace WebDAL
             }
             return obj;
         }
+      
+        /// <summary>
+        /// 批量插入对象数组(仅限sqlserver)
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="list">对象数组集合</param>
+        public static void BulkInsert<T>(List<T> list)
+        {
+            T obj = default(T);
+            try
+            {
+
+                Type type = typeof(T);
+                obj = (T)Activator.CreateInstance(type);//使用默认构造器初始化对象
+                string tablename = type.Name.ToLower().ToString().Substring(0, type.Name.ToLower().IndexOf("model"));
+                PropertyInfo[] propertyInfos = type.GetProperties();
+                string commandText = "select * from " + tablename +"";
+                DataSet dataSet = new DataSet();
+                SqlConnection con = (SqlConnection)GetConnection();
+                SqlDataAdapter adapter = new SqlDataAdapter(commandText, con);
+                adapter.Fill(dataSet);
+                if (dataSet.Tables[0]!=null&&dataSet.Tables.Count!=0)
+                {
+                    DataTable dt = dataSet.Tables[0];
+                    foreach (T model in list)
+                    {
+
+                        DataRow dr = dt.NewRow();
+                        for (int i = 0; i < propertyInfos.Length; i++)
+                        {
+
+                            dr[i] = propertyInfos[i].GetValue(model, null);
+                           
+                        }
+                        dt.Rows.Add(dr);
+                    }
+                    using (con)
+                    {
+                    
+                    con.Open();
+                    using (SqlBulkCopy bulk = new SqlBulkCopy(con))
+                    {
+                        bulk.BatchSize =dt.Rows.Count;
+                        bulk.DestinationTableName =tablename;
+                        foreach (DataColumn dcl in dt.Columns)
+                        {
+                            bulk.ColumnMappings.Add(dcl.ColumnName,dcl.ColumnName);
+                        }
+                      
+                        bulk.WriteToServer(dt);
+                    }
+
+                }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+      
         /// <summary>
         /// 执行返回多行记录的泛型集合对象
         /// </summary>
@@ -303,6 +365,50 @@ namespace WebDAL
             }
             return list;
         }
+        public static void Update<T>(T model)
+        {
+            T obj = default(T);
+
+            try
+            {
+
+                Type type = typeof(T);
+                obj = (T)Activator.CreateInstance(type);//使用默认构造器初始化对象
+                string tablename = type.Name.ToLower().ToString().Substring(0, type.Name.ToLower().IndexOf("model"));
+                PropertyInfo[] propertyInfos = type.GetProperties();
+
+                string commandText = "update " + tablename + " set {0}";
+                string param = "";
+
+                SqlParameter[] arrayparams = new SqlParameter[propertyInfos.Length];
+                for (int i = 0; i < propertyInfos.Length; i++)
+                {
+
+                    arrayparams[i] = new SqlParameter("@" + propertyInfos[i].Name.ToLower().ToString(), propertyInfos[i].GetValue(model, null));
+
+
+
+                    param = param + propertyInfos[i].Name.ToLower().ToString()+"="+ "@" + propertyInfos[i].Name.ToLower().ToString() + ",";
+                }
+                param = param.Substring(0, param.Length - 1);
+                commandText = string.Format(commandText, param);
+                if (propertyInfos[0].PropertyType.IsPrimitive)
+                {
+                    commandText = string.Format(commandText + " where {0}={1}", propertyInfos[0].Name.ToLower().ToString(), propertyInfos[0].GetValue(model, null));
+
+                }
+                else
+                {
+                    commandText = string.Format(commandText + " where {0}='{1}'", propertyInfos[0].Name.ToLower().ToString(), propertyInfos[0].GetValue(model, null));
+                }
+
+                ExecuteNonQuery(commandText, CommandType.Text, arrayparams);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         #endregion
         /// <summary>
         /// 用于指定对象的全属性插入
@@ -337,6 +443,7 @@ namespace WebDAL
                 param = param.Substring(0, param.Length - 1);
                 commandText = string.Format(commandText,param);
                 ExecuteNonQuery(commandText, CommandType.Text, arrayparams);
+                
             }
             catch (Exception ex)
             {
@@ -346,6 +453,7 @@ namespace WebDAL
            
         }
     }
+   
     #region 数据库类型枚举
     /// <summary>
     /// 该枚举类型用于创建合适的数据库访问对象

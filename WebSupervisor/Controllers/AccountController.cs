@@ -7,6 +7,7 @@ using WebSupervisor.Models;
 using WebDAL;
 using System.Data;
 using System.Data.SqlClient;
+using WebSupervisor.Code.Placement;
 
 namespace WebSupervisor.Controllers
 {
@@ -22,7 +23,7 @@ namespace WebSupervisor.Controllers
         [HttpPost]
         public ActionResult Login(FormCollection fc)
         {
-           
+            MakePlacement.Test();
             string username = fc["username"];
             string password = fc["password"];
             List<SupervisorModle> lstsupervisor = new List<SupervisorModle>();

@@ -201,6 +201,8 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Code\Excel\ExcelHelper.cs" />
+    <Compile Include="Code\Placement\MakePlacement.cs" />
+    <Compile Include="Code\Placement\MakeSpareTime.cs" />
     <Compile Include="Code\Sql\DbHelper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ConfigController.cs" />
@@ -211,8 +213,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ArrageConfigModel.cs" />
+    <Compile Include="Models\ArrageModel.cs" />
+    <Compile Include="Models\CheckClassModel.cs" />
     <Compile Include="Models\ClassesModel.cs" />
-    <Compile Include="Models\TeacherModel.cs" />
+    <Compile Include="Models\SpareTimeModel.cs" />
+    <Compile Include="Models\TeachersModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -320,7 +326,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Code\Classes\" />
     <Folder Include="Code\Email\" />
-    <Folder Include="Code\Placement\" />
     <Folder Include="Code\Word\" />
     <Folder Include="Views\Config\" />
   </ItemGroup>
