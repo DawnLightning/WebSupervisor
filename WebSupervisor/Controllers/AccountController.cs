@@ -37,13 +37,15 @@ namespace WebSupervisor.Controllers
                     if (admin.Power == 0)
                     {
                         Session["College"] = admin.College;
-                        Session["UserName"] = username;
-                        return RedirectToAction("Index", "Home", new {role= "管理员" });
+                        Session["AdminUser"] = username;
+                        Session["Power"] = "管理员";
+                        return RedirectToAction("Index", "Home");
                     }
                     else if (admin.Power == 1)
                     {
-                        Session["UserName"] = username;
-                        return RedirectToAction("Index", "Home", new { role = "超级管理员" });
+                        Session["AdminUser"] = username;
+                        Session["Power"] = "超级管理员";
+                        return RedirectToAction("Index", "Home");
                     }
                         
                 }
@@ -53,7 +55,7 @@ namespace WebSupervisor.Controllers
             {
                 if (supervisor.Phone == username && supervisor.Password == password)
                 {
-                    Session["UserName"] = username;
+                    Session["AdminUser"] = username;
                     return RedirectToAction("CheifSupervisor", "Supervisor", "");
                 }
             

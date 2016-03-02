@@ -8,14 +8,17 @@ using System.Data.SqlClient;
 using System.Data;
 using WebDAL;
 using WebSupervisor.Code.Classes;
+using WebSupervisor.Controllers.CheckUser;
+
 namespace WebSupervisor.Controllers
 {
+    [AuthenAdmin]
     public class HomeController : Controller
     {
         // GET: HomePage
-        public ActionResult Index(string role)
+        public ActionResult Index()
         {
-            ViewBag.role = role;
+            ViewBag.role = Session["Power"];
             return View();
         }
         public PartialViewResult Confirm()
@@ -42,18 +45,21 @@ namespace WebSupervisor.Controllers
             if (ischeck == "on")
                 a = 1;
             else a = 0;
-                //SqlParameterCollection
-                SqlParameter[] sqlpara = new SqlParameter[9];
-                sqlpara[0] = new SqlParameter("@tid", fc["teacherNO"]);
-                sqlpara[1] = new SqlParameter("@teachername", fc["teacherName"]);
-                sqlpara[6] = new SqlParameter("@title", fc["teacherTitle"]);
-                sqlpara[8] = new SqlParameter("@teacherroom", fc["teacherRoom"]);
-                sqlpara[2] = new SqlParameter("@phone", fc["teacherTel"]);
-                sqlpara[3] = new SqlParameter("@eamil", fc["teacherEmail"]);
-                sqlpara[7] = new SqlParameter("@islimit",fc["islimit"]);
-                sqlpara[4] = new SqlParameter("@college", fc["college"]);
-                sqlpara[5] = new SqlParameter("@identify",a);
-            DBHelper.ExecuteNonQuery("insert into teachers values(@tid,@teachername,@phone,@eamil,@college,@identify,@title,@islimit,null,@teacherroom)", CommandType.Text, sqlpara);
+            //SqlParameterCollection
+                 TeachersModel model = new TeachersModel();
+            model.Tid = fc["teacherNO"];
+            model.Title = fc["teacherTitle"];
+            model.TeacherRoom = fc["teacherRoom"];
+            model.TeacherName = fc["teacherName"];
+            model.Phone = fc["teacherTel"];
+            model.Password = "123";
+            model.Islimit =1;
+            model.Indentify = a;
+            model.Email = fc["teacherEmail"];
+            model.College = fc["college"];
+
+
+                DBHelper.Insert<TeachersModel>(model);
                 return  Content("<script language='javascript' type='text/javascript'>alert('添加成功！！');window.location.href= '/Home/Teacher'</script>");
                 //TeacherModel teacher = new TeacherModel();
                 //teacher.Tid = fc["teacherNo"];

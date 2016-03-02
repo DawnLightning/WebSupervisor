@@ -207,6 +207,7 @@
     <Compile Include="Code\Placement\MakeSpareTime.cs" />
     <Compile Include="Code\Sql\DbHelper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CheckUser\AuthenAdminAttribute.cs" />
     <Compile Include="Controllers\ConfigController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PowerController.cs" />
