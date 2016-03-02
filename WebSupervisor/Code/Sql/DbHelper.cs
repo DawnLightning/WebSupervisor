@@ -26,7 +26,7 @@ namespace WebDAL
         //从Web.config文件中动态获取连接字符串和数据库类型
         private static string conType = ConfigurationManager.AppSettings["DBType"].ToString();
         private static string constr = ConfigurationManager.AppSettings[conType].ToString();
-    
+
         #endregion
         #region 私有方法
         /// <summary>
@@ -85,14 +85,14 @@ namespace WebDAL
 
             //for(int i=0;i<param.Length;i++)
             //{
-                if (param != null)
-                {
+            if (param != null)
+            {
                 foreach (IDbDataParameter Idbparam in param)
                 {
                     cmd.Parameters.Add(Idbparam);
                 }
-               
-                }
+
+            }
             //}
             return cmd;
         }
@@ -138,7 +138,7 @@ namespace WebDAL
             {
                 Type type = typeof(T);
                 obj = (T)Activator.CreateInstance(type);//使用默认构造器初始化对象
-             
+
                 PropertyInfo[] propertyInfos = type.GetProperties();
                 foreach (PropertyInfo propertyinfo in propertyInfos)
                 {
@@ -268,7 +268,7 @@ namespace WebDAL
             }
             return obj;
         }
-      
+
         /// <summary>
         /// 批量插入对象数组(仅限sqlserver)
         /// </summary>
@@ -284,12 +284,12 @@ namespace WebDAL
                 obj = (T)Activator.CreateInstance(type);//使用默认构造器初始化对象
                 string tablename = type.Name.ToLower().ToString().Substring(0, type.Name.ToLower().IndexOf("model"));
                 PropertyInfo[] propertyInfos = type.GetProperties();
-                string commandText = "select * from " + tablename +"";
+                string commandText = "select * from " + tablename + "";
                 DataSet dataSet = new DataSet();
                 SqlConnection con = (SqlConnection)GetConnection();
                 SqlDataAdapter adapter = new SqlDataAdapter(commandText, con);
                 adapter.Fill(dataSet);
-                if (dataSet.Tables[0]!=null&&dataSet.Tables.Count!=0)
+                if (dataSet.Tables[0] != null && dataSet.Tables.Count != 0)
                 {
                     DataTable dt = dataSet.Tables[0];
                     foreach (T model in list)
@@ -300,27 +300,27 @@ namespace WebDAL
                         {
 
                             dr[i] = propertyInfos[i].GetValue(model, null);
-                           
+
                         }
                         dt.Rows.Add(dr);
                     }
                     using (con)
                     {
-                    
-                    con.Open();
-                    using (SqlBulkCopy bulk = new SqlBulkCopy(con))
-                    {
-                        bulk.BatchSize =dt.Rows.Count;
-                        bulk.DestinationTableName =tablename;
-                        foreach (DataColumn dcl in dt.Columns)
-                        {
-                            bulk.ColumnMappings.Add(dcl.ColumnName,dcl.ColumnName);
-                        }
-                      
-                        bulk.WriteToServer(dt);
-                    }
 
-                }
+                        con.Open();
+                        using (SqlBulkCopy bulk = new SqlBulkCopy(con))
+                        {
+                            bulk.BatchSize = dt.Rows.Count;
+                            bulk.DestinationTableName = tablename;
+                            foreach (DataColumn dcl in dt.Columns)
+                            {
+                                bulk.ColumnMappings.Add(dcl.ColumnName, dcl.ColumnName);
+                            }
+
+                            bulk.WriteToServer(dt);
+                        }
+
+                    }
                 }
 
             }
@@ -329,7 +329,7 @@ namespace WebDAL
                 throw ex;
             }
         }
-      
+
         /// <summary>
         /// 执行返回多行记录的泛型集合对象
         /// </summary>
@@ -388,7 +388,7 @@ namespace WebDAL
 
 
 
-                    param = param + propertyInfos[i].Name.ToLower().ToString()+"="+ "@" + propertyInfos[i].Name.ToLower().ToString() + ",";
+                    param = param + propertyInfos[i].Name.ToLower().ToString() + "=" + "@" + propertyInfos[i].Name.ToLower().ToString() + ",";
                 }
                 param = param.Substring(0, param.Length - 1);
                 commandText = string.Format(commandText, param);
@@ -418,42 +418,59 @@ namespace WebDAL
         public static void Insert<T>(T model)
         {
             T obj = default(T);
-          
+
             try
             {
-              
+
                 Type type = typeof(T);
                 obj = (T)Activator.CreateInstance(type);//使用默认构造器初始化对象
                 string tablename = type.Name.ToLower().ToString().Substring(0, type.Name.ToLower().IndexOf("model"));
                 PropertyInfo[] propertyInfos = type.GetProperties();
-                
-                string commandText = "insert into "+tablename+" values({0})";
+
+                string commandText = "insert into " + tablename + " values({0})";
                 string param = "";
- 
-                 SqlParameter[] arrayparams = new SqlParameter[propertyInfos.Length];
+
+                SqlParameter[] arrayparams = new SqlParameter[propertyInfos.Length];
                 for (int i = 0; i < propertyInfos.Length; i++)
                 {
 
                     arrayparams[i] = new SqlParameter("@" + propertyInfos[i].Name.ToLower().ToString(), propertyInfos[i].GetValue(model, null));
-                   
 
-             
-                    param = param+"@" + propertyInfos[i].Name.ToLower().ToString() + ",";
+
+
+                    param = param + "@" + propertyInfos[i].Name.ToLower().ToString() + ",";
                 }
                 param = param.Substring(0, param.Length - 1);
-                commandText = string.Format(commandText,param);
+                commandText = string.Format(commandText, param);
                 ExecuteNonQuery(commandText, CommandType.Text, arrayparams);
-                
+
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-           
-           
+
+
+        }
+        /// <summary>
+        /// 查询指定行数记录
+        /// </summary>
+        /// <typeparam name="T">返回的类型</typeparam>
+        /// <param name="n">开始的记录位置</param>
+        /// <param name="m">记录条数</param>
+        /// <param name="tablename">数据表名</param>
+        /// <returns></returns>
+        public static List<T> DataResult<T>(int n, int m, string tablename)
+        {
+            string end = (n + m).ToString();
+            //T obj = default(T);
+            string selectsql = string.Format("select top {0} * from {1} where id not in (select top {2} * from {1})", end, tablename, n.ToString());
+            List<T> lst = new List<T>();
+            lst = ExecuteList<T>(selectsql, CommandType.Text, null);
+            return lst;
         }
     }
-   
+
     #region 数据库类型枚举
     /// <summary>
     /// 该枚举类型用于创建合适的数据库访问对象

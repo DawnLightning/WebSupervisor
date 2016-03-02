@@ -1,15 +1,18 @@
 ﻿@*<style type="text/css">
-    #filelist {
-        background-color: #FFF;
-        border-radius: 3px;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.25);
-        height: 103px;
-        margin-bottom: 10px;
-        overflow: auto;
-        padding: 5px 10px;
-        width: 300px;
-    }
-</style>*@
+        #filelist {
+            background-color: #FFF;
+            border-radius: 3px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+            height: 103px;
+            margin-bottom: 10px;
+            overflow: auto;
+            padding: 5px 10px;
+            width: 300px;
+        }
+    </style>*@
+@using WebSupervisor.Models;
+@using WebDAL;
+@using WebSupervisor.Code.Classes
 <div class="contain">
     <ul class="tabs">
         <li class="active">
@@ -75,311 +78,43 @@
                         </th>
                     </tr>
                     @*@{
-                        for (int i = 0; i < 14; i++)
-                        {
-                            <tr>
-                                <td>
-                                    &nbsp;
-                                </td>
-                                <td>
-                                    &nbsp;
-                                </td>
-                                <td>
-                                    &nbsp;
-                                </td>
-                                <td>
-                                    &nbsp;
-                                </td>
-                                <td>
-                                    &nbsp;
-                                </td>
-                                <td>
-                                    &nbsp;
-                                </td>
-                            </tr>
-                        }
+                            //string[] teachernames=DBHelper.ExecuteList
 
-                    }*@
-                    <tr>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                    </tr>
+                            ClassesModel classes = new ClassesModel();
+                            List<ClassesModel> lstclass = new List<ClassesModel>();
+                            lstclass = DBHelper.ExecuteList<ClassesModel>("select * from classes where teachername=(select teachername from teachers where college=+" + Session["College"] + ")", System.Data.CommandType.Text, null);
+                            //Common.xmlRead(ViewBag.path);
+                            for (int i = 0; i < 14; i++)
+                            {
+                                if (i < lstclass.Count)
+                                {
+                                    int nowday = lstclass[i].Day;
+                                    int nowWeeks = lstclass[i].Week;
+                                    string time = CalendarTools.getdata(Common.Year, nowWeeks, nowday - CalendarTools.weekdays(CalendarTools.CaculateWeekDay(Common.Year, Common.Month, Common.Day)), Common.Month, Common.Day).ToLongDateString();
+                                    <tr>
+                                        <td>
+                                            @lstclass[i].TeacherName
+                                        </td>
+                                        <td>
+                                            @lstclass[i].ClassContent
+                                        </td>
+                                        <td>
+                                            @time
+                                        </td>
+                                        <td>
+                                            @lstclass[i].Address
+                                        </td>
+                                        <td>
+                                            @lstclass[i].Major
+                                        </td>
+                                        <td>
+                                            @lstclass[i].ClassType
+                                        </td>
+                                    </tr>
+                                }
+                            }
+
+                        }*@
                 </table>
             </div>
             <!-- /.table -->
@@ -394,7 +129,7 @@
                         <form method="get">
                             <input type="text" name="pages" />
                         </form>
-                        <button type="button" class="button gray">
+                        <button type="button" class="button gray" onclick="">
                             下一页
                         </button>
                         <button type="button" class="button gray">
@@ -453,10 +188,9 @@
                             <!--规则名称-->
                         </div>
                         <!--btn-group-->
-                       @*<div id="filelist"></div>*@
-                        <span>                                                 
-                            <button type="button" class="sch-btn blue"  id="upload"  value="read">
-                            </button>
+                        @*<div id="filelist"></div>*@
+                        <span>
+                            <button type="button" class="sch-btn blue" id="upload" value="read"></button>
                         </span>
                     </div>
                     <!--po-right-->
@@ -970,15 +704,12 @@
 <script src="~/js/jquery.Huploadify.js"></script>
 <script src="~/js/btn.js"></script>
 <script>
-  $(function() {
-    $(".dropdown-menu li a").bind("click",
-    function() {
-      var $this = $(this);
-      var $a = $this.parent().parent().prev() $a.text($this.text());
-      $a.append("<span class='caret'>");
+    $(function() {
+        $(".dropdown-menu li a").bind("click",
+        function() {
+            var $this = $(this);
+            var $a = $this.parent().parent().prev() $a.text($this.text());
+            $a.append("<span class='caret'>");
+        });
     });
-  });
 </script>
-
-
-

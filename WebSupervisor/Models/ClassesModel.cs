@@ -22,5 +22,6 @@ namespace WebSupervisor.Models
         public int Day { get; set; }
         public int ClassNumber { get; set; }
         public int CheckNumber { get; set; }
+        public string Major { get; set; }
     }
 }

@@ -200,6 +200,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Code\Classes\CalendarTools.cs" />
+    <Compile Include="Code\Classes\Common.cs" />
     <Compile Include="Code\Excel\ExcelHelper.cs" />
     <Compile Include="Code\Placement\MakePlacement.cs" />
     <Compile Include="Code\Placement\MakeSpareTime.cs" />
@@ -220,6 +222,7 @@
     <Compile Include="Models\SpareTimeModel.cs" />
     <Compile Include="Models\TeachersModel.cs" />
     <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Models\ViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -315,6 +318,8 @@
     <Content Include="Views\Supervisor\Supervisor.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\_Menu.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Schedule\Schedulelist.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -324,7 +329,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Code\Classes\" />
     <Folder Include="Code\Email\" />
     <Folder Include="Code\Word\" />
     <Folder Include="Views\Config\" />

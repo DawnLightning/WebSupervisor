@@ -158,7 +158,11 @@ namespace WebSupervisor
 
                             int classnumindex = strclassname.IndexOf("-");
                             int tnum = teachernamepick.IndexOf("(");//获取教师姓名列中的第一个"("的位置
-                            string tname= teachernamepick.Substring(0, tnum);//截取老师名字
+                            string tname;
+                            if (tnum >= 0)
+                                tname = teachernamepick.Substring(0, tnum);//截取老师名字
+                            else
+                                tname = teachernamepick;
                             //int classnumindex = strclassname.IndexOf("-");
                             //schedule.Day = j;
                             //schedule.TeacherName = teachernamepick;
@@ -180,7 +184,7 @@ namespace WebSupervisor
                             model.Week = Convert.ToInt32(Excel_dt.Rows[i][name[0]]);
                             model.ClassName = classname.Substring(5);
                             model.ClassContent = Excel_dt.Rows[i][name[5]].ToString();
-                            model.CheckNumber = 0;                      
+                            model.CheckNumber = 0;
                             DBHelper.Insert<ClassesModel>(model);
                             // DBHelper.Insert<ClassesModel>(model, "insert into classes values(@cid,@teachername,@classname,@classcontent,@classtype,@address,@week,@day,@classnumber,@checknumber)");
                             ///---------------------------------------------------------------------------------------------
@@ -196,7 +200,7 @@ namespace WebSupervisor
                             //sqlparament[9] = new SqlParameter("@checknumber", 1);
                             //DBHelper.ExecuteNonQuery("insert into classes values(@cid,@teachername,@classname,@classcontent,@classtype,@address,@week,@day,@classnumber,@checknumber)", CommandType.Text, sqlparament);
                             //drClass_information["day"] = j;
-                            
+
 
                             //drClass_information["Teachername"] = teachernamepick;
                             //drClass_information["CID"] = teachernamepick + Excel_dt.Rows[i][name[0]].ToString() + j.ToString() + strclassname.Substring(0, classnumindex) + strclassname.Substring(classnumindex + 1) + classname.Substring(5) + Excel_dt.Rows[i][name[3]] + banji;
@@ -225,7 +229,7 @@ namespace WebSupervisor
             //dtClass.Merge(dt, true);
 
             //daClass.Update(dtClass);
-         
+
             return 1;
             //}
             //catch (Exception)

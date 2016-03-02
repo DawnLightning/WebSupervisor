@@ -7,6 +7,7 @@ using WebSupervisor.Models;
 using System.Data.SqlClient;
 using System.Data;
 using WebDAL;
+using WebSupervisor.Code.Classes;
 namespace WebSupervisor.Controllers
 {
     public class HomeController : Controller
@@ -62,6 +63,21 @@ namespace WebSupervisor.Controllers
             //{
             //    return Content("<script language='javascript' type='text/javascript'>alert('添加失败！！');window.location.href= '/Home/Teacher'</script>");
             //}
+        }
+        public ActionResult Paging<T>(PageModel model,string tablename)
+        {
+            //model.PageSize=from s in dbo
+            //Common com = new Common();
+            //List<T> lst = new List<T>();
+            
+            int pagesum = DBHelper.ExexuteEntity<int>("select count(*) from" + tablename, CommandType.Text, null);
+            string end = ((model.PageNO-1)*model.PageSize + model.PageSize).ToString();
+            ////T obj = default(T);
+            string selectsql = string.Format("select top {0} * from {1} where id not in (select top {2} * from {1})", end, tablename, ((model.PageNO - 1) * model.PageSize).ToString());
+            List<T> lst = new List<T>();
+            lst = DBHelper.ExecuteList<T>(selectsql, CommandType.Text, null);
+            ////return lst;
+            return Json(new { lst,model.PageNO,pagesum },JsonRequestBehavior.AllowGet);
         }
     }
 }
