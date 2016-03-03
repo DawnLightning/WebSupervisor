@@ -422,13 +422,12 @@ namespace WebDAL
         /// <param name="model">实例化的对象</param>
         public static void Insert<T>(T model)
         {
-            T obj = default(T);
+           
 
             try
             {
 
                 Type type = typeof(T);
-                obj = (T)Activator.CreateInstance(type);//使用默认构造器初始化对象
                 string tablename = type.Name.ToLower().ToString().Substring(0, type.Name.ToLower().IndexOf("model"));
                 PropertyInfo[] propertyInfos = type.GetProperties();
 
