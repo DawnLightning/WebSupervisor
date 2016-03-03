@@ -16,8 +16,7 @@ namespace WebSupervisor.Controllers
         // GET: Account
         public ActionResult Login()
         {
-
-
+           
             return View();
         }
         [HttpPost]
@@ -26,10 +25,10 @@ namespace WebSupervisor.Controllers
             MakePlacement.Test();
             string username = fc["username"];
             string password = fc["password"];
-            List<SupervisorModle> lstsupervisor = new List<SupervisorModle>();
+            List<SupervisorModel> lstsupervisor = new List<SupervisorModel>();
             List<AdminModel> lstadmin = new List<AdminModel>();
             lstadmin = DBHelper.ExecuteList<AdminModel>("select * from [admin]", CommandType.Text, null);
-            lstsupervisor = DBHelper.ExecuteList<SupervisorModle>("select phone,password from [teachers] where password is not null", CommandType.Text, null);
+            lstsupervisor = DBHelper.ExecuteList<SupervisorModel>("select phone,password from [teachers] where password is not null", CommandType.Text, null);
             foreach (AdminModel admin in lstadmin)
             {
                 if (admin.Password == password && admin.UserName == username)
@@ -51,7 +50,7 @@ namespace WebSupervisor.Controllers
                 }
                     
             }
-            foreach (SupervisorModle supervisor in lstsupervisor)
+            foreach (SupervisorModel supervisor in lstsupervisor)
             {
                 if (supervisor.Phone == username && supervisor.Password == password)
                 {

@@ -16,8 +16,11 @@ namespace WebSupervisor
 {
     class ExcelHelper
     {
-        SqlParameter[] sqlparament = new SqlParameter[10];
+    
         DataTable Excel_dt;
+        List<ClassesModel> list = new List<ClassesModel>();
+        Random r = new Random();
+      
         #region 读取excel ,默认第一行为标头Import()
         /// <summary>
         /// 读取excel ,默认第一行为标头
@@ -157,63 +160,24 @@ namespace WebSupervisor
                             string strclassname = Excel_dt.Rows[i][name[2]].ToString();
 
                             int classnumindex = strclassname.IndexOf("-");
-                            int tnum = teachernamepick.IndexOf("(");//获取教师姓名列中的第一个"("的位置
-                            string tname;
-                            if (tnum >= 0)
-                                tname = teachernamepick.Substring(0, tnum);//截取老师名字
-                            else
-                                tname = teachernamepick;
-                            //int classnumindex = strclassname.IndexOf("-");
-                            //schedule.Day = j;
-                            //schedule.TeacherName = teachernamepick;
-                            //schedule.Cid= teachernamepick + Excel_dt.Rows[i][name[0]].ToString() + j.ToString() + strclassname.Substring(0, classnumindex) + strclassname.Substring(classnumindex + 1) + classname.Substring(5) + Excel_dt.Rows[i][name[3]] + banji;
-                            //schedule.Week = (int)Excel_dt.Rows[i][name[0]];
-                            //schedule.ClassNumber= Convert.ToInt32(strclassname.Substring(0, classnumindex) + strclassname.Substring(classnumindex + 1));
-                            //schedule.Address = (string)Excel_dt.Rows[i][name[3]];
 
-                            //DataRow drClass_information = dt.NewRow();
-                            ///--------------------------------------------------------------------------------------------
-                            string tid = DBHelper.ExexuteEntity<string>("select tid from teachers where teachername=" + tname, CommandType.Text, null);
+
+                            string tid = r.Next(1, 99999).ToString();
                             ClassesModel model = new ClassesModel();
                             model.Cid = tid + Excel_dt.Rows[i][name[0]].ToString() + j.ToString() + strclassname.Substring(0, classnumindex) + strclassname.Substring(classnumindex + 1);
                             model.Day = j;
                             model.ClassNumber = Convert.ToInt32(strclassname.Substring(0, classnumindex) + strclassname.Substring(classnumindex + 1));
                             model.ClassType = Excel_dt.Rows[i][name[6]].ToString();
                             model.Address = Excel_dt.Rows[i][name[3]].ToString();
-                            model.TeacherName = tname;
+                            model.TeacherName = teachernamepick;
                             model.Week = Convert.ToInt32(Excel_dt.Rows[i][name[0]]);
                             model.ClassName = classname.Substring(5);
                             model.ClassContent = Excel_dt.Rows[i][name[5]].ToString();
                             model.CheckNumber = 0;
-                            DBHelper.Insert<ClassesModel>(model);
-                            // DBHelper.Insert<ClassesModel>(model, "insert into classes values(@cid,@teachername,@classname,@classcontent,@classtype,@address,@week,@day,@classnumber,@checknumber)");
-                            ///---------------------------------------------------------------------------------------------
-                            //sqlparament[7] = new SqlParameter("@day", j);
-                            //sqlparament[1] = new SqlParameter("@teachername", teachernamepick);
-                            //sqlparament[2] = new SqlParameter("@classname", classname.Substring(5));
-                            //sqlparament[0] = new SqlParameter("@cid", "00" + Excel_dt.Rows[i][name[0]].ToString() + j.ToString() + strclassname.Substring(0, classnumindex) + strclassname.Substring(classnumindex + 1));
-                            //sqlparament[3] = new SqlParameter("@classcontent", Excel_dt.Rows[i][name[5]]);
-                            //sqlparament[6] = new SqlParameter("@week", Excel_dt.Rows[i][name[0]]);
-                            //sqlparament[5] = new SqlParameter("@address", Excel_dt.Rows[i][name[3]]);
-                            //sqlparament[4] = new SqlParameter("@classtype", Excel_dt.Rows[i][name[6]]);
-                            //sqlparament[8] = new SqlParameter("@classnumber", Convert.ToInt32(strclassname.Substring(0, classnumindex) + strclassname.Substring(classnumindex + 1)));
-                            //sqlparament[9] = new SqlParameter("@checknumber", 1);
-                            //DBHelper.ExecuteNonQuery("insert into classes values(@cid,@teachername,@classname,@classcontent,@classtype,@address,@week,@day,@classnumber,@checknumber)", CommandType.Text, sqlparament);
-                            //drClass_information["day"] = j;
-
-
-                            //drClass_information["Teachername"] = teachernamepick;
-                            //drClass_information["CID"] = teachernamepick + Excel_dt.Rows[i][name[0]].ToString() + j.ToString() + strclassname.Substring(0, classnumindex) + strclassname.Substring(classnumindex + 1) + classname.Substring(5) + Excel_dt.Rows[i][name[3]] + banji;
-                            //drClass_information["Teacher_ID"] = "0000000000";
-                            //drClass_information["Class_Week"] = Excel_dt.Rows[i][name[0]];
-                            //drClass_information["Class_Number"] = Convert.ToInt32(strclassname.Substring(0, classnumindex) + strclassname.Substring(classnumindex + 1));
-                            //drClass_information["Class_Address"] = Excel_dt.Rows[i][name[3]];
-                            //drClass_information["Class_Name"] = classname.Substring(5);
-                            //drClass_information["Class_Content"] = Excel_dt.Rows[i][name[5]];
-                            //drClass_information["Class_Type"] = Excel_dt.Rows[i][name[6]];
-                            //drClass_information["Spcialty"] = spcialty;
-
-                            //dt.Rows.Add(drClass_information);
+                            model.Major = spcialty;
+                            list.Add(model);
+                           
+                           
                         }
                         else
                         {
@@ -229,7 +193,8 @@ namespace WebSupervisor
             //dtClass.Merge(dt, true);
 
             //daClass.Update(dtClass);
-
+            DBHelper.BulkInsert<ClassesModel>(list);
+           
             return 1;
             //}
             //catch (Exception)
