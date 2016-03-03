@@ -1,25 +1,16 @@
 ﻿// JavaScript Document
-
-function clearform(thisform) {
-    // 遍历 form  
-    for (var i = 0; i < thisform.elements.length; i++) {
-        // 提取控件  
-        var input = thisform.elements[i];
-        // 检查是否是指定的控件  
-        if (input.type === "checkbox") {
-            input.checked = false;
-        } else if (input.type === "text") {
-            input.value = "";
-        }
-    }
-}
+var navinfo = {};
 function navpage(pagename, t1, t2) {
     $("#title1").html(t1);
     $("#title2").html(t2);
     window.location.hash = "#!" + pagename;
     showpage(pagename);
 }
+function navreload() {
+    showpage(this.navinfo.url);
+}
 function showpage(url) {
+    this.navinfo.url = url;
     var xmlhttp = GetXmlHttpObject();
 
     if (xmlhttp == null) {
@@ -31,7 +22,7 @@ function showpage(url) {
     url= url.substring(0,url.split('#')[0].lastIndexOf('/')+1);
     url += "includes/"+pagename+".html"; */
     // var url = "/includes/"+pagename+".html";
-    xmlhttp.onreadystatechange = function () {
+    xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4 || xmlhttp.readyState == "complete") {
             $("#wrapper").html(xmlhttp.responseText);
         }
@@ -40,17 +31,14 @@ function showpage(url) {
     xmlhttp.send(null);
 }
 
-
 function GetXmlHttpObject() {
     var xmlhttp;
-    if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+    if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
         xmlhttp = new XMLHttpRequest();
-    }
-    else {// code for IE6, IE5
+    } else { // code for IE6, IE5
         try {
             xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
-        }
-        catch (e) {
+        } catch(e) {
             xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
     }
@@ -59,42 +47,68 @@ function GetXmlHttpObject() {
 }
 
 //---------Supervisor--------------------
-
-function selectallweek(thisbox,thisform) {
-  var check = thisbox.checked;
-  // 遍历 form  
-  for (var i = 0; i < thisform.elements.length; i++) {
-    // 提取控件  
-    var checkbox = thisform.elements[i];
-    // 检查是否是指定的控件  
-    if (checkbox.name != thisbox.name && checkbox.type === "checkbox" && checkbox.checked != check) {
-      checkbox.checked = check;
+function selectallweek(thisbox, thisform) {
+    var check = thisbox.checked;
+    // 遍历 form  
+    for (var i = 0; i < thisform.elements.length; i++) {
+        // 提取控件  
+        var checkbox = thisform.elements[i];
+        // 检查是否是指定的控件  
+        if (checkbox.name != thisbox.name && checkbox.type === "checkbox" && checkbox.checked != check) {
+            checkbox.checked = check;
+        }
     }
-  }
 }
 
 function selectday(thisday, dayname) {
-  var allCheckBoxs = document.getElementsByName(dayname);
-  var selectOrUnselect = true;
-  if (thisday.checked) {
-    selectOrUnselect = false;
-  }
-
-  if (selectOrUnselect) {
-
-    for (var i = 0; i < allCheckBoxs.length; i++) {
-      allCheckBoxs[i].checked = false;
+    var allCheckBoxs = document.getElementsByName(dayname);
+    var selectOrUnselect = true;
+    if (thisday.checked) {
+        selectOrUnselect = false;
     }
-  } else {
-    for (var i = 0; i < allCheckBoxs.length; i++) {
-      allCheckBoxs[i].checked = true;
+
+    if (selectOrUnselect) {
+
+        for (var i = 0; i < allCheckBoxs.length; i++) {
+            allCheckBoxs[i].checked = false;
+        }
+    } else {
+        for (var i = 0; i < allCheckBoxs.length; i++) {
+            allCheckBoxs[i].checked = true;
+        }
     }
-  }
 }
 
-//-------------------Menu-------------------------
-
+//-------------------Ready------------------------
 $(document).ready(function() {
+
+    //----------------Submit------------------
+    $(document).on("click", "input#btncancel",
+    function() {
+        $(this.form).resetForm();
+        $("#addtr").hide();
+    });
+    $(document).on("click", "input#btnsubmit",
+    function() {
+        $(this.form).ajaxSubmit({
+            dataType: 'json',
+            success: function(data) {
+                if ("string" == typeof(data)) alert(data);
+                else if (data.code == 0) {
+                    alert("Success!" + '\n' + data.msg);
+                    navreload();
+                } else {
+                    alert("Error!" + '\n' + data.msg);
+                }
+            },
+            error: function(xhr) {
+                alert(xhr.responseText);
+            },
+            resetForm: true
+        });
+    });
+
+    //-------------------Menu-------------------------
     $(".mm-menu__link").on("click",
     function() {
         //Default Action

@@ -80,7 +80,7 @@
                                 <input type="text" id="teacherTitle" name="teacherTitle" />
                             </td>
                             <td>
-                                <input type="text" id="teacherRoom" name="teacherRoom" value="可不填" />
+                                <input type="text" id="teacherRoom" name="teacherRoom"  />
                             </td>
                             <td>
                                 <input type="text" id="teacherTel" name="teacherTel" />
@@ -92,7 +92,7 @@
                                 <input type="checkbox" name="checkall">
                             </td>
                             <td>
-                                <input type="submit" id="btnsubmit" value="添加" class="teacherbtn blue"/>
+                                <input type="button" id="btnsubmit" value="添加" class="teacherbtn blue"/>
                                 <input type="button" id="btncancel" value="取消" class="teacherbtn red"/>
                             </td>
                         </tr>
@@ -112,12 +112,7 @@
                     <input type="hidden" id="college" value=@Session[ "College"] name="college" />
                 </form>
                 <script type="text/javascript">
-                    $(document).ready(function () {
-                        $("input#btncancel").click(function () {
-                            clearform(this.form);
-                            $("#addtr").hide();
-                        });
-                    });
+					
                     $(function () {
                         $(":input[name='teacherEmail']").blur(function () {
                             var email = $(this).val();

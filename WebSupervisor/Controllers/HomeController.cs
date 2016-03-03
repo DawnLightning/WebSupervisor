@@ -37,9 +37,7 @@ namespace WebSupervisor.Controllers
         [HttpPost]
         public ActionResult AddTeacher(FormCollection fc)
         {
-            //try
-            //{
-            //string a = fc["teacherNo"];
+
             int a;
             string ischeck = fc["checkall"];
             if (ischeck == "on")
@@ -60,15 +58,7 @@ namespace WebSupervisor.Controllers
 
 
                 DBHelper.Insert<TeachersModel>(model);
-                return  Content("<script language='javascript' type='text/javascript'>alert('添加成功！！');window.location.href= '/Home/Teacher'</script>");
-                //TeacherModel teacher = new TeacherModel();
-                //teacher.Tid = fc["teacherNo"];
-                //teacher
-       
-            //catch(Exception)
-            //{
-            //    return Content("<script language='javascript' type='text/javascript'>alert('添加失败！！');window.location.href= '/Home/Teacher'</script>");
-            //}
+            return Json(new jsondata(0,"添加成功！"), JsonRequestBehavior.AllowGet);
         }
         public ActionResult Paging<T>(PageModel model,string tablename)
         {
