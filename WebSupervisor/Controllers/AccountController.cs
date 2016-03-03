@@ -62,5 +62,13 @@ namespace WebSupervisor.Controllers
             }
             return Content("<script language='javascript' type='text/javascript'>alert('账号或者密码有误，请核对后再登录！！');window.location.href= '/Account/Login'</script>");
         }
+        public ActionResult LogOff()
+        {
+            if (Session["AdminUser"] != null)
+            {
+                Session["AdminUser"] = null;
+            }
+            return RedirectToAction("Login");
+        }
     }
 }
