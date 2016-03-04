@@ -3,7 +3,7 @@ $(function(){
     var up = $('#upload').Huploadify({
         requeueErrors:true,
         queueSizeLimit:5,
-        queueID:filelist,
+        //queueID:filelist,
 		auto:true,
 		fileTypeExts:'*.xls;*.xlsx;',
 		multi:true,

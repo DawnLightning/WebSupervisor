@@ -365,6 +365,11 @@ namespace WebDAL
             }
             return list;
         }
+        /// <summary>
+        /// 更新一个指定的对象
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="model">对象实例</param>
         public static void Update<T>(T model)
         {
             T obj = default(T);
@@ -468,6 +473,72 @@ namespace WebDAL
             List<T> lst = new List<T>();
             lst = ExecuteList<T>(selectsql, CommandType.Text, null);
             return lst;
+        }
+        /// <summary>
+        /// 返回指定的数据表的页数
+        /// </summary>
+        /// <typeparam name="T">表格对应的model</typeparam>
+        /// <param name="list">存储查询后的结果，便于以后的取数据</param>
+        /// <param name="pagesize">页面大小（一页多少条记录）</param>
+        /// <returns></returns>
+        public int TotalPage<T>(List<T> list,int pagesize)//返回总的页数
+        {
+            Type type = typeof(T);
+            string tablename = type.Name.ToLower().ToString().Substring(0, type.Name.ToLower().IndexOf("model"));
+            string commandtext = "select * ftom " + tablename;
+            list= ExecuteList<T>(commandtext, CommandType.Text, null);
+            int Linenumber = list.Count;
+            if ((Linenumber % pagesize) > 0)
+            {
+                int allpage = (Linenumber / pagesize) + 1;
+                return allpage;
+            }
+            else
+            {
+                int allpage = Linenumber / pagesize;
+                return allpage;
+            }
+
+        }
+        /// <summary>
+        /// 获取指定页的数据
+        /// </summary>
+        /// <typeparam name="T">数据表</typeparam>
+        /// <param name="list">数据源</param>
+        /// <param name="currentpage">当前页</param>
+        /// <param name="pagesize">页面尺寸</param>
+        /// <returns></returns>
+        public List<T> GetCurrentData<T>(List<T> list, int currentpage, int pagesize)//返回指定页数的记录
+        {
+            if (currentpage == 0)
+                return list;
+            List<T> NewList = new List<T>();
+            foreach (T t in list)
+            {
+                NewList.Add(t);
+            }
+            int rowbegin = (currentpage - 1) * pagesize;
+            int rowend = currentpage * pagesize;
+
+            if (rowbegin >= list.Count)
+            {
+                return NewList;
+            }
+               
+
+            if (rowend > list.Count)
+            {
+                rowend = list.Count;
+                NewList.Clear();
+            }
+              
+            for (int i = rowbegin; i <= rowend - 1; i++)
+            {
+              
+                NewList.Add(list[i]);
+            }
+
+            return NewList;
         }
     }
 

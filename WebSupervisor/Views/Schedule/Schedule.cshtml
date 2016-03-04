@@ -13,6 +13,9 @@
 @using WebSupervisor.Models;
 @using WebDAL;
 @using WebSupervisor.Code.Classes
+@using PagedList
+@using PagedList.Mvc
+@model PagedList.IPagedList<WebSupervisor.Models.ClassesModel>
 <div class="contain">
     <ul class="tabs">
         <li class="active">
@@ -77,7 +80,7 @@
                             </p>
                         </th>
                     </tr>
-                    @helper paging(int page)
+                    @*@helper paging(int page)
                     {
                         var star = (page - 1) * 14 + 1;
                         ClassesModel classes = new ClassesModel();
@@ -91,8 +94,8 @@
                             //{
                             int nowday = lstclass[i].Day;
                             int nowWeeks = lstclass[i].Week;
-                            string time = CalendarTools.getdata(Common.Year, nowWeeks, nowday - CalendarTools.weekdays(CalendarTools.CaculateWeekDay(Common.Year, Common.Month, Common.Day)), Common.Month, Common.Day).ToLongDateString();
-                                <tr>
+                            string time = CalendarTools.getdata(Common.Year, nowWeeks, nowday - CalendarTools.weekdays(CalendarTools.CaculateWeekDay(Common.Year, Common.Month, Common.Day)), Common.Month, Common.Day).ToLongDateString();*@
+                                @*<tr>
                                     <td>
                                         @lstclass[i].TeacherName
                                     </td>
@@ -114,10 +117,36 @@
                                 </tr>
                             //}
                          }
-                        }
+                        }*@
                     @{
-//string[] teachernames=DBHelper.ExecuteList
-                     
+                        Common com = new Common();
+                        com.xmlRead(ViewBag.path);
+                        foreach (var item in Model)
+                        {
+                            int nowday = item.Day;
+                            int nowWeeks = item.Week;
+                            string time = CalendarTools.getdata(Common.Year, nowWeeks, nowday - CalendarTools.weekdays(CalendarTools.CaculateWeekDay(Common.Year, Common.Month, Common.Day)), Common.Month, Common.Day).ToLongDateString();
+                            <tr>
+                                <td>
+                                    @item.TeacherName
+                                </td>
+                                <td>
+                                    @item.ClassContent
+                                </td>
+                                <td>
+                                    @time
+                                </td>
+                                <td>
+                                    @item.Address
+                                </td>
+                                <td>
+                                    @item.Major
+                                </td>
+                                <td>
+                                    @item.ClassType
+                                </td>
+                            </tr>
+                        }
                     }
                 </table>
             </div>
@@ -128,9 +157,9 @@
                 <div class="col-lg-3 col-sm-6 col-xs-8">
                     <div class="pagese">
                         <p>
-                            页数：
+                            页数：@Model.PageNumber
                         </p>
-                        <form method="get">
+                        @*<form method="get">
                             <input type="text" name="pages" />
                         </form>
                         <button type="button" class="button gray" onclick="">
@@ -141,7 +170,8 @@
                         </button>
                         <button type="button" class="button gray">
                             转到
-                        </button>
+                        </button>*@
+                       @Html.PagedListPager(Model, page => Url.Action("/Schedule/Schedule", new { page }), new PagedListRenderOptions() { LinkToFirstPageFormat = "首页", LinkToNextPageFormat = "下一页", LinkToPreviousPageFormat = "上一页", LinkToLastPageFormat = "末页", DisplayItemSliceAndTotal = false, MaximumPageNumbersToDisplay = 10 }) 
                     </div>
                 </div>
                 <!-- /.row -->
@@ -716,8 +746,8 @@
             $a.append("<span class='caret'>");
         });
     });
-    function getpage(pagno)
-    {
-        var
-    }
+    //function getpage(pagno)
+    //{
+    //    var
+    //}
 </script>

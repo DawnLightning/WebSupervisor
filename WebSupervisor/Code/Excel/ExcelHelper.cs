@@ -72,7 +72,8 @@ namespace WebSupervisor
 
             headerRow = sheet.GetRow(5);
 
-
+            Random ran = new Random();
+            int RandKey = ran.Next(0, 1000);
             for (int i = 5; i <= sheet.LastRowNum; i++)
             {
                 IRow row = sheet.GetRow(i);
@@ -100,7 +101,7 @@ namespace WebSupervisor
                                     //daClass.Fill(dtClass);
                                     //daClass.FillSchema(dtClass, SchemaType.Source);
             string classname = Excel_dt.Rows[2][0].ToString();//课程名称
-            string spcialty = Excel_dt.Rows[2][1].ToString().Substring(3);//专业
+            string major = Excel_dt.Rows[2][1].ToString().Substring(3);//专业
             //string banji = Excel_dt.Rows[3][1].ToString();
             for (int q = 0; q < Excel_dt.Columns.Count; q++)
             {
@@ -172,8 +173,9 @@ namespace WebSupervisor
                             //schedule.Address = (string)Excel_dt.Rows[i][name[3]];
 
                             //DataRow drClass_information = dt.NewRow();
-                            ///--------------------------------------------------------------------------------------------
-                            string tid = DBHelper.ExexuteEntity<string>("select tid from teachers where teachername=" + tname, CommandType.Text, null);
+                            ///--------------------------------------------------------------------------------------------                          
+                            //string tid = DBHelper.ExexuteEntity<string>("select tid from teachers where teachername=" + tname, CommandType.Text, null);
+                            string tid = RandKey.ToString();
                             ClassesModel model = new ClassesModel();
                             model.Cid = tid + Excel_dt.Rows[i][name[0]].ToString() + j.ToString() + strclassname.Substring(0, classnumindex) + strclassname.Substring(classnumindex + 1);
                             model.Day = j;
@@ -185,6 +187,7 @@ namespace WebSupervisor
                             model.ClassName = classname.Substring(5);
                             model.ClassContent = Excel_dt.Rows[i][name[5]].ToString();
                             model.CheckNumber = 0;
+                            model.Major = major;
                             DBHelper.Insert<ClassesModel>(model);
                             // DBHelper.Insert<ClassesModel>(model, "insert into classes values(@cid,@teachername,@classname,@classcontent,@classtype,@address,@week,@day,@classnumber,@checknumber)");
                             ///---------------------------------------------------------------------------------------------
