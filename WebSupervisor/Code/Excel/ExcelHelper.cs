@@ -16,8 +16,11 @@ namespace WebSupervisor
 {
     class ExcelHelper
     {
-        SqlParameter[] sqlparament = new SqlParameter[10];
+    
         DataTable Excel_dt;
+        List<ClassesModel> list = new List<ClassesModel>();
+        Random r = new Random();
+      
         #region 读取excel ,默认第一行为标头Import()
         /// <summary>
         /// 读取excel ,默认第一行为标头
@@ -182,7 +185,7 @@ namespace WebSupervisor
                             model.ClassNumber = Convert.ToInt32(strclassname.Substring(0, classnumindex) + strclassname.Substring(classnumindex + 1));
                             model.ClassType = Excel_dt.Rows[i][name[6]].ToString();
                             model.Address = Excel_dt.Rows[i][name[3]].ToString();
-                            model.TeacherName = tname;
+                            model.TeacherName = teachernamepick;
                             model.Week = Convert.ToInt32(Excel_dt.Rows[i][name[0]]);
                             model.ClassName = classname.Substring(5);
                             model.ClassContent = Excel_dt.Rows[i][name[5]].ToString();
@@ -232,7 +235,8 @@ namespace WebSupervisor
             //dtClass.Merge(dt, true);
 
             //daClass.Update(dtClass);
-
+            DBHelper.BulkInsert<ClassesModel>(list);
+           
             return 1;
             //}
             //catch (Exception)

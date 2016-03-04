@@ -181,6 +181,7 @@
     <Content Include="js\bootstrap.min.js" />
     <Content Include="js\btn.js" />
     <Content Include="js\html5shiv.min.js" />
+    <Content Include="js\jquery.form.js" />
     <Content Include="js\jquery.Huploadify.js" />
     <Content Include="js\jquery.js" />
     <Content Include="js\jquery.min.js" />

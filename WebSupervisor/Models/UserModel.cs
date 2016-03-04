@@ -24,7 +24,7 @@ namespace WebSupervisor.Models
     /// <summary>
     /// 督导老师登录模型
     /// </summary>
-    public class SupervisorModle
+    public class SupervisorModel
     {
     
         //public int indentity { get; set; }

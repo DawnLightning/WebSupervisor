@@ -9,39 +9,19 @@ using WebDAL;
 
 namespace WebSupervisor.Code.Classes
 {
+    public class jsondata
+    {
+        public int code;
+        public string msg;
+        public jsondata(int _code,string _msg)
+        {
+            code = _code;
+            msg = _msg;
+        }
+    }
      public class Common
     {
-        /// <summary>
-        /// 数据库名称
-        /// </summary>
-        //const string strDatabaseName = "DataBase.mdb";
-        //public static string TempPath = System.IO.Path.GetTempPath() + "SAS";
-        //static string MyDocumentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-        ///// <summary>
-        ///// 数据库路径
-        ///// </summary>
-        //public static string strDatabasePath
-        //{
-        //    get
-        //    {
-        //        return MyDocumentsPath + "\\SAS\\" + strDatabaseName;
-        //    }
-        //}
 
-        //public static string strEmailResultPath
-        //{
-        //    get
-        //    {
-        //        return MyDocumentsPath + "\\SAS\\EmailResult\\";
-        //    }
-        //}
-        //public static string strAddfilesPath
-        //{
-        //    get
-        //    {
-        //        return MyDocumentsPath + "\\SAS\\Addfiles\\";
-        //    }
-        //}
         /// <summary>
         /// 配置文件路径
         /// </summary>

@@ -1,18 +1,15 @@
 ﻿@*<style type="text/css">
-        #filelist {
-            background-color: #FFF;
-            border-radius: 3px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.25);
-            height: 103px;
-            margin-bottom: 10px;
-            overflow: auto;
-            padding: 5px 10px;
-            width: 300px;
-        }
-    </style>*@
-@using WebSupervisor.Models;
-@using WebDAL;
-@using WebSupervisor.Code.Classes
+    #filelist {
+        background-color: #FFF;
+        border-radius: 3px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+        height: 103px;
+        margin-bottom: 10px;
+        overflow: auto;
+        padding: 5px 10px;
+        width: 300px;
+    }
+</style>*@
 @using PagedList
 @using PagedList.Mvc
 @model PagedList.IPagedList<WebSupervisor.Models.ClassesModel>
@@ -79,45 +76,7 @@
                                 课程类型
                             </p>
                         </th>
-                    </tr>
-                    @*@helper paging(int page)
-                    {
-                        var star = (page - 1) * 14 + 1;
-                        ClassesModel classes = new ClassesModel();
-                        List<ClassesModel> lstclass = new List<ClassesModel>();
-                        Common com = new Common();
-                        lstclass = DBHelper.DataResult<ClassesModel>(star, 14, "classes");
-                        com.xmlRead(ViewBag.path);
-                        for (int i = 0; i < 14; i++)
-                        {
-                            //if (i < lstclass.Count)
-                            //{
-                            int nowday = lstclass[i].Day;
-                            int nowWeeks = lstclass[i].Week;
-                            string time = CalendarTools.getdata(Common.Year, nowWeeks, nowday - CalendarTools.weekdays(CalendarTools.CaculateWeekDay(Common.Year, Common.Month, Common.Day)), Common.Month, Common.Day).ToLongDateString();*@
-                                @*<tr>
-                                    <td>
-                                        @lstclass[i].TeacherName
-                                    </td>
-                                    <td>
-                                        @lstclass[i].ClassContent
-                                    </td>
-                                    <td>
-                                        @time
-                                    </td>
-                                    <td>
-                                        @lstclass[i].Address
-                                    </td>
-                                    <td>
-                                        @lstclass[i].Major
-                                    </td>
-                                    <td>
-                                        @lstclass[i].ClassType
-                                    </td>
-                                </tr>
-                            //}
-                         }
-                        }*@
+                    </tr>           
                     @{
                         Common com = new Common();
                         com.xmlRead(ViewBag.path);
@@ -162,7 +121,7 @@
                         @*<form method="get">
                             <input type="text" name="pages" />
                         </form>
-                        <button type="button" class="button gray" onclick="">
+                        <button type="button" class="button gray">
                             下一页
                         </button>
                         <button type="button" class="button gray">
@@ -180,51 +139,11 @@
         <div id="tab2" class="tab_content" style="display: none; ">
             <div class="row">
                 <div class="col-lg-12 col-sm-12 col-xs-12">
-                    <div class="po-right">
-                        <div class="btn-group">
-                            <a class="drop-title dropdown-toggle" data-toggle="dropdown" href="#">
-                                请选择规则名称
-                                <span class="caret caret-color">
-                                </span>
-                            </a>
-                            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
-                                <li>
-                                    <a tabindex="-1" href="#">
-                                        &nbsp;
-                                    </a>
-                                </li>
-                                <li>
-                                    <a tabindex="-1" href="#">
-                                        &nbsp;
-                                    </a>
-                                </li>
-                                <li>
-                                    <a tabindex="-1" href="#">
-                                        &nbsp;
-                                    </a>
-                                </li>
-                                <li>
-                                    <a tabindex="-1" href="#">
-                                        &nbsp;
-                                    </a>
-                                </li>
-                                <li>
-                                    <a tabindex="-1" href="#">
-                                        &nbsp;
-                                    </a>
-                                </li>
-                                <li>
-                                    <a tabindex="-1" href="#">
-                                        &nbsp;
-                                    </a>
-                                </li>
-                            </ul>
-                            <!--规则名称-->
-                        </div>
-                        <!--btn-group-->
-                        @*<div id="filelist"></div>*@
-                        <span>
-                            <button type="button" class="sch-btn blue" id="upload" value="read"></button>
+                    <div class="po-right">    
+                       @*<div id="filelist"></div>*@
+                        <span>                                                 
+                            <button type="button" class="sch-btn blue"  id="upload"  value="read">导入
+                            </button>
                         </span>
                     </div>
                     <!--po-right-->
@@ -738,16 +657,18 @@
 <script src="~/js/jquery.Huploadify.js"></script>
 <script src="~/js/btn.js"></script>
 <script>
-    $(function() {
-        $(".dropdown-menu li a").bind("click",
-        function() {
-            var $this = $(this);
-            var $a = $this.parent().parent().prev() $a.text($this.text());
-            $a.append("<span class='caret'>");
-        });
+  $(function() {
+    $(".dropdown-menu li a").bind("click",
+    function() {
+      var $this = $(this);
+      var $a = $this.parent().parent().prev() $a.text($this.text());
+      $a.append("<span class='caret'>");
     });
     //function getpage(pagno)
     //{
     //    var
     //}
 </script>
+
+
+
