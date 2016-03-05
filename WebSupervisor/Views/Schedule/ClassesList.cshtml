@@ -91,5 +91,13 @@
     }))
 </div>
 <script>
-    $(".pagination-container .pagination a").each(function () { if (typeof $(this).attr("href") != "undefined") { var href = "javascript:navpage('" + $(this).attr("href") + "')"; $(this).attr("href", href); } })</script>
+    $(".pagination-container .pagination a").each(function ()
+    {
+        if (typeof $(this).attr("href") != "undefined")
+        {
+            var href = "javascript:navpage('" + $(this).attr("href") + "')";
+            $(this).attr("href", href);
+        }
+    })
+</script>
 <!-- /.row -->

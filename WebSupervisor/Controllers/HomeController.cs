@@ -82,7 +82,7 @@ namespace WebSupervisor.Controllers
         public PartialViewResult Teacher(int page = 1)
         {
            
-            IPagedList<TeachersModel> Iteachers = teacherlist.ToPagedList(page, 12);
+            IPagedList<TeachersModel> Iteachers = teacherlist.ToPagedList(page, 10);
             return PartialView(Iteachers);
         }
         [HttpPost]

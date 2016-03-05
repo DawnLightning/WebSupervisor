@@ -2,65 +2,158 @@
 @using WebSupervisor.Code.Classes
 @model PagedList<TeachersModel>
 <link href="/Content/PagedList.css" rel="stylesheet" type="text/css" />
-<table class="table table-condensed table-hover table-responsive ove" id="teachertable">
-    @{
+<form id="formAddTeacher" action="/Home/AddTeacher" method="post">
 
-        foreach (var item in Model)
-        {   string identify = "";
-            string islimit = "";
-            if (item.Indentify == 0)
+    <table class="table table-condensed table-hover table-responsive ove" id="teachertable">
+
+
+        <tr bgcolor="#f5f5f5">
+            <th width=2%>
+
+                <input type="checkbox" name="checkall">
+
+            </th>
+            <th>
+                <p>
+                    教师号
+                </p>
+            </th>
+            <th>
+                <p>
+                    教师姓名
+                </p>
+            </th>
+            <th>
+                <p>
+                    职称
+                </p>
+            </th>
+            <th>
+                <p>
+                    教研室
+                </p>
+            </th>
+            <th>
+                <p>
+                    联系电话
+                </p>
+            </th>
+            <th>
+                <p>
+                    邮箱
+                </p>
+            </th>
+            <th>
+                <p>
+                    是否督导
+                </p>
+            </th>
+            <th>
+                <p>
+                    审核状态
+                </p>
+            </th>
+        </tr>
+        <tr id="addtr" style="display:none">
+            <td>
+                &nbsp;
+            </td>
+            <td>
+                <input type="text" id="teacherNo" name="teacherNo" />
+            </td>
+            <td>
+                <input type="text" id="teacherName" name="teacherName" />
+            </td>
+            <td>
+                <input type="text" id="teacherTitle" name="teacherTitle" />
+            </td>
+            <td>
+                <input type="text" id="teacherRoom" name="teacherRoom" />
+            </td>
+            <td>
+                <input type="text" id="teacherTel" name="teacherTel" />
+            </td>
+            <td>
+                <input type="text" id="teacherEmail" name="teacherEmail" />
+            </td>
+            <td>
+                <input type="checkbox" name="checkall">
+            </td>
+            <td>
+                <input type="button" id="btnsubmit" value="添加" class="teacherbtn blue" />
+                <input type="button" id="btncancel" value="取消" class="teacherbtn red" />
+            </td>
+        </tr>
+        @{
+
+            foreach (var item in Model)
             {
-                identify = "否";
+                string identify = "";
+                string islimit = "";
+                if (item.Indentify == 0)
+                {
+                    identify = "否";
+                }
+                else
+                {
+                    identify = "是";
+                }
+                if (item.Islimit == 0)
+                {
+                    islimit = "未审核";
+                }
+                else
+                {
+                    islimit = "已审核";
+                }
+                <tr>
+                    <td width=2%>
+
+                        <input type="checkbox" name="checkall">
+
+                    </td>
+                    <td>
+                        @item.Tid
+                    </td>
+                    <td>
+                        @item.TeacherName
+                    </td>
+                    <td>
+                        @item.Title
+                    </td>
+                    <td>
+                        @item.TeacherRoom
+                    </td>
+                    <td>
+                        @item.Phone
+                    </td>
+                    <td>
+                        @item.Email
+                    </td>
+                    <td>
+
+                        @identify
+
+                    </td>
+                    <td>
+                        @islimit
+                    </td>
+
+                </tr>
             }
-            else
-            {
-                identify = "是";
-            }
-            if (item.Islimit==0)
-            {
-                islimit = "未审核";
-            }
-            else
-            {
-                islimit = "已审核";
-            }
-            <tr>
-                <td>
-                    @item.Tid
-                </td>
-                <td>
-                    @item.TeacherName
-                </td>
-                <td>
-                    @item.Title
-                </td>
-                <td>
-                    @item.TeacherRoom
-                </td>
-                <td>
-                    @item.Phone
-                </td>
-                <td>
-                    @item.Email
-                </td>
-                <td>
-                   
-                   @identify
-                    
-                </td>
-                <td>
-                   @islimit
-                </td>
-               
-            </tr>
         }
-    }
-</table>
+    </table>
+    <input type="hidden" id="islimit" value=1 name="islimit" />
+    <input type="hidden" id="college" value=@Session[ "College"] name="college" />
+</form>
+   
+    
+    <div class="pager" style="text-align: center;">
 
-<div class="pager" style="text-align: center;">
-
-    <span style="height: 10px; line-height: 10px;">共 @Model.TotalItemCount.ToString() 条记录，当前第 @Model.PageNumber 页/共 @Model.PageCount 页 </span>
-    @Html.PagedListPager(Model, page => Url.Action("Teacher", "Home", new { page }),
+        @*
+            <span style="height: 5px; line-height: 5px;">共 @Model.TotalItemCount.ToString() 条记录，当前第 @Model.PageNumber 页/共 @Model.PageCount 页 </span>
+        *@
+        @Html.PagedListPager(Model, page => Url.Action("Teacher", "Home", new { page }),
     PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new PagedListRenderOptions
     {
         LinkToFirstPageFormat = "首页",
@@ -77,6 +170,14 @@
         UpdateTargetId = "teachertable"
     }
 
-       ))
-</div>
+     ))
+    </div>
+    <script>
+        $(".pagination-container .pagination a").each(function () {
+            if (typeof $(this).attr("href") != "undefined") {
+                var href = "javascript:navpage('" + $(this).attr("href") + "')";
+                $(this).attr("href", href);
+            }
+        })
+    </script>
 
