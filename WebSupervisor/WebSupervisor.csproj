@@ -330,7 +330,8 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\_Menu.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Schedule\Schedulelist.cshtml" />
+    <Content Include="Views\Schedule\ClassesList.cshtml" />
+    <Content Include="Views\Home\TeacherList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,0 +1,82 @@
+﻿@using WebSupervisor.Models
+@using WebSupervisor.Code.Classes
+@model PagedList<TeachersModel>
+<link href="/Content/PagedList.css" rel="stylesheet" type="text/css" />
+<table class="table table-condensed table-hover table-responsive ove" id="teachertable">
+    @{
+
+        foreach (var item in Model)
+        {   string identify = "";
+            string islimit = "";
+            if (item.Indentify == 0)
+            {
+                identify = "否";
+            }
+            else
+            {
+                identify = "是";
+            }
+            if (item.Islimit==0)
+            {
+                islimit = "未审核";
+            }
+            else
+            {
+                islimit = "已审核";
+            }
+            <tr>
+                <td>
+                    @item.Tid
+                </td>
+                <td>
+                    @item.TeacherName
+                </td>
+                <td>
+                    @item.Title
+                </td>
+                <td>
+                    @item.TeacherRoom
+                </td>
+                <td>
+                    @item.Phone
+                </td>
+                <td>
+                    @item.Email
+                </td>
+                <td>
+                   
+                   @identify
+                    
+                </td>
+                <td>
+                   @islimit
+                </td>
+               
+            </tr>
+        }
+    }
+</table>
+
+<div class="pager" style="text-align: center;">
+
+    <span style="height: 10px; line-height: 10px;">共 @Model.TotalItemCount.ToString() 条记录，当前第 @Model.PageNumber 页/共 @Model.PageCount 页 </span>
+    @Html.PagedListPager(Model, page => Url.Action("Teacher", "Home", new { page }),
+    PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new PagedListRenderOptions
+    {
+        LinkToFirstPageFormat = "首页",
+        LinkToNextPageFormat = "下一页",
+        LinkToPreviousPageFormat = "上一页",
+        LinkToLastPageFormat = "末页",
+        DisplayItemSliceAndTotal = false,
+        MaximumPageNumbersToDisplay = 10,
+        DisplayLinkToIndividualPages = true
+    }, new AjaxOptions()
+    {
+        HttpMethod = "GET",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "teachertable"
+    }
+
+       ))
+</div>
+

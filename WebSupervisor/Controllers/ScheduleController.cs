@@ -15,16 +15,13 @@ namespace WebSupervisor.Controllers
 {
     public class ScheduleController : Controller
     {
+        List<ClassesModel> lstclasses = DBHelper.ExecuteList<ClassesModel>("select * from classes", CommandType.Text, null);
         // GET: Schedule
-        public PartialViewResult Schedule(int pageno=1)
+        public PartialViewResult Schedule(int page=1)
         {
             string path = Server.MapPath(Common.ConfPath);
-            ViewBag.path = path;
-            //DBHelper db = new DBHelper();
-            List<ClassesModel> lstclasses = new List<ClassesModel>();
-            lstclasses = DBHelper.ExecuteList<ClassesModel>("select * from classes", CommandType.Text, null);
-                //db.GetCurrentData(DBHelper.ExecuteList<ClassesModel>("select * from classes", CommandType.Text, null), pageno, 14);
-            IPagedList<ClassesModel>  Lclasses = lstclasses.ToPagedList(pageno, 14);
+            ViewBag.path = path;      
+            IPagedList<ClassesModel>  Lclasses = lstclasses.ToPagedList(page, 12);
             return PartialView(Lclasses);
         }
         public PartialViewResult Auto()
