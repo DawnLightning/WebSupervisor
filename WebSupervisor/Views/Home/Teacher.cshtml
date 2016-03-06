@@ -22,9 +22,93 @@
             <div id="editable3">
                 <p>
                 </p>
-               
+                <form id="formAddTeacher" action="/Home/AddTeacher" method="post">
+                    <table class="table table-condensed table-hover table-responsive ove"
+                           id="tb1">
+                        <tr bgcolor="#f5f5f5">
+                            <th width=2%>
+                                <input type="checkbox" name="checkall">
+                            </th>
+                            <th>
+                                <p>
+                                    教师号
+                                </p>
+                            </th>
+                            <th>
+                                <p>
+                                    教师姓名
+                                </p>
+                            </th>
+                            <th>
+                                <p>
+                                    职称
+                                </p>
+                            </th>
+                            <th>
+                                <p>
+                                    教研室
+                                </p>
+                            </th>
+                            <th>
+                                <p>
+                                    联系电话
+                                </p>
+                            </th>
+                            <th>
+                                <p>
+                                    邮箱
+                                </p>
+                            </th>
+                            <th>
+                                <p>
+                                    是否督导
+                                </p>
+                            </th>
+                            <th>
+                                <p>
+                                    审核状态
+                                </p>
+                            </th>
+                        </tr>
+                        <tr id="addtr" style="display:none">
+                            <td>
+                                &nbsp;
+                            </td>
+                            <td>
+                                <input type="text" id="teacherNo" name="teacherNo" />
+                            </td>
+                            <td>
+                                <input type="text" id="teacherName" name="teacherName" />
+                            </td>
+                            <td>
+                                <input type="text" id="teacherTitle" name="teacherTitle" />
+                            </td>
+                            <td>
+                                <input type="text" id="teacherRoom" name="teacherRoom"  />
+                            </td>
+                            <td>
+                                <input type="text" id="teacherTel" name="teacherTel" />
+                            </td>
+                            <td>
+                                <input type="text" id="teacherEmail" name="teacherEmail" />
+                            </td>
+                            <td>
+                                <input type="checkbox" name="checkall">
+                            </td>
+                            <td>
+                                <input type="button" id="btnsubmit" value="添加" class="teacherbtn blue"/>
+                                <input type="button" id="btncancel" value="取消" class="teacherbtn red"/>
+                            </td>
+                        </tr>
                        @Html.Partial("TeacherList",Model);
+<<<<<<< HEAD
                  
+=======
+                    </table>
+                    <input type="hidden" id="islimit" value=1 name="islimit" />
+                    <input type="hidden" id="college" value=@Session[ "College"] name="college" />
+                </form>
+>>>>>>> 1f4c0a5600335a4a066e40d312a8a9b734d2a817
                 <script type="text/javascript">
 					
                     $(function () {

@@ -1,8 +1,12 @@
+<<<<<<< HEAD
 ﻿
 @using PagedList
 @using PagedList.Mvc
 @model PagedList.IPagedList<WebSupervisor.Models.AdminModel>
 <div class="contain">
+=======
+﻿<div class="contain">
+>>>>>>> 1f4c0a5600335a4a066e40d312a8a9b734d2a817
     <div class="tab_container">
         <div id="tab1" class="tab_content" style="display: block; ">
             <div class="row">
@@ -22,12 +26,144 @@
             <div id="editable4">
                 <p>
                 </p>
+<<<<<<< HEAD
 			    @Html.Partial("AdminList",Model);
             </div>
             <!-- /.table -->
            
                 <!-- /.row -->
             </div>
+=======
+				<form>
+                <table class="table table-condensed table-hover table-responsive ove">
+                    <tr bgcolor="#f5f5f5">
+                        <th width=2%>
+                            
+                                <input type="checkbox" name="checkall">
+                          
+                        </th>
+                        <th>
+                            <p>
+                                ID
+                            </p>
+                        </th>
+                        <th>
+                            <p>
+                                用户名
+                            </p>
+                        </th>
+                        <th>
+                            <p>
+                                密码
+                            </p>
+                        </th>
+                        <th>
+                            <p>
+                                学院
+                            </p>
+                        </th>
+                        <th>
+                            <p>
+                                电话
+                            </p>
+                        </th>
+                        <th>
+                            <p>
+                                邮箱
+                            </p>
+                        </th>
+                        <th>
+                            <p>
+                                剩余短信
+                            </p>
+                        </th>
+                        <th>
+                            <p>
+                                是否管理员
+                            </p>
+                        </th>
+                        <th>
+                            <p>
+                                操作
+                            </p>
+                        </th>
+                    </tr>
+                        <tr id="addadmin" style="display:none">
+                            <td>
+                               &nbsp;
+                            </td>
+                            <td>
+                               <input type="text" id="uid" name="uid"  />
+                            </td>
+                            <td>
+                                <input type="text" id="username" name="username" />
+                            </td>
+                            <td>
+                                <input type="text" id="password" name="password" />
+                            </td>
+                            <td>
+                                <input type="text" id="college" name="college" />
+                            </td>
+                            <td>
+                                <input type="text" id="phone" name="phone" />
+                            </td>
+                            <td>
+                                <input type="text" id="email" name="email" />
+                            </td>
+                            <td>
+                                <input type="text" id="numsms" name="numsms" />
+                            </td>
+                            <td>
+                                <input type="checkbox"  id="power"  name="power" class="checkboxpadding">
+                            </td>
+                            <td class="checkboxpadding1">
+                                <input type="submit" id="btnsubmit" value="添加" class="teacherbtn blue"/>
+                                <input type="button" id="btncancel" value="取消" class="teacherbtn red"/>
+                            </td>
+                        </tr>
+                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                </table>
+				
+                </form>
+            </div>
+            <!-- /.table -->
+            <div class="row">
+                <div class="col-lg-9 col-sm-6 col-xs-4">
+                </div>
+                <div class="col-lg-3 col-sm-6 col-xs-8">
+                    <div class="pagese">
+                        <p>
+                            页数：
+                        </p>
+                        <form method="get">
+                            <input type="text" name="pages" />
+                        </form>
+                        <button type="button" class="button gray">
+                            下一页
+                        </button>
+                        <button type="button" class="button gray">
+                            上一页
+                        </button>
+                        <button type="button" class="button gray">
+                            转到
+                        </button>
+                    </div>
+                </div>
+                <!-- /.row -->
+            </div>
+>>>>>>> 1f4c0a5600335a4a066e40d312a8a9b734d2a817
         </div>
     </div>
 </div>
