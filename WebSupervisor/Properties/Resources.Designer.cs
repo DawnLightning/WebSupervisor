@@ -83,9 +83,9 @@ namespace WebSupervisor.Properties {
         /// <summary>
         ///   查找类似 string 的本地化字符串。
         /// </summary>
-        internal static string Resources {
+        internal static string Resource {
             get {
-                return ResourceManager.GetString("Resources", resourceCulture);
+                return ResourceManager.GetString("Resource", resourceCulture);
             }
         }
         

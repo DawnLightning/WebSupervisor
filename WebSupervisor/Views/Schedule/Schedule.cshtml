@@ -45,110 +45,21 @@
             </div>
             <!-- /.row -->
             <div>
-                <table class="table table-condensed table-hover table-responsive ove">
-                    <tr bgcolor="#f5f5f5">
-                        <th>
-                            <p>
-                                教师
-                            </p>
-                        </th>
-                        <th>
-                            <p>
-                                课程内容
-                            </p>
-                        </th>
-                        <th>
-                            <p>
-                                上课时间
-                            </p>
-                        </th>
-                        <th>
-                            <p>
-                                上课地点
-                            </p>
-                        </th>
-                        <th>
-                            <p>
-                                专业
-                            </p>
-                        </th>
-                        <th>
-                            <p>
-                                课程类型
-                            </p>
-                        </th>
-                    </tr>
-                    @{
-                        Common com = new Common();
-                        com.xmlRead(ViewBag.path);
-                        foreach (var item in Model)
-                        {
-                            int nowday = item.Day;
-                            int nowWeeks = item.Week;
-                            string time = CalendarTools.getdata(Common.Year, nowWeeks, nowday - CalendarTools.weekdays(CalendarTools.CaculateWeekDay(Common.Year, Common.Month, Common.Day)), Common.Month, Common.Day).ToLongDateString();
-                            <tr>
-                                <td>
-                                    @item.TeacherName
-                                </td>
-                                <td>
-                                    @item.ClassContent
-                                </td>
-                                <td>
-                                    @time
-                                </td>
-                                <td>
-                                    @item.Address
-                                </td>
-                                <td>
-                                    @item.Major
-                                </td>
-                                <td>
-                                    @item.ClassType
-                                </td>
-                            </tr>
-                        }
-                    }
-                </table>
+                @Html.Partial("ClassesList", Model)
             </div>
             <!-- /.table -->
-            <div class="row">
-                <div class="col-lg-9 col-sm-6 col-xs-4">
-                </div>
-                <div class="col-lg-3 col-sm-6 col-xs-8">
-                    <div class="pagese">
-                        @*<div>*@
-                        页数：@Model.PageCount
-                        @*</div>*@
-                        @*<form method="get">
-                                <input type="text" name="pages" />
-                            </form>
-                            <button type="button" class="button gray">
-                                下一页
-                            </button>
-                            <button type="button" class="button gray">
-                                上一页
-                            </button>
-                            <button type="button" class="button gray">
-                                转到
-                            </button>*@
-                        @Html.PagedListPager(Model, page => Url.Action("/Schedule/Schedule", new { page }), new PagedListRenderOptions() { LinkToFirstPageFormat = "首页", LinkToNextPageFormat = "下一页", LinkToPreviousPageFormat = "上一页", LinkToLastPageFormat = "末页", DisplayItemSliceAndTotal = false, MaximumPageNumbersToDisplay = 10 })
-                    </div>
-                </div>
-                <!-- /.row -->
-            </div>
+
         </div>
         <div id="tab2" class="tab_content" style="display: none; ">
             <div class="row">
-                <div class="col-lg-12 col-sm-12 col-xs-12">
-                    <div class="po-right">
-                        @*<div id="filelist"></div>*@
+                <div class="po-right">
+                    <div class="btn-group">
                         <span>
-                            <button type="button" class="sch-btn blue" id="upload" value="read" />
-                            @*</button>*@
+                            <button type="button" class="sch-btn blue" id="upload" value="read"/>
                         </span>
                     </div>
-                    <!--po-right-->
                 </div>
+                <!--po-right-->
             </div>
             <div>
                 <!-- /table开始 -->
@@ -312,30 +223,30 @@
                 </table>
             </div>
             <!-- /.table -->
-            <div class="row">
-                <div class="col-lg-9 col-sm-6 col-xs-4">
-                </div>
-                <div class="col-lg-3 col-sm-6 col-xs-8">
-                    <div class="pages">
-                        <p>
-                            页数：
-                        </p>
-                        <form method="get">
-                            <input type="text" name="pages" />
-                        </form>
-                        <button type="button" class="button gray">
-                            下一页
-                        </button>
-                        <button type="button" class="button gray">
-                            上一页
-                        </button>
-                        <button type="button" class="button gray">
-                            转到
-                        </button>
-                    </div>
+        </div>
+        @*<div class="row">
+            <div class="col-lg-9 col-sm-6 col-xs-4">
+            </div>
+            <div class="col-lg-3 col-sm-6 col-xs-8">
+                <div class="pages">
+                    <p>
+                        页数：
+                    </p>
+                    <form method="get">
+                        <input type="text" name="pages" />
+                    </form>
+                    <button type="button" class="button gray">
+                        下一页
+                    </button>
+                    <button type="button" class="button gray">
+                        上一页
+                    </button>
+                    <button type="button" class="button gray">
+                        转到
+                    </button>
                 </div>
             </div>
-        </div>
+        </div>*@
         <div id="tab3" class="tab_content" style="display: none; ">
             <div class="row">
                 <div class="col-lg-12 col-sm-12 col-xs-12">
@@ -347,36 +258,17 @@
                                 </span>
                             </a>
                             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
-                                <li>
-                                    <a tabindex="-1" href="#">
-                                        &nbsp;
-                                    </a>
-                                </li>
-                                <li>
-                                    <a tabindex="-1" href="#">
-                                        &nbsp;
-                                    </a>
-                                </li>
-                                <li>
-                                    <a tabindex="-1" href="#">
-                                        &nbsp;
-                                    </a>
-                                </li>
-                                <li>
-                                    <a tabindex="-1" href="#">
-                                        &nbsp;
-                                    </a>
-                                </li>
-                                <li>
-                                    <a tabindex="-1" href="#">
-                                        &nbsp;
-                                    </a>
-                                </li>
-                                <li>
-                                    <a tabindex="-1" href="#">
-                                        &nbsp;
-                                    </a>
-                                </li>
+                                @{
+                                foreach (var item in ViewBag.TeacherName)
+                                {
+                            <li>
+                                <a tabindex="-1" href="#">
+                                    @item
+                                </a>
+                            </li>
+                                }
+
+                                }
                             </ul>
                             <!--教师姓名-->
                         </div>
@@ -388,36 +280,16 @@
                                 </span>
                             </a>
                             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
-                                <li>
-                                    <a tabindex="-1" href="#">
-                                        &nbsp;
-                                    </a>
-                                </li>
-                                <li>
-                                    <a tabindex="-1" href="#">
-                                        &nbsp;
-                                    </a>
-                                </li>
-                                <li>
-                                    <a tabindex="-1" href="#">
-                                        &nbsp;
-                                    </a>
-                                </li>
-                                <li>
-                                    <a tabindex="-1" href="#">
-                                        &nbsp;
-                                    </a>
-                                </li>
-                                <li>
-                                    <a tabindex="-1" href="#">
-                                        &nbsp;
-                                    </a>
-                                </li>
-                                <li>
-                                    <a tabindex="-1" href="#">
-                                        &nbsp;
-                                    </a>
-                                </li>
+                                @{
+                                foreach (var item in ViewBag.ClassName)
+                                {
+                            <li>
+                                <a tabindex="-1" href="#">
+                                    @item
+                                </a>
+                            </li>
+                                }
+                                }
                             </ul>
                             <!--课程-->
                         </div>
@@ -429,36 +301,16 @@
                                 </span>
                             </a>
                             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
-                                <li>
-                                    <a tabindex="-1" href="#">
-                                        &nbsp;
-                                    </a>
-                                </li>
-                                <li>
-                                    <a tabindex="-1" href="#">
-                                        &nbsp;
-                                    </a>
-                                </li>
-                                <li>
-                                    <a tabindex="-1" href="#">
-                                        &nbsp;
-                                    </a>
-                                </li>
-                                <li>
-                                    <a tabindex="-1" href="#">
-                                        &nbsp;
-                                    </a>
-                                </li>
-                                <li>
-                                    <a tabindex="-1" href="#">
-                                        &nbsp;
-                                    </a>
-                                </li>
-                                <li>
-                                    <a tabindex="-1" href="#">
-                                        &nbsp;
-                                    </a>
-                                </li>
+                                @{
+                                foreach (var item in ViewBag.Major)
+                                {
+                            <li>
+                                <a tabindex="-1" href="#">
+                                    @item
+                                </a>
+                            </li>
+                                }
+                                }
                             </ul>
                             <!--专业-->
                         </div>
@@ -473,92 +325,17 @@
                 </div>
             </div>
             <!--row-->
-            <div>
-                <!-- /.table开始 -->
-                <table class="table table-condensed table-hover table-responsive ove">
-                    <tr bgcolor="#f5f5f5">
-                        <th>
-                            <p>
-                                教师
-                            </p>
-                        </th>
-                        <th>
-                            <p>
-                                课程
-                            </p>
-                        </th>
-                        <th>
-                            <p>
-                                专业
-                            </p>
-                        </th>
-                    </tr>
-                    @{
-                        //Common co = new Common();
-                        //com.xmlRead(ViewBag.path);
-                        foreach (var item in Model)
-                        {
-                            //int nowday = item.Day;
-                            //int nowWeeks = item.Week;
-                            //string time = CalendarTools.getdata(Common.Year, nowWeeks, nowday - CalendarTools.weekdays(CalendarTools.CaculateWeekDay(Common.Year, Common.Month, Common.Day)), Common.Month, Common.Day).ToLongDateString();
-                            <tr>
-                                <td>
-                                    @item.TeacherName
-                                </td>
-                                <td>
-                                    @item.ClassName
-                                </td>
-                                <td>
-                                    @item.Major
-                                </td>
-                            </tr>
-                        }
-                    }
-                </table>
-            </div>
-            <!-- /.table -->
-            <div class="row">
-                <div class="col-lg-9 col-sm-6 col-xs-4">
-                </div>
-                <div class="col-lg-3 col-sm-6 col-xs-8">
-                    <div class="pages">
-                        @*<p>*@
-                            页数：@Model.PageCount
-                        @*</p>*@
-                        @*<form method="get">
-                                <input type="text" name="pages" />
-                            </form>
-                            <button type="button" class="button gray">
-                                下一页
-                            </button>
-                            <button type="button" class="button gray">
-                                上一页
-                            </button>
-                            <button type="button" class="button gray">
-                                转到
-                            </button>*@
-                        @Html.PagedListPager(Model, page => Url.Action("/Schedule/Schedule", new { page }), new PagedListRenderOptions() { LinkToFirstPageFormat = "首页", LinkToNextPageFormat = "下一页", LinkToPreviousPageFormat = "上一页", LinkToLastPageFormat = "末页", DisplayItemSliceAndTotal = false, MaximumPageNumbersToDisplay = 10 })
-                    </div>
-                </div>
-            </div>
+            @Html.Action("ExportClassList");
         </div>
     </div>
 </div>
+        @*</div>
+    </div>
+</div>*@
 <script src="~/js/jquery.js"></script>
 <script src="~/js/jquery.Huploadify.js"></script>
 <script src="~/js/btn.js"></script>
 <script>
-    $(function() {
-        $(".dropdown-menu li a").bind("click",
-        function() {
-            var $this = $(this);
-            var $a = $this.parent().parent().prev() $a.text($this.text());
-            $a.append("<span class='caret'>");
-        });
-        //function getpage(pagno)
-        //{
-        //    var
-        //}
 </script>
 
 

@@ -20,6 +20,8 @@ namespace WebSupervisor.Models
         public int NumSMS { set; get; }
 
         public int Power { set; get; }
+        public string Phone { set; get; }
+        public string Email { set; get; }
     }
     /// <summary>
     /// 督导老师登录模型

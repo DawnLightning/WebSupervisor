@@ -9,12 +9,15 @@ using System.Data;
 using WebDAL;
 using WebSupervisor.Code.Classes;
 using WebSupervisor.Controllers.CheckUser;
+using PagedList;
 
 namespace WebSupervisor.Controllers
-{
+{   
+
     [AuthenAdmin]
     public class HomeController : Controller
     {
+        List<TeachersModel> teacherlist = DBHelper.ExecuteList<TeachersModel>("select * from Teachers", CommandType.Text, null);
         // GET: HomePage
         public ActionResult Index()
         {
@@ -27,10 +30,6 @@ namespace WebSupervisor.Controllers
             return PartialView();
         }
         public PartialViewResult Set()
-        {
-            return PartialView();
-        }
-        public PartialViewResult Teacher()
         {
             return PartialView();
         }
@@ -72,28 +71,19 @@ namespace WebSupervisor.Controllers
             try
             {
                 com.xmlSave(path);
-                //    string path = this.Server.MapPath(Common.ConfPath);
-                //    //if (!Directory.Exists(path))//判断是否存在
-                //    //{
-                //    //    Directory.CreateDirectory(path);//创建新路径
-                //    //}
-                //    XElement xe = new XElement("Config",
-                //       new XElement("Year", year.ToString()),
-                //       new XElement("Month", month.ToString()),
-                //       new XElement("Day", day.ToString())
-                //       //new XElement("MailAddress", MailAddress),
-                //       //new XElement("MailPassword", MailPassword)
-                //       );
-                //    if (!System.IO.File.Exists(path))
-                //    {
-                //        xe.Save(path);
-                //    }
-                //    else { return Content("<script language='javascript' type='text/javascript'>alert('保存成功！！');window.location.href= '/Home/Set'</script>"); }
-                //    xe.RemoveAll();
+               
                 return Content("<script language='javascript' type='text/javascript'>alert('保存成功！！');window.location.href= '/Home/Set'</script>");
             }
             catch (Exception) { return Content("<script language='javascript' type='text/javascript'>alert('保存失败！！');window.location.href= '/Home/Set'</script>"); };
 
+        }
+      
+       
+        public PartialViewResult Teacher(int page = 1)
+        {
+           
+            IPagedList<TeachersModel> Iteachers = teacherlist.ToPagedList(page, 10);
+            return PartialView(Iteachers);
         }
         [HttpPost]
         public ActionResult SetInfo(FormCollection fc)
@@ -121,20 +111,6 @@ namespace WebSupervisor.Controllers
             //DBHelper.ExecuteNonQuery("update admin set phone=@phone,email=@email,password=@password where username="+uname , CommandType.Text, sqlpara);
 
         }
-        //public ActionResult Paging<T>(PageModel model,string tablename)
-        //{
-        //    //model.PageSize=from s in dbo
-        //    //Common com = new Common();
-        //    //List<T> lst = new List<T>();
-
-        //    int pagesum = DBHelper.ExexuteEntity<int>("select count(*) from" + tablename, CommandType.Text, null);
-        //    string end = ((model.PageNO-1)*model.PageSize + model.PageSize).ToString();
-        //    ////T obj = default(T);
-        //    string selectsql = string.Format("select top {0} * from {1} where id not in (select top {2} * from {1})", end, tablename, ((model.PageNO - 1) * model.PageSize).ToString());
-        //    List<T> lst = new List<T>();
-        //    lst = DBHelper.ExecuteList<T>(selectsql, CommandType.Text, null);
-        //    ////return lst;
-        //    return Json(new { lst,model.PageNO,pagesum },JsonRequestBehavior.AllowGet);
-        //}
+      
     }
 }

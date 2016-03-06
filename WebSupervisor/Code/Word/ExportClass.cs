@@ -16,36 +16,36 @@ namespace WebSupervisor.Code.Word
         ///  3.等等
         ///  ！所有节次在数据库中的存储都是数字，例如1-2节，那么就是12
         /// </summary>
-        private List<ClassesModel> dtclass=new List<ClassesModel>();//进度表
+        //private List<ClassesModel> dtclass=new List<ClassesModel>();//进度表
         private List<ExportClassModel> Info = new List<ExportClassModel>();//对应教师的上课信息
         //private SqlHelper help = new SqlHelper();
         /// <summary>
         /// 从数据库中选择要导出的教学进度
         /// </summary>
-       public bool  InitData(string condition)
-        {    string selectcommand="";
-            if (condition!="")
-            {
-                selectcommand = "select teachername,classtype,week,day,classnumber,classname from classes" + " where " + condition;
-            }
-            else
-            {
-                selectcommand = "select teachername,classtype,week,day,classnumber,classname from classes";
-            }
-            dtclass = DBHelper.ExecuteList<ClassesModel>(selectcommand, CommandType.Text, null);
-            if (dtclass.Count==0)
-            {
-                return false;
-            } 
-            else
-            {
-                return true;
-            }
-        }
-        /// <summary>
+       //public bool  InitData(string condition)
+       // {    string selectcommand="";
+       //     if (condition!="")
+       //     {
+       //         selectcommand = "select teachername,classtype,week,day,classnumber,classname from classes" + " where " + condition;
+       //     }
+       //     else
+       //     {
+       //         selectcommand = "select teachername,classtype,week,day,classnumber,classname from classes";
+       //     }
+       //     dtclass = DBHelper.ExecuteList<ClassesModel>(selectcommand, CommandType.Text, null);
+       //     if (dtclass.Count==0)
+       //     {
+       //         return false;
+       //     } 
+       //     else
+       //     {
+       //         return true;
+       //     }
+       // }
+       // /// <summary>
         /// //将数据库中的记录导入到对象数组中
         /// </summary>
-        public void InitInfo()
+        public void InitInfo(List<ClassesModel> dtclass)
         {   
             for (int i = 0; i < dtclass.Count;i++ )
             {
@@ -87,17 +87,17 @@ namespace WebSupervisor.Code.Word
         /// <summary>
         /// 输出word文档
         /// </summary>
-        public bool MakeWordDoc(string selectcommand,string filename)
+        public bool MakeWordDoc(List<ClassesModel> dtclass,string classpath)
         {
-            if (InitData(selectcommand)) //从数据库中选择要导出的教学进度
-           {
-               InitInfo();//将数据库中的记录导入到对象数组中
+  //if (InitData(selectcommand)) //从数据库中选择要导出的教学进度
+  //         {          
+               InitInfo( dtclass);//将数据库中的记录导入到对象数组中
                WordTools tools = new WordTools();
-               tools.fullclasses(Info, filename);//将对象数组写进word文档
+               tools.fullclasses(Info,classpath);//将对象数组写进word文档
                 return true;
-           }else{
-                return false;
-           }
+           //}else{
+           //     return false;
+           //}
          
            
         }

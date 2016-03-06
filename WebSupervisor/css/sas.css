@@ -489,3 +489,12 @@ width: 190px;
     -moz-border-radius: 8px;
      color:#fff;
 }
+.checkboxpadding {
+    width:60px;
+}
+#addadmin input[type="text"] {
+    width:120px;
+}
+#addadmin td {
+    width: 120px;
+}

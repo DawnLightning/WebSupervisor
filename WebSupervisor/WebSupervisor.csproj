@@ -344,7 +344,11 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\_Menu.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Schedule\Schedulelist.cshtml" />
+    <Content Include="Views\Schedule\ClassesList.cshtml" />
+    <Content Include="Views\Home\TeacherList.cshtml" />
+    <Content Include="Views\Power\AdminList.cshtml" />
+    <Content Include="Views\Schedule\ExportClassList.cshtml" />
+    <Content Include="Views\Schedule\_Paging.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
