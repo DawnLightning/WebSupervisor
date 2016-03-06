@@ -1,17 +1,18 @@
 ﻿@*<style type="text/css">
-    #filelist {
-        background-color: #FFF;
-        border-radius: 3px;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.25);
-        height: 103px;
-        margin-bottom: 10px;
-        overflow: auto;
-        padding: 5px 10px;
-        width: 300px;
-    }
-</style>*@
+        #filelist {
+            background-color: #FFF;
+            border-radius: 3px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+            height: 103px;
+            margin-bottom: 10px;
+            overflow: auto;
+            padding: 5px 10px;
+            width: 300px;
+        }
+    </style>*@
 @using PagedList
 @using PagedList.Mvc
+@using WebSupervisor.Code.Classes
 @model PagedList.IPagedList<WebSupervisor.Models.ClassesModel>
 <div class="contain">
     <ul class="tabs">
@@ -76,7 +77,7 @@
                                 课程类型
                             </p>
                         </th>
-                    </tr>           
+                    </tr>
                     @{
                         Common com = new Common();
                         com.xmlRead(ViewBag.path);
@@ -115,22 +116,22 @@
                 </div>
                 <div class="col-lg-3 col-sm-6 col-xs-8">
                     <div class="pagese">
-                        <p>
-                            页数：@Model.PageNumber
-                        </p>
+                        @*<div>*@
+                        页数：@Model.PageCount
+                        @*</div>*@
                         @*<form method="get">
-                            <input type="text" name="pages" />
-                        </form>
-                        <button type="button" class="button gray">
-                            下一页
-                        </button>
-                        <button type="button" class="button gray">
-                            上一页
-                        </button>
-                        <button type="button" class="button gray">
-                            转到
-                        </button>*@
-                       @Html.PagedListPager(Model, page => Url.Action("/Schedule/Schedule", new { page }), new PagedListRenderOptions() { LinkToFirstPageFormat = "首页", LinkToNextPageFormat = "下一页", LinkToPreviousPageFormat = "上一页", LinkToLastPageFormat = "末页", DisplayItemSliceAndTotal = false, MaximumPageNumbersToDisplay = 10 }) 
+                                <input type="text" name="pages" />
+                            </form>
+                            <button type="button" class="button gray">
+                                下一页
+                            </button>
+                            <button type="button" class="button gray">
+                                上一页
+                            </button>
+                            <button type="button" class="button gray">
+                                转到
+                            </button>*@
+                        @Html.PagedListPager(Model, page => Url.Action("/Schedule/Schedule", new { page }), new PagedListRenderOptions() { LinkToFirstPageFormat = "首页", LinkToNextPageFormat = "下一页", LinkToPreviousPageFormat = "上一页", LinkToLastPageFormat = "末页", DisplayItemSliceAndTotal = false, MaximumPageNumbersToDisplay = 10 })
                     </div>
                 </div>
                 <!-- /.row -->
@@ -139,11 +140,11 @@
         <div id="tab2" class="tab_content" style="display: none; ">
             <div class="row">
                 <div class="col-lg-12 col-sm-12 col-xs-12">
-                    <div class="po-right">    
-                       @*<div id="filelist"></div>*@
-                        <span>                                                 
-                            <button type="button" class="sch-btn blue"  id="upload"  value="read">导入
-                            </button>
+                    <div class="po-right">
+                        @*<div id="filelist"></div>*@
+                        <span>
+                            <button type="button" class="sch-btn blue" id="upload" value="read" />
+                            @*</button>*@
                         </span>
                     </div>
                     <!--po-right-->
@@ -492,138 +493,27 @@
                             </p>
                         </th>
                     </tr>
-                    <tr>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                    </tr>
+                    @{
+                        //Common co = new Common();
+                        //com.xmlRead(ViewBag.path);
+                        foreach (var item in Model)
+                        {
+                            //int nowday = item.Day;
+                            //int nowWeeks = item.Week;
+                            //string time = CalendarTools.getdata(Common.Year, nowWeeks, nowday - CalendarTools.weekdays(CalendarTools.CaculateWeekDay(Common.Year, Common.Month, Common.Day)), Common.Month, Common.Day).ToLongDateString();
+                            <tr>
+                                <td>
+                                    @item.TeacherName
+                                </td>
+                                <td>
+                                    @item.ClassName
+                                </td>
+                                <td>
+                                    @item.Major
+                                </td>
+                            </tr>
+                        }
+                    }
                 </table>
             </div>
             <!-- /.table -->
@@ -632,21 +522,22 @@
                 </div>
                 <div class="col-lg-3 col-sm-6 col-xs-8">
                     <div class="pages">
-                        <p>
-                            页数：
-                        </p>
-                        <form method="get">
-                            <input type="text" name="pages" />
-                        </form>
-                        <button type="button" class="button gray">
-                            下一页
-                        </button>
-                        <button type="button" class="button gray">
-                            上一页
-                        </button>
-                        <button type="button" class="button gray">
-                            转到
-                        </button>
+                        @*<p>*@
+                            页数：@Model.PageCount
+                        @*</p>*@
+                        @*<form method="get">
+                                <input type="text" name="pages" />
+                            </form>
+                            <button type="button" class="button gray">
+                                下一页
+                            </button>
+                            <button type="button" class="button gray">
+                                上一页
+                            </button>
+                            <button type="button" class="button gray">
+                                转到
+                            </button>*@
+                        @Html.PagedListPager(Model, page => Url.Action("/Schedule/Schedule", new { page }), new PagedListRenderOptions() { LinkToFirstPageFormat = "首页", LinkToNextPageFormat = "下一页", LinkToPreviousPageFormat = "上一页", LinkToLastPageFormat = "末页", DisplayItemSliceAndTotal = false, MaximumPageNumbersToDisplay = 10 })
                     </div>
                 </div>
             </div>
@@ -657,17 +548,17 @@
 <script src="~/js/jquery.Huploadify.js"></script>
 <script src="~/js/btn.js"></script>
 <script>
-  $(function() {
-    $(".dropdown-menu li a").bind("click",
-    function() {
-      var $this = $(this);
-      var $a = $this.parent().parent().prev() $a.text($this.text());
-      $a.append("<span class='caret'>");
-    });
-    //function getpage(pagno)
-    //{
-    //    var
-    //}
+    $(function() {
+        $(".dropdown-menu li a").bind("click",
+        function() {
+            var $this = $(this);
+            var $a = $this.parent().parent().prev() $a.text($this.text());
+            $a.append("<span class='caret'>");
+        });
+        //function getpage(pagno)
+        //{
+        //    var
+        //}
 </script>
 
 

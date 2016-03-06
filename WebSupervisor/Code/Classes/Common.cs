@@ -21,7 +21,13 @@ namespace WebSupervisor.Code.Classes
     }
      public class Common
     {
-
+        //public static string strAddfilesPath
+        //{
+        //    get
+        //    {
+        //        return "~/App_Start/UserData.xml";
+        //    }
+        //}
         /// <summary>
         /// 配置文件路径
         /// </summary>
@@ -99,7 +105,7 @@ namespace WebSupervisor.Code.Classes
 
         //#region 数据库操作
 
-        
+
         //#endregion
         //    public static int Year, Month, Day;//年月日
         //    public static int Week//周数
@@ -210,80 +216,80 @@ namespace WebSupervisor.Code.Classes
         //        return true;
         //    }
         //    #endregion
-        //    #region 输出Word文档
-        //     public  static void load_supervisor()
-        //     {
-        //         string Path = Environment.CurrentDirectory + "\\" + "supervisor.doc";
-        //         if (!(File.Exists(Path)))
-        //         {
-        //             FileStream fs = new FileStream(Path, FileMode.OpenOrCreate, FileAccess.Write);
+        #region 输出Word文档
+        public static void load_supervisor()
+        {
+            string Path = Environment.CurrentDirectory + "\\" + "supervisor.doc";
+            if (!(File.Exists(Path)))
+            {
+                FileStream fs = new FileStream(Path, FileMode.OpenOrCreate, FileAccess.Write);
 
-        //             try
-        //             {
-        //                 Byte[] b = SAS.Properties.Resources.supervisor;
+                try
+                {
+                    Byte[] b = Properties.Resources.supervisor;
 
-        //                 fs.Write(b, 0, b.Length);
-        //                 if (fs != null)
-        //                     fs.Close();
-        //             }
-        //             catch
-        //             {
-        //                 if (fs != null)
-        //                     fs.Close();
+                    fs.Write(b, 0, b.Length);
+                    if (fs != null)
+                        fs.Close();
+                }
+                catch
+                {
+                    if (fs != null)
+                        fs.Close();
 
-        //             }
-        //         }
-        //     }
-        //     public static void load_cheif_supervisor()
-        //     {
-        //         string Path = Environment.CurrentDirectory + "\\" + "chief_supervisor.doc";
-        //         if (!(File.Exists(Path)))
-        //         {
-        //             FileStream fs = new FileStream(Path, FileMode.OpenOrCreate, FileAccess.Write);
+                }
+            }
+        }
+        public static void load_cheif_supervisor()
+        {
+            string Path = Environment.CurrentDirectory + "\\" + "chief_supervisor.doc";
+            if (!(File.Exists(Path)))
+            {
+                FileStream fs = new FileStream(Path, FileMode.OpenOrCreate, FileAccess.Write);
 
-        //             try
-        //             {
-        //                 Byte[] b = SAS.Properties.Resources.chief_supervisor;
+                try
+                {
+                    Byte[] b = Properties.Resources.chief_supervisor;
 
-        //                 fs.Write(b, 0, b.Length);
-        //                 if (fs != null)
-        //                     fs.Close();
-        //                 fs.Dispose();
-        //             }
-        //             catch
-        //             {
-        //                 if (fs != null)
-        //                     fs.Close();
-        //                 fs.Dispose();
+                    fs.Write(b, 0, b.Length);
+                    if (fs != null)
+                        fs.Close();
+                    fs.Dispose();
+                }
+                catch
+                {
+                    if (fs != null)
+                        fs.Close();
+                    fs.Dispose();
 
-        //             }
-        //         }
-        //     }
+                }
+            }
+        }
 
-        //     public static void load_classes()
-        //     {
-        //         string Path = Environment.CurrentDirectory + "\\" + "classes.docx";
-        //         if (!(File.Exists(Path)))
-        //         {
-        //             FileStream fs = new FileStream(Path, FileMode.OpenOrCreate, FileAccess.Write);
+        public static void load_classes()
+        {
+            string Path = Environment.CurrentDirectory + "\\" + "classes.docx";
+            if (!(File.Exists(Path)))
+            {
+                FileStream fs = new FileStream(Path, FileMode.OpenOrCreate, FileAccess.Write);
 
-        //             try
-        //             {
-        //                 Byte[] b = SAS.Properties.Resources.classes;
+                try
+                {
+                    Byte[] b = Properties.Resources.classes;
 
-        //                 fs.Write(b, 0, b.Length);
-        //                 if (fs != null)
-        //                     fs.Close();
-        //             }
-        //             catch
-        //             {
-        //                 if (fs != null)
-        //                     fs.Close();
+                    fs.Write(b, 0, b.Length);
+                    if (fs != null)
+                        fs.Close();
+                }
+                catch
+                {
+                    if (fs != null)
+                        fs.Close();
 
-        //             }
-        //         }
-        //     }
-        //    #endregion
+                }
+            }
+        }
+        #endregion
         //}
     }
 }

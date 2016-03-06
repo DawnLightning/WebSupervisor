@@ -292,6 +292,7 @@ namespace WebDAL
                 if (dataSet.Tables[0] != null && dataSet.Tables.Count != 0)
                 {
                     DataTable dt = dataSet.Tables[0];
+                    dt.Clear();
                     foreach (T model in list)
                     {
 

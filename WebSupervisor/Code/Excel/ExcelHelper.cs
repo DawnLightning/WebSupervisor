@@ -16,11 +16,11 @@ namespace WebSupervisor
 {
     class ExcelHelper
     {
-    
+
         DataTable Excel_dt;
         List<ClassesModel> list = new List<ClassesModel>();
         Random r = new Random();
-      
+
         #region 读取excel ,默认第一行为标头Import()
         /// <summary>
         /// 读取excel ,默认第一行为标头
@@ -161,12 +161,12 @@ namespace WebSupervisor
                             string strclassname = Excel_dt.Rows[i][name[2]].ToString();
 
                             int classnumindex = strclassname.IndexOf("-");
-                            int tnum = teachernamepick.IndexOf("(");//获取教师姓名列中的第一个"("的位置
-                            string tname;
-                            if (tnum >= 0)
-                                tname = teachernamepick.Substring(0, tnum);//截取老师名字
-                            else
-                                tname = teachernamepick;
+                            //int tnum = teachernamepick.IndexOf("(");//获取教师姓名列中的第一个"("的位置
+                            string tname = ClearTechnicalTitle(teachernamepick);
+                            //if (tnum >= 0)
+                            //    tname = teachernamepick.Substring(0, tnum);//截取老师名字
+                            //else
+                            //    tname = teachernamepick;
                             //int classnumindex = strclassname.IndexOf("-");
                             //schedule.Day = j;
                             //schedule.TeacherName = teachernamepick;
@@ -191,7 +191,8 @@ namespace WebSupervisor
                             model.ClassContent = Excel_dt.Rows[i][name[5]].ToString();
                             model.CheckNumber = 0;
                             model.Major = major;
-                            DBHelper.Insert<ClassesModel>(model);
+                            //DBHelper.Insert<ClassesModel>(model);
+                            list.Add(model);
                             // DBHelper.Insert<ClassesModel>(model, "insert into classes values(@cid,@teachername,@classname,@classcontent,@classtype,@address,@week,@day,@classnumber,@checknumber)");
                             ///---------------------------------------------------------------------------------------------
                             //sqlparament[7] = new SqlParameter("@day", j);
@@ -236,7 +237,7 @@ namespace WebSupervisor
 
             //daClass.Update(dtClass);
             DBHelper.BulkInsert<ClassesModel>(list);
-           
+
             return 1;
             //}
             //catch (Exception)
@@ -250,5 +251,21 @@ namespace WebSupervisor
             return strTeacher.Length - strTeacher.Replace(",", "").Length;
         }
         #endregion
+        /// <summary>
+        /// 去掉职称
+        /// </summary>
+        /// <param name="s">教师姓名</param>
+        /// <returns></returns>
+        private string ClearTechnicalTitle(string s)
+        {
+            if (s.IndexOf("(") != -1)
+            {
+                return s.Substring(0, s.IndexOf("("));
+            }
+            else
+            {
+                return s;
+            }
+        }
     }
 }

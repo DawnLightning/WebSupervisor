@@ -10,13 +10,14 @@ using WebSupervisor.Models;
 using PagedList;
 using PagedList.Mvc;
 using WebSupervisor.Code.Classes;
+using WebSupervisor.Code.Word;
 
 namespace WebSupervisor.Controllers
 {
     public class ScheduleController : Controller
     {
         // GET: Schedule
-        public PartialViewResult Schedule(int pageno=1)
+        public PartialViewResult Schedule(int page=1)
         {
             string path = Server.MapPath(Common.ConfPath);
             ViewBag.path = path;
@@ -24,7 +25,7 @@ namespace WebSupervisor.Controllers
             List<ClassesModel> lstclasses = new List<ClassesModel>();
             lstclasses = DBHelper.ExecuteList<ClassesModel>("select * from classes", CommandType.Text, null);
                 //db.GetCurrentData(DBHelper.ExecuteList<ClassesModel>("select * from classes", CommandType.Text, null), pageno, 14);
-            IPagedList<ClassesModel>  Lclasses = lstclasses.ToPagedList(pageno, 14);
+            IPagedList<ClassesModel>  Lclasses = lstclasses.ToPagedList(page, 14);
             return PartialView(Lclasses);
         }
         public PartialViewResult Auto()
@@ -45,8 +46,8 @@ namespace WebSupervisor.Controllers
 
             //获取文件完整文件名
             string filename = Path.GetFileName(Filedata.FileName);
-            //文件存放路径格式：~/App_Data/用户名/文件名
-            string virtualPath = string.Format("~/App_Data/{0}/{1}", Session["AdminUser"], filename);
+            //文件存放路径格式：~/App_Data/用户名/Excel/文件名
+            string virtualPath = string.Format("~/App_Data/{0}/{1}/{2}", Session["AdminUser"],"Excel" ,filename);
 
             ////例如：/files/upload/20130913/43CA215D947F8C1F1DDFCED383C4D706.jpg
             //string fileMD5 = CommonFuncs.GetStreamMD5(Filedata.InputStream);
@@ -94,5 +95,25 @@ namespace WebSupervisor.Controllers
         //    ////return lst;
         //    return Json(new { lst, model.PageNO, pagesum }, JsonRequestBehavior.AllowGet);
         //}
+        public ActionResult ExportClassList(string cbspcial, string cbname, string cbclass)
+        {
+            ExportClass ex = new ExportClass();
+            string filename = "课程表\\" + cbspcial + "专业" + cbname + "老师的" + cbclass + "课程表";
+            string virtualPath = string.Format("~/App_Data/{0}/{1}/{2}", Session["AdminUser"], "Word", filename);
+            string fullFileName = this.Server.MapPath(virtualPath);
+
+            //创建文件夹，保存文件
+            string path = Path.GetDirectoryName(fullFileName);
+            if (!Directory.Exists(path))
+                Directory.CreateDirectory(path);
+            //if (!System.IO.File.Exists(Common.strAddfilesPath + "课程表"))
+            //{
+            //    System.IO.Directory.CreateDirectory(Common.strAddfilesPath + "课程表");
+            //}
+            //string filename = "课程表\\" + cbspcial + "专业" + cbname + "老师的" + cbclass + "课程表";
+            filepath = Common.strAddfilesPath + filename + ".docx";
+            ex.MakeWordDoc(selectcommand, filename);
+            //MessageBox.Show("导出成功");
+        }
     }
 }
