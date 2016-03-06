@@ -1,30 +1,39 @@
-﻿@using PagedList
+﻿
+@using PagedList
 @using PagedList.Mvc
 @model PagedList.IPagedList<WebSupervisor.Models.AdminModel>
 <div class="contain">
-    <div class="tab_container">
-        <div id="tab1" class="tab_content" style="display: block; ">
-            <div class="row">
-                <div class="col-lg-3 col-sm-5 col-xs-12">
-                    <button type="button" class="button green"  onClick="$('#addadmin').show()">
-                        添加
-                    </button>
-                    <button type="button" class="button orange">
-                        修改
-                    </button>
-                    <button type="button" class="button red">
-                        删除
-                    </button>
+
+    ﻿<div class="contain">
+
+        <div class="tab_container">
+            <div id="tab1" class="tab_content" style="display: block; ">
+                <div class="row">
+                    <div class="col-lg-3 col-sm-5 col-xs-12">
+                        <button type="button" class="button green" onClick="$('#addadmin').show()">
+                            添加
+                        </button>
+                        <button type="button" class="button orange" onclick="edite4()" ;>
+                            修改
+                        </button>
+                        <button type="button" class="button red" onclick="delete1()" ;>
+                            删除
+                        </button>
+                    </div>
                 </div>
+                <!-- /.row -->
+                <div id="editable4">
+                    <p>
+                    </p>
+
+                    @Html.Partial("AdminList", Model);
+                </div>
+                <!-- /.table -->
+                <!-- /.row -->
             </div>
-            <!-- /.row -->
-            <div>
-                <p>
-                </p>
-               @Html.Partial("AdminList",Model);
-                
-            </div>
-           
+
+
+
         </div>
     </div>
 </div>

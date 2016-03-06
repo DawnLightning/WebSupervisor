@@ -10,41 +10,37 @@
                     <button type="button" class="button green" onClick="$('#addtr').show()">
                         添加
                     </button>
-                    <button type="button" class="button orange">
+                    <button type="button" class="button orange" onclick="edite3()";>
                         修改
                     </button>
-                    <button type="button" class="button blue">
+                    <button type="button" class="button blue" onclick="tsave()";>
                         保存
                     </button>
                 </div>
             </div>
             <!-- /.row -->
-            <div>
+            <div id="editable3">
                 <p>
                 </p>
                
                        @Html.Partial("TeacherList",Model);
-                   
-                    
-               
-                <script type="text/javascript">
-					
-                    $(function () {
-                        $(":input[name='teacherEmail']").blur(function () {
-                            var email = $(this).val();
-                            var reg = /\w+[@@]{1}\w+[.]\w+/;
-                            if (reg.test(email)) {
-                                $("#btnsubmit").removeAttr("disabled");//将按钮可用
-                            } else {
-                                $(":input[name='teacherEmail']").val("请输入正确的email地址");
-                                $("#btnsubmit").attr("disabled", "disabled"); // 禁用
-                            }
-                        });
-                    });
-                </script>
+
+              
             </div>
             <!-- /.table -->
            
         </div>
     </div>
 </div>
+<script>
+    //教师信息按钮 保存
+    function tsave() {
+        swal({
+            title: "已保存",//放js显示乱码 所以放这里
+            timer: 1500,
+            showConfirmButton: false,
+            type: "success"
+        });
+        document.getElementById("editable3").contentEditable = "false";
+    };
+</script>
