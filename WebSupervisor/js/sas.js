@@ -3,7 +3,7 @@ var navinfo = {};
 function navpage(pagename, t1, t2) {
     $("#title1").html(t1);
     $("#title2").html(t2);
-    window.location.hash = "#!" + pagename;
+    window.location.hash =pagename;
     showpage(pagename);
 }
 function navreload() {

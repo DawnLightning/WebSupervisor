@@ -10,23 +10,21 @@
                     <button type="button" class="button green" onClick="$('#addtr').show()">
                         添加
                     </button>
-                    <button type="button" class="button orange">
+                    <button type="button" class="button orange" onclick="edite3()";>
                         修改
                     </button>
-                    <button type="button" class="button blue">
+                    <button type="button" class="button blue" onclick="tsave()";>
                         保存
                     </button>
                 </div>
             </div>
             <!-- /.row -->
-            <div>
+            <div id="editable3">
                 <p>
                 </p>
                
                        @Html.Partial("TeacherList",Model);
-                   
-                    
-               
+                 
                 <script type="text/javascript">
 					
                     $(function () {
@@ -48,3 +46,15 @@
         </div>
     </div>
 </div>
+<script>
+    //教师信息按钮 保存
+    function tsave() {
+        swal({
+            title: "已保存",//放js显示乱码 所以放这里
+            timer: 1500,
+            showConfirmButton: false,
+            type: "success"
+        });
+        document.getElementById("editable3").contentEditable = "false";
+    };
+</script>

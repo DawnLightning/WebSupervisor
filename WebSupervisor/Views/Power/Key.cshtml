@@ -1,4 +1,5 @@
-﻿@using PagedList
+﻿
+@using PagedList
 @using PagedList.Mvc
 @model PagedList.IPagedList<WebSupervisor.Models.AdminModel>
 <div class="contain">
@@ -9,22 +10,24 @@
                     <button type="button" class="button green"  onClick="$('#addadmin').show()">
                         添加
                     </button>
-                    <button type="button" class="button orange">
+                    <button type="button" class="button orange" onclick="edite4()";>
                         修改
                     </button>
-                    <button type="button" class="button red">
+                    <button type="button" class="button red" onclick="delete1()";>
                         删除
                     </button>
                 </div>
             </div>
             <!-- /.row -->
-            <div>
+            <div id="editable4">
                 <p>
                 </p>
-               @Html.Partial("AdminList",Model);
-                
+			    @Html.Partial("AdminList",Model);
             </div>
+            <!-- /.table -->
            
+                <!-- /.row -->
+            </div>
         </div>
     </div>
 </div>
