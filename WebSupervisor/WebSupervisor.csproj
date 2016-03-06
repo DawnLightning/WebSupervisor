@@ -333,6 +333,7 @@
     <Content Include="Views\Schedule\ClassesList.cshtml" />
     <Content Include="Views\Home\TeacherList.cshtml" />
     <Content Include="Views\Power\AdminList.cshtml" />
+    <Content Include="Views\Supervisor\SupervisorList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -34,4 +34,11 @@ namespace WebSupervisor.Models
         public string Phone { get; set; }
 
     }
+    public class SupervisorViewModel
+    {
+        public string TeacherName { set; get; }
+        public string SpareTime { set; get; }
+        public string Phone { set; get; }
+        public string Password { set; get; }
+    }
 }
