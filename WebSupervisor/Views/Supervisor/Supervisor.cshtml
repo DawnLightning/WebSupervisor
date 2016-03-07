@@ -3,689 +3,733 @@
 @using PagedList.Mvc
 @using System.Web.Mvc.Html
 @model PagedList.IPagedList<WebSupervisor.Models.SupervisorViewModel>
-<div class="tab_container">
-    <!--白板宽度-->
-    <div style="width:1226px;overflow:auto">
-        <!--同督导信息的vrtab的overflow产生滚动条-->
-        <div class="vltab">
-            <ul id="navtab">
-                <li class="aa" id="tb_1" onClick="i:hoverli(1);">
-                    总览
-                </li>
-                @foreach (WebSupervisor.Models.SupervisorViewModel m in Model)
-                {   
-                   
-                    <li class="aa" id="tb_2" onClick="x:hoverli(2);">
-                       @m.TeacherName
+<div class="contain">
+    <div class="tab_container">
+        <!--白板宽度-->
+        <div style="width:1226px;">
+            <!--同督导信息的vrtab的overflow产生滚动条-->
+            <div class="vltab" style="overflow:auto;">
+                <ul id="navtab" style="overflow-y:auto;overflow-x:hidden;height:495px;">
+                    <li class="overview aa" id="tb_1" onClick="i:hoverli(1);">
+                        <strong>  总览</strong>
                     </li>
-                   
-                }
-               
-            </ul>
-        </div>
-        <div class="vrtab">
-            <div class="rtab listtab">
-                <div class="dis" id="tbc_01" style="overflow-x:hidden;overflow-y:auto;word-break:break-all;">
-                    <div class="row">
-                        <div class="col-lg-4 col-md-4 col-sm-7 col-xs-12">
-                            <button type="button" class="button green">
-                                自动填补
-                            </button>
-                            <button type="button" class="button red">
-                                移除督导
-                            </button>
-                            <button type="button" class="button orange">
-                                修改
-                            </button>
+                <!-- @foreach (WebSupervisor.Models.SupervisorViewModel m in Model)
+                {
+
+                        <li class="aa" id="tb_2" onClick="x:hoverli(2);">
+                         //   @m.TeacherName
+                        </li>
+ 
+                }-->
+                    <li class="aa" id="tb_2" onClick="x:hoverli(2);">
+                        &nbsp;
+                    </li>
+                    <li class="aa" id="tb_3" onClick="x:hoverli(3);">
+                        &nbsp;
+                    </li>
+                    <li class="aa" id="tb_4" onClick="x:hoverli(4);">
+                        &nbsp;
+                    </li>
+                    <li class="aa" id="tb_5" onClick="x:hoverli(5);">
+                        &nbsp;
+                    </li>
+                    <li class="aa" id="tb_6" onClick="x:hoverli(6);">
+                        &nbsp;
+                    </li>
+                    <li class="aa" id="tb_7" onClick="x:hoverli(7);">
+                        &nbsp;
+                    </li>
+                    <li class="aa" id="tb_8" onClick="x:hoverli(8);">
+                        &nbsp;
+                    </li>
+                    <li class="aa" id="tb_9" onClick="x:hoverli(9);">
+                        &nbsp;
+                    </li>
+                    <li class="aa" id="tb_10" onClick="x:hoverli(10);">
+                        &nbsp;
+                    </li>
+                    <li class="aa" id="tb_11" onClick="x:hoverli(11);">
+                        &nbsp;
+                    </li>
+                    <li class="aa" id="tb_12" onClick="x:hoverli(12);">
+                        &nbsp;
+                    </li>
+                    <li class="aa" id="tb_13" onClick="x:hoverli(13);">
+                        &nbsp;
+                    </li>
+                    <li class="aa" id="tb_14" onClick="x:hoverli(14);">
+                        &nbsp;
+                    </li>
+                    <li class="aa" id="tb_15" onClick="x:hoverli(15);">
+                        &nbsp;
+                    </li>
+
+                </ul>
+            </div>
+            <div class="vrtab">
+                <div class="rtab listtab">
+                    <div class="dis" id="tbc_01" style="overflow-x:hidden;overflow-y:auto;word-break:break-all;">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-7 col-xs-12">
+                                <button type="button" class="button green">
+                                    自动填补
+                                </button>
+                                <button type="button" class="button red">
+                                    移除督导
+                                </button>
+                                <button type="button" class="button orange">
+                                    修改
+                                </button>
+                            </div>
+                        </div>
+                        <!--row-->
+                        <div>
+                            <!--TABLE-->
+                            <p>
+                            </p>
+                            @Html.Partial("SupervisorList", Model);
+                            <!--TABLE-->
                         </div>
                     </div>
-                    <!--row-->
-                    <div>
-                        <!--TABLE-->
-                        <p>
-                        </p>
-                        @Html.Partial("SupervisorList", Model);
-                        <!--TABLE-->
-                    </div>
-                </div>
-                <!--dis-->
-                <div class="undis" id="tbc_02" style="overflow:hidden">
-                    <div class="row">
-                        <div class="col-lg-4 col-md-4 col-sm-7 col-xs-12">
-                            <button type="button" class="button green">
-                                清空全部
-                            </button>
-                            <button type="button" class="button red">
-                                移除勾选
-                            </button>
-                            <button type="button" class="button blue">
-                                保存
-                            </button>
+                    <!--dis-->
+                    <div class="undis" id="tbc_02" style="overflow:hidden">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-7 col-xs-12">
+                                <button type="button" class="button green">
+                                    清空全部
+                                </button>
+                                <button type="button" class="button red">
+                                    移除勾选
+                                </button>
+                                <button type="button" class="button blue">
+                                    保存
+                                </button>
+                            </div>
+                            <!--col-->
                         </div>
-                        <!--col-->
-                    </div>
-                    <!--row-->
-                    <div>
-                        <!--TABLE-->
-                        <p>
-                        </p>
-                        <form>
-                            <table class="table" style="font-size:20px">
-                                <tr bgcolor="f5f5f5" style="text-align:center">
-                                    <th>
-                                        <input id="checkweek" type="checkbox" name="checkweek" onClick="selectallweek(this,this.form)">
-                                        全选
-                                    </th>
-                                    <th>
-                                        <input type="checkbox" id="monday" onClick="selectday(this,'mon')">
-                                        星期一
-                                    </th>
-                                    <th>
-                                        <input type="checkbox" id="tuesday" onClick="selectday(this,'tue')">
-                                        星期二
-                                    </th>
-                                    <th>
-                                        <input type="checkbox" id="wednesday" onClick="selectday(this,'wed')">
-                                        星期三
-                                    </th>
-                                    <th>
-                                        <input type="checkbox" id="thursday" onClick="selectday(this,'thu')">
-                                        星期四
-                                    </th>
-                                    <th>
-                                        <input type="checkbox" id="friday" onClick="selectday(this,'fri')">
-                                        星期五
-                                    </th>
-                                    <th>
-                                        <input type="checkbox" id="saturday" onClick="selectday(this,'sat')">
-                                        星期六
-                                    </th>
-                                    <th>
-                                        <input type="checkbox" id="sunday" onClick="selectday(this,'sun')">
-                                        星期天
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        上午
-                                    </td>
-                                    <td>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="mon">
-                                            1
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="mon">
-                                            2
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="mon">
-                                            3
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="mon">
-                                            4
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="mon">
-                                            5
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="tue">
-                                            1
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="tue">
-                                            2
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="tue">
-                                            3
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="tue">
-                                            4
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="tue">
-                                            5
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="wed">
-                                            1
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="wed">
-                                            2
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="wed">
-                                            3
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="wed">
-                                            4
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="wed">
-                                            5
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="thu">
-                                            1
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="thu">
-                                            2
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="thu">
-                                            3
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="thu">
-                                            4
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="thu">
-                                            5
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="fri">
-                                            1
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="fri">
-                                            2
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="fri">
-                                            3
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="fri">
-                                            4
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="fri">
-                                            5
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="sat">
-                                            1
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="sat">
-                                            2
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="sat">
-                                            3
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="sat">
-                                            4
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="sat">
-                                            5
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="sun">
-                                            1
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="sun">
-                                            2
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="sun">
-                                            3
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="sun">
-                                            4
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="sun">
-                                            5
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        下午
-                                    </td>
-                                    <td>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="mon">
-                                            6
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="mon">
-                                            7
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="mon">
-                                            8
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="mon">
-                                            9
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="tue">
-                                            6
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="tue">
-                                            7
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="tue">
-                                            8
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="tue">
-                                            9
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="wed">
-                                            6
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="wed">
-                                            7
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="wed">
-                                            8
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="wed">
-                                            9
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="thu">
-                                            6
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="thu">
-                                            7
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="thu">
-                                            8
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="thu">
-                                            9
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="fri">
-                                            6
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="fri">
-                                            7
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="fri">
-                                            8
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="fri">
-                                            9
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="sat">
-                                            6
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="sat">
-                                            7
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="sat">
-                                            8
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="sat">
-                                            9
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="sun">
-                                            6
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="sun">
-                                            7
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="sun">
-                                            8
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="sun">
-                                            9
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        晚上
-                                    </td>
-                                    <td>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="mon">
-                                            10
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="mon">
-                                            11
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="mon">
-                                            12
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="tue">
-                                            10
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="tue">
-                                            11
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="tue">
-                                            12
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="wed">
-                                            10
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="wed">
-                                            11
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="wed">
-                                            12
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="thu">
-                                            10
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="thu">
-                                            11
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="thu">
-                                            12
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="fri">
-                                            10
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="fri">
-                                            11
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="fri">
-                                            12
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="sat">
-                                            10
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="sat">
-                                            11
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="sat">
-                                            12
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="sun">
-                                            10
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="sun">
-                                            11
-                                        </div>
-                                        <div class="divblock">
-                                            <input id="checkday" type="checkbox" name="sun">
-                                            12
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                            </table>
-                        </form>
-                    </div>
-                    <!--TABLE-->
-                    <div class="row">
-                        <div class="muchadd col-lg-1 col-md-2 col-sm-3 cpl-sx-12">
+                        <!--row-->
+                        <div>
+                            <!--TABLE-->
+                            <p>
+                            </p>
                             <form>
-                                <input type="checkbox" name="add">
-                                &nbsp;批量增加&nbsp;&nbsp;
+                                <table class="table" style="font-size:20px">
+                                    <tr bgcolor="f5f5f5" style="text-align:center">
+                                        <th>
+                                            <input id="checkweek" type="checkbox" name="checkweek" onClick="selectallweek(this,this.form)">
+                                            全选
+                                        </th>
+                                        <th>
+                                            <input type="checkbox" id="monday" onClick="selectday(this,'mon')">
+                                            星期一
+                                        </th>
+                                        <th>
+                                            <input type="checkbox" id="tuesday" onClick="selectday(this,'tue')">
+                                            星期二
+                                        </th>
+                                        <th>
+                                            <input type="checkbox" id="wednesday" onClick="selectday(this,'wed')">
+                                            星期三
+                                        </th>
+                                        <th>
+                                            <input type="checkbox" id="thursday" onClick="selectday(this,'thu')">
+                                            星期四
+                                        </th>
+                                        <th>
+                                            <input type="checkbox" id="friday" onClick="selectday(this,'fri')">
+                                            星期五
+                                        </th>
+                                        <th>
+                                            <input type="checkbox" id="saturday" onClick="selectday(this,'sat')">
+                                            星期六
+                                        </th>
+                                        <th>
+                                            <input type="checkbox" id="sunday" onClick="selectday(this,'sun')">
+                                            星期天
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            上午
+                                        </td>
+                                        <td>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="mon">
+                                                1
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="mon">
+                                                2
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="mon">
+                                                3
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="mon">
+                                                4
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="mon">
+                                                5
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="tue">
+                                                1
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="tue">
+                                                2
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="tue">
+                                                3
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="tue">
+                                                4
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="tue">
+                                                5
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="wed">
+                                                1
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="wed">
+                                                2
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="wed">
+                                                3
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="wed">
+                                                4
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="wed">
+                                                5
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="thu">
+                                                1
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="thu">
+                                                2
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="thu">
+                                                3
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="thu">
+                                                4
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="thu">
+                                                5
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="fri">
+                                                1
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="fri">
+                                                2
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="fri">
+                                                3
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="fri">
+                                                4
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="fri">
+                                                5
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="sat">
+                                                1
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="sat">
+                                                2
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="sat">
+                                                3
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="sat">
+                                                4
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="sat">
+                                                5
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="sun">
+                                                1
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="sun">
+                                                2
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="sun">
+                                                3
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="sun">
+                                                4
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="sun">
+                                                5
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            下午
+                                        </td>
+                                        <td>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="mon">
+                                                6
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="mon">
+                                                7
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="mon">
+                                                8
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="mon">
+                                                9
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="tue">
+                                                6
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="tue">
+                                                7
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="tue">
+                                                8
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="tue">
+                                                9
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="wed">
+                                                6
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="wed">
+                                                7
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="wed">
+                                                8
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="wed">
+                                                9
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="thu">
+                                                6
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="thu">
+                                                7
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="thu">
+                                                8
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="thu">
+                                                9
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="fri">
+                                                6
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="fri">
+                                                7
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="fri">
+                                                8
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="fri">
+                                                9
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="sat">
+                                                6
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="sat">
+                                                7
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="sat">
+                                                8
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="sat">
+                                                9
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="sun">
+                                                6
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="sun">
+                                                7
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="sun">
+                                                8
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="sun">
+                                                9
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            晚上
+                                        </td>
+                                        <td>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="mon">
+                                                10
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="mon">
+                                                11
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="mon">
+                                                12
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="tue">
+                                                10
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="tue">
+                                                11
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="tue">
+                                                12
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="wed">
+                                                10
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="wed">
+                                                11
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="wed">
+                                                12
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="thu">
+                                                10
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="thu">
+                                                11
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="thu">
+                                                12
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="fri">
+                                                10
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="fri">
+                                                11
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="fri">
+                                                12
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="sat">
+                                                10
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="sat">
+                                                11
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="sat">
+                                                12
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="sun">
+                                                10
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="sun">
+                                                11
+                                            </div>
+                                            <div class="divblock">
+                                                <input id="checkday" type="checkbox" name="sun">
+                                                12
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </table>
                             </form>
                         </div>
-                        <div class="col-lg-5 col-md-8 col-sm-9 cpl-sx-12">
-                            <div class="weeks">
-                                <form method="get">
-                                    第&nbsp;
-                                    <input type="text" name="lastweek" />
-                                    &nbsp;周&nbsp;--&nbsp;第&nbsp;
-                                    <input type="text" name="nextweek" />
-                                    &nbsp;周
+                        <!--TABLE-->
+                        <div class="row">
+                            <div class="muchadd col-lg-1 col-md-2 col-sm-3 cpl-sx-12">
+                                <form>
+                                    <input type="checkbox" name="add">
+                                    &nbsp;批量增加&nbsp;&nbsp;
                                 </form>
                             </div>
-                            <div class="con">
-                                <form>
-                                    <button type="button" class="button blue">
-                                        确认
-                                    </button>
-                                </form>
+                            <div class="col-lg-5 col-md-8 col-sm-9 cpl-sx-12">
+                                <div class="weeks">
+                                    <form method="get">
+                                        第&nbsp;
+                                        <input type="text" name="lastweek" />
+                                        &nbsp;周&nbsp;--&nbsp;第&nbsp;
+                                        <input type="text" name="nextweek" />
+                                        &nbsp;周
+                                    </form>
+                                </div>
+                                <div class="con">
+                                    <form>
+                                        <button type="button" class="button blue">
+                                            确认
+                                        </button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
+                        <!--row-->
+                        <div class="twenty">
+                            <nav>
+                                周次：
+                                <ul class="pagination">
+                                    <li>
+                                        <a href="#">
+                                            1
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            2
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            3
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            4
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            5
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            6
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            7
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            8
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            9
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            10
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            11
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            12
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            13
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            14
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            15
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            16
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            17
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            18
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            19
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            20
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
                     </div>
-                    <!--row-->
-                    <div class="twenty">
-                        <nav>
-                            周次：
-                            <ul class="pagination">
-                                <li>
-                                    <a href="#">
-                                        1
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        2
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        3
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        4
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        5
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        6
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        7
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        8
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        9
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        10
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        11
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        12
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        13
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        14
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        15
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        16
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        17
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        18
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        19
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        20
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
+                    <div class="undis" id="tbc_03">
+                        &nbsp;
                     </div>
-                </div>
-                <div class="undis" id="tbc_03">
-                    &nbsp;
-                </div>
-                <div class="undis" id="tbc_04">
-                    &nbsp;
-                </div>
-                <div class="undis" id="tbc_05">
-                    &nbsp;
-                </div>
-                <div class="undis" id="tbc_06">
-                    &nbsp;
-                </div>
-                <div class="undis" id="tbc_07">
-                    &nbsp;
-                </div>
-                <div class="undis" id="tbc_08">
-                    &nbsp;
-                </div>
-                <div class="undis" id="tbc_09">
-                    &nbsp;
-                </div>
-                <div class="undis" id="tbc_010">
-                    &nbsp;
-                </div>
-                <div class="undis" id="tbc_011">
-                    &nbsp;
-                </div>
-                <div class="undis" id="tbc_012">
-                    &nbsp;
-                </div>
-                <div class="undis" id="tbc_013">
-                    &nbsp;
+                    <div class="undis" id="tbc_04">
+                        &nbsp;
+                    </div>
+                    <div class="undis" id="tbc_05">
+                        &nbsp;
+                    </div>
+                    <div class="undis" id="tbc_06">
+                        &nbsp;
+                    </div>
+                    <div class="undis" id="tbc_07">
+                        &nbsp;
+                    </div>
+                    <div class="undis" id="tbc_08">
+                        &nbsp;
+                    </div>
+                    <div class="undis" id="tbc_09">
+                        &nbsp;
+                    </div>
+                    <div class="undis" id="tbc_010">
+                        &nbsp;
+                    </div>
+                    <div class="undis" id="tbc_011">
+                        &nbsp;
+                    </div>
+                    <div class="undis" id="tbc_012">
+                        &nbsp;
+                    </div>
+                    <div class="undis" id="tbc_013">
+                        &nbsp;
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    <!-- tab_container -->
 </div>
-<!-- tab_container -->
-</div>
+
 <!-- contain -->
 <script src="~/js/jquery.min.js">
 </script>

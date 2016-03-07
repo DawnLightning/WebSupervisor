@@ -344,6 +344,10 @@ tr {
 	}
 
 /*督导信息*/
+.overview{
+ 	background-color:rgb(220,220,220);width:140px; height:35px;border-radius:5px;
+ 	
+ }
 #navtab li {
 	list-style:none;
     width:130px;  
@@ -359,6 +363,7 @@ tr {
 	}/*点击前*/
 .bb {
 	background:#8F8F8F;
+    color: rgb(255,255,255);
 	}/*点击后*/
 .cc { 
     border-top:4px solid #ff66ff; 
