@@ -116,10 +116,10 @@ namespace WebSupervisor.Code.Word
         /// 将对象数组写入word文档
         /// </summary>
         /// <param name="info">对象数组</param>
-        public string fullclasses(List<ExportClassModel> info,string classespath)
+        public string fullclasses(List<ExportClassModel> info,string classespath,string wordpath)
         {
-            Common.load_classes();//加载输出word文档，可以在resource文件中查看
-            string fileName1 = Environment.CurrentDirectory + "\\" + "classes.docx";//输出目录
+            Common.load_classes(wordpath);//加载输出word文档，可以在resource文件中查看
+            string fileName1 = wordpath;//输出目录
             string newfile = classespath;//保存目录
             DocX doc = DocX.Load(fileName1);//用第三方类库加载word文档
             //去除表格中的数字
@@ -175,10 +175,10 @@ namespace WebSupervisor.Code.Word
                 }
             }
 
-            if (!File.Exists(classespath))
-            {
-                Directory.CreateDirectory(classespath);
-            }
+            //if (!File.Exists(classespath))
+            //{
+            //    Directory.CreateDirectory(classespath);
+            //}
             try
             {
                 doc.SaveAs(newfile);//保存

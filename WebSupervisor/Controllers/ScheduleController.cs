@@ -101,7 +101,7 @@ namespace WebSupervisor.Controllers
             string filename =cbspcial + "专业" + cbname + "老师的" + cbclass + "课程表" + ".docx";
             string virtualPath = string.Format("~/App_Data/{0}/{1}/{2}", Session["AdminUser"], "课程表", filename);
             string fullFileName = this.Server.MapPath(virtualPath);
-
+            string wordpath = Server.MapPath("~/Resources/classes.docx");
             //创建文件夹，保存文件
             string path = Path.GetDirectoryName(fullFileName);
             if (!Directory.Exists(path))
@@ -112,7 +112,7 @@ namespace WebSupervisor.Controllers
             //}
             //string filename = "课程表\\" + cbspcial + "专业" + cbname + "老师的" + cbclass + "课程表";
             //filepath = Common.strAddfilesPath + filename + ".docx";
-            ex.MakeWordDoc(selectExport(cbspcial,cbname,cbclass),fullFileName);
+            ex.MakeWordDoc(selectExport(cbspcial,cbname,cbclass),fullFileName, wordpath);
             //MessageBox.Show("导出成功");
             return File(fullFileName, "application/zip-x-compressed", filename);
         }

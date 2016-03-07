@@ -87,13 +87,13 @@ namespace WebSupervisor.Code.Word
         /// <summary>
         /// 输出word文档
         /// </summary>
-        public bool MakeWordDoc(List<ClassesModel> dtclass,string classpath)
+        public bool MakeWordDoc(List<ClassesModel> dtclass,string classpath,string wordpath)
         {
   //if (InitData(selectcommand)) //从数据库中选择要导出的教学进度
   //         {          
                InitInfo( dtclass);//将数据库中的记录导入到对象数组中
                WordTools tools = new WordTools();
-               tools.fullclasses(Info,classpath);//将对象数组写进word文档
+               tools.fullclasses(Info,classpath, wordpath);//将对象数组写进word文档
                 return true;
            //}else{
            //     return false;

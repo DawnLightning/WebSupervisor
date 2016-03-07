@@ -293,7 +293,7 @@
                         </div>
                         <!--btn-group-->
                         <span>
-                            <button type="button" class="sch-btn blue">
+                            <button type="button" class="sch-btn blue" id="btnexport">
                                 导出课程表
                             </button>
                         </span>
@@ -310,6 +310,18 @@
 <script src="~/js/jquery.Huploadify.js"></script>
 <script src="~/js/btn.js"></script>
 <script>
+    $(document).ready(function () {
+        $("#btnexport").click(function () {
+            $.ajax({
+                type: "POST",
+                url: "/Schedule/ExportCList",
+                data: "",
+                success: function () {
+                    //$("#txt1").val(sesponseTest);
+                }
+            });
+        });
+    });
 </script>
 
 

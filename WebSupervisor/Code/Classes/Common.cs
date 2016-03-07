@@ -266,12 +266,12 @@ namespace WebSupervisor.Code.Classes
             }
         }
 
-        public static void load_classes()
+        public static void load_classes(string wordpath)
         {
-            string Path = Environment.CurrentDirectory + "\\" + "classes.docx";
-            if (!(File.Exists(Path)))
+            //string Path = Environment.CurrentDirectory + "\\" + "classes.docx";
+            if (!(File.Exists(wordpath)))
             {
-                FileStream fs = new FileStream(Path, FileMode.OpenOrCreate, FileAccess.Write);
+                FileStream fs = new FileStream(wordpath, FileMode.OpenOrCreate, FileAccess.Write);
 
                 try
                 {
