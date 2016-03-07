@@ -81,7 +81,7 @@
             </td>
             <td>
                 <input type="button" id="btnsubmit" value="添加" class="teacherbtn blue" />
-                <input type="button" id="btncancel" value="取消" class="teacherbtn red" />
+                <input type="button" id="btncancel" value="取消" class="teacherbtn red" onclick="$('addtr').hide()"/>
             </td>
         </tr>
         @{
@@ -109,7 +109,7 @@
                 <tr>
                     <td width=2%>
 
-                        <input type="checkbox" name="checkall">
+                        <input type="checkbox" name="checkall"onclick="checkAll(this.checked)">
 
                     </td>
                     <td>
