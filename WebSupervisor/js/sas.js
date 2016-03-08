@@ -4,7 +4,6 @@ var navinfo = {};
 function navpage(pagename, t1, t2) {
     $("#title1").html(t1);
     $("#title2").html(t2);
-    window.location.hash = "#!" + pagename;
     showpage(pagename);
 }
 function navreload() {
@@ -12,6 +11,17 @@ function navreload() {
 }
 function showpage(url) {
     this.navinfo.url = url;
+    window.location.hash = "#!" + url;
+    replacetag(url,"#wrapper");
+}
+/*
+ * 改变特定标签内的html内容
+ * url: 内容的地址
+ * tag: 标签，如
+ *      <div id="divid" class="divclass"></div>
+ *      tag参数可以是 字符串 "#divid" 或 ".divclass"
+*/
+function replacetag(url, tag) {
     var xmlhttp = GetXmlHttpObject();
 
     if (xmlhttp == null) {
@@ -23,9 +33,9 @@ function showpage(url) {
     url= url.substring(0,url.split('#')[0].lastIndexOf('/')+1);
     url += "includes/"+pagename+".html"; */
     // var url = "/includes/"+pagename+".html";
-    xmlhttp.onreadystatechange = function() {
+    xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState == 4 || xmlhttp.readyState == "complete") {
-            $("#wrapper").html(xmlhttp.responseText);
+            $(tag).html(xmlhttp.responseText);
         }
     };
     xmlhttp.open("GET", url, true);
@@ -39,7 +49,7 @@ function GetXmlHttpObject() {
     } else { // code for IE6, IE5
         try {
             xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
-        } catch(e) {
+        } catch (e) {
             xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
     }
@@ -82,20 +92,20 @@ function selectday(thisday, dayname) {
 }
 
 //-------------------Ready------------------------
-$(document).ready(function() {
+$(document).ready(function () {
 
     //----------------Submit------------------
     $(document).on("click", "input#btncancel",
-    function() {
+    function () {
         $(this.form).resetForm();
         $("#addtr").hide();
     });
     $(document).on("click", "input#btnsubmit",
-    function() {
+    function () {
         $(this.form).ajaxSubmit({
             dataType: 'json',
-            success: function(data) {
-                if ("string" == typeof(data)) alert(data);
+            success: function (data) {
+                if ("string" == typeof (data)) alert(data);
                 else if (data.code == 0) {
                     alert("Success!" + '\n' + data.msg);
                     navreload();
@@ -103,14 +113,14 @@ $(document).ready(function() {
                     alert("Error!" + '\n' + data.msg);
                 }
             },
-            error: function(xhr) {
+            error: function (xhr) {
                 alert(xhr.responseText);
             },
             resetForm: true
         });
     });
 
-    
+
     //--------------download-----------------
 
     $(document).on("click", "a.fileDownloadPromise", function () {
@@ -130,7 +140,7 @@ $(document).ready(function() {
 
     //-------------------Menu-------------------------
     $(".mm-menu__link").on("click",
-    function() {
+    function () {
         //Default Action
         $(".tab_content").hide(); //Hide all content
         $("ul.tabs li:first").addClass("active").show(); //Activate first tab
@@ -143,7 +153,7 @@ $(document).ready(function() {
 
     //On Click Event
     $(document).on("click", "ul.tabs li",
-    function() {
+    function () {
         $("ul.tabs li").removeClass("active"); //Remove any "active" class
         $(this).addClass("active"); //Add "active" class to selected tab
         $(".tab_content").hide(); //Hide all tab content
@@ -154,7 +164,7 @@ $(document).ready(function() {
 
     //On Click Event
     $(document).on("click", "ul.set-tabs li",
-    function() {
+    function () {
         $("ul.set-tabs li").removeClass("active"); //Remove any "active" class
         $(this).addClass("active"); //Add "active" class to selected tab
         $(".set-tab_content").hide(); //Hide all tab content
