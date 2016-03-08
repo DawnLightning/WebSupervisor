@@ -12,7 +12,7 @@ function navreload() {
 function showpage(url) {
     this.navinfo.url = url;
     window.location.hash = "#!" + url;
-    replacetag(url,"#wrapper");
+    replacetag(url, "#wrapper");
 }
 /*
  * 改变特定标签内的html内容
@@ -28,11 +28,6 @@ function replacetag(url, tag) {
         alert("Browser does not support HTTP Request");
         return;
     }
-
-    /* var url=document.URL;
-    url= url.substring(0,url.split('#')[0].lastIndexOf('/')+1);
-    url += "includes/"+pagename+".html"; */
-    // var url = "/includes/"+pagename+".html";
     xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState == 4 || xmlhttp.readyState == "complete") {
             $(tag).html(xmlhttp.responseText);

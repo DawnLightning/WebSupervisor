@@ -143,11 +143,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Start\UserData.xml" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\PagedList.css" />
-    <Content Include="css\bootstrap-theme.css" />
-    <Content Include="css\bootstrap-theme.min.css" />
-    <Content Include="css\bootstrap.css" />
-    <Content Include="css\bootstrap.min.css" />
     <Content Include="css\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
     <Content Include="css\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
     <Content Include="css\images\ui-bg_flat_10_000000_40x100.png" />
@@ -163,8 +163,8 @@
     <Content Include="css\images\ui-icons_ffd27a_256x240.png" />
     <Content Include="css\images\ui-icons_ffffff_256x240.png" />
     <Content Include="css\jquery-ui.min.css" />
-    <Content Include="css\jquery-ui.theme.css" />
     <Content Include="css\lj.css" />
+    <Content Include="css\pikaday.css" />
     <Content Include="css\sas.css" />
     <Content Include="css\style.css" />
     <Content Include="css\tabs.css" />
@@ -173,6 +173,7 @@
     <Content Include="DLL\NPOI.OpenXml4Net.dll" />
     <Content Include="DLL\NPOI.OpenXmlFormats.dll" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="image\00.ico" />
     <Content Include="image\1.png" />
@@ -214,18 +215,29 @@
     <Content Include="js\respond.min.js" />
     <Content Include="js\sas.js" />
     <Content Include="js\vtab.js" />
-    <Content Include="scripts\ai.0.15.0-build58334.js" />
-    <Content Include="scripts\ai.0.15.0-build58334.min.js" />
-    <Content Include="scripts\jquery-1.11.2.min.js" />
+    <Content Include="Scripts\ai.0.15.0-build58334.js" />
+    <Content Include="Scripts\ai.0.15.0-build58334.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\jquery-1.11.2.min.js" />
     <Content Include="App_Data\.gitkeep" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Resources\chief_supervisor.doc" />
     <None Include="Resources\classes .docx" />
     <None Include="Resources\supervisor.doc" />
-    <None Include="scripts\jquery-1.8.0.intellisense.js" />
-    <Content Include="scripts\jquery-1.8.0.js" />
-    <Content Include="scripts\jquery-1.8.0.min.js" />
-    <Content Include="scripts\jquery.unobtrusive-ajax.js" />
-    <Content Include="scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery-2.2.1.js" />
+    <Content Include="Scripts\jquery-2.2.1.min.js" />
+    <Content Include="Scripts\jquery.form.js" />
+    <Content Include="Scripts\jquery.form.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Views\Home\Confirm.cshtml" />
     <Content Include="Views\Home\Set.cshtml" />
     <Content Include="Views\Home\Teacher.cshtml" />
@@ -279,13 +291,6 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="css\bootstrap-theme.css.map" />
-    <Content Include="css\bootstrap.css.map" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="less\.csscomb.json" />
     <Content Include="less\.csslintrc" />
     <Content Include="less\alerts.less" />
@@ -372,6 +377,8 @@
     <Content Include="Views\Power\AdminList.cshtml" />
     <Content Include="Views\Schedule\ExportClassList.cshtml" />
     <Content Include="Views\Schedule\_Paging.cshtml" />
+    <Content Include="Scripts\jquery-2.2.1.min.map" />
+    <Content Include="Scripts\jquery.form.min.js.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

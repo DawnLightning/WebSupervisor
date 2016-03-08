@@ -3,21 +3,22 @@
     Page.Title = "主页";
 }
 
+
+@section Style {
+    <link rel="stylesheet" href="~/Content/bootstrap.css">
+    <link rel="stylesheet" href="~/css/jquery-ui.min.css">
+    <link rel="stylesheet" href="~/css/sas.css">
+    <link rel="stylesheet" href="~/css/style.css">
+    <link rel="stylesheet" href="~/css/tabs.css">
+}
 @section Scripts {
-    <script src="~/js/jquery.min.js">
-    </script>
-    <script src="~/js/jquery-ui.min.js">
-    </script>
-    <script src="~/js/bootstrap.min.js">
-    </script>
-    <script src="~/js/materialMenu.js">
-    </script>
-    <script src="~/js/jquery.form.js">
-    </script>
-    <script src="~/js/jquery.fileDownload.js">
-    </script>
-    <script src="~/js/sas.js">
-    </script>
+    <script src="~/Scripts/jquery-2.2.1.min.js"></script>
+    <script src="~/Scripts/jquery.form.min.js"></script>
+    <script src="~/js/jquery-ui.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/materialMenu.js"></script>
+    <script src="~/js/jquery.fileDownload.js"></script>
+    <script src="~/js/sas.js"></script>
     <script>
         var act = window.location.hash;
         if (act.substring(0, 3) == "#!/") {
