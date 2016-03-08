@@ -1,9 +1,10 @@
 ﻿// JavaScript Document
+//--------------Common------------------
 var navinfo = {};
 function navpage(pagename, t1, t2) {
     $("#title1").html(t1);
     $("#title2").html(t2);
-    window.location.hash =pagename;
+    window.location.hash = "#!" + pagename;
     showpage(pagename);
 }
 function navreload() {
@@ -45,6 +46,7 @@ function GetXmlHttpObject() {
 
     return xmlhttp;
 }
+
 
 //---------Supervisor--------------------
 function selectallweek(thisbox, thisform) {
@@ -106,6 +108,24 @@ $(document).ready(function() {
             },
             resetForm: true
         });
+    });
+
+    
+    //--------------download-----------------
+
+    $(document).on("click", "a.fileDownloadPromise", function () {
+        $.fileDownload($(this).prop('href'))
+            .done(function () { alert('File download a success!'); })
+            .fail(function () { alert('File download failed!'); });
+
+        return false; //this is critical to stop the click event which will trigger a normal file download
+    });
+    $(document).on("click", "a.fileDownloadSimpleRichExperience", function () {
+        $.fileDownload($(this).prop('href'), {
+            preparingMessageHtml: "We are preparing your report, please wait...",
+            failMessageHtml: "There was a problem generating your report, please try again."
+        });
+        return false; //this is critical to stop the click event which will trigger a normal file download!
     });
 
     //-------------------Menu-------------------------

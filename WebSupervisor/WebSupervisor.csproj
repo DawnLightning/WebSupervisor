@@ -142,11 +142,28 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Start\UserData.xml" />
     <Content Include="Content\PagedList.css" />
     <Content Include="css\bootstrap-theme.css" />
     <Content Include="css\bootstrap-theme.min.css" />
     <Content Include="css\bootstrap.css" />
     <Content Include="css\bootstrap.min.css" />
+    <Content Include="css\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
+    <Content Include="css\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
+    <Content Include="css\images\ui-bg_flat_10_000000_40x100.png" />
+    <Content Include="css\images\ui-bg_glass_100_f6f6f6_1x400.png" />
+    <Content Include="css\images\ui-bg_glass_100_fdf5ce_1x400.png" />
+    <Content Include="css\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="css\images\ui-bg_gloss-wave_35_f6a828_500x100.png" />
+    <Content Include="css\images\ui-bg_highlight-soft_100_eeeeee_1x100.png" />
+    <Content Include="css\images\ui-bg_highlight-soft_75_ffe45c_1x100.png" />
+    <Content Include="css\images\ui-icons_222222_256x240.png" />
+    <Content Include="css\images\ui-icons_228ef1_256x240.png" />
+    <Content Include="css\images\ui-icons_ef8c08_256x240.png" />
+    <Content Include="css\images\ui-icons_ffd27a_256x240.png" />
+    <Content Include="css\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="css\jquery-ui.min.css" />
+    <Content Include="css\jquery-ui.theme.css" />
     <Content Include="css\lj.css" />
     <Content Include="css\sas.css" />
     <Content Include="css\style.css" />
@@ -155,6 +172,7 @@
     <Content Include="DLL\NPOI.OOXML.dll" />
     <Content Include="DLL\NPOI.OpenXml4Net.dll" />
     <Content Include="DLL\NPOI.OpenXmlFormats.dll" />
+    <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="image\00.ico" />
     <Content Include="image\1.png" />
@@ -184,6 +202,8 @@
     <Content Include="js\bootstrap.min.js" />
     <Content Include="js\btn.js" />
     <Content Include="js\html5shiv.min.js" />
+    <Content Include="js\jquery-ui.min.js" />
+    <Content Include="js\jquery.fileDownload.js" />
     <Content Include="js\jquery.form.js" />
     <Content Include="js\jquery.Huploadify.js" />
     <Content Include="js\jquery.js" />
@@ -197,6 +217,7 @@
     <Content Include="scripts\ai.0.15.0-build58334.js" />
     <Content Include="scripts\ai.0.15.0-build58334.min.js" />
     <Content Include="scripts\jquery-1.11.2.min.js" />
+    <Content Include="App_Data\.gitkeep" />
     <None Include="Resources\chief_supervisor.doc" />
     <None Include="Resources\classes .docx" />
     <None Include="Resources\supervisor.doc" />
@@ -212,7 +233,9 @@
     <Content Include="Views\Schedule\Schedule.cshtml" />
     <Content Include="Views\Schedule\Auto.cshtml" />
     <Content Include="Views\Schedule\Reference.cshtml" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -357,7 +380,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Code\Email\" />
     <Folder Include="Views\Config\" />
   </ItemGroup>
