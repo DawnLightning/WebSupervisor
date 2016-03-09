@@ -361,6 +361,7 @@
     <Content Include="Views\Schedule\_Paging.cshtml" />
     <Content Include="Scripts\jquery-2.2.1.min.map" />
     <Content Include="Scripts\jquery.form.min.js.map" />
+    <Content Include="Views\Supervisor\SupervisorList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

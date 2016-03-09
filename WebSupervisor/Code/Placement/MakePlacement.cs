@@ -10,7 +10,7 @@ namespace WebSupervisor.Code.Placement
     public class MakePlacement
     {
         static List<int> spareclass = new List<int> { 12, 13, 23, 24, 34, 35, 45, 67, 68, 78, 79, 89, 1011, 1112, 1012 };//枚举所有的连续节次
-        List<ClassesModel> listclasses = DBHelper.ExecuteList<ClassesModel>("select * from claases", CommandType.Text, null);//课程表
+        List<ClassesModel> listclasses = DBHelper.ExecuteList<ClassesModel>("select * from classes", CommandType.Text, null);//课程表
         List<TeachersModel> listsupervisor = DBHelper.ExecuteList<TeachersModel>("select * from teachers where indentify=1", CommandType.Text, null);//督导表
         List<CheckClassModel> listcheckcount = DBHelper.ExecuteList<CheckClassModel>("select * from checkclass", CommandType.Text, null);//听课情况表
         List<SpareTimeModel> listsparetime = DBHelper.ExecuteList<SpareTimeModel>("select * from sparetime", CommandType.Text, null);//空闲时间表

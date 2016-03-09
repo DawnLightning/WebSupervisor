@@ -7,6 +7,7 @@ using System.Data;
 using WebSupervisor.Models;
 using WebDAL;
 using PagedList;
+using WebSupervisor.Code.Placement;
 
 namespace WebSupervisor.Controllers
 {
@@ -58,6 +59,23 @@ namespace WebSupervisor.Controllers
             IPagedList<SupervisorViewModel> Iteachers = spvlist.ToPagedList(page, 10);
            
             return PartialView(Iteachers);
+        }
+        //自动填补空闲时间
+        [AllowAnonymous]
+        [HttpPost]
+        public ActionResult AutoSpare(FormCollection fc)
+        {
+            var cherkbox = from x in fc.AllKeys
+                           //where fc[x] == "on"
+                           select x;
+            foreach (var cherkname in cherkbox)
+            {
+                int index = int.Parse(cherkname);
+                MakeSpareTime.AutoSelectSpareTime(list[index].TeacherName);
+                //string i=list[index].TeacherName;
+                //string a;
+            }
+            return Json( new {status=1 } );
         }
     }
 }
