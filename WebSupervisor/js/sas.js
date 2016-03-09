@@ -133,6 +133,15 @@ $(document).ready(function () {
         return false; //this is critical to stop the click event which will trigger a normal file download!
     });
 
+    //----------------pagination----------------
+    $(document).on("click", ".pagination-container .pagination a", function () {
+
+        if (typeof $(this).attr("href") != "undefined") {
+            replacetag($(this).attr("href"), $(this).parents(".tab_content"));
+        }
+        return false;
+    });
+
     //-------------------Menu-------------------------
     $(".mm-menu__link").on("click",
     function () {

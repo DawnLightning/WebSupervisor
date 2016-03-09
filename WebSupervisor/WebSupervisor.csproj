@@ -354,13 +354,14 @@
     <Content Include="Views\Supervisor\Supervisor.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\_Menu.cshtml" />
-    <Content Include="Views\Schedule\ClassesList.cshtml" />
     <Content Include="Views\Home\TeacherList.cshtml" />
     <Content Include="Views\Power\AdminList.cshtml" />
-    <Content Include="Views\Schedule\ExportClassList.cshtml" />
+    <Content Include="Views\Schedule\ScheduleExport.cshtml" />
     <Content Include="Views\Schedule\_Paging.cshtml" />
     <Content Include="Scripts\jquery-2.2.1.min.map" />
     <Content Include="Scripts\jquery.form.min.js.map" />
+    <Content Include="Views\Schedule\ScheduleList.cshtml" />
+    <Content Include="Views\Schedule\ScheduleInport.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

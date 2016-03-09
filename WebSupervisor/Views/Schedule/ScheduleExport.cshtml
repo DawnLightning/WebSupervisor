@@ -1,0 +1,137 @@
+﻿@using WebSupervisor.Models
+@model PagedList<ClassesModel>
+<div class="row">
+    <div class="col-lg-12 col-sm-12 col-xs-12">
+        <div class="po-right">
+            <div class="btn-group">
+                <a class="drop-title dropdown-toggle" data-toggle="dropdown" href="#">
+                    教师姓名
+                    <span class="caret caret-color">
+                    </span>
+                </a>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+                    @{
+                        foreach (var item in ViewBag.TeacherName)
+                        {
+                            <li>
+                                <a tabindex="-1" href="#">
+                                    @item
+                                </a>
+                            </li>
+                        }
+
+                    }
+                </ul>
+                <!--教师姓名-->
+            </div>
+            <!--btn-group-->
+            <div class="btn-group">
+                <a class="drop-title dropdown-toggle" data-toggle="dropdown" href="#">
+                    课程
+                    <span class="caret caret-color">
+                    </span>
+                </a>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+                    @{
+                        foreach (var item in ViewBag.ClassName)
+                        {
+                            <li>
+                                <a tabindex="-1" href="#">
+                                    @item
+                                </a>
+                            </li>
+                        }
+                    }
+                </ul>
+                <!--课程-->
+            </div>
+            <!--btn-group-->
+            <div class="btn-group">
+                <a class="drop-title dropdown-toggle" data-toggle="dropdown" href="#">
+                    专业
+                    <span class="caret caret-color">
+                    </span>
+                </a>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+                    @{
+                        foreach (var item in ViewBag.Major)
+                        {
+                            <li>
+                                <a tabindex="-1" href="#">
+                                    @item
+                                </a>
+                            </li>
+                        }
+                    }
+                </ul>
+                <!--专业-->
+            </div>
+            <!--btn-group-->
+            <span>
+                <a href="/Schedule/ExportCList" class="fileDownloadPromise sch-btn blue" id="btnexport">
+                    导出课程表
+                </a>
+            </span>
+        </div>
+        <!--po-right-->
+    </div>
+</div>
+<!--row-->
+
+<table class="table table-condensed table-hover table-responsive ove">
+    <tr bgcolor="#f5f5f5">
+        <th>
+            <p>
+                教师
+            </p>
+        </th>
+        <th>
+            <p>
+                课程
+            </p>
+        </th>
+        <th>
+            <p>
+                专业
+            </p>
+        </th>
+    </tr>
+    @{
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.TeacherName
+                </td>
+                <td>
+                    @item.ClassName
+                </td>
+                <td>
+                    @item.Major
+                </td>
+            </tr>
+        }
+    }
+</table>
+<div class="pager" style="text-align: center;">
+
+    <span style="height: 10px; line-height: 10px;">共 @Model.TotalItemCount.ToString() 条记录，当前第 @Model.PageNumber 页/共 @Model.PageCount 页 </span>
+    @Html.PagedListPager(
+    Model,
+    page => Url.Action("ScheduleExport", "Schedule", new { page }),
+    PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new PagedListRenderOptions
+    {
+        LinkToFirstPageFormat = "首页",
+        LinkToNextPageFormat = "下一页",
+        LinkToPreviousPageFormat = "上一页",
+        LinkToLastPageFormat = "末页",
+        DisplayItemSliceAndTotal = false,
+        MaximumPageNumbersToDisplay = 10,
+        DisplayLinkToIndividualPages = true
+    }, new AjaxOptions()
+    {
+        HttpMethod = "GET",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "classtable"
+    }))
+</div>
