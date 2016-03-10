@@ -1,0 +1,104 @@
+﻿
+@using WebSupervisor.Models
+@using WebSupervisor.Code.Classes
+@model PagedList<ClassesModel>
+<div class="row">
+    <div class="col-lg-3 col-sm-5 col-xs-12">
+    </div>
+    <div class="col-lg-6 col-sm-3 col-xs-0">
+    </div>
+    <div class="col-lg-3 col-sm-4 col-xs-12">
+    </div>
+    <!-- /.col-lg-6 -->
+</div>
+<!-- /.row -->
+<div>
+    <table class="table table-condensed table-hover table-responsive ove" id="classtable">
+        <tr bgcolor="#f5f5f5">
+            <th>
+                <p>
+                    教师
+                </p>
+            </th>
+            <th>
+                <p>
+                    课程内容
+                </p>
+            </th>
+            <th>
+                <p>
+                    上课时间
+                </p>
+            </th>
+            <th>
+                <p>
+                    上课地点
+                </p>
+            </th>
+            <th>
+                <p>
+                    专业
+                </p>
+            </th>
+            <th>
+                <p>
+                    课程类型
+                </p>
+            </th>
+        </tr>
+
+        @{
+            Common com = new Common();
+            com.xmlRead(ViewBag.path);
+            foreach (var item in Model)
+            {
+                int nowday = item.Day;
+                int nowWeeks = item.Week;
+                string time = CalendarTools.getdata(Common.Year, nowWeeks, nowday - CalendarTools.weekdays(CalendarTools.CaculateWeekDay(Common.Year, Common.Month, Common.Day)), Common.Month, Common.Day).ToLongDateString();
+                <tr>
+                    <td>
+                        @item.TeacherName
+                    </td>
+                    <td>
+                        @item.ClassContent
+                    </td>
+                    <td>
+                        @time
+                    </td>
+                    <td>
+                        @item.Address
+                    </td>
+                    <td>
+                        @item.Major
+                    </td>
+                    <td>
+                        @item.ClassType
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+    <div class="pager" style="text-align: center;">
+
+        <span style="height: 10px; line-height: 10px;">共 @Model.TotalItemCount.ToString() 条记录，当前第 @Model.PageNumber 页/共 @Model.PageCount 页 </span>
+        @Html.PagedListPager(
+    Model,
+    page => Url.Action("ScheduleList", "Schedule", new { page }),
+    PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new PagedListRenderOptions
+    {
+        LinkToFirstPageFormat = "首页",
+        LinkToNextPageFormat = "下一页",
+        LinkToPreviousPageFormat = "上一页",
+        LinkToLastPageFormat = "末页",
+        DisplayItemSliceAndTotal = false,
+        MaximumPageNumbersToDisplay = 10,
+        DisplayLinkToIndividualPages = true
+    }, new AjaxOptions()
+    {
+        HttpMethod = "GET",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "classtable"
+    }))
+    </div>
+
+</div>
