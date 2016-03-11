@@ -10,6 +10,7 @@ namespace WebSupervisor.Models
         ///管理员Id 
         /// </summary>
         public int Uid { set; get; }
+        public int Sday { set; get; }
         /// <summary>
         /// 排课规则名称
         /// </summary>

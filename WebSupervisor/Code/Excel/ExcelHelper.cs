@@ -160,9 +160,16 @@ namespace WebSupervisor
                             //获取节次  
                             string strclassname = Excel_dt.Rows[i][name[2]].ToString();
 
-                            int classnumindex = strclassname.IndexOf("-");
-                            //int tnum = teachernamepick.IndexOf("(");//获取教师姓名列中的第一个"("的位置
+                            int classnumindex = strclassname.IndexOf("-");                           
                             string tname = ClearTechnicalTitle(teachernamepick);
+                            string tid = tname;
+                            if (i == 7)
+                            {
+                                SqlParameter[] sp = new SqlParameter[2];
+                                sp[0] = new SqlParameter("@tid", tid);
+                                sp[1] = new SqlParameter("@teachername", tname);
+                                DBHelper.ExecuteNonQuery("INSERT INTO [dbo].[teachers] ([tid], [teachername]) VALUES (@tid,@teachername)",CommandType.Text,sp);                          
+                            } 
                             //if (tnum >= 0)
                             //    tname = teachernamepick.Substring(0, tnum);//截取老师名字
                             //else
@@ -178,14 +185,14 @@ namespace WebSupervisor
                             //DataRow drClass_information = dt.NewRow();
                             ///--------------------------------------------------------------------------------------------                          
                             //string tid = DBHelper.ExexuteEntity<string>("select tid from teachers where teachername=" + tname, CommandType.Text, null);
-                            string tid = RandKey.ToString();
-                            ClassesModel model = new ClassesModel();
+                            //string tid = RandKey.ToString();
+                            ClassesModel model = new ClassesModel();                          
                             model.Cid = tid + Excel_dt.Rows[i][name[0]].ToString() + j.ToString() + strclassname.Substring(0, classnumindex) + strclassname.Substring(classnumindex + 1);
                             model.Day = j;
                             model.ClassNumber = Convert.ToInt32(strclassname.Substring(0, classnumindex) + strclassname.Substring(classnumindex + 1));
                             model.ClassType = Excel_dt.Rows[i][name[6]].ToString();
                             model.Address = Excel_dt.Rows[i][name[3]].ToString();
-                            model.TeacherName = teachernamepick;
+                            model.TeacherName = tname;
                             model.Week = Convert.ToInt32(Excel_dt.Rows[i][name[0]]);
                             model.ClassName = classname.Substring(5);
                             model.ClassContent = Excel_dt.Rows[i][name[5]].ToString();

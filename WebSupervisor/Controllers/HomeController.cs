@@ -10,6 +10,7 @@ using WebDAL;
 using WebSupervisor.Code.Classes;
 using WebSupervisor.Controllers.CheckUser;
 using PagedList;
+using WebSupervisor.Code.Placement;
 
 namespace WebSupervisor.Controllers
 {   
@@ -111,6 +112,15 @@ namespace WebSupervisor.Controllers
             //DBHelper.ExecuteNonQuery("update admin set phone=@phone,email=@email,password=@password where username="+uname , CommandType.Text, sqlpara);
 
         }
-      
+        [HttpPost]
+        public ActionResult AutoArrange(ArrageConfigModel ac)
+        {
+            MakePlacement mp = new MakePlacement(ac);
+            mp.CreatPlan();
+            // = new ArrageConfigModel();
+            //ac.a
+            return Json(new { web = 1 });
+        }
+
     }
 }

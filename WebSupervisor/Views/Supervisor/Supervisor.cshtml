@@ -8,19 +8,19 @@
         <!--白板宽度-->
         <div style="width:1226px;">
             <!--同督导信息的vrtab的overflow产生滚动条-->
-            <div class="vltab" style="overflow:auto;">
-                <ul id="navtab" style="overflow-y:auto;overflow-x:hidden;height:495px;">
+            <div class="vltab">
+                <ul id="navtab" ">
                     <li class="overview aa" id="tb_1" onClick="i:hoverli(1);">
                         <strong>  总览</strong>
                     </li>
-                <!-- @foreach (WebSupervisor.Models.SupervisorViewModel m in Model)
-                {
+                    <!-- @foreach (WebSupervisor.Models.SupervisorViewModel m in Model)
+                    {
 
-                        <li class="aa" id="tb_2" onClick="x:hoverli(2);">
-                         //   @m.TeacherName
-                        </li>
- 
-                }-->
+                            <li class="aa" id="tb_2" onClick="x:hoverli(2);">
+                             //   @m.TeacherName
+                            </li>
+
+                    }-->
                     <li class="aa" id="tb_2" onClick="x:hoverli(2);">
                         &nbsp;
                     </li>
@@ -66,31 +66,32 @@
 
                 </ul>
             </div>
+
             <div class="vrtab">
                 <div class="rtab listtab">
-                    <div class="dis" id="tbc_01" style="overflow-x:hidden;overflow-y:auto;word-break:break-all;">
-                        <div class="row">
-                            <div class="col-lg-4 col-md-4 col-sm-7 col-xs-12">
-                                <button type="button" class="button green">
-                                    自动填补
-                                </button>
-                                <button type="button" class="button red">
-                                    移除督导
-                                </button>
-                                <button type="button" class="button orange">
-                                    修改
-                                </button>
+                    <form action="/Supervisor/AutoSpare" method="post">
+                        <div class="dis" id="tbc_01" style="overflow-x:hidden;overflow-y:auto;word-break:break-all;">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-7 col-xs-12">
+                                    <input type="submit" class="button green" value="自动填补">
+                                    <button type="button" class="button red">
+                                        移除督导
+                                    </button>
+                                    <button type="button" class="button orange">
+                                        修改
+                                    </button>
+                                </div>
+                            </div>
+                            <!--row-->
+                            <div>
+                                <!--TABLE-->
+                                <p>
+                                </p>
+                                @Html.Partial("SupervisorList", Model);
+                                <!--TABLE-->
                             </div>
                         </div>
-                        <!--row-->
-                        <div>
-                            <!--TABLE-->
-                            <p>
-                            </p>
-                            @Html.Partial("SupervisorList", Model);
-                            <!--TABLE-->
-                        </div>
-                    </div>
+                    </form>
                     <!--dis-->
                     <div class="undis" id="tbc_02" style="overflow:hidden">
                         <div class="row">
@@ -735,17 +736,17 @@
 </script>
 <script src="~/js/jquery.form.js">
 
-    $(document).ready(function() {
-        $("li").click( function(){
-            if($(this).val()=="总览"){
-               
+    $(document).ready(function () {
+        $("li").click(function () {
+            if ($(this).val() == "总览") {
+
             } else {
                 var teachername = $(this).val();
                 alert(teachername);
             }
         })
-        });
+    });
 </script>
 <script src="~/js/vtab.js">
-   
+
 </script>

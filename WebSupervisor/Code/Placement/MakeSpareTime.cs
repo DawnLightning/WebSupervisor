@@ -95,13 +95,37 @@ namespace WebSupervisor.Code.Placement
                                 {
                                     CheckError(index, week, day, listsparetime);
                                 }
-
                             }
                         }
                     }
                 }
                 else
                 {
+                    for (int week = 1; week < 20; week++)
+                    {
+                        for (int day = 1; day < 6; day++)
+                        {
+                            for (int index = 0; index < spareclass.Count; index++)
+                            {
+                                //List<ClassesModel> dr = SelectClasses(listclasses, week, day, spareclass[index], listsupervisor[i].TeacherName.ToString());
+                                //if (dr.Count == 0)
+                                //{
+                                    SpareTimeModel sptmodel = new SpareTimeModel();
+                                    sptmodel.Tid = listsupervisor[i].Tid.ToString();
+                                    sptmodel.Week = week;
+                                    sptmodel.Day = day;
+                                    sptmodel.ClassNumber = spareclass[index];
+                                    sptmodel.Assign = 0;
+                                    listsparetime.Add(sptmodel);
+                                //}
+                                //else
+                                //{
+                                //    CheckError(index, week, day, listsparetime);
+                                //}
+
+                            }
+                        }
+                    }
                     continue;
                 }
             }
