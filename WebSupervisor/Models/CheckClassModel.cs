@@ -17,7 +17,7 @@ namespace WebSupervisor.Models
         /// <summary>
         /// 督导日听课
         /// </summary>
-        public int DayNmuber { set; get; }
+        public int DayNumber { set; get; }
         /// <summary>
         /// 督导总听课
         /// </summary>
