@@ -10,60 +10,17 @@
             <!--同督导信息的vrtab的overflow产生滚动条-->
             <div class="vltab">
                 <ul id="navtab" ">
-                    <li class="overview aa" id="tb_1" onClick="i:hoverli(1);">
-                        <strong>  总览</strong>
+                    <li  class="aa" id="tb_1" onClick="i:hoverli(1);">
+                        <strong>总览</strong>
                     </li>
-                    <!-- @foreach (WebSupervisor.Models.SupervisorViewModel m in Model)
+                    @for (int i=0;i<Model.Count;i++)
                     {
+                        var a = i + 2;
+                        <li class="aa" id="tb_@a" onClick="x:hoverli(@a);">
+                               @Model[i].TeacherName
+                        </li>
 
-                            <li class="aa" id="tb_2" onClick="x:hoverli(2);">
-                             //   @m.TeacherName
-                            </li>
-
-                    }-->
-                    <li class="aa" id="tb_2" onClick="x:hoverli(2);">
-                        &nbsp;
-                    </li>
-                    <li class="aa" id="tb_3" onClick="x:hoverli(3);">
-                        &nbsp;
-                    </li>
-                    <li class="aa" id="tb_4" onClick="x:hoverli(4);">
-                        &nbsp;
-                    </li>
-                    <li class="aa" id="tb_5" onClick="x:hoverli(5);">
-                        &nbsp;
-                    </li>
-                    <li class="aa" id="tb_6" onClick="x:hoverli(6);">
-                        &nbsp;
-                    </li>
-                    <li class="aa" id="tb_7" onClick="x:hoverli(7);">
-                        &nbsp;
-                    </li>
-                    <li class="aa" id="tb_8" onClick="x:hoverli(8);">
-                        &nbsp;
-                    </li>
-                    <li class="aa" id="tb_9" onClick="x:hoverli(9);">
-                        &nbsp;
-                    </li>
-                    <li class="aa" id="tb_10" onClick="x:hoverli(10);">
-                        &nbsp;
-                    </li>
-                    <li class="aa" id="tb_11" onClick="x:hoverli(11);">
-                        &nbsp;
-                    </li>
-                    <li class="aa" id="tb_12" onClick="x:hoverli(12);">
-                        &nbsp;
-                    </li>
-                    <li class="aa" id="tb_13" onClick="x:hoverli(13);">
-                        &nbsp;
-                    </li>
-                    <li class="aa" id="tb_14" onClick="x:hoverli(14);">
-                        &nbsp;
-                    </li>
-                    <li class="aa" id="tb_15" onClick="x:hoverli(15);">
-                        &nbsp;
-                    </li>
-
+                    }
                 </ul>
             </div>
 

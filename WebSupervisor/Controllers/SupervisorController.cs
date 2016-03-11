@@ -24,13 +24,9 @@ namespace WebSupervisor.Controllers
         {
             return View();
         }
-        public PartialViewResult Supervisor(int page=1)
+        public PartialViewResult Supervisor(int page = 1)
         {
             List<SupervisorViewModel> spvlist = new List<SupervisorViewModel>();
-            List<SpareTimeModel> sptlist = new List<SpareTimeModel>();
-            
-            List<SpareTimeModel> sptlist1 = new List<SpareTimeModel>();
-            sptlist1=splist.GroupBy(a => a.Tid).ToDictionary(a=>a.Key,a=>a.GroupBy(g=>g.Week).ToDictionary(g=>g.Key,g=>g.ToList()));
             foreach (TeachersModel teacher in list)
             {
                 SupervisorViewModel m = new SupervisorViewModel();
@@ -38,26 +34,30 @@ namespace WebSupervisor.Controllers
                 m.Phone = teacher.Phone;
                 m.Password = teacher.Password;
                 m.SpareTime = "";
-                foreach (SpareTimeModel spt in sptlist1)
+                var sptlist = (from s in splist
+                               where s.Tid == teacher.Tid
+                               select s).ToList();
+                if (sptlist.Count > 0)
                 {
-                    if (teacher.Tid.Equals(spt.Tid))
+                    List<SpareTimeModel> sptlist1 = new List<SpareTimeModel>();
+                    sptlist1 = sptlist.GroupBy(a => a.Week).Select(b => b.First()).ToList();
+                    foreach (SpareTimeModel spt in sptlist1)
                     {
-                        m.SpareTime = m.SpareTime +" "+spt.Week.ToString();
+                        m.SpareTime = m.SpareTime + " " + spt.Week.ToString();
                     }
-                    
                 }
+                else m.SpareTime = "未填写";
                 spvlist.Add(m);
             }
-           
-            foreach (SupervisorViewModel sp in spvlist)
-            {
-                if (sp.SpareTime==""&&sp.SpareTime.Length==0)
-                {
-                    sp.SpareTime = "未填写";
-                }
-                
-            }
-            IPagedList<SupervisorViewModel> Iteachers = spvlist.ToPagedList(page, 10);           
+            //foreach (SupervisorViewModel sp in spvlist)
+            //{
+            //    if (sp.SpareTime == "" && sp.SpareTime.Length == 0)
+            //    {
+            //        sp.SpareTime = "未填写";
+            //    }
+
+            //}
+            IPagedList<SupervisorViewModel> Iteachers = spvlist.ToPagedList(page, 10);
             return PartialView(Iteachers);
         }
         //自动填补空闲时间
@@ -66,7 +66,7 @@ namespace WebSupervisor.Controllers
         public ActionResult AutoSpare(FormCollection fc)
         {
             var cherkbox = from x in fc.AllKeys
-                           //where fc[x] == "on"
+                               //where fc[x] == "on"
                            select x;
             foreach (var cherkname in cherkbox)
             {
@@ -75,7 +75,7 @@ namespace WebSupervisor.Controllers
                 //string i=list[index].TeacherName;
                 //string a;
             }
-            return Json( new {status=1 } );
+            return Json(new { status = 1 });
         }
     }
 }

@@ -11,9 +11,11 @@ using PagedList;
 using PagedList.Mvc;
 using WebSupervisor.Code.Classes;
 using WebSupervisor.Code.Word;
+using WebSupervisor.Controllers.CheckUser;
 
 namespace WebSupervisor.Controllers
 {
+    [AuthenAdmin]
     public class ScheduleController : Controller
     {
         //string selectcommand = "";

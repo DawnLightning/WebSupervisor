@@ -1,0 +1,199 @@
+﻿@using WebSupervisor.Code.Classes
+@using WebSupervisor.Models
+@model IPagedList<ConfirmTempModel>
+<div id="tab1" class="tab_content" style="display: block; ">
+    <div class="row">
+        <div class="col-lg-3 col-sm-5 col-xs-12">
+            <a href="#" class="button green" onclick="$('#addtemp').show()" ;>
+                添加
+            </a>
+            <a href="#" class="button orange" onclick="edite1()" ;>
+                修改
+            </a>
+            <a href="#" class="button blue" onclick="save()" ;>
+                保存
+            </a>
+        </div>
+        <div class="col-lg-6 col-sm-3 col-xs-0">
+        </div>
+        <div class="col-lg-3 col-sm-4 col-xs-12">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="输入你想搜索的信息">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button">
+                        搜索
+                    </button>
+                </span>
+            </div>
+            <!-- /input-group -->
+        </div>
+        <!-- /.col-lg-6 -->
+    </div>
+    <!-- /.row -->
+    <div id="editable1">
+        <p>
+        </p>
+        <table class="table table-condensed table-hover table-responsive ove">
+            <tr bgcolor="f5f5f5">
+                <th width=2%>
+                    <form>
+                        <input id="checkall" type="checkbox" name="checkall">
+                    </form>
+                </th>
+                <th>
+                    <p>
+                        课程
+                    </p>
+                </th>
+                <th>
+                    <p>
+                        授课内容
+                    </p>
+                </th>
+                <th>
+                    <p>
+                        授课方式
+                    </p>
+                </th>
+                <th>
+                    <p>
+                        专业
+                    </p>
+                </th>
+                <th>
+                    <p>
+                        教室
+                    </p>
+                </th>
+                <th>
+                    <p>
+                        教师
+                    </p>
+                </th>
+                <th>
+                    <p>
+                        周次
+                    </p>
+                </th>
+                <th>
+                    <p>
+                        听课时间
+                    </p>
+                </th>
+                <th>
+                    <p>
+                        人员安排
+                    </p>
+                </th>
+                <th>
+                    <p>
+                        &nbsp;
+                    </p>
+                </th>
+            </tr>
+            <tr id="addtemp" style="display:none">
+                <td>
+                    &nbsp;
+                </td>
+                <td>
+                    <input type="text" id="tempcourse" name="tempcourse" />
+                </td>
+                <td>
+                    <input type="text" id="tempcontent" name="tempcontent" />
+                </td>
+                <td>
+                    <input type="text" id="tempway" name="tempway" />
+                </td>
+                <td>
+                    <input type="text" id="tempmajor" name="tempmajor" />
+                </td>
+                <td>
+                    <input type="text" id="temproom" name="temproom" />
+                </td>
+                <td>
+                    <input type="text" id="temptr" name="temptr" />
+                </td>
+                <td>
+                    <input type="text" id="tempweek" name="tempweek" />
+                </td>
+                <td>
+                    <input type="text" id="temptime" name="temptime" />
+                </td>
+                <td>
+                    <input type="text" id="temper" name="temper" />
+                </td>
+                <td>
+                    <input type="button" id="btnsubmit" value="添加" class="teacherbtn blue" />
+                    <input type="button" id="btncancel" value="取消" class="teacherbtn red" onclick="$('#addtemp').hide()" />
+                </td>
+            </tr>
+            @{
+                Common com = new Common();
+                com.xmlRead(ViewBag.path);
+                for (int i = 0; i < Model.PageSize; i++)
+                {
+                    var item = Model[i];
+                    var checkname = ((Model.PageNumber - 1) * Model.PageSize + i);
+                    int nowday = item.Day;
+                    int nowWeeks = item.Week;
+                    string time = CalendarTools.getdata(Common.Year, nowWeeks, nowday - CalendarTools.weekdays(CalendarTools.CaculateWeekDay(Common.Year, Common.Month, Common.Day)), Common.Month, Common.Day).ToLongDateString();
+                <tr>
+                    <td width=2%>
+                        <input type="checkbox" name="@checkname">
+                    </td>
+                    <td>
+                        @item.ClassName
+                    </td>
+                    <td>
+                       @item.ClassContent
+                    </td>
+                    <td>
+                       @item.ClassType
+                    </td>
+                    <td>
+                        @item.Major
+                    </td>
+                    <td>
+                        @item.Address
+                    </td>
+                    <td>
+                        @item.TeacherName
+                    </td>
+                    <td>
+                       @item.Week
+                    </td>
+                    <td>
+                        @time
+                    </td>
+                    <td>
+                       @item.SuperVisors
+                    </td>
+                </tr>
+                    }
+                }
+        </table>
+    </div>
+    <!-- /.table -->
+    <div class="pager" style="text-align: center;">
+
+        <span style="height: 10px; line-height: 10px;">共 @Model.TotalItemCount.ToString() 条记录，当前第 @Model.PageNumber 页/共 @Model.PageCount 页 </span>
+        @Html.PagedListPager(
+    Model,
+    page => Url.Action("ConfirmTemp", "Home", new { page }),
+    PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new PagedListRenderOptions
+    {
+        LinkToFirstPageFormat = "首页",
+        LinkToNextPageFormat = "下一页",
+        LinkToPreviousPageFormat = "上一页",
+        LinkToLastPageFormat = "末页",
+        DisplayItemSliceAndTotal = false,
+        MaximumPageNumbersToDisplay = 10,
+        DisplayLinkToIndividualPages = true
+    }, new AjaxOptions()
+    {
+        HttpMethod = "GET",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "classtable"
+    }))
+    </div>
+</div>

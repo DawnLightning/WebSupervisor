@@ -1,9 +1,5 @@
 ﻿
-@using PagedList
-@using PagedList.Mvc
-@using WebSupervisor.Code.Classes
-@model PagedList.IPagedList<WebSupervisor.Models.ClassesModel>
-
+@model IPagedList<WebSupervisor.Models.ClassesModel>
 <link href="/Content/PagedList.css" rel="stylesheet" type="text/css" />
 <div class="contain">
     <ul class="tabs">
@@ -25,7 +21,6 @@
     </ul>
     <div class="tab_container">
         <div id="tab1" class="tab_content" style="display: block; ">
-
             @Html.Action("ScheduleList");
 
         </div>

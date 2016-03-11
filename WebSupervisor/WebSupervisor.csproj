@@ -256,7 +256,6 @@
     <Compile Include="Models\ArrageModel.cs" />
     <Compile Include="Models\CheckClassModel.cs" />
     <Compile Include="Models\ClassesModel.cs" />
-    <Compile Include="Models\ExportClassModel.cs" />
     <Compile Include="Models\SpareTimeModel.cs" />
     <Compile Include="Models\TeachersModel.cs" />
     <Compile Include="Models\UserModel.cs" />
@@ -362,6 +361,8 @@
     <Content Include="Scripts\jquery.form.min.js.map" />
     <Content Include="Views\Schedule\ScheduleList.cshtml" />
     <Content Include="Views\Schedule\ScheduleInport.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Home\ConfirmTemp.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -40,38 +40,48 @@ namespace WebSupervisor.Code.Placement
                             if (GetDaySpareCount(Day) >= config.MinPeople && GetWeekArrageCount(Week) <= config.PlanNumber - 1)
                             {
                                 UpdataDay(listcheckcount);
-                                List<SpareTimeModel> sptlist=GetSpareTimeList(spareclass[Index]);
-                                ClassesModel classmodel = GetClass(Week,Day,spareclass[Index]);
-                                string group = "";//督导小组
-                                int count = sptlist.Count;
-                                for (Index = 0; Index < 15; Index++)
-                                {   
-                                    if (count < config.MinPeople)
+                              
+                                //做非空判断，如果为空就不满足听课条件了（没上课老师）,循环继续
+                              
+                                  
+                                    for (Index = 0; Index < 15; Index++)
                                     {
-                                        break;
-                                    }
-                                    else if (count >= config.MinPeople && count <= config.MaxPeople)
+                                        List<SpareTimeModel> sptlist = GetSpareTimeList(spareclass[Index]);
+                                        ClassesModel classmodel = GetClass(Week, Day, spareclass[Index]);
+                                    if (classmodel != null)
                                     {
-                                        foreach (SpareTimeModel spt in sptlist)
+                                        string group = "";//督导小组
+                                        int count = sptlist.Count;
+                                        if (count < config.MinPeople)
                                         {
-                                            group = group + "," + IdToName(spt.Tid);
-                                            WritePlacement(sptlist,classmodel,group);
+                                            break;
                                         }
-                                    }
-                                    else if (count > config.MaxPeople)
-                                    {
-                                        for (int i = 0; i < config.MaxPeople; i++)
+                                        else if (count >= config.MinPeople && count <= config.MaxPeople)
                                         {
-                                            group = group + "," + IdToName(sptlist[i].Tid);
+                                            foreach (SpareTimeModel spt in sptlist)
+                                            {
+                                                group = group + "," + IdToName(spt.Tid);
+                                               
+                                            }
                                             WritePlacement(sptlist, classmodel, group);
                                         }
-                                    }
-                                    else
-                                    {
-                                        break;
-                                    }
+                                        else if (count > config.MaxPeople)
+                                        {
+                                            for (int i = 0; i < config.MaxPeople; i++)
+                                            {
+                                                group = group + "," + IdToName(sptlist[i].Tid);
+                                              
+                                            }
+                                            WritePlacement(sptlist, classmodel, group);
+                                        }
+                                        else
+                                        {
+                                            break;
+                                        }
 
+                                    }
                                 }
+                                
                             }
                         }
                     }
@@ -100,7 +110,7 @@ namespace WebSupervisor.Code.Placement
         {
             foreach (CheckClassModel model in list)
             {
-                model.DayNmuber = 0;
+                model.DayNumber = 0;
             }
         }
         /// <summary>
@@ -115,7 +125,7 @@ namespace WebSupervisor.Code.Placement
                     if (cmodel.Tid.Equals(tid))
                     {
                         cmodel.WeekNumber++;
-                        cmodel.DayNmuber++;
+                        cmodel.DayNumber++;
                         cmodel.total++;
                         
                     }
@@ -133,7 +143,10 @@ namespace WebSupervisor.Code.Placement
             }
             foreach (SpareTimeModel spt in listchange)
             {
-                DBHelper.Update<SpareTimeModel>(spt);
+
+                string update = string.Format("update sparetime set tid={0},week={1},day={2},classnumber={3},assign={4} where tid={5} and week={6} and day={7} and classnumber={8}",
+                    spt.Tid,spt.Week,spt.Day,spt.ClassNumber,spt.Assign, spt.Tid, spt.Week, spt.Day, spt.ClassNumber);
+                DBHelper.ExecuteNonQuery(update,CommandType.Text,null);
             }
             foreach (CheckClassModel cmodel in listcheckcount)
             {
@@ -218,7 +231,7 @@ namespace WebSupervisor.Code.Placement
             listcheckcount=listcheckcount.OrderBy(m => m.total).ToList();
             foreach (CheckClassModel model in listcheckcount)
             {
-                if (model.DayNmuber==0&&model.WeekNumber<2)
+                if (model.DayNumber==0&&model.WeekNumber<2)
                 {
                     truelist.Add(model);
                 }
@@ -246,9 +259,9 @@ namespace WebSupervisor.Code.Placement
         /// <returns></returns>
         private ClassesModel GetClass(int week,int day ,int classnumber)
         {
-            ClassesModel _model = new ClassesModel();
+          
             List<ClassesModel> list = new List<ClassesModel>();
-            string classtype = ContorlProportion();
+            string classtype = ContorlProportion();//控制理论和实验课的比例
             foreach (ClassesModel model in listclasses)
             {
                 if (model.Week.Equals(week)&&model.Day.Equals(day)&&model.ClassNumber.Equals(classnumber)&&model.ClassType.Equals(classtype))
@@ -257,7 +270,8 @@ namespace WebSupervisor.Code.Placement
                 }
             }
             list = list.OrderBy(m => m.CheckNumber).ToList();
-            if (list.Count > 0)
+            //做数量判断，如果为0表示没有上课老师,因为上面做了比例控制，可能会没有实验或者理论课
+            if (list.Count>0)
             {
                 return list[0];
             }
@@ -265,6 +279,8 @@ namespace WebSupervisor.Code.Placement
             {
                 return null;
             }
+           
+
         }
         /// <summary>
         /// 控制理论课和实验课的比例
@@ -314,7 +330,7 @@ namespace WebSupervisor.Code.Placement
             arragemodel.Cid = model.Cid;
             arragemodel.SuperVisors = group.Substring(1);
             arragemodel.Stauts = 0;
-            arragemodel.Pid = model.Cid + sptlist[0].Week + sptlist[0].Day + sptlist[0].ClassNumber.ToString();
+            arragemodel.Pid = model.Cid.Trim() + sptlist[0].Week + sptlist[0].Day + sptlist[0].ClassNumber.ToString();
             listarrage.Add(arragemodel);
           
             model.CheckNumber++;
