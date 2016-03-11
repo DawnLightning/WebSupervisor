@@ -15,7 +15,6 @@ namespace WebSupervisor.Controllers
     {
         List<TeachersModel> list = DBHelper.ExecuteList<TeachersModel>("select * from teachers where indentify=1", CommandType.Text, null);
         List<SpareTimeModel> splist = DBHelper.ExecuteList<SpareTimeModel>("select * from sparetime", CommandType.Text, null);
-
         // GET: SupervisorPage
         public ActionResult CheifSupervisor()
         {
@@ -27,9 +26,11 @@ namespace WebSupervisor.Controllers
         }
         public PartialViewResult Supervisor(int page=1)
         {
-          
             List<SupervisorViewModel> spvlist = new List<SupervisorViewModel>();
-            splist=splist.GroupBy(a => a.Week).Select(g => g.First()).ToList();
+            List<SpareTimeModel> sptlist = new List<SpareTimeModel>();
+            
+            List<SpareTimeModel> sptlist1 = new List<SpareTimeModel>();
+            sptlist1=splist.GroupBy(a => a.Tid).ToDictionary(a=>a.Key,a=>a.GroupBy(g=>g.Week).ToDictionary(g=>g.Key,g=>g.ToList()));
             foreach (TeachersModel teacher in list)
             {
                 SupervisorViewModel m = new SupervisorViewModel();
@@ -37,7 +38,7 @@ namespace WebSupervisor.Controllers
                 m.Phone = teacher.Phone;
                 m.Password = teacher.Password;
                 m.SpareTime = "";
-                foreach (SpareTimeModel spt in splist)
+                foreach (SpareTimeModel spt in sptlist1)
                 {
                     if (teacher.Tid.Equals(spt.Tid))
                     {
@@ -56,8 +57,7 @@ namespace WebSupervisor.Controllers
                 }
                 
             }
-            IPagedList<SupervisorViewModel> Iteachers = spvlist.ToPagedList(page, 10);
-           
+            IPagedList<SupervisorViewModel> Iteachers = spvlist.ToPagedList(page, 10);           
             return PartialView(Iteachers);
         }
         //自动填补空闲时间

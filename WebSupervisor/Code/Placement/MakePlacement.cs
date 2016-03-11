@@ -257,8 +257,14 @@ namespace WebSupervisor.Code.Placement
                 }
             }
             list = list.OrderBy(m => m.CheckNumber).ToList();
-            return list[0];
-
+            if (list.Count > 0)
+            {
+                return list[0];
+            }
+            else
+            {
+                return null;
+            }
         }
         /// <summary>
         /// 控制理论课和实验课的比例
