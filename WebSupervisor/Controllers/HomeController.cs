@@ -19,6 +19,8 @@ namespace WebSupervisor.Controllers
     public class HomeController : Controller
     {
         List<TeachersModel> teacherlist = DBHelper.ExecuteList<TeachersModel>("select * from Teachers", CommandType.Text, null);
+        List<ArrageModel> arragelist = DBHelper.ExecuteList<ArrageModel>("select * from arrage", CommandType.Text, null);
+        List<ClassesModel> classlist = DBHelper.ExecuteList<ClassesModel>("select * from classes", CommandType.Text, null);
         // GET: HomePage
         public ActionResult Index()
         {
@@ -29,6 +31,27 @@ namespace WebSupervisor.Controllers
         {
 
             return PartialView();
+        }
+        public ActionResult ConfirmTemp(int page=1)
+        {
+            ViewBag.path =Server.MapPath(Common.ConfPath);
+            var arragetemplist = (from a in arragelist join b in classlist on a.Cid equals b.Cid
+                                 where a.Stauts == 0
+                                 select new ConfirmTempModel
+                                 {
+                                      ClassName=b.ClassName,
+                                      ClassContent=b.ClassContent,
+                                      ClassType=b.ClassType,
+                                      Major=b.Major,
+                                      Address=b.Address,
+                                      TeacherName=b.TeacherName,
+                                      Week=b.Week,
+                                      Day=b.Day,
+                                      ClassNumber=b.ClassNumber,
+                                      SuperVisors=a.SuperVisors
+                                 }).ToList();
+            IPagedList<ConfirmTempModel> iplarrage = arragetemplist.ToPagedList(page, 11);
+            return PartialView(iplarrage);
         }
         public PartialViewResult Set()
         {
@@ -112,6 +135,7 @@ namespace WebSupervisor.Controllers
             //DBHelper.ExecuteNonQuery("update admin set phone=@phone,email=@email,password=@password where username="+uname , CommandType.Text, sqlpara);
 
         }
+        //自动生成安排
         [HttpPost]
         public ActionResult AutoArrange(ArrageConfigModel ac)
         {
