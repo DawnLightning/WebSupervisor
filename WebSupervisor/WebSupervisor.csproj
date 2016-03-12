@@ -362,6 +362,8 @@
     <Content Include="Views\Schedule\ScheduleInport.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Home\ConfirmTemp.cshtml" />
+    <Content Include="Views\Home\ConfirmSure.cshtml" />
+    <Content Include="Views\Home\ArrageAdd.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -8,9 +8,9 @@ namespace WebSupervisor.Models
 {
 
     /// <summary>
-    /// 临时安排模型
+    /// 安排视图模型
     /// </summary>
-    public class ConfirmTempModel
+    public class ConfirmModel
     {
         public string ClassName { set; get; }
         public string ClassContent { set; get; }
@@ -22,6 +22,7 @@ namespace WebSupervisor.Models
         public int ClassNumber { set; get; }
         public string SuperVisors { set; get; }
         public int Day { get; set; }
+        public int Total { set; get; }
     }
     /// <summary>
     /// 导出课程模型

@@ -37,7 +37,7 @@ namespace WebSupervisor.Controllers
             ViewBag.path =Server.MapPath(Common.ConfPath);
             var arragetemplist = (from a in arragelist join b in classlist on a.Cid equals b.Cid
                                  where a.Stauts == 0
-                                 select new ConfirmTempModel
+                                 select new ConfirmModel
                                  {
                                       ClassName=b.ClassName,
                                       ClassContent=b.ClassContent,
@@ -50,9 +50,20 @@ namespace WebSupervisor.Controllers
                                       ClassNumber=b.ClassNumber,
                                       SuperVisors=a.SuperVisors
                                  }).ToList();
-            IPagedList<ConfirmTempModel> iplarrage = arragetemplist.ToPagedList(page, 11);
+            IPagedList<ConfirmModel> iplarrage = arragetemplist.ToPagedList(page, 11);
             return PartialView(iplarrage);
         }
+        //public ActionResult SaveArrage(FormCollection fc)
+        //{
+        //    var cherkbox = from x in fc.AllKeys
+        //                       //where fc[x] == "on"
+        //                   select x;
+        //    foreach (var cherkname in cherkbox)
+        //    {
+        //        int index = int.Parse(cherkname);
+
+        //    }
+        //}
         public PartialViewResult Set()
         {
             return PartialView();
@@ -151,6 +162,29 @@ namespace WebSupervisor.Controllers
             mp.CreatPlan();
             return Json(new { web = 1 });
         }
-
+        public ActionResult ArrageAdd()
+        {
+            return PartialView();
+        }
+        public ActionResult ArrageAddwdc(FormCollection fc)
+        {
+            int[] select = new int[] { int.Parse(fc["week"]), int.Parse(fc["day"]), int.Parse(fc["classnumber"]) };
+            List<string> teachernames = new List<string>();
+            if (Session["Power"].ToString() == "管理员")
+            {
+                teachernames = (from t in teacherlist
+                                join c in classlist on t.TeacherName equals c.TeacherName
+                                where t.College == Session["College"].ToString()
+                                && c.Week == @select[0] && c.Day == @select[1] && c.ClassNumber == @select[2]
+                                select t.TeacherName).ToList();
+            }
+            else
+            {
+                teachernames = (from c in classlist
+                                where c.Week == @select[0] && c.Day == @select[1] && c.ClassNumber == @select[2]
+                                select c.TeacherName).ToList();
+            }
+            return Json(teachernames);
+        }
     }
 }
