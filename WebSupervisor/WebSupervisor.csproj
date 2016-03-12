@@ -357,7 +357,6 @@
     <Content Include="Views\Home\TeacherList.cshtml" />
     <Content Include="Views\Power\AdminList.cshtml" />
     <Content Include="Views\Schedule\ScheduleExport.cshtml" />
-    <Content Include="Views\Schedule\_Paging.cshtml" />
     <Content Include="Scripts\jquery-2.2.1.min.map" />
     <Content Include="Scripts\jquery.form.min.js.map" />
     <Content Include="Views\Schedule\ScheduleList.cshtml" />
@@ -377,6 +376,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

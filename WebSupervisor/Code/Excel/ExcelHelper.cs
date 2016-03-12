@@ -29,14 +29,7 @@ namespace WebSupervisor
         /// <returns></returns>
         public int Import(string strFileName)
         {
-            //try
-            //{
-            //    //List<ScheduleModle> lstschedule = new List<ScheduleModle>();
-            //lstschedule = DBHelper.ExecuteList<ScheduleModle>(strSelect_Class_Data, CommandType.Text, null);
-            //foreach (ScheduleModle schedule in lstschedule)
-            //{
-
-            //}
+        
             Excel_dt = new DataTable();
             HSSFWorkbook hssfworkbook;
             using (FileStream file = new FileStream(strFileName, FileMode.Open, FileAccess.Read))
@@ -99,13 +92,8 @@ namespace WebSupervisor
             }
 
             int[] name = new int[7];//确定Excel的所需字段值所在的列---
-                                    //daClass = helper.adapter(strSelect_Class_Data);
-                                    //dtClass = new DataTable();
-                                    //daClass.Fill(dtClass);
-                                    //daClass.FillSchema(dtClass, SchemaType.Source);
             string classname = Excel_dt.Rows[2][0].ToString();//课程名称
             string major = Excel_dt.Rows[2][1].ToString().Substring(3);//专业
-            //string banji = Excel_dt.Rows[3][1].ToString();
             for (int q = 0; q < Excel_dt.Columns.Count; q++)
             {
                 switch (Excel_dt.Rows[5][q].ToString())
