@@ -19,10 +19,15 @@ namespace WebSupervisor.Controllers
            
             return View();
         }
+        /// <summary>
+        /// 登陆
+        /// </summary>
+        /// <param name="fc"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult Login(FormCollection fc)
         {
-            MakePlacement.Test();
+           
             string username = fc["username"];
             string password = fc["password"];
             List<SupervisorModel> lstsupervisor = new List<SupervisorModel>();
@@ -61,6 +66,10 @@ namespace WebSupervisor.Controllers
             }
             return Content("<script language='javascript' type='text/javascript'>alert('账号或者密码有误，请核对后再登录！！');window.location.href= '/Account/Login'</script>");
         }
+        /// <summary>
+        /// 注销
+        /// </summary>
+        /// <returns></returns>
         public ActionResult LogOff()
         {
             if (Session["AdminUser"] != null)

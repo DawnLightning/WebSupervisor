@@ -46,17 +46,13 @@ namespace WebSupervisor.Controllers
                         m.SpareTime = m.SpareTime + " " + spt.Week.ToString();
                     }
                 }
-                else m.SpareTime = "未填写";
+                else
+                {
+                    m.SpareTime = "未填写";
+                }
                 spvlist.Add(m);
             }
-            //foreach (SupervisorViewModel sp in spvlist)
-            //{
-            //    if (sp.SpareTime == "" && sp.SpareTime.Length == 0)
-            //    {
-            //        sp.SpareTime = "未填写";
-            //    }
-
-            //}
+         
             IPagedList<SupervisorViewModel> Iteachers = spvlist.ToPagedList(page, 10);
             return PartialView(Iteachers);
         }

@@ -64,8 +64,13 @@ namespace WebSupervisor.Controllers
             int a;
             string ischeck = fc["checkall"];
             if (ischeck == "on")
+            {
                 a = 1;
-            else a = 0;
+            }
+            else
+            {
+                a = 0;
+            }
             //SqlParameterCollection
                  TeachersModel model = new TeachersModel();
             model.Tid = fc["teacherNO"];
@@ -78,9 +83,7 @@ namespace WebSupervisor.Controllers
             model.Indentify = a;
             model.Email = fc["teacherEmail"];
             model.College = fc["college"];
-
-
-                DBHelper.Insert<TeachersModel>(model);
+            DBHelper.Insert<TeachersModel>(model);
             return Json(new jsondata(0,"添加成功！"), JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
@@ -98,7 +101,10 @@ namespace WebSupervisor.Controllers
                
                 return Content("<script language='javascript' type='text/javascript'>alert('保存成功！！');window.location.href= '/Home/Set'</script>");
             }
-            catch (Exception) { return Content("<script language='javascript' type='text/javascript'>alert('保存失败！！');window.location.href= '/Home/Set'</script>"); };
+            catch (Exception)
+            {
+                return Content("<script language='javascript' type='text/javascript'>alert('保存失败！！');window.location.href= '/Home/Set'</script>");
+            }
 
         }
       
@@ -130,9 +136,11 @@ namespace WebSupervisor.Controllers
                     DBHelper.ExecuteNonQuery("update admin set phone=@phone,email=@email where username=" + uname, CommandType.Text, sqlpara);
                 return Content("<script language='javascript' type='text/javascript'>alert('保存成功！！');window.location.href= '/Home/Set'</script>");
             }
-            catch (Exception) { return Content("<script language='javascript' type='text/javascript'>alert('保存失败！！');window.location.href= '/Home/Set'</script>"); }
-            // sqlpara[2] = new SqlParameter("@password", password);
-            //DBHelper.ExecuteNonQuery("update admin set phone=@phone,email=@email,password=@password where username="+uname , CommandType.Text, sqlpara);
+            catch (Exception)
+            {
+                return Content("<script language='javascript' type='text/javascript'>alert('保存失败！！');window.location.href= '/Home/Set'</script>");
+            }
+          
 
         }
         //自动生成安排
@@ -141,8 +149,6 @@ namespace WebSupervisor.Controllers
         {
             MakePlacement mp = new MakePlacement(ac);
             mp.CreatPlan();
-            // = new ArrageConfigModel();
-            //ac.a
             return Json(new { web = 1 });
         }
 

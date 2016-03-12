@@ -18,7 +18,7 @@ namespace WebSupervisor.Controllers
     [AuthenAdmin]
     public class ScheduleController : Controller
     {
-        //string selectcommand = "";
+        
         List<ClassesModel> lstclasses = DBHelper.ExecuteList<ClassesModel>("select * from classes", CommandType.Text, null);
         // GET: Schedule
         public PartialViewResult Schedule()
@@ -84,7 +84,10 @@ namespace WebSupervisor.Controllers
             //创建文件夹，保存文件
             string path = Path.GetDirectoryName(fullFileName);
             if (!Directory.Exists(path))
+            {
                 Directory.CreateDirectory(path);
+            }
+               
             if (!System.IO.File.Exists(fullFileName))
             {
                 Filedata.SaveAs(fullFileName);
@@ -104,18 +107,21 @@ namespace WebSupervisor.Controllers
             //创建文件夹，保存文件
             string path = Path.GetDirectoryName(fullFileName);
             if (!Directory.Exists(path))
+            {
                 Directory.CreateDirectory(path);
+            }
+              
             ex.MakeWordDoc(selectExport(cbspcial, cbname, cbclass), fullFileName, wordpath);
             return File(fullFileName, "application/zip-x-compressed", filename);
         }
         private List<ClassesModel> selectExport(string cbspcial, string cbname, string cbclass)
         {
-            //string selectcommand = "";
+           
             List<ClassesModel> clist = new List<ClassesModel>();
             List<string> condition = new List<string>();
             if (cbname == "全部")
             {
-                //condition.Add(null);
+               
             }
             else
             {
@@ -123,7 +129,7 @@ namespace WebSupervisor.Controllers
             }
             if (cbclass == "全部")
             {
-                //condition.Add(null);
+                
             }
             else
             {
@@ -131,7 +137,7 @@ namespace WebSupervisor.Controllers
             }
             if (cbspcial == "全部")
             {
-                //condition.Add(null);
+              
             }
             else
             {

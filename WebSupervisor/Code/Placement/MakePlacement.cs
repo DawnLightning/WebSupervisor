@@ -26,6 +26,22 @@ namespace WebSupervisor.Code.Placement
         {
             this.config = config;
         }
+        /// <summary>
+        /// 重新生成听课安排
+        /// </summary>
+        public void ReCreatPlan()
+        {
+            if (ResetArrageData()>0)
+            {
+                ResetCheckClass();
+                ResetClases();
+                ResetSpareTime();
+                CreatPlan();
+            }
+        }
+        /// <summary>
+        /// 生成听课安排
+        /// </summary>
         public void CreatPlan()
         {
             if (config!=null)
@@ -41,13 +57,14 @@ namespace WebSupervisor.Code.Placement
                             {
                                 UpdataDay(listcheckcount);
                               
-                                //做非空判断，如果为空就不满足听课条件了（没上课老师）,循环继续
+                             
                               
                                   
                                     for (Index = 0; Index < 15; Index++)
                                     {
                                         List<SpareTimeModel> sptlist = GetSpareTimeList(spareclass[Index]);
                                         ClassesModel classmodel = GetClass(Week, Day, spareclass[Index]);
+                                    //做非空判断，如果为空就不满足听课条件了（没上课老师）,循环继续
                                     if (classmodel != null)
                                     {
                                         string group = "";//督导小组
@@ -343,6 +360,47 @@ namespace WebSupervisor.Code.Placement
             listchange.AddRange(sptlist);
 
 
+        }
+        /// <summary>
+        /// 课堂抽查次数归零
+        /// </summary>
+        private void ResetClases()
+        {
+            foreach (ClassesModel m in listclasses)
+            {
+                m.CheckNumber = 0;
+            }
+        }
+        /// <summary>
+        /// 空闲时间已安排-->未安排
+        /// </summary>
+        private void ResetSpareTime()
+        {
+            foreach (SpareTimeModel m in listsparetime)
+            {
+                m.Assign = 0;
+            }
+        }
+        /// <summary>
+        /// 督导的总听课次数归零
+        /// </summary>
+        private void ResetCheckClass()
+        {
+            foreach (CheckClassModel m in listcheckcount)
+            {
+                m.DayNumber = 0;
+                m.WeekNumber = 0;
+                m.total = 0;
+            }
+        }
+      
+        /// <summary>
+        /// 删除临时数据
+        /// </summary>
+        /// <returns>大于1-->成功;等于0失败</returns>
+        private int ResetArrageData()
+        {
+            return DBHelper.ExecuteNonQuery(string.Format("delete from arrage where Stauts={0}",0),CommandType.Text,null);
         }
         public static void Test()
         {
