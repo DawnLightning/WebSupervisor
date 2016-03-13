@@ -148,7 +148,31 @@ namespace WebSupervisor.Code.Classes
             }
         }
         #endregion
-       
+        //转换节次格式
+        public string AddSeparator(int classnumber)
+        {
+            string newclassnumber = "";
+            switch (classnumber)
+            {
+                case 12: newclassnumber = "1-2"; break;
+                case 13: newclassnumber = "1-3"; break;
+                case 23: newclassnumber = "2-3"; break;
+                case 24: newclassnumber = "2-4"; break;
+                case 34: newclassnumber = "3-4"; break;
+                case 35: newclassnumber = "3-5"; break;
+                case 45: newclassnumber = "4-5"; break;
+                case 46: newclassnumber = "4-6"; break;
+                case 67: newclassnumber = "6-7"; break;
+                case 68: newclassnumber = "6-8"; break;
+                case 78: newclassnumber = "7-8"; break;
+                case 79: newclassnumber = "7-9"; break;
+                case 89: newclassnumber = "8-9"; break;
+                case 1011: newclassnumber = "10-11"; break;
+                case 1112: newclassnumber = "11-12"; break;
+                case 1012: newclassnumber = "10-12"; break;
+            }
+            return newclassnumber;
+        }
     }
 }
 

@@ -12,6 +12,7 @@ namespace WebSupervisor.Models
     /// </summary>
     public class ConfirmModel
     {
+        public string Cid { set; get; }
         public string ClassName { set; get; }
         public string ClassContent { set; get; }
         public string ClassType { set; get; }

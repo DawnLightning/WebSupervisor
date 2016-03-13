@@ -362,7 +362,6 @@
     <Content Include="Scripts\jquery.form.min.js.map" />
     <Content Include="Views\Schedule\ScheduleList.cshtml" />
     <Content Include="Views\Schedule\ScheduleInport.cshtml" />
-    <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Home\ConfirmTemp.cshtml" />
     <Content Include="Views\Home\ConfirmSure.cshtml" />
     <Content Include="Views\Home\ArrageAdd.cshtml" />
@@ -374,7 +373,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Code\Email\" />
     <Folder Include="Views\Config\" />
   </ItemGroup>
   <ItemGroup>

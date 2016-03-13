@@ -13,7 +13,7 @@ using PagedList;
 using WebSupervisor.Code.Placement;
 
 namespace WebSupervisor.Controllers
-{   
+{
 
     [AuthenAdmin]
     public class HomeController : Controller
@@ -32,38 +32,121 @@ namespace WebSupervisor.Controllers
 
             return PartialView();
         }
-        public ActionResult ConfirmTemp(int page=1)
+        public ActionResult ConfirmTemp(int page = 1)
         {
-            ViewBag.path =Server.MapPath(Common.ConfPath);
-            var arragetemplist = (from a in arragelist join b in classlist on a.Cid equals b.Cid
-                                 where a.Stauts == 0
-                                 select new ConfirmModel
-                                 {
-                                      ClassName=b.ClassName,
-                                      ClassContent=b.ClassContent,
-                                      ClassType=b.ClassType,
-                                      Major=b.Major,
-                                      Address=b.Address,
-                                      TeacherName=b.TeacherName,
-                                      Week=b.Week,
-                                      Day=b.Day,
-                                      ClassNumber=b.ClassNumber,
-                                      SuperVisors=a.SuperVisors
-                                 }).ToList();
+            ViewBag.path = Server.MapPath(Common.ConfPath);
+            List<ConfirmModel> arragetemplist = new List<ConfirmModel>();
+            if (Session["Power"].ToString() == "管理员")
+            {
+                arragetemplist = (from a in arragelist
+                                  join b in classlist on a.Cid equals b.Cid
+                                  join t in teacherlist on b.TeacherName equals t.TeacherName
+                                  where a.Stauts == 0 && t.College == Session["College"].ToString()
+                                  select new ConfirmModel
+                                  {
+                                      Cid = a.Cid,
+                                      ClassName = b.ClassName,
+                                      ClassContent = b.ClassContent,
+                                      ClassType = b.ClassType,
+                                      Major = b.Major,
+                                      Address = b.Address,
+                                      TeacherName = b.TeacherName,
+                                      Week = b.Week,
+                                      Day = b.Day,
+                                      ClassNumber = b.ClassNumber,
+                                      SuperVisors = a.SuperVisors
+                                  }).ToList();
+            }
+            else
+            {
+                arragetemplist = (from a in arragelist
+                                  join b in classlist on a.Cid equals b.Cid
+                                  join t in teacherlist on b.TeacherName equals t.TeacherName
+                                  where a.Stauts == 0
+                                  select new ConfirmModel
+                                  {
+                                      Cid = a.Cid,
+                                      ClassName = b.ClassName,
+                                      ClassContent = b.ClassContent,
+                                      ClassType = b.ClassType,
+                                      Major = b.Major,
+                                      Address = b.Address,
+                                      TeacherName = b.TeacherName,
+                                      Week = b.Week,
+                                      Day = b.Day,
+                                      ClassNumber = b.ClassNumber,
+                                      SuperVisors = a.SuperVisors
+                                  }).ToList();
+            }
             IPagedList<ConfirmModel> iplarrage = arragetemplist.ToPagedList(page, 11);
             return PartialView(iplarrage);
         }
-        //public ActionResult SaveArrage(FormCollection fc)
-        //{
-        //    var cherkbox = from x in fc.AllKeys
-        //                       //where fc[x] == "on"
-        //                   select x;
-        //    foreach (var cherkname in cherkbox)
-        //    {
-        //        int index = int.Parse(cherkname);
+        [HttpPost]
+        public ActionResult SaveArrage(FormCollection fc)
+        {
+            try
+            {
+                var cherkbox = from x in fc.AllKeys
+                               where fc[x] != "checkall"
+                               select x;
+                foreach (var cherkname in cherkbox)
+                {
+                    SqlParameter s = new SqlParameter("@cid", cherkname);
+                    DBHelper.ExecuteNonQuery("update arrage set stauts=1 where cid=@cid", CommandType.Text, s);
 
-        //    }
-        //}
+                }
+                return Json(new jsondata(1, "保存成功！"), JsonRequestBehavior.AllowGet);
+            }
+            catch { return Json(new jsondata(0, "保存失败！"), JsonRequestBehavior.AllowGet); }
+        }
+        public ActionResult ConfirmSure(int page = 1)
+        {
+            List<ConfirmModel> arragetemplist = new List<ConfirmModel>();
+            if (Session["Power"].ToString() == "管理员")
+            {
+                arragetemplist = (from a in arragelist
+                                  join b in classlist on a.Cid equals b.Cid join t in teacherlist on b.TeacherName equals t.TeacherName
+                                  where a.Stauts == 1&& t.College==Session["College"].ToString()
+                                  select new ConfirmModel
+                                  {
+                                      Cid = a.Cid,
+                                      ClassName = b.ClassName,
+                                      ClassContent = b.ClassContent,
+                                      ClassType = b.ClassType,
+                                      Major = b.Major,
+                                      Address = b.Address,
+                                      TeacherName = b.TeacherName,
+                                      Week = b.Week,
+                                      Day = b.Day,
+                                      ClassNumber = b.ClassNumber,
+                                      SuperVisors = a.SuperVisors
+                                  }).ToList();
+            }
+            else
+            {
+                arragetemplist = (from a in arragelist
+                                  join b in classlist on a.Cid equals b.Cid
+                                  join t in teacherlist on b.TeacherName equals t.TeacherName
+                                  where a.Stauts == 1
+                                  select new ConfirmModel
+                                  {
+                                      Cid = a.Cid,
+                                      ClassName = b.ClassName,
+                                      ClassContent = b.ClassContent,
+                                      ClassType = b.ClassType,
+                                      Major = b.Major,
+                                      Address = b.Address,
+                                      TeacherName = b.TeacherName,
+                                      Week = b.Week,
+                                      Day = b.Day,
+                                      ClassNumber = b.ClassNumber,
+                                      SuperVisors = a.SuperVisors
+                                  }).ToList();
+            }
+            ViewBag.path = Server.MapPath(Common.ConfPath);
+            IPagedList<ConfirmModel> iplarrage = arragetemplist.ToPagedList(page, 11);
+            return PartialView(iplarrage);
+        }
         public PartialViewResult Set()
         {
             return PartialView();
@@ -83,19 +166,19 @@ namespace WebSupervisor.Controllers
                 a = 0;
             }
             //SqlParameterCollection
-                 TeachersModel model = new TeachersModel();
+            TeachersModel model = new TeachersModel();
             model.Tid = fc["teacherNO"];
             model.Title = fc["teacherTitle"];
             model.TeacherRoom = fc["teacherRoom"];
             model.TeacherName = fc["teacherName"];
             model.Phone = fc["teacherTel"];
             model.Password = "123";
-            model.Islimit =1;
+            model.Islimit = 1;
             model.Indentify = a;
             model.Email = fc["teacherEmail"];
             model.College = fc["college"];
             DBHelper.Insert<TeachersModel>(model);
-            return Json(new jsondata(0,"添加成功！"), JsonRequestBehavior.AllowGet);
+            return Json(new jsondata(1, "添加成功！"), JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         public ActionResult SetDate(FormCollection fc)
@@ -105,11 +188,11 @@ namespace WebSupervisor.Controllers
             Common.Day = Convert.ToInt32(fc["day"]);
             Common com = new Common();
             string path = this.Server.MapPath(Common.ConfPath);
-           com.xmlSave(path);
+            com.xmlSave(path);
             try
             {
                 com.xmlSave(path);
-               
+
                 return Content("<script language='javascript' type='text/javascript'>alert('保存成功！！');window.location.href= '/Home/Set'</script>");
             }
             catch (Exception)
@@ -118,11 +201,11 @@ namespace WebSupervisor.Controllers
             }
 
         }
-      
-       
+
+
         public PartialViewResult Teacher(int page = 1)
         {
-           
+
             IPagedList<TeachersModel> Iteachers = teacherlist.ToPagedList(page, 10);
             return PartialView(Iteachers);
         }
@@ -151,7 +234,7 @@ namespace WebSupervisor.Controllers
             {
                 return Content("<script language='javascript' type='text/javascript'>alert('保存失败！！');window.location.href= '/Home/Set'</script>");
             }
-          
+
 
         }
         //自动生成安排
@@ -166,6 +249,7 @@ namespace WebSupervisor.Controllers
         {
             return PartialView();
         }
+        //根据周天节次获得教师姓名
         public ActionResult ArrageAddwdc(string week, string day, string classnumber)
         {
             int[] select = new int[] { int.Parse(week), int.Parse(day), int.Parse(classnumber) };
