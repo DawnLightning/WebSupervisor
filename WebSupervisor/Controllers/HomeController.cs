@@ -166,9 +166,9 @@ namespace WebSupervisor.Controllers
         {
             return PartialView();
         }
-        public ActionResult ArrageAddwdc(FormCollection fc)
+        public ActionResult ArrageAddwdc(string week, string day, string classnumber)
         {
-            int[] select = new int[] { int.Parse(fc["week"]), int.Parse(fc["day"]), int.Parse(fc["classnumber"]) };
+            int[] select = new int[] { int.Parse(week), int.Parse(day), int.Parse(classnumber) };
             List<string> teachernames = new List<string>();
             if (Session["Power"].ToString() == "管理员")
             {

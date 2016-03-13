@@ -221,6 +221,8 @@
     <Content Include="Scripts\jquery.form.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\json2.js" />
+    <Content Include="Scripts\json2.min.js" />
     <Content Include="Views\Home\Confirm.cshtml" />
     <Content Include="Views\Home\Set.cshtml" />
     <Content Include="Views\Home\Teacher.cshtml" />
