@@ -52,14 +52,14 @@
                         <option value="1011">10-11</option>
                         <option value="1112">11-12</option>
                     </select>
-                    <select name="teachername">
-                        <option value="0">请选择教师姓名</option>
-                         @*@{ 
-                             foreach(var item in ViewBag.TeacherName)
-                             {
-                                 <option value="@item">@item</option>
-                             }
-                         }*@
+                    <select name="teachername" >
+                        @*<option value="0">请选择教师姓名</option>*@
+                        @*@{
+                                foreach(var item in ViewBag.TeacherName)
+                                {
+                                    <option value="@item">@item</option>
+                                }
+                            }*@
                     </select>
                     <select name="classtype">
                         <option value="0">请选择授课方式</option>
