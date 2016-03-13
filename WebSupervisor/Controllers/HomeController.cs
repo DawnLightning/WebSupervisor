@@ -38,28 +38,30 @@ namespace WebSupervisor.Controllers
             List<ConfirmModel> arragetemplist = new List<ConfirmModel>();
             if (Session["Power"].ToString() == "管理员")
             {
-                arragetemplist = (from a in arragelist
-                                  join b in classlist on a.Cid equals b.Cid
-                                  join t in teacherlist on b.TeacherName equals t.TeacherName
-                                  where a.Stauts == 0 && t.College == Session["College"].ToString()
-                                  select new ConfirmModel
-                                  {
-                                      Cid = a.Cid,
-                                      ClassName = b.ClassName,
-                                      ClassContent = b.ClassContent,
-                                      ClassType = b.ClassType,
-                                      Major = b.Major,
-                                      Address = b.Address,
-                                      TeacherName = b.TeacherName,
-                                      Week = b.Week,
-                                      Day = b.Day,
-                                      ClassNumber = b.ClassNumber,
-                                      SuperVisors = a.SuperVisors
-                                  }).ToList();
+                    arragetemplist = (from a in arragelist
+                                      join b in classlist on a.Cid equals b.Cid
+                                      join t in teacherlist on b.TeacherName equals t.TeacherName
+                                      where a.Stauts == 0 && t.College == Session["College"].ToString()
+                                      select new ConfirmModel
+                                      {
+                                          Cid = a.Cid,
+                                          ClassName = b.ClassName,
+                                          ClassContent = b.ClassContent,
+                                          ClassType = b.ClassType,
+                                          Major = b.Major,
+                                          Address = b.Address,
+                                          TeacherName = b.TeacherName,
+                                          Week = b.Week,
+                                          Day = b.Day,
+                                          ClassNumber = b.ClassNumber,
+                                          SuperVisors = a.SuperVisors
+                                      }).ToList();
+                IPagedList<ConfirmModel> iplarrage = arragetemplist.ToPagedList(page, 11);
+                return PartialView(iplarrage);
             }
             else
             {
-                arragetemplist = (from a in arragelist
+                 arragetemplist = (from a in arragelist
                                   join b in classlist on a.Cid equals b.Cid
                                   join t in teacherlist on b.TeacherName equals t.TeacherName
                                   where a.Stauts == 0
@@ -77,9 +79,9 @@ namespace WebSupervisor.Controllers
                                       ClassNumber = b.ClassNumber,
                                       SuperVisors = a.SuperVisors
                                   }).ToList();
+                IPagedList<ConfirmModel> iplarrage = arragetemplist.ToPagedList(page, 11);
+                return PartialView(iplarrage);
             }
-            IPagedList<ConfirmModel> iplarrage = arragetemplist.ToPagedList(page, 11);
-            return PartialView(iplarrage);
         }
         [HttpPost]
         public ActionResult SaveArrage(FormCollection fc)
