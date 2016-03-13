@@ -52,7 +52,7 @@
                         <option value="1011">10-11</option>
                         <option value="1112">11-12</option>
                     </select>
-                    <select name="teachername">
+                    <select id="teachername">
                         @*<option value="0">请选择教师姓名</option>*@
                         @*@{
                                 foreach(var item in ViewBag.TeacherName)
@@ -242,10 +242,8 @@
                     "classnumber": classnumber,
                 }),
                 success: function (teachernames) {
-                    //或的 json  数据  绑定 功能下拉框
-                    var optionString = "";
-                    for (var i = 0; i < teachernames.length; i++) {
-                        $("#teachername").append("<option value='Value'>" + teachernames[i].toString() + "</option>");  //添加一项option ;
+                    for (i in teachernames) {
+                        $("#teachername").append('<option value="' + teachernames[i] + '">' + teachernames[i] + '</option>');  //添加一项option ;
                     }
                 },
                 error: function () {
