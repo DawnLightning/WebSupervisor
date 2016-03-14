@@ -227,11 +227,20 @@
     </div>
 </div>
 <script>
+    var week = $("#week").val();
+    var day = $("#day").val();
+    var classnumber = $("#classnumber").val();
+    var isselect = function ()
+    {
+        if (week != 0 && day != 0 && classnumber != 0)
+            return true;
+        else
+            return false;
+    }
     $(document).ready(function () {
-        $("#classnumber").change(function () {
-            var week = $("#week").val();
-            var day = $("#day").val();
-            var classnumber = $(this).val();
+        $("#classnumber").onchange(function () {
+            if (isselect == true)
+            { 
             $.ajax({
                 url: '/Home/ArrageAddwdc',
                 type: 'post',
@@ -250,6 +259,7 @@
                     alert("出错了");
                 }
             })
-        })
+            }
+            })
     });
 </script>
