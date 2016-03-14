@@ -162,6 +162,7 @@
     <Content Include="css\pikaday.css" />
     <Content Include="css\sas.css" />
     <Content Include="css\style.css" />
+    <Content Include="css\sweetalert.css" />
     <Content Include="css\tabs.css" />
     <Content Include="DLL\DocX.dll" />
     <Content Include="DLL\NPOI.dll" />
@@ -188,7 +189,6 @@
     <Content Include="image\9.gif" />
     <Content Include="js\btn.js" />
     <Content Include="js\html5shiv.min.js" />
-    <Content Include="js\jquery-ui.min.js" />
     <Content Include="js\jquery.fileDownload.js" />
     <Content Include="js\jquery.Huploadify.js" />
     <Content Include="js\materialMenu.js" />
@@ -196,6 +196,7 @@
     <Content Include="js\pikaday.js" />
     <Content Include="js\respond.min.js" />
     <Content Include="js\sas.js" />
+    <Content Include="js\sweetalert.min.js" />
     <Content Include="js\vtab.js" />
     <Content Include="less\vtab.js" />
     <Content Include="Scripts\ai.0.15.0-build58334.js" />
