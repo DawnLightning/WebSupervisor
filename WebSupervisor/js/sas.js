@@ -122,6 +122,9 @@ function selectday(thisday, dayname) {
     }
 }
 
+
+
+
 //-------------------Ready------------------------
 $(document).ready(function () {
 
@@ -155,9 +158,13 @@ $(document).ready(function () {
     //--------------download-----------------
 
     $(document).on("click", "a.fileDownloadPromise", function () {
+        swal({ title: "Waiting", text: "The file is downloading.",type:"info", timer: 2000, showConfirmButton: false });
         $.fileDownload($(this).prop('href'))
-            .done(function () { alert('File download a success!'); })
-            .fail(function () { alert('File download failed!'); });
+            .done(function () {
+                alert('success');
+                swal({ title: "Success!", type:"success", timer: 2000, showConfirmButton: false });
+            })
+            .fail(function () { swal('Error!','File download failed!','error'); });
 
         return false; //this is critical to stop the click event which will trigger a normal file download
     });
@@ -235,5 +242,6 @@ $(document).ready(function () {
     if (!_loadpage()) {
         $(".mm-menu__link:first").click();
     }
+
 
 });
