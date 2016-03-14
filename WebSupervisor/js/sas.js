@@ -158,23 +158,23 @@ $(document).ready(function () {
     //--------------download-----------------
 
     $(document).on("click", "a.fileDownloadPromise", function () {
-        swal({ title: "Waiting", text: "The file is downloading.",type:"info", timer: 2000, showConfirmButton: false });
-        $.fileDownload($(this).prop('href'))
-            .done(function () {
-                alert('success');
-                swal({ title: "Success!", type:"success", timer: 2000, showConfirmButton: false });
-            })
-            .fail(function () { swal('Error!','File download failed!','error'); });
+       swal({ title: "Waiting", text: "The file is downloading.", type: "info", timer: 2000, showConfirmButton: false });
 
+        $.fileDownload($(this).attr('href'), {
+            successCallback: function (url) {
+                swal({ title: "Success!", type: "success", timer: 2000, showConfirmButton: false });
+               // alert('You just got a file download dialog or ribbon for this URL :' + url);
+            },
+            failCallback: function (html, url) {
+                swal('Error!', 'File download failed!', 'error');
+                /*alert('Your file download just failed for this URL:' + url + '\r\n' +
+                        'Here was the resulting error HTML: \r\n' + html
+                        );*/
+            }
+        });
         return false; //this is critical to stop the click event which will trigger a normal file download
     });
-    $(document).on("click", "a.fileDownloadSimpleRichExperience", function () {
-        $.fileDownload($(this).prop('href'), {
-            preparingMessageHtml: "We are preparing your report, please wait...",
-            failMessageHtml: "There was a problem generating your report, please try again."
-        });
-        return false; //this is critical to stop the click event which will trigger a normal file download!
-    });
+
 
     //----------------pagination----------------
     $(document).on("click", ".pagination-container .pagination a", function () {
