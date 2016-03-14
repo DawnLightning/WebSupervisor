@@ -92,7 +92,7 @@
                 <table class="table table-condensed table-hover table-responsive ove table-border table-margin" style="height:60px;width:32.5%;float:left;">
                     <tr id="backgcolor">
                         <th width=2%>
-
+                            @*<input id="checkall" type="checkbox" name="checkall">*@
                         </th>
                         <th><p style="color:white;">首选督导</p></th>
                         <th><p style="color:white;">安排情况</p></th>
@@ -261,7 +261,7 @@
             if (week != 0 && day != 0 && classnumber != 0 && teachername != 0 && classtype != 0)
             {
                 $.ajax({
-                    url: '/Home/ArrageAddallselect',
+                    url: '/Supervisor/ArrageAddallselect',
                     async: false,
                     type: 'post',
                     contentType: 'application/json;charset=utf-8',
@@ -272,15 +272,15 @@
                         "teachername": teachername,
                         "classtype":classtype
                     }),
-                    success: function (classes) {
+                    success: function (arrageadd) {
                         //for (i in classeslist) {
                             //$().fi('<td>' + teachernames[i] + '</td>');
-                        $("#classeslist").find("td[id='address']").html(classes[0].Address);
-                        $("#classeslist").find("td[id='classcontent']").html(classes[0].ClassContent);
-                        $("#classeslist").find("td[id='classtype']").html(classes[0].ClassType);
-                        $("#classeslist").find("td[id='major']").html(classes[0].Major);
-                        $("#classeslist").find("td[id='classname']").html(classes[0].ClassName);
-                        $("#classeslist").find("td[id='cid']").html(classes[0].Cid);//替换 ;
+                        $("#classeslist").find("td[id='address']").html(arrageadd.classeslist[0].Address);
+                        $("#classeslist").find("td[id='classcontent']").html(arrageadd.classeslist[0].ClassContent);
+                        $("#classeslist").find("td[id='classtype']").html(arrageadd.classeslist[0].ClassType);
+                        $("#classeslist").find("td[id='major']").html(arrageadd.classeslist[0].Major);
+                        $("#classeslist").find("td[id='classname']").html(arrageadd.classeslist[0].ClassName);
+                        $("#classeslist").find("td[id='cid']").html(arrageadd.classeslist[0].Cid);//替换 ;
                         //}
                     },
                     error: function () {
@@ -303,18 +303,6 @@
                 isallselect(week, day, classnumber, teachername, classtype);
             }
         })
-        //$("#week").change(function () {
-        //    var week = $("#week").val();
-        //    var day = $("#day").val();
-        //    var classnumber = $("#classnumber").val();
-        //    findteachername(week, day, classnumber);
-        //})
-        //$("#day").change(function () {
-        //    var week = $("#week").val();
-        //    var day = $("#day").val();
-        //    var classnumber = $("#classnumber").val();
-        //    findteachername(week, day, classnumber);
-        //})
-        
+
     });
 </script>
