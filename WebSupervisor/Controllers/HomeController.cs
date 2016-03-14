@@ -272,5 +272,14 @@ namespace WebSupervisor.Controllers
             }
             return Json(teachernames);
         }
+        public ActionResult ArrageAddallselect(string week, string day, string classnumber,string teachername,string classtype)
+        {
+            int[] select = new int[] { int.Parse(week), int.Parse(day), int.Parse(classnumber) };
+            var classeslist = from c in classlist
+                              where c.Week == @select[0] && c.Day == @select[1] && c.ClassNumber == @select[2] && c.TeacherName == teachername
+                              && c.ClassType == classtype
+                              select c;
+            return Json(classeslist);
+        }
     }
 }
