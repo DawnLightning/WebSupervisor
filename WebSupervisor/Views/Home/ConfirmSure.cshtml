@@ -25,7 +25,7 @@
         <!-- /table开始 -->
         <div id="editable2">
             <p></p>
-            <table class="table table-condensed table-hover table-responsive ove">
+            <table id="Home_ConfirmSure" class="table table-condensed table-hover table-responsive ove">
                 <tr bgcolor="#f5f5f5">
                     <th width=2%>
                         <form>
@@ -88,7 +88,7 @@
                     com.xmlRead(ViewBag.path);
                     for (int i = 0; i < Model.PageSize; i++)
                     {
-                        if (i <Model.Count)
+                        if (i < Model.Count)
                         {
                             var item = Model[i];
                             var checkname = item.Cid;
@@ -97,6 +97,8 @@
                             string time = CalendarTools.getdata(Common.Year, nowWeeks, nowday - CalendarTools.weekdays(CalendarTools.CaculateWeekDay(Common.Year, Common.Month, Common.Day)), Common.Month, Common.Day).ToLongDateString() + "" + com.AddSeparator(item.ClassNumber);
                             <tr>
                                 <td width=2%>
+                                    <input type="hidden" name="idname" value="Cid">
+                                    <input type="hidden" name="id" value="@item.Cid">
                                     <input type="checkbox" name="@checkname">
                                 </td>
                                 <td>
@@ -246,22 +248,22 @@
 
         <span style="height: 10px; line-height: 10px;">共 @Model.TotalItemCount.ToString() 条记录，当前第 @Model.PageNumber 页/共 @Model.PageCount 页 </span>
         @Html.PagedListPager(
-    Model,
-    page => Url.Action("ConfirmTemp", "Home", new { page }),
-    PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new PagedListRenderOptions
-    {
-        LinkToFirstPageFormat = "首页",
-        LinkToNextPageFormat = "下一页",
-        LinkToPreviousPageFormat = "上一页",
-        LinkToLastPageFormat = "末页",
-        DisplayItemSliceAndTotal = false,
-        MaximumPageNumbersToDisplay = 10,
-        DisplayLinkToIndividualPages = true
-    }, new AjaxOptions()
-    {
-        HttpMethod = "GET",
-        InsertionMode = InsertionMode.Replace,
-        UpdateTargetId = "classtable"
-    }))
+ Model,
+ page => Url.Action("ConfirmTemp", "Home", new { page }),
+ PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new PagedListRenderOptions
+ {
+     LinkToFirstPageFormat = "首页",
+     LinkToNextPageFormat = "下一页",
+     LinkToPreviousPageFormat = "上一页",
+     LinkToLastPageFormat = "末页",
+     DisplayItemSliceAndTotal = false,
+     MaximumPageNumbersToDisplay = 10,
+     DisplayLinkToIndividualPages = true
+ }, new AjaxOptions()
+ {
+     HttpMethod = "GET",
+     InsertionMode = InsertionMode.Replace,
+     UpdateTargetId = "classtable"
+ }))
     </div>
 </div>

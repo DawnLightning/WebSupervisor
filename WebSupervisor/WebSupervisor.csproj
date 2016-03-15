@@ -183,6 +183,7 @@
     <Content Include="js\jquery.Huploadify.js" />
     <Content Include="js\jquery.js" />
     <Content Include="js\materialMenu.js" />
+    <Content Include="js\mustache.js" />
     <Content Include="js\npm.js" />
     <Content Include="js\pikaday.js" />
     <Content Include="js\respond.min.js" />

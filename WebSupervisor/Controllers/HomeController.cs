@@ -32,36 +32,34 @@ namespace WebSupervisor.Controllers
 
             return PartialView();
         }
-        public ActionResult ConfirmTemp(int page = 1)
+        public ActionResult ConfirmTemp(int page = 1, bool ajax = false)
         {
             ViewBag.path = Server.MapPath(Common.ConfPath);
             List<ConfirmModel> arragetemplist = new List<ConfirmModel>();
             if (Session["Power"].ToString() == "管理员")
             {
-                    arragetemplist = (from a in arragelist
-                                      join b in classlist on a.Cid equals b.Cid
-                                      join t in teacherlist on b.TeacherName equals t.TeacherName
-                                      where a.Stauts == 0 && t.College == Session["College"].ToString()
-                                      select new ConfirmModel
-                                      {
-                                          Cid = a.Cid,
-                                          ClassName = b.ClassName,
-                                          ClassContent = b.ClassContent,
-                                          ClassType = b.ClassType,
-                                          Major = b.Major,
-                                          Address = b.Address,
-                                          TeacherName = b.TeacherName,
-                                          Week = b.Week,
-                                          Day = b.Day,
-                                          ClassNumber = b.ClassNumber,
-                                          SuperVisors = a.SuperVisors
-                                      }).ToList();
-                IPagedList<ConfirmModel> iplarrage = arragetemplist.ToPagedList(page, 11);
-                return PartialView(iplarrage);
+                arragetemplist = (from a in arragelist
+                                  join b in classlist on a.Cid equals b.Cid
+                                  join t in teacherlist on b.TeacherName equals t.TeacherName
+                                  where a.Stauts == 0 && t.College == Session["College"].ToString()
+                                  select new ConfirmModel
+                                  {
+                                      Cid = a.Cid,
+                                      ClassName = b.ClassName,
+                                      ClassContent = b.ClassContent,
+                                      ClassType = b.ClassType,
+                                      Major = b.Major,
+                                      Address = b.Address,
+                                      TeacherName = b.TeacherName,
+                                      Week = b.Week,
+                                      Day = b.Day,
+                                      ClassNumber = b.ClassNumber,
+                                      SuperVisors = a.SuperVisors
+                                  }).ToList();
             }
             else
             {
-                 arragetemplist = (from a in arragelist
+                arragetemplist = (from a in arragelist
                                   join b in classlist on a.Cid equals b.Cid
                                   join t in teacherlist on b.TeacherName equals t.TeacherName
                                   where a.Stauts == 0
@@ -79,9 +77,11 @@ namespace WebSupervisor.Controllers
                                       ClassNumber = b.ClassNumber,
                                       SuperVisors = a.SuperVisors
                                   }).ToList();
-                IPagedList<ConfirmModel> iplarrage = arragetemplist.ToPagedList(page, 11);
-                return PartialView(iplarrage);
             }
+                IPagedList<ConfirmModel> iplarrage = arragetemplist.ToPagedList(page, 11);
+            if (ajax)
+                return Json(iplarrage, JsonRequestBehavior.AllowGet);
+            return PartialView(iplarrage);
         }
         [HttpPost]
         public ActionResult SaveArrage(FormCollection fc)
@@ -101,14 +101,15 @@ namespace WebSupervisor.Controllers
             }
             catch { return Json(new jsondata(0, "保存失败！"), JsonRequestBehavior.AllowGet); }
         }
-        public ActionResult ConfirmSure(int page = 1)
+        public ActionResult ConfirmSure(int page = 1, bool ajax = false)
         {
             List<ConfirmModel> arragetemplist = new List<ConfirmModel>();
             if (Session["Power"].ToString() == "管理员")
             {
                 arragetemplist = (from a in arragelist
-                                  join b in classlist on a.Cid equals b.Cid join t in teacherlist on b.TeacherName equals t.TeacherName
-                                  where a.Stauts == 1&& t.College==Session["College"].ToString()
+                                  join b in classlist on a.Cid equals b.Cid
+                                  join t in teacherlist on b.TeacherName equals t.TeacherName
+                                  where a.Stauts == 1 && t.College == Session["College"].ToString()
                                   select new ConfirmModel
                                   {
                                       Cid = a.Cid,
@@ -147,6 +148,8 @@ namespace WebSupervisor.Controllers
             }
             ViewBag.path = Server.MapPath(Common.ConfPath);
             IPagedList<ConfirmModel> iplarrage = arragetemplist.ToPagedList(page, 11);
+            if (ajax)
+                return Json(iplarrage, JsonRequestBehavior.AllowGet);
             return PartialView(iplarrage);
         }
         public PartialViewResult Set()
