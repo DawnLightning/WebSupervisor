@@ -8,6 +8,32 @@ namespace WebSupervisor.Models
 {
 
     /// <summary>
+    /// 首选督导
+    /// </summary>
+    public class FirstSupervisorModel
+    {
+        public string TeacherName { set; get; }
+        public string IsArrage { set; get; }
+    }
+
+    /// <summary>
+    /// 备选督导
+    /// </summary>
+    public class SecondSupervisorModel
+    {
+        public string TeacherName { set; get; }
+        public int Total { set; get; }
+    }
+    /// <summary>
+    /// 添加安排视图模型
+    /// </summary>
+    public class ArrageAddModel
+    {
+        public List<ClassesModel> classeslist { set; get; }
+        public List<FirstSupervisorModel> FirstSupervisorList { set; get; }
+        public List<SecondSupervisorModel> SecondSupervisorList { set; get; }
+    }
+    /// <summary>
     /// 安排视图模型
     /// </summary>
     public class ConfirmModel

@@ -86,26 +86,31 @@
         </tr>
         @{
 
-            foreach (var item in Model)
+            for (int i = 0; i < Model.PageSize; i++)
             {
-                string identify = "";
-                string islimit = "";
-                if (item.Indentify == 0)
+                if (i < Model.Count)
                 {
-                    identify = "否";
-                }
-                else
-                {
-                    identify = "是";
-                }
-                if (item.Islimit == 0)
-                {
-                    islimit = "未审核";
-                }
-                else
-                {
-                    islimit = "已审核";
-                }
+
+
+                    TeachersModel item = Model[i];
+                    string identify = "";
+                    string islimit = "";
+                    if (item.Indentify == 0)
+                    {
+                        identify = "否";
+                    }
+                    else
+                    {
+                        identify = "是";
+                    }
+                    if (item.Islimit == 0)
+                    {
+                        islimit = "未审核";
+                    }
+                    else
+                    {
+                        islimit = "已审核";
+                    }
                 <tr>
                     <td width=2%>
 
@@ -140,6 +145,43 @@
                     </td>
 
                 </tr>
+                }
+                else
+                {
+                    <tr>
+                        <td width=2%>
+
+                            &nbsp;
+
+                        </td>
+                        <td>
+                            &nbsp;
+                        </td>
+                        <td>
+                            &nbsp;
+                        </td>
+                        <td>
+                            &nbsp;
+                        </td>
+                        <td>
+                            &nbsp;
+                        </td>
+                        <td>
+                            &nbsp;
+                        </td>
+                        <td>
+                            &nbsp;
+                        </td>
+                        <td>
+
+                            &nbsp;
+                        </td>
+                        <td>
+                            &nbsp;
+                        </td>
+
+                    </tr>
+                }
             }
         }
     </table>
@@ -150,9 +192,9 @@
     
     <div class="pager" style="text-align: center;">
 
-        @*
+        
             <span style="height: 5px; line-height: 5px;">共 @Model.TotalItemCount.ToString() 条记录，当前第 @Model.PageNumber 页/共 @Model.PageCount 页 </span>
-        *@
+        
         @Html.PagedListPager(Model, page => Url.Action("Teacher", "Home", new { page }),
     PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new PagedListRenderOptions
     {

@@ -72,8 +72,13 @@
         </tr>
         @{
 
-            foreach (var item in Model)
+            for (int i = 0; i < Model.PageSize; i++)
             {
+                if (i < Model.Count)
+                {
+
+
+
                 <tr>
                     <td width=2%>
 
@@ -81,25 +86,57 @@
 
                     </td>
                     <td>
-                        @item.UserName
+                        @Model[i].UserName
                     </td>
                     <td>
-                        @item.Password
+                        @Model[i].Password
                     </td>
                     <td>
-                        @item.College
+                        @Model[i].College
                     </td>
                     <td>
-                        @item.Phone
+                        @Model[i].Phone
                     </td>
                     <td>
-                        @item.Email
+                        @Model[i].Email
                     </td>
                     <td>
-                        @item.NumSMS
+                        @Model[i].NumSMS
                     </td>
                   
                 </tr>
+                }
+                else
+                {
+
+                    <tr>
+                        <td width=2%>
+
+                            &nbsp;
+
+                        </td>
+                        <td>
+                            &nbsp;
+                        </td>
+                        <td>
+                            &nbsp;
+                        </td>
+                        <td>
+                            &nbsp;
+                        </td>
+                        <td>
+                            &nbsp;
+                        </td>
+                        <td>
+                            &nbsp;
+                        </td>
+                        <td>
+                            &nbsp;
+                        </td>
+
+                    </tr>
+
+                }
             }
         }
     </table>
@@ -130,11 +167,3 @@
 
      ))
 </div>
-<script>
-        $(".pagination-container .pagination a").each(function () {
-            if (typeof $(this).attr("href") != "undefined") {
-                var href = "javascript:navpage('" + $(this).attr("href") + "')";
-                $(this).attr("href", href);
-            }
-        })
-</script>

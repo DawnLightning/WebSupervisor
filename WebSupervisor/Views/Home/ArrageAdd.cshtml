@@ -53,7 +53,7 @@
                         <option value="1112">11-12</option>
                     </select>
                     <select id="teachername">
-                        @*<option value="0">请选择教师姓名</option>*@
+                        <option value="0">请选择教师姓名</option>
                         @*@{
                                 foreach(var item in ViewBag.TeacherName)
                                 {
@@ -61,7 +61,7 @@
                                 }
                             }*@
                     </select>
-                    <select name="classtype">
+                    <select id="classtype">
                         <option value="0">请选择授课方式</option>
                         <option value="理论">理论</option>
                         <option value="实验">实验</option>
@@ -80,19 +80,19 @@
                         <th><p>课程名</p></th>
                         <th><p>课程编号</p></th>
                     </tr>
-                    <tr>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
+                    <tr id="classeslist">
+                        <td id="address">&nbsp;</td>
+                        <td id="classcontent">&nbsp;</td>
+                        <td id="classtype">&nbsp;</td>
+                        <td id="major">&nbsp;</td>
+                        <td id="classname">&nbsp;</td>
+                        <td id="cid">&nbsp;</td>
                     </tr>
                 </table>
                 <table class="table table-condensed table-hover table-responsive ove table-border table-margin" style="height:60px;width:32.5%;float:left;">
                     <tr id="backgcolor">
                         <th width=2%>
-
+                            @*<input id="checkall" type="checkbox" name="checkall">*@
                         </th>
                         <th><p style="color:white;">首选督导</p></th>
                         <th><p style="color:white;">安排情况</p></th>
@@ -228,28 +228,81 @@
 </div>
 <script>
     $(document).ready(function () {
-        $("#classnumber").change(function () {
+        var findteachername = function (week, day, classnumber) {
+            if (week != 0 && day != 0 && classnumber != 0)
+            {
+                $.ajax({
+                    url: '/Home/ArrageAddwdc',
+                    type: 'post',
+                    contentType: 'application/json;charset=utf-8',
+                    async: false,
+                    data: JSON.stringify({
+                        "week": week,
+                        "day": day,
+                        "classnumber": classnumber,
+                    }),
+                    success: function (teachernames) {
+                        $("#teachername").empty();
+                        for (i in teachernames) {
+                            $("#teachername").append('<option value="' + teachernames[i] + '">' + teachernames[i] + '</option>');  //添加一项option ;
+                        }
+                    },
+                    error: function () {
+                        alert("出错了");
+                    }
+                })
+                return true;
+            }
+            else
+                return false;
+        }
+        var isallselect=function(week,day,classnumber,teachername,classtype)
+        {
+            if (week != 0 && day != 0 && classnumber != 0 && teachername != 0 && classtype != 0)
+            {
+                $.ajax({
+                    url: '/Supervisor/ArrageAddallselect',
+                    async: false,
+                    type: 'post',
+                    contentType: 'application/json;charset=utf-8',
+                    data: JSON.stringify({
+                        "week": week,
+                        "day": day,
+                        "classnumber": classnumber,
+                        "teachername": teachername,
+                        "classtype":classtype
+                    }),
+                    success: function (arrageadd) {
+                        //for (i in classeslist) {
+                            //$().fi('<td>' + teachernames[i] + '</td>');
+                        $("#classeslist").find("td[id='address']").html(arrageadd.classeslist[0].Address);
+                        $("#classeslist").find("td[id='classcontent']").html(arrageadd.classeslist[0].ClassContent);
+                        $("#classeslist").find("td[id='classtype']").html(arrageadd.classeslist[0].ClassType);
+                        $("#classeslist").find("td[id='major']").html(arrageadd.classeslist[0].Major);
+                        $("#classeslist").find("td[id='classname']").html(arrageadd.classeslist[0].ClassName);
+                        $("#classeslist").find("td[id='cid']").html(arrageadd.classeslist[0].Cid);//替换 ;
+                        //}
+                    },
+                    error: function () {
+                        alert("出错了");
+                    }
+                })
+                return true;
+            }            
+            else
+                return false;
+        }
+        $("select").change(function () {
             var week = $("#week").val();
             var day = $("#day").val();
-            var classnumber = $(this).val();
-            $.ajax({
-                url: '/Home/ArrageAddwdc',
-                type: 'post',
-                contentType: 'application/json;charset=utf-8',
-                data: JSON.stringify({
-                    "week": week,
-                    "day": day,
-                    "classnumber": classnumber,
-                }),
-                success: function (teachernames) {
-                    for (i in teachernames) {
-                        $("#teachername").append('<option value="' + teachernames[i] + '">' + teachernames[i] + '</option>');  //添加一项option ;
-                    }
-                },
-                error: function () {
-                    alert("出错了");
-                }
-            })
+            var classnumber = $("#classnumber").val();
+            var classtype = $("#classtype").val();
+            var teachername = $("#teachername").val();            
+            if (findteachername(week, day, classnumber) == true)
+            {
+                isallselect(week, day, classnumber, teachername, classtype);
+            }
         })
+
     });
 </script>
