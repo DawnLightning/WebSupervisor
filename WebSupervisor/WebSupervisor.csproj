@@ -220,7 +220,7 @@
     <Content Include="Views\Power\Key.cshtml" />
     <Content Include="Views\Schedule\Schedule.cshtml" />
     <Content Include="Views\Schedule\Auto.cshtml" />
-    <Content Include="Views\Schedule\Reference.cshtml" />
+    <Content Include="Views\Supervisor\Reference.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

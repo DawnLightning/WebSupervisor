@@ -157,4 +157,15 @@ namespace WebSupervisor.Models
         public string Phone { set; get; }
         public string Password { set; get; }
     }
+    public class ReferenceModel
+    {
+        public int Id { set; get; }
+        public string Cid { set; get; }
+        public string time { set; get; }
+        public string TeacherName { set; get; }
+        public string Address { set; get; }
+        public string Major { set; get; }
+        public string ClassType { set; get; }
+        public int SupervisorsSum { set; get; }
+    }
 }

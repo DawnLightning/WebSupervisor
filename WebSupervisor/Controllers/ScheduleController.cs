@@ -63,10 +63,6 @@ namespace WebSupervisor.Controllers
         {
             return PartialView();
         }
-        public PartialViewResult Reference()
-        {
-            return PartialView();
-        }
         public ActionResult Upload(HttpPostedFileBase Filedata)
         {
             // 没有文件上传，直接返回
