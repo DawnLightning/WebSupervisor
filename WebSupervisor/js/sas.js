@@ -324,7 +324,7 @@ $(document).ready(function () {
                 $(_this).parent().html(rendered);
             });
         }
-        return false;
+        
     });
     $(document).on("click", "table tr td #tdsubmit",
     function () {
