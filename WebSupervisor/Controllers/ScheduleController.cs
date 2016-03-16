@@ -89,6 +89,7 @@ namespace WebSupervisor.Controllers
                 Filedata.SaveAs(fullFileName);
                 ExcelHelper excel = new ExcelHelper();
                 excel.Import(fullFileName);
+               
             }
 
             return this.Json(new { });

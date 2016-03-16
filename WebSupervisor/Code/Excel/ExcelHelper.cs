@@ -20,11 +20,10 @@ namespace WebSupervisor
 
         DataTable Excel_dt;
         List<ClassesModel> list = new List<ClassesModel>();
-        Random r = new Random();
-
+        List<TeachersModel> teacherlist = new List<TeachersModel>();
         List<string> dcs = new List<string> { "序号", "课程", "授课内容", "授课方式", "专业", "教室", "教师", "周次", "听课时间", "听课人员安排", "分数", "申报" };//表格的列头信息
         List<string> ListSupervisor = new List<string>();//暂存分离出的督导员
-        #region 读取excel ,默认第一行为标头Import()
+        #region 读取教学进度表
         /// <summary>
         /// 读取excel ,默认第一行为标头
         /// </summary>
@@ -71,8 +70,7 @@ namespace WebSupervisor
 
             headerRow = sheet.GetRow(5);
 
-            Random ran = new Random();
-            int RandKey = ran.Next(0, 1000);
+         
             for (int i = 5; i <= sheet.LastRowNum; i++)
             {
                 IRow row = sheet.GetRow(i);
@@ -200,7 +198,7 @@ namespace WebSupervisor
         {
             return strTeacher.Length - strTeacher.Replace(",", "").Length;
         }
-        #endregion
+
         /// <summary>
         /// 去掉职称
         /// </summary>
@@ -217,7 +215,85 @@ namespace WebSupervisor
                 return s;
             }
         }
+        #endregion
 
+        #region 读取教师信息表
+        /// <summary>
+        /// 教师信息导入
+        /// 密码默认123
+        /// 邮箱,教研室,职称为空
+        /// </summary>
+        /// <param name="filename">文件名</param>
+        /// <param name="college">学院</param>
+            public void ReadTeacherTable(string filename,string college)
+        {
+            Excel_dt = new DataTable();
+            HSSFWorkbook hssfworkbook;
+            using (FileStream file = new FileStream(filename, FileMode.Open, FileAccess.Read))
+            {
+                hssfworkbook = new HSSFWorkbook(file);
+            }
+            ISheet sheet = hssfworkbook.GetSheetAt(0);
+            System.Collections.IEnumerator rows = sheet.GetRowEnumerator();
+
+            IRow headerRow = sheet.GetRow(0);
+            int cellCount = headerRow.LastCellNum;
+            for (int j = 0; j < cellCount; j++)
+            {
+
+                Excel_dt.Columns.Add(j.ToString());
+            }
+
+            for (int i = 4; i <= sheet.LastRowNum; i++)
+            {
+                IRow row = sheet.GetRow(i);
+                if (row != null)
+                {
+                    DataRow dataRow = Excel_dt.NewRow();
+
+                    for (int j = 0; j < cellCount; j++)
+                    {
+                        if (row.GetCell(j) != null)
+                            dataRow[j] = row.GetCell(j).ToString();
+                    }
+                    Excel_dt.Rows.Add(dataRow);
+                }
+                else
+                {
+                    break;
+                }
+
+            }
+            for (int i=0;i<Excel_dt.Rows.Count;i++)
+            {
+                if (Excel_dt.Rows[i][0].ToString().Length!=0&& Excel_dt.Rows[i][1].ToString().Length!=0&& Excel_dt.Rows[i][2].ToString().Length==11)
+                {
+                    TeachersModel m = new TeachersModel();
+                    m.Tid = Excel_dt.Rows[i][0].ToString();
+                    m.TeacherName = Excel_dt.Rows[i][1].ToString();
+                    m.Phone = Excel_dt.Rows[i][2].ToString();
+                    if (Excel_dt.Rows[i][3].ToString() != null && Excel_dt.Rows[i][3].ToString() == "1")
+                    {
+                        m.Indentify = 1;
+                    }
+                    else
+                    {
+                        m.Indentify = 0;
+                    }
+                    m.Islimit = 1;
+                    m.Password = "123";
+                    m.TeacherRoom = " ";
+                    m.Title = " ";
+                    m.Email = " ";
+                    m.College = college;
+                    teacherlist.Add(m);
+                }
+               
+               
+            }
+            DBHelper.BulkInsert<TeachersModel>(teacherlist);
+        }
+        #endregion
         #region 导出安排表excel表格
         /// <summary>
         /// List<ExportExcelModel> dtSource 是表格需要的数据，只需要将内容放到对象就可以
