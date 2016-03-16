@@ -84,7 +84,7 @@
                             {
                                 var item = Model[i];
                                 <tr>
-                                    <td>
+                                    <td width=2%>
                                         <input type="checkbox" name="checkbox" value=@item.Cid>
                                     </td>
                                     <td>
@@ -183,8 +183,9 @@
                 if ($(this).attr("checked")) {
                     str.push($(this).val())
                 }
-                alert(str[0]);
+               
             })
+            alert(str[0]);
             for (i in str)
             {
                 $.ajax({
@@ -194,6 +195,9 @@
                     data: JSON.stringify({
                         "cid": str[i],
                     }),
+                    success: function (data) {
+                        $("#wrapper").html(data);
+                    },
                     error: function () {
                         alert("出错了");
                     }
@@ -214,12 +218,14 @@
                     url: '/Supervisor/Reference',
                     type: 'post',
                     contentType: 'application/json;charset=utf-8',
+                    async: false,
                     data: JSON.stringify({
                         "year": year,
                         "day": day,
                         "month": month,
                     }),
-                    success: function () {
+                    success: function (data) {
+                        $("#wrapper").html(data);
                     },
                     error: function () {
                         alert("出错了");
