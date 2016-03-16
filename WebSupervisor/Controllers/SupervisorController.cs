@@ -107,7 +107,7 @@ namespace WebSupervisor.Controllers
             IPagedList<ReferenceModel> iplist = referencelist.ToPagedList(page, 10);
             return PartialView(iplist);
         }
-        public ActionResult ReferenceSure(string cid)
+        public ActionResult ReferenceSure(string cid= "4209610113                        ")
         {
             var classesl =( from c in classlist
                            where c.Cid == cid
@@ -180,11 +180,11 @@ namespace WebSupervisor.Controllers
                 arrageadd.classeslist = (from c in classlist
                                          join t in teacherlist on c.TeacherName equals t.TeacherName
                                          where c.Week == @select[0] && c.Day == @select[1] && c.ClassNumber == @select[2] && c.TeacherName == teachername
-                                         && c.ClassType == classtype && t.College == Session["UserName"].ToString()
+                                         && c.ClassType == classtype && t.College == Session["College"].ToString()
                                          select c).ToList();
                 arrageadd.FirstSupervisorList = (from s in splist
                                                  join t in teacherlist on s.Tid equals t.Tid
-                                                 where t.College == Session["UserName"].ToString()
+                                                 where t.College == Session["College"].ToString()
                                                  select new FirstSupervisorModel
                                                  {
                                                      TeacherName = t.TeacherName,
@@ -192,7 +192,7 @@ namespace WebSupervisor.Controllers
                                                  }).ToList();
                 arrageadd.SecondSupervisorList = (from ch in checkclasslist
                                                   join t in teacherlist on ch.Tid equals t.Tid
-                                                  where t.College == Session["UserName"].ToString()
+                                                  where t.College == Session["College"].ToString()
                                                   select new SecondSupervisorModel
                                                   {
                                                       TeacherName = t.TeacherName,

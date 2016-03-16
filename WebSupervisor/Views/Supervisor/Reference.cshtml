@@ -85,7 +85,7 @@
                                 var item = Model[i];
                                 <tr>
                                     <td width=2%>
-                                        <input type="checkbox" name="checkbox" value=@item.Cid>
+                                        <input type="checkbox" name="chebox" value=@item.Cid>
                                     </td>
                                     <td>
                                         @item.Id
@@ -145,7 +145,7 @@
             </div>
             <!-- /.table -->
             <div class="po-right">
-                <button id="sure" class="sch-btn blue" style="margin-top:-9px;">
+                <button id="sure" class="sch-btn blue" style="margin-top:-9px;"  data-toggle="modal" data-target=".bs-example-modal-lg">
                     确认安排
                 </button>
             </div>
@@ -173,28 +173,29 @@
         </div>
     </div>
 </div>
+@RenderPage("~/Views/Shared/_ArrageAdd.cshtml")
 <script src="~/js/pikaday.js">
 </script>
 <script>
     $(document).ready(function () {
         var str = new Array();
         $("#sure").click(function () {
-            $("input[name='checkbox']:checkbox").each(function () {
-                if ($(this).attr("checked")) {
-                    str.push($(this).val())
-                }
-               
-            })
-            alert(str[0]);
-            for (i in str)
-            {
+            //$("input[name='chebox']:checked").each(function () {
+            //    //if ($(this).attr("checked")==true) {
+            //        str.push($(this).val())
+            //        //alert($(this).val());
+            //    //}              
+            //})
+            //for (i in str)
+            //{
+            //    alert[str[i]];
                 $.ajax({
                     url: '/Supervisor/ReferenceSure',
                     type: 'post',
                     contentType: 'application/json;charset=utf-8',
-                    data: JSON.stringify({
-                        "cid": str[i],
-                    }),
+                    //data: JSON.stringify({
+                    //    "cid": str[i],
+                    //}),
                     success: function (data) {
                         $("#wrapper").html(data);
                     },
@@ -202,7 +203,7 @@
                         alert("出错了");
                     }
                 })
-            }
+            //}
         })
         var datepicker = new Pikaday({
             field: jQuery('#datepicker')[0],
