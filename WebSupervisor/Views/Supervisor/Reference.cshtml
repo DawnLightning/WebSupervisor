@@ -196,8 +196,21 @@
                     //data: JSON.stringify({
                     //    "cid": str[i],
                     //}),
-                    success: function (data) {
-                        $("#wrapper").html(data);
+                    success: function (arrageadd) {
+                        //for (i in classeslist) {
+                        //$().fi('<td>' + teachernames[i] + '</td>');
+                        $("#week").find("option[id='0']").html(arrageadd.classeslist[0].Week);
+                        $("#day").find("option[id='0']").html(arrageadd.classeslist[0].Day);
+                        $("#classnumber").find("option[id='0']").html(arrageadd.classeslist[0].ClassNumber);
+                        $("#teachername").find("option[id='0']").html(arrageadd.classeslist[0].TeacherName);
+                        $("#classtype").find("option[id='0']").html(arrageadd.classeslist[0].ClassType);
+                        $("#classeslist").find("td[id='address']").html(arrageadd.classeslist[0].Address);
+                        $("#classeslist").find("td[id='classcontent']").html(arrageadd.classeslist[0].ClassContent);
+                        $("#classeslist").find("td[id='classtype']").html(arrageadd.classeslist[0].ClassType);
+                        $("#classeslist").find("td[id='major']").html(arrageadd.classeslist[0].Major);
+                        $("#classeslist").find("td[id='classname']").html(arrageadd.classeslist[0].ClassName);
+                        $("#classeslist").find("td[id='cid']").html(arrageadd.classeslist[0].Cid);//替换 ;
+                        //}
                     },
                     error: function () {
                         alert("出错了");
