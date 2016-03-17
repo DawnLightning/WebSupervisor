@@ -1,54 +1,77 @@
-﻿
-@using PagedList
-@using PagedList.Mvc
-@using System.Web.Mvc.Html
-@model PagedList.IPagedList<WebSupervisor.Models.SupervisorViewModel>
-<div class="contain">
-    <div class="tab_container"style="overflow-x:auto;">
+﻿<div class="contain">
+    <div class="tab_container">
         <!--白板宽度-->
-        <div style="width:1226px;">
+        <div style="width:1226px overflow: hidden">
             <!--同督导信息的vrtab的overflow产生滚动条-->
             <div class="vltab">
-                <ul id="navtab" ">
-                    <li  class="aa" id="tb_1" onClick="i:hoverli(1);">
-                        <strong>总览</strong>
+                <ul id="navtab">
+                    <li class="aa" id="tb_1" onClick="i:hoverli(1);">
+                        总览
                     </li>
-                    @for (int i=0;i<Model.Count;i++)
-                    {
-                        var a = i + 2;
-                        <li class="aa" id="tb_@a" onClick="x:hoverli(@a);">
-                               @Model[i].TeacherName
-                        </li>
-
-                    }
+                    <li class="aa" id="tb_2" onClick="x:hoverli(2);">
+                        张春明
+                    </li>
+                    <li class="aa" id="tb_3" onClick="x:hoverli(3);">
+                        &nbsp;
+                    </li>
+                    <li class="aa" id="tb_4" onClick="x:hoverli(4);">
+                        &nbsp;
+                    </li>
+                    <li class="aa" id="tb_5" onClick="x:hoverli(5);">
+                        &nbsp;
+                    </li>
+                    <li class="aa" id="tb_6" onClick="x:hoverli(6);">
+                        &nbsp;
+                    </li>
+                    <li class="aa" id="tb_7" onClick="x:hoverli(7);">
+                        &nbsp;
+                    </li>
+                    <li class="aa" id="tb_8" onClick="x:hoverli(8);">
+                        &nbsp;
+                    </li>
+                    <li class="aa" id="tb_9" onClick="x:hoverli(9);">
+                        &nbsp;
+                    </li>
+                    <li class="aa" id="tb_10" onClick="x:hoverli(10);">
+                        &nbsp;
+                    </li>
+                    <li class="aa" id="tb_11" onClick="x:hoverli(11);">
+                        &nbsp;
+                    </li>
+                    <li class="aa" id="tb_12" onClick="x:hoverli(12);">
+                        &nbsp;
+                    </li>
+                    <li class="aa" id="tb_13" onClick="x:hoverli(13);">
+                        &nbsp;
+                    </li>
                 </ul>
             </div>
-
             <div class="vrtab">
                 <div class="rtab listtab">
-                    <form action="/Supervisor/AutoSpare" method="post">
-                        <div class="dis" id="tbc_01" style="overflow-x:hidden;overflow-y:auto;word-break:break-all;">
-                            <div class="row">
-                                <div class="col-lg-4 col-md-4 col-sm-7 col-xs-12">
-                                    <input type="submit" class="button green" value="自动填补">
-                                    <button type="button" class="button red">
-                                        移除督导
-                                    </button>
-                                    <button type="button" class="button orange">
-                                        修改
-                                    </button>
-                                </div>
-                            </div>
-                            <!--row-->
-                            <div>
-                                <!--TABLE-->
-                                <p>
-                                </p>
-                                @Html.Partial("SupervisorList", Model);
-                                <!--TABLE-->
+                    <div class="dis" id="tbc_01" style="overflow-x:hidden;overflow-y:auto;word-break:break-all;">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-7 col-xs-12">
+                                <button type="button" class="button green" id="autofill">
+                                    自动填补
+                                </button>
+                                <button type="button" class="button red">
+                                    移除督导
+                                </button>
+                                <button type="button" class="button orange">
+                                    修改
+                                </button>
                             </div>
                         </div>
-                    </form>
+                        <!--row-->
+                        <div>
+                            <!--TABLE-->
+                            <p>
+                            </p>                     
+                        </div>
+                        <!--TABLE-->
+                        @Html.Action("SupervisorList")
+                        <!-- 页数/.row -->
+                    </div>
                     <!--dis-->
                     <div class="undis" id="tbc_02" style="overflow:hidden">
                         <div class="row">
@@ -687,23 +710,73 @@
     </div>
     <!-- tab_container -->
 </div>
-
 <!-- contain -->
-<script src="~/js/jquery.min.js">
+<script src="~/js/vtab.js">
 </script>
-<script src="~/js/jquery.form.js">
-
+<script src="~/js/selectcheckbox.js">
+</script>
+<script>
     $(document).ready(function () {
-        $("li").click(function () {
-            if ($(this).val() == "总览") {
-
-            } else {
-                var teachername = $(this).val();
-                alert(teachername);
+        var str = new Array();
+        $("#sure").click(function () {
+            $("input[name='chebox']:checked").each(function () {
+                //if ($(this).attr("checked")==true) {
+                str.push($(this).val())
+                //alert($(this).val());
+                //}              
+            })
+            for (i in str) {
+                //    alert[str[i]];
+                $.ajax({
+                    url: '/Supervisor/ReferenceSure',
+                    type: 'post',
+                    contentType: 'application/json;charset=utf-8',
+                    data: JSON.stringify({
+                        "cid": str[i],
+                    }),
+                    async: false,
+                    success: function (arrageadd) {
+                        //for (i in classeslist) {
+                        //$().fi('<td>' + teachernames[i] + '</td>');
+                        $("#week").find("option[id='0']").html(arrageadd.classeslist[0].Week);
+                        $("#day").find("option[id='0']").html(arrageadd.classeslist[0].Day);
+                        $("#classnumber").find("option[id='0']").html(arrageadd.classeslist[0].ClassNumber);
+                        $("#teachername").find("option[id='0']").html(arrageadd.classeslist[0].TeacherName);
+                        $("#classtype").find("option[id='0']").html(arrageadd.classeslist[0].ClassType);
+                        $("#classeslist").find("td[id='address']").html(arrageadd.classeslist[0].Address);
+                        $("#classeslist").find("td[id='classcontent']").html(arrageadd.classeslist[0].ClassContent);
+                        $("#classeslist").find("td[id='classtype']").html(arrageadd.classeslist[0].ClassType);
+                        $("#classeslist").find("td[id='major']").html(arrageadd.classeslist[0].Major);
+                        $("#classeslist").find("td[id='classname']").html(arrageadd.classeslist[0].ClassName);
+                        $("#classeslist").find("td[id='cid']").html(arrageadd.classeslist[0].Cid);//替换 ;
+                        //}
+                    },
+                    error: function () {
+                        alert("出错了");
+                    }
+                })
             }
         })
-    });
-</script>
-<script src="~/js/vtab.js">
+        $("#autofill").click(function () {
+            
+        })
+        $.ajax({
+            url: '/Supervisor/Reference',
+            type: 'post',
+            contentType: 'application/json;charset=utf-8',
+            async: false,
+            data: JSON.stringify({
+                "year": year,
+                "day": day,
+                "month": month,
+            }),
+            success: function (data) {
+                $("#wrapper").html(data);
+            },
+            error: function () {
+                alert("出错了");
+            }
+        })
 
+    });
 </script>

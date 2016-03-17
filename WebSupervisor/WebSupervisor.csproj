@@ -357,6 +357,7 @@
     <Content Include="Views\Home\ConfirmTemp.cshtml" />
     <Content Include="Views\Home\ConfirmSure.cshtml" />
     <Content Include="Views\Shared\_ArrageAdd.cshtml" />
+    <Content Include="Views\Supervisor\SupervisorList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

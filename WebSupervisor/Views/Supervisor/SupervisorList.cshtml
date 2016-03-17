@@ -1,6 +1,6 @@
 ﻿@using PagedList
 @using PagedList.Mvc
-@model PagedList.IPagedList<WebSupervisor.Models.SupervisorViewModel>
+@model IPagedList<SupervisorViewModel>
     <table class="table table-condensed table-hover table-responsive ove" id="supervisortable">
         <tr bgcolor="f5f5f5">
             <th width=2%>
@@ -31,30 +31,53 @@
             for (int i = 0; i < Model.PageSize; i++)
             {
                 var item = Model[i];
-                var checkname = ((Model.PageNumber - 1) * Model.PageSize + i);
-                <tr>
-                    <td width=2%>
-                        <input type="checkbox" name="@checkname">
-                    </td>
-                    <td>
-                        @item.TeacherName
-                    </td>
-                    <td>
-                        @item.SpareTime
-                    </td>
-                    <td>
-                        @item.Phone
-                    </td>
-                    <td>
-                        @item.Password
-                    </td>
-                </tr>
+                var checkname = item.Tid;
+                if (i < Model.Count)
+                {
+                    <tr>
+                        <td width=2%>
+                            <input type="checkbox" name="@checkname">
+                        </td>
+                        <td>
+                            @item.TeacherName
+                        </td>
+                        <td>
+                            @item.SpareTime
+                        </td>
+                        <td>
+                            @item.Phone
+                        </td>
+                        <td>
+                            @item.Password
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    <tr>
+                        <td>
+                            &nbsp;
+                        </td>
+                        <td>
+                            &nbsp;
+                        </td>
+                        <td>
+                            &nbsp;
+                        </td>
+                        <td>
+                            &nbsp;
+                        </td>
+                        <td>
+                            &nbsp;
+                        </td>
+                    </tr>
+                }
             }
         }
     </table>
 <div class="pager" style="text-align: center;">
     <span style="height: 5px; line-height: 5px;">共 @Model.TotalItemCount.ToString() 条记录，当前第 @Model.PageNumber 页/共 @Model.PageCount 页 </span>
-    @Html.PagedListPager(Model, page => Url.Action("Supervisor", "Supervisor", new { page }),
+    @Html.PagedListPager(Model, page => Url.Action("SupervisorList", "Supervisor", new { page }),
     PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new PagedListRenderOptions
     {
         LinkToFirstPageFormat = "首页",
@@ -70,14 +93,13 @@
         InsertionMode = InsertionMode.Replace,
         UpdateTargetId = "supervisortable"
     }
-
      ))
 </div>
-<script>
+@*<script>
     $(".pagination-container .pagination a").each(function () {
         if (typeof $(this).attr("href") != "undefined") {
             var href = "javascript:navpage('" + $(this).attr("href") + "')";
             $(this).attr("href", href);
         }
     })
-</script>        
+</script>*@        
