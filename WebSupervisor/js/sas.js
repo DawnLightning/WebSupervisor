@@ -136,7 +136,7 @@ function selectday(thisday, dayname) {
     }
 }
 
-
+/*
 var sasdata = (function () {
     var _this = this;
     _this._data = {};
@@ -209,7 +209,7 @@ var sasdata = (function () {
     };
 
     return _this;
-}());
+}());*/
 
 
 //-------------------Ready------------------------
@@ -266,7 +266,7 @@ $(document).ready(function () {
 
         if (typeof $(this).attr("href") != "undefined") {
             var href = $(this).attr("href");
-            sasdata.fetchdata(href + "&ajax=true");
+            //sasdata.fetchdata(href + "&ajax=true");
             replacetag(href, $(this).parents(".tab_content"));
 
         }
@@ -309,6 +309,7 @@ $(document).ready(function () {
         $(activeTab).fadeIn(); //Fade in the active content
         return false;
     });
+    /*
     //----------table------------------------
     $(document).on("click", "table tr td",
     function () {
@@ -361,8 +362,8 @@ var table = $(_this).parents("table");
 
         return false;
     });
-
-
+    */
+    
     var menu = new Menu;
 
     if ("onhashchange" in window) {

@@ -94,7 +94,7 @@
                                 <td id="cid">&nbsp;</td>
                             </tr>
                         </table>
-                        <table class="table table-condensed table-hover table-responsive ove table-border table-margin" style="height:60px;width:32.5%;float:left;">
+                        <table  id="tablesupervisor1"  class="table table-condensed table-hover table-responsive ove table-border table-margin" style="height:60px;width:32.5%;float:left;">
                             <tr id="backgcolor">
                                 <th width=2%>
                                     @*<input id="checkall" type="checkbox" name="checkall">*@
@@ -143,7 +143,7 @@
                                 <td>&nbsp;</td>
                             </tr>
                         </table>
-                        <table class="table table-condensed table-hover table-responsive ove table-border table-margin" style="height:60px;width:32.5%;float:left;">
+                        <table  id="tablesupervisor2" class="table table-condensed table-hover table-responsive ove table-border table-margin" style="height:60px;width:32.5%;float:left;">
                             <tr id="backgcolor">
                                 <th width=2%>
 
@@ -190,7 +190,7 @@
                                 <td>&nbsp;</td>
                             </tr>
                         </table>
-                        <table class="table table-condensed table-hover table-responsive ove table-border table-margin" style="height:60px;width:22.5%;float:left;">
+                        <table id="tablesupervisor"  class="table table-condensed table-hover table-responsive ove table-border table-margin" style="height:60px;width:22.5%;float:left;">
                             <tr id="backgcolor">
                                 <th><p style="color:white;">督导成员</p></th>
                             </tr>
@@ -290,6 +290,15 @@
                         $("#classeslist").find("td[id='major']").html(arrageadd.classeslist[0].Major);
                         $("#classeslist").find("td[id='classname']").html(arrageadd.classeslist[0].ClassName);
                         $("#classeslist").find("td[id='cid']").html(arrageadd.classeslist[0].Cid);//替换 ;
+
+                        $("[id^='tablesupervisor']").find("tr td:gt(0)").remove();
+                        var tr = "{{#FirstSupervisorList}}<tr><td>{{ TeacherName}}</td><td>{{ IsArrage}}</td></tr>{{/FirstSupervisorList}}";
+                        var tr2 = "{{#SecondSupervisorList}}<tr><td>{{ TeacherName}}</td><td>{{ Total}}</td></tr>{{/SecondSupervisorList}}";
+
+                        $("#tablesupervisor1").append(Mustache.render(tr, arrageadd));
+                        $("#tablesupervisor2").append(Mustache.render(tr2, arrageadd));
+
+
                         //}
                     },
                     error: function () {
