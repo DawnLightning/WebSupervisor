@@ -152,6 +152,7 @@ namespace WebSupervisor.Models
     /// </summary>
     public class SupervisorViewModel
     {
+        public string Tid { set; get; }
         public string TeacherName { set; get; }
         public string SpareTime { set; get; }
         public string Phone { set; get; }

@@ -107,7 +107,7 @@ namespace WebSupervisor.Controllers
             IPagedList<ReferenceModel> iplist = referencelist.ToPagedList(page, 10);
             return PartialView(iplist);
         }
-        public ActionResult ReferenceSure(string cid= "4209610113                        ")
+        public ActionResult ReferenceSure(string cid)
         {
             var classesl =( from c in classlist
                            where c.Cid == cid
@@ -121,12 +121,17 @@ namespace WebSupervisor.Controllers
                            }).First();
             return RedirectToAction("ArrageAddallselect",new {week=classesl.Week,day=classesl.Day,classnumber=classesl.ClassNumber,teachername=classesl.TeacherName,classtype=classesl.ClassType });
         }
-        public PartialViewResult Supervisor(int page = 1)
+        public ActionResult Supervisor()
+        {
+            return PartialView();
+        }
+        public PartialViewResult SupervisorList(int page = 1)
         {
             List<SupervisorViewModel> spvlist = new List<SupervisorViewModel>();
             foreach (TeachersModel teacher in teacherlist)
             {
                 SupervisorViewModel m = new SupervisorViewModel();
+                m.Tid = teacher.Tid;
                 m.TeacherName = teacher.TeacherName;
                 m.Phone = teacher.Phone;
                 m.Password = teacher.Password;
@@ -220,7 +225,7 @@ namespace WebSupervisor.Controllers
                                                       Total = ch.total
                                                   }).ToList();
             }
-            return Json(arrageadd);
+            return Json(arrageadd,JsonRequestBehavior.AllowGet);
         }
         private string Trueflase(int i)
         {

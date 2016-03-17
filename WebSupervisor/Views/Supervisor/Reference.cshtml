@@ -180,22 +180,23 @@
     $(document).ready(function () {
         var str = new Array();
         $("#sure").click(function () {
-            //$("input[name='chebox']:checked").each(function () {
-            //    //if ($(this).attr("checked")==true) {
-            //        str.push($(this).val())
-            //        //alert($(this).val());
-            //    //}              
-            //})
-            //for (i in str)
-            //{
+            $("input[name='chebox']:checked").each(function () {
+                //if ($(this).attr("checked")==true) {
+                    str.push($(this).val())
+                    //alert($(this).val());
+                //}              
+            })
+            for (i in str)
+            {
             //    alert[str[i]];
                 $.ajax({
                     url: '/Supervisor/ReferenceSure',
                     type: 'post',
                     contentType: 'application/json;charset=utf-8',
-                    //data: JSON.stringify({
-                    //    "cid": str[i],
-                    //}),
+                    data: JSON.stringify({
+                        "cid": str[i],
+                    }),
+                    async: false,
                     success: function (arrageadd) {
                         //for (i in classeslist) {
                         //$().fi('<td>' + teachernames[i] + '</td>');
@@ -216,7 +217,7 @@
                         alert("出错了");
                     }
                 })
-            //}
+            }
         })
         var datepicker = new Pikaday({
             field: jQuery('#datepicker')[0],
