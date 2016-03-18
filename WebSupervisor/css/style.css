@@ -276,9 +276,18 @@ p:last-child {
   -webkit-transition: background 0.3s, color 0.3s;
           transition: background 0.3s, color 0.3s;
 }
+.mm-menu__link:link,
+.mm-menu__link:visited {
+  text-decoration: none;
+  color: #67686a;
+}
 .mm-menu__link:hover{
   text-decoration: none;
   color: #fff;
+}
+.mm-menu__link:active {
+  text-decoration: none;
+  color: #67686a;
 }
 .mm-menu__link-text {
   position: relative;

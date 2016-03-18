@@ -40,6 +40,11 @@
                     剩余短信
                 </p>
             </th>
+            <th>
+                <p>
+                    &nbsp;
+                </p>
+            </th>
           
         </tr>
         <tr id="addadmin" style="display:none">
@@ -67,7 +72,7 @@
             </td>
             <td class="checkboxpadding1">
                 <input type="submit" id="btnsubmit" value="添加" class="teacherbtn blue" />
-                <input type="button" id="btncancel" value="取消" class="teacherbtn red" />
+                <input type="button" id="btncancel" value="取消" class="teacherbtn red" onclick="$('#addadmin').hide();"/>
             </td>
         </tr>
         @{
@@ -103,6 +108,9 @@
                     <td>
                         @Model[i].NumSMS
                     </td>
+                    <td>
+                        &nbsp;
+                    </td>
                   
                 </tr>
                 }
@@ -133,7 +141,9 @@
                         <td>
                             &nbsp;
                         </td>
-
+                        <td>
+                            &nbsp;
+                        </td>
                     </tr>
 
                 }

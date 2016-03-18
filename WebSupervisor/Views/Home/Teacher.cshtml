@@ -10,7 +10,7 @@
                     <button type="button" class="button green" onClick="$('#addtr').show()">
                         添加
                     </button>
-                    <button type="button" class="button red" onClick="delete1()">
+                    <button type="button" class="button red" onClick="deletesure()">
                         删除
                     </button>
                     <button type="button" class="button orange" onclick="edite3()";>
@@ -36,16 +36,7 @@
     </div>
 </div>
 <script>
-    //教师信息按钮 保存
-    function tsave() {
-        swal({
-            title: "已保存",//放js显示乱码 所以放这里
-            timer: 1500,
-            showConfirmButton: false,
-            type: "success"
-        });
-        document.getElementById("editable3").contentEditable = "false";
-    };
+   
     // 选中任意列的checkbox 
     function checkAll(c) {
         var arr = document.getElementsByName('checkname');//checkbox名字叫checkname
