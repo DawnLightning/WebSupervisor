@@ -292,8 +292,8 @@
                         $("#classeslist").find("td[id='cid']").html(arrageadd.classeslist[0].Cid);//替换 ;
 
                         $("[id^='tablesupervisor']").find("tr td:gt(0)").remove();
-                        var tr = "{{#FirstSupervisorList}}<tr><td>{{ TeacherName}}</td><td>{{ IsArrage}}</td></tr>{{/FirstSupervisorList}}";
-                        var tr2 = "{{#SecondSupervisorList}}<tr><td>{{ TeacherName}}</td><td>{{ Total}}</td></tr>{{/SecondSupervisorList}}";
+                        var tr = "{{#FirstSupervisorList}}<tr><td></td><td>{{ TeacherName}}</td><td>{{ IsArrage}}</td></tr>{{/FirstSupervisorList}}";
+                        var tr2 = "{{#SecondSupervisorList}}<tr><td></td><td>{{ TeacherName}}</td><td>{{ Total}}</td></tr>{{/SecondSupervisorList}}";
 
                         $("#tablesupervisor1").append(Mustache.render(tr, arrageadd));
                         $("#tablesupervisor2").append(Mustache.render(tr2, arrageadd));
