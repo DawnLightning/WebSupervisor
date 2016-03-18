@@ -309,6 +309,16 @@ $(document).ready(function () {
         $(activeTab).fadeIn(); //Fade in the active content
         return false;
     });
+    //On Click Event
+    $(document).on("click", "ul#navtab li",
+    function () {
+        $("ul#navtab li").removeClass("active"); //Remove any "active" class
+        $(this).addClass("active"); //Add "active" class to selected tab
+        $(".tab_contents").hide(); //Hide all tab content
+        var activeTab = $(this).find("a").attr("href"); //Find the rel attribute value to identify the active tab + content
+        $(activeTab).fadeIn(); //Fade in the active content
+        return false;
+    });
     /*
     //----------table------------------------
     $(document).on("click", "table tr td",

@@ -320,21 +320,4 @@
 
 })(window);
 
-/*临时表按钮 修改*/
-function edite1() {
-    document.getElementById("editable1").contentEditable = "true";
-};
-
-/*确认表按钮 修改*/
-function edite2() {
-    document.getElementById("editable2").contentEditable = "true";
-};
-/*教师信息按钮 修改*/
-function edite3() {
-    document.getElementById("editable3").contentEditable = "true";
-};
-/*权限管理按钮 修改*/
-function edite4() {
-    document.getElementById("editable4").contentEditable = "true";
-};
 

@@ -18,7 +18,7 @@ body.stop-scrolling {
 
 .sweet-alert {
   background-color: white;
-  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Microsoft YaHei';
   width: 478px;
   padding: 17px;
   border-radius: 5px;
@@ -40,9 +40,9 @@ body.stop-scrolling {
       right: 15px; } }
   .sweet-alert h2 {
     color: #575757;
-    font-size: 30px;
+    font-size: 26px;
     text-align: center;
-    font-weight: 600;
+    font-weight: 200;
     text-transform: none;
     position: relative;
     margin: 25px 0;
@@ -53,7 +53,7 @@ body.stop-scrolling {
     color: #797979;
     font-size: 16px;
     text-align: center;
-    font-weight: 300;
+    font-weight: 100;
     position: relative;
     text-align: inherit;
     float: none;

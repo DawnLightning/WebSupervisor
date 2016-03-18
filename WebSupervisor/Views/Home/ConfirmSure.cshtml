@@ -4,16 +4,16 @@
 <div id="tab2" class="tab_content" style="display: none; ">
     <div class="row">
         <div class="col-lg-5 col-sm-12 col-xs-12">
-            <a href="#" class="button orange" onclick="edite2()" ;>
+            <a href="#" class="button orange" onclick="edite2();" >
                 修改
             </a>
-            <a href="#" class="button red" onclick="delete1()" ;>
+            <a href="#" class="button red" onclick="deletesure();" >
                 删除
             </a>
-            <a href="#" class="button blue" onclick="sendMsg()" ;>
+            <a href="#" class="button blue" onclick="sendMsg();" >
                 发送安排
             </a>
-            <a href="#" class="button green" onclick="sendResult()" ;>
+            <a href="#" class="button green" onclick="sendResult();" >
                 发送结果
             </a>
             <a href="#" class="button orange">
@@ -127,6 +127,9 @@
                                 </td>
                                 <td>
                                     @item.SuperVisors
+                                </td>
+                                <td>
+                                    &nbsp;
                                 </td>
                             </tr>
                         }
@@ -267,3 +270,20 @@
  }))
     </div>
 </div>
+<script>
+    function delete2() {
+        swal({
+            title: "确认删除?",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "确认",
+            closeOnConfirm: false
+        },
+          function () {
+              swal("",
+                "已删除",
+                "success");
+          });
+    }
+</script>
