@@ -1,80 +1,80 @@
 ﻿@using PagedList
 @using PagedList.Mvc
 @model IPagedList<SupervisorViewModel>
-    <table class="table table-condensed table-hover table-responsive ove" id="supervisortable">
-        <tr bgcolor="f5f5f5">
-            <th width=2%>
-                <input id="checkall" type="checkbox" name="checkall">
-            </th>
-            <th>
-                <p>
-                    督导
-                </p>
-            </th>
-            <th>
-                <p>
-                    已填写的空闲时间
-                </p>
-            </th>
-            <th>
-                <p>
-                    账号
-                </p>
-            </th>
-            <th>
-                <p>
-                    密码
-                </p>
-            </th>
-        </tr>
-        @{
-            for (int i = 0; i < Model.PageSize; i++)
+<table class="table table-condensed table-hover table-responsive ove" id="supervisortable">
+    <tr bgcolor="f5f5f5">
+        <th width=2%>
+            <input id="checkall" type="checkbox" name="checkall">
+        </th>
+        <th>
+            <p>
+                督导
+            </p>
+        </th>
+        <th>
+            <p>
+                已填写的空闲时间
+            </p>
+        </th>
+        <th>
+            <p>
+                账号
+            </p>
+        </th>
+        <th>
+            <p>
+                密码
+            </p>
+        </th>
+    </tr>
+    @{
+        for (int i = 0; i < Model.PageSize; i++)
+        {
+            var item = Model[i];
+            var checkname = item.Tid;
+            if (i < Model.Count)
             {
-                var item = Model[i];
-                var checkname = item.Tid;
-                if (i < Model.Count)
-                {
-                    <tr>
-                        <td width=2%>
-                            <input type="checkbox" name="@checkname">
-                        </td>
-                        <td>
-                            @item.TeacherName
-                        </td>
-                        <td>
-                            @item.SpareTime
-                        </td>
-                        <td>
-                            @item.Phone
-                        </td>
-                        <td>
-                            @item.Password
-                        </td>
-                    </tr>
-                }
-                else
-                {
-                    <tr>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                    </tr>
-                }
+                <tr>
+                    <td width=2%>
+                        <input type="checkbox" name="@checkname">
+                    </td>
+                    <td>
+                        @item.TeacherName
+                    </td>
+                    <td>
+                        @item.SpareTime
+                    </td>
+                    <td>
+                        @item.Phone
+                    </td>
+                    <td>
+                        @item.Password
+                    </td>
+                </tr>
+            }
+            else
+            {
+                <tr>
+                    <td>
+                        &nbsp;
+                    </td>
+                    <td>
+                        &nbsp;
+                    </td>
+                    <td>
+                        &nbsp;
+                    </td>
+                    <td>
+                        &nbsp;
+                    </td>
+                    <td>
+                        &nbsp;
+                    </td>
+                </tr>
             }
         }
-    </table>
+    }
+</table>
 <div class="pager" style="text-align: center;">
     <span style="height: 5px; line-height: 5px;">共 @Model.TotalItemCount.ToString() 条记录，当前第 @Model.PageNumber 页/共 @Model.PageCount 页 </span>
     @Html.PagedListPager(Model, page => Url.Action("SupervisorList", "Supervisor", new { page }),
@@ -95,11 +95,11 @@
     }
      ))
 </div>
-@*<script>
+<script>
     $(".pagination-container .pagination a").each(function () {
         if (typeof $(this).attr("href") != "undefined") {
             var href = "javascript:navpage('" + $(this).attr("href") + "')";
             $(this).attr("href", href);
         }
     })
-</script>*@        
+</script>        

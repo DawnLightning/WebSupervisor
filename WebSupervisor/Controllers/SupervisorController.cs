@@ -168,12 +168,14 @@ namespace WebSupervisor.Controllers
                            select x;
             foreach (var cherkname in cherkbox)
             {
-                int index = int.Parse(cherkname);
-                MakeSpareTime.AutoSelectSpareTime(teacherlist[index].TeacherName);
+                var t =( from te in teacherlist
+                        where te.Tid == cherkname
+                        select te.TeacherName).First();
+                MakeSpareTime.AutoSelectSpareTime(t);
                 //string i=list[index].TeacherName;
                 //string a;
             }
-            return Json(new { status = 1 });
+            return Redirect("/#!/Supervisor/Supervisor");
         }
         public ActionResult ArrageAddallselect(string week, string day, string classnumber, string teachername, string classtype)
         {
@@ -189,7 +191,7 @@ namespace WebSupervisor.Controllers
                                          select c).ToList();
                 arrageadd.FirstSupervisorList = (from s in splist
                                                  join t in teacherlist on s.Tid equals t.Tid
-                                                 where t.College == Session["College"].ToString()
+                                                 where t.College == Session["College"].ToString()&& s.Week == @select[0] && s.Day == @select[1] && s.ClassNumber == @select[2]
                                                  select new FirstSupervisorModel
                                                  {
                                                      TeacherName = t.TeacherName,
@@ -212,6 +214,7 @@ namespace WebSupervisor.Controllers
                                          select c).ToList();
                 arrageadd.FirstSupervisorList = (from s in splist
                                                  join t in teacherlist on s.Tid equals t.Tid
+                                                 where s.Week == @select[0] && s.Day == @select[1] && s.ClassNumber == @select[2]
                                                  select new FirstSupervisorModel
                                                  {
                                                      TeacherName = t.TeacherName,
