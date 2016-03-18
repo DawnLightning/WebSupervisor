@@ -1,79 +1,353 @@
 ﻿<div class="contain">
     <div class="tab_container">
         <!--白板宽度-->
-        <div style="width:1226px overflow: hidden">
+        <div style="width:1226px;">
             <!--同督导信息的vrtab的overflow产生滚动条-->
             <div class="vltab">
-                <ul id="navtab">
-                    <li class="aa" id="tb_1" onClick="i:hoverli(1);">
-                        总览
-                    </li>
-                    <li class="aa" id="tb_2" onClick="x:hoverli(2);">
-                        张春明
-                    </li>
-                    <li class="aa" id="tb_3" onClick="x:hoverli(3);">
-                        &nbsp;
-                    </li>
-                    <li class="aa" id="tb_4" onClick="x:hoverli(4);">
-                        &nbsp;
-                    </li>
-                    <li class="aa" id="tb_5" onClick="x:hoverli(5);">
-                        &nbsp;
-                    </li>
-                    <li class="aa" id="tb_6" onClick="x:hoverli(6);">
-                        &nbsp;
-                    </li>
-                    <li class="aa" id="tb_7" onClick="x:hoverli(7);">
-                        &nbsp;
-                    </li>
-                    <li class="aa" id="tb_8" onClick="x:hoverli(8);">
-                        &nbsp;
-                    </li>
-                    <li class="aa" id="tb_9" onClick="x:hoverli(9);">
-                        &nbsp;
-                    </li>
-                    <li class="aa" id="tb_10" onClick="x:hoverli(10);">
-                        &nbsp;
-                    </li>
-                    <li class="aa" id="tb_11" onClick="x:hoverli(11);">
-                        &nbsp;
-                    </li>
-                    <li class="aa" id="tb_12" onClick="x:hoverli(12);">
-                        &nbsp;
-                    </li>
-                    <li class="aa" id="tb_13" onClick="x:hoverli(13);">
-                        &nbsp;
-                    </li>
+                <ul id="navtab" class="tabss">
+                    <li class="active" style="width:130px;height:45px;text-align:center;vertical-align:middle;font-size:16px;font-weight:50;line-height:45px; ">总览<a href="#tab1"></a></li>
+                    <li>2<a href="#tab2"></a></li>
+                    <li>2<a href="#tab2"></a></li>
+                    <li>2<a href="#tab2"></a></li>
+                    <li>2<a href="#tab2"></a></li>
+                    <li>2<a href="#tab2"></a></li>
+                    <li>2<a href="#tab2"></a></li>
+                    <li>2<a href="#tab2"></a></li>
+                    <li>2<a href="#tab2"></a></li>
+                    <li>2<a href="#tab2"></a></li>              <!--注意：文字放在li与a之间 不然点击没有效果 li包括总览只有9个 不然有些页面会溢出-->
                 </ul>
+                <div>
+                    <button type="button" class="btn btn-default" aria-label="Left Align">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    </button>
+                    <button type="button" class="btn btn-default">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    </button>
+                </div>
+                
             </div>
+
             <div class="vrtab">
                 <div class="rtab listtab">
-                    <div class="dis" id="tbc_01" style="overflow-x:hidden;overflow-y:auto;word-break:break-all;">
-                        <div class="row">
-                            <div class="col-lg-4 col-md-4 col-sm-7 col-xs-12">
-                                <button type="button" class="button green" id="autofill">
-                                    自动填补
-                                </button>
-                                <button type="button" class="button red">
-                                    移除督导
-                                </button>
-                                <button type="button" class="button orange">
-                                    修改
-                                </button>
+                    <form action="/Supervisor/AutoSpare" method="post">
+                        <div id="tab1" class="tab_contents" style="display: block; ">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-7 col-xs-12">
+                                    <button type="submit" class="button green">
+                                        自动填补
+                                    </button>
+                                    <button type="button" class="button red">
+                                        移除督导
+                                    </button>
+                                    <button type="button" class="button orange">
+                                        修改
+                                    </button>
+                                </div>
+                            </div>
+                            <!--row-->
+                            <div>
+                                <!--TABLE-->
+                                <p>
+                                </p>
+                                <table class="table table-condensed table-hover table-responsive ove">
+                                    <tr bgcolor="f5f5f5">
+                                        <th width=2%>
+                                            <form>
+                                                <input id="checkall" type="checkbox" name="checkall">
+                                            </form>
+                                        </th>
+                                        <th>
+                                            <p>
+                                                督导
+                                            </p>
+                                        </th>
+                                        <th>
+                                            <p>
+                                                已填写的空闲时间
+                                            </p>
+                                        </th>
+                                        <th>
+                                            <p>
+                                                账号
+                                            </p>
+                                        </th>
+                                        <th>
+                                            <p>
+                                                密码
+                                            </p>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            &nbsp;
+
+                                        </td>
+                                        <td>
+                                            &nbsp;
+
+                                        </td>
+                                        <td>
+                                            &nbsp;
+
+                                        </td>
+                                        <td>
+                                            &nbsp;
+
+                                        </td>
+                                        <td>
+                                            &nbsp;
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            &nbsp;
+
+                                        </td>
+                                        <td>
+                                            &nbsp;
+
+                                        </td>
+                                        <td>
+                                            &nbsp;
+
+                                        </td>
+                                        <td>
+                                            &nbsp;
+
+                                        </td>
+                                        <td>
+                                            &nbsp;
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            &nbsp;
+
+                                        </td>
+                                        <td>
+                                            &nbsp;
+
+                                        </td>
+                                        <td>
+                                            &nbsp;
+
+                                        </td>
+                                        <td>
+                                            &nbsp;
+
+                                        </td>
+                                        <td>
+                                            &nbsp;
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            &nbsp;
+
+                                        </td>
+                                        <td>
+                                            &nbsp;
+
+                                        </td>
+                                        <td>
+                                            &nbsp;
+
+                                        </td>
+                                        <td>
+                                            &nbsp;
+
+                                        </td>
+                                        <td>
+                                            &nbsp;
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            &nbsp;
+
+                                        </td>
+                                        <td>
+                                            &nbsp;
+
+                                        </td>
+                                        <td>
+                                            &nbsp;
+
+                                        </td>
+                                        <td>
+                                            &nbsp;
+
+                                        </td>
+                                        <td>
+                                            &nbsp;
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            &nbsp;
+
+                                        </td>
+                                        <td>
+                                            &nbsp;
+
+                                        </td>
+                                        <td>
+                                            &nbsp;
+
+                                        </td>
+                                        <td>
+                                            &nbsp;
+
+                                        </td>
+                                        <td>
+                                            &nbsp;
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            &nbsp;
+
+                                        </td>
+                                        <td>
+                                            &nbsp;
+
+                                        </td>
+                                        <td>
+                                            &nbsp;
+
+                                        </td>
+                                        <td>
+                                            &nbsp;
+
+                                        </td>
+                                        <td>
+                                            &nbsp;
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            &nbsp;
+
+                                        </td>
+                                        <td>
+                                            &nbsp;
+
+                                        </td>
+                                        <td>
+                                            &nbsp;
+
+                                        </td>
+                                        <td>
+                                            &nbsp;
+
+                                        </td>
+                                        <td>
+                                            &nbsp;
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            &nbsp;
+
+                                        </td>
+                                        <td>
+                                            &nbsp;
+
+                                        </td>
+                                        <td>
+                                            &nbsp;
+
+                                        </td>
+                                        <td>
+                                            &nbsp;
+
+                                        </td>
+                                        <td>
+                                            &nbsp;
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            &nbsp;
+
+                                        </td>
+                                        <td>
+                                            &nbsp;
+
+                                        </td>
+                                        <td>
+                                            &nbsp;
+
+                                        </td>
+                                        <td>
+                                            &nbsp;
+
+                                        </td>
+                                        <td>
+                                            &nbsp;
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            &nbsp;
+
+                                        </td>
+                                        <td>
+                                            &nbsp;
+
+                                        </td>
+                                        <td>
+                                            &nbsp;
+
+                                        </td>
+                                        <td>
+                                            &nbsp;
+
+                                        </td>
+                                        <td>
+                                            &nbsp;
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            &nbsp;
+
+                                        </td>
+                                        <td>
+                                            &nbsp;
+
+                                        </td>
+                                        <td>
+                                            &nbsp;
+
+                                        </td>
+                                        <td>
+                                            &nbsp;
+
+                                        </td>
+                                        <td>
+                                            &nbsp;
+
+                                        </td>
+                                    </tr>
+                                </table>
+                                <!--TABLE-->
                             </div>
                         </div>
-                        <!--row-->
-                        <div>
-                            <!--TABLE-->
-                            <p>
-                            </p>                     
-                        </div>
-                        <!--TABLE-->
-                        @Html.Action("SupervisorList")
-                        <!-- 页数/.row -->
-                    </div>
+                    </form>
                     <!--dis-->
-                    <div class="undis" id="tbc_02" style="overflow:hidden">
+                    <div id="tab2" class="tab_contents" style="display: none; ">
                         <div class="row">
                             <div class="col-lg-4 col-md-4 col-sm-7 col-xs-12">
                                 <button type="button" class="button green">
@@ -670,40 +944,7 @@
                                 </ul>
                             </nav>
                         </div>
-                    </div>
-                    <div class="undis" id="tbc_03">
-                        &nbsp;
-                    </div>
-                    <div class="undis" id="tbc_04">
-                        &nbsp;
-                    </div>
-                    <div class="undis" id="tbc_05">
-                        &nbsp;
-                    </div>
-                    <div class="undis" id="tbc_06">
-                        &nbsp;
-                    </div>
-                    <div class="undis" id="tbc_07">
-                        &nbsp;
-                    </div>
-                    <div class="undis" id="tbc_08">
-                        &nbsp;
-                    </div>
-                    <div class="undis" id="tbc_09">
-                        &nbsp;
-                    </div>
-                    <div class="undis" id="tbc_010">
-                        &nbsp;
-                    </div>
-                    <div class="undis" id="tbc_011">
-                        &nbsp;
-                    </div>
-                    <div class="undis" id="tbc_012">
-                        &nbsp;
-                    </div>
-                    <div class="undis" id="tbc_013">
-                        &nbsp;
-                    </div>
+                    </div> <!--2-->
                 </div>
             </div>
         </div>
@@ -711,7 +952,7 @@
     <!-- tab_container -->
 </div>
 <!-- contain -->
-<script src="~/js/vtab.js">
+<script src="~/js/sas.js">
 </script>
 <script src="~/js/selectcheckbox.js">
 </script>

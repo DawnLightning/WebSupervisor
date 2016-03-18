@@ -345,31 +345,43 @@ tr {
 	}
 
 /*督导信息*/
-.overview{
- 	background-color:rgb(220,220,220);width:140px; height:35px;border-radius:5px;
- 	
- }
+#navtab li{
+   background-color:#eee;    
+}
+ #navtab a:link { 
+color:#000; 
+text-decoration:none; 
+}  
+
+ #navtab li:link { 
+background: #8F8F8F;
+color:#fff; 
+} 
+#navtab li:visited { 
+background: #8F8F8F;
+color:#fff; 
+}  
+#navtab li:hover { 
+background: rgb(150,203,243);
+color:#fff; 
+} 
+#navtab li.active{ 
+color:#fff; 
+background: rgb(150,203,243);
+text-decoration:none; 
+} 
 #navtab li {
+    color:#222;
+    cursor:pointer;
 	list-style:none;
-    width:130px;  
-	height:30px; 
-	margin:7px 3px 7px 3px;
-	border-radius:6px;
-	text-align:left;
-    padding-top:6px; 
-	padding-left:25%;
+    width:128px;  
+	height:35px; 
+	margin:0px 4px 7px 4px;
+	border-radius:6px; 
+	text-align:center;
+    vertical-align:middle;
+    line-height:35px; 
     }/*字体不居中为了不被覆盖*/
-.aa {
-	background:#F4F4F4;
-	}/*点击前*/
-.bb {
-	background:#8F8F8F;
-    color: rgb(255,255,255);
-	}/*点击后*/
-.cc { 
-    border-top:4px solid #ff66ff; 
-	background:#fcf;
-	}/*删除则影响bb*/
 .listtab  { 
     font: normal 17px/2em Microsoft YaHei;
     padding:3px;
@@ -380,6 +392,8 @@ tr {
     padding:0 0 0 10px;
 	}
 .vltab {
+    height:auto;
+    min-height:495px;
 	float:left;
 	width:12%; 
 	position:relative;
@@ -397,7 +411,8 @@ tr {
 	padding:0;
     clear:both;
 	text-align:left;
-	height:495px;
+	min-height:495px;
+    height:auto;
 	/*border-top:1px solid #AAC7E9;border-right:1px solid #AAC7E9;border-bottom:1px solid #AAC7E9; 观察范围*/
 	/*overflow:auto;*/
 	_width:89%;
@@ -414,7 +429,7 @@ tr {
 	}
 .vltab ul { 
     padding:0; 
-	margin:10 0 10 0;
+	margin:10px 0 10px 0;
 	}
 	
 /*督导信息按钮*/
