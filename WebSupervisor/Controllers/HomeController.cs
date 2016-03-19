@@ -275,5 +275,28 @@ namespace WebSupervisor.Controllers
             }
             return Json(teachernames);
         }
+        /// <summary>
+        /// 删除听课安排
+        /// </summary>
+        /// <param name="tid"></param>
+        /// <returns></returns>
+        private ActionResult DeleteArrage(string pid)
+        {
+            try
+            {
+
+                string delete_arrage = string.Format("delete from arrage where pid='{0}'", pid);
+                
+                DBHelper.ExecuteNonQuery(delete_arrage, CommandType.Text, null);
+                
+                return this.Json(new jsondata(1, "删除成功"));
+            }
+            catch (Exception)
+            {
+                return this.Json(new jsondata(0, "删除失败"));
+            }
+
+
+        }
     }
 }
