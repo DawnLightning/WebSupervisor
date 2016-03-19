@@ -59,6 +59,28 @@ namespace WebSupervisor.Controllers
 
 
         }
-       
+        /// <summary>
+        /// 删除管理员
+        /// </summary>
+        /// <param name="tid"></param>
+        /// <returns></returns>
+        private ActionResult DeleteAdmin(string uid)
+        {
+            try
+            {
+
+                string delete_admin = string.Format("delete from admin where uid={0}", uid);
+             
+                DBHelper.ExecuteNonQuery(delete_admin, CommandType.Text, null);
+                return this.Json(new jsondata(1, "删除成功"));
+            }
+            catch (Exception)
+            {
+                return this.Json(new jsondata(0, "删除失败"));
+            }
+
+
+        }
+
     }
 }
