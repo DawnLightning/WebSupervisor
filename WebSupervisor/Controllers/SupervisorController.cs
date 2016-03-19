@@ -122,7 +122,7 @@ namespace WebSupervisor.Controllers
             return RedirectToAction("ArrageAddallselect",new {week=classesl.Week,day=classesl.Day,classnumber=classesl.ClassNumber,teachername=classesl.TeacherName,classtype=classesl.ClassType });
         }
         public ActionResult Supervisor()
-        {
+        {            
             return PartialView();
         }
         public PartialViewResult SupervisorList(int page = 1)
@@ -157,6 +157,28 @@ namespace WebSupervisor.Controllers
 
             IPagedList<SupervisorViewModel> Iteachers = spvlist.ToPagedList(page, 10);
             return PartialView(Iteachers);
+        }
+        public string SupervisorName(int p = 0)
+        {
+            string c= "";
+            List<string> te;
+            if (Session["Power"].ToString() == "管理员")
+                te =(from t in teacherlist
+                    where t.College==Session["College"].ToString()
+                    select t.TeacherName).ToList();
+            else
+                te = (from t in teacherlist
+                      select t.TeacherName).ToList();
+            for (int i = p * 9; i < 9*p+9; i++)
+            {
+                if(i<te.Count)
+                c+= "<li>" + te[i]+ "<a href='#tab2'></a></li>";
+            }
+            return c;
+        }
+        public ActionResult HandSpareTime()
+        {
+            return PartialView();
         }
         //自动填补空闲时间
         [AllowAnonymous]

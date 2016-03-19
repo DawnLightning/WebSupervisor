@@ -250,10 +250,6 @@ namespace WebSupervisor.Controllers
             mp.CreatPlan();
             return Json(new { web = 1 });
         }
-        public ActionResult ArrageAdd()
-        {
-            return PartialView();
-        }
         //根据周天节次获得教师姓名
         public ActionResult ArrageAddwdc(string week, string day, string classnumber)
         {
