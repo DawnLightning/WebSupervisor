@@ -304,7 +304,8 @@ namespace WebSupervisor.Controllers
         /// </summary>
         /// <param name="tid"></param>
         /// <returns></returns>
-        private ActionResult DeleteTeacher(string tid)
+        [HttpGet]
+        public ActionResult DeleteTeacher(string tid)
         {
             try
             {
@@ -313,11 +314,11 @@ namespace WebSupervisor.Controllers
                 string delete_classes = string.Format("delete from classes where tid='{0}'",tid);
                 DBHelper.ExecuteNonQuery(delete_teachers, CommandType.Text, null);
                 DBHelper.ExecuteNonQuery(delete_classes, CommandType.Text, null);
-                return this.Json(new jsondata(1, "删除成功"));
+                return this.Json(new jsondata(1, "删除成功"),JsonRequestBehavior.AllowGet);
             }
             catch (Exception)
             {
-                return this.Json(new jsondata(0, "删除失败"));
+                return this.Json(new jsondata(0, "删除失败"), JsonRequestBehavior.AllowGet);
             }
            
 

@@ -214,6 +214,12 @@ namespace WebSupervisor.Controllers
             IPagedList<TeachersModel> Iteachers = teacherlist.ToPagedList(page, 10);
             return PartialView(Iteachers);
         }
+        public PartialViewResult TeacherList(int page = 1)
+        {
+
+            IPagedList<TeachersModel> Iteachers = teacherlist.ToPagedList(page, 10);
+            return PartialView(Iteachers);
+        }
         [HttpPost]
         public ActionResult SetInfo(FormCollection fc)
         {
