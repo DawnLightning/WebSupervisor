@@ -1,4 +1,4 @@
-﻿/*! Wrote by Jier ( naturalwill999@gmail.com ) */
+﻿/*! Wrote by Jier <naturalwill999@gmail.com> */
 
 
 function xmlhttpget(url, func) {
@@ -35,8 +35,8 @@ function GetXmlHttpObject() {
     return xmlhttp;
 }
 
-var curhref = (function () {
-    var _this = this;
+var curhref = (function (window) {
+    var _this = {};
 
     _this.defaultdata = {
         url: "/Home/Confirm",
@@ -44,24 +44,12 @@ var curhref = (function () {
     };
 
     _this.record = {
-        data: defaultdata,
+        data: _this.defaultdata,
         func: _this.replacetag
     };
 
     _this.save = function (record) {
         _this.record = record;
-    };
-
-    _this.reload = function () {
-
-        if (typeof _this.record.func === 'function') {
-            if (typeof _this.record.data != "undefined")
-                _this.record.func(_this.record.data);
-            else {
-                _this.record.func();
-            }
-        }
-
     };
 
     /*
@@ -78,6 +66,21 @@ var curhref = (function () {
     };
 
 
+    _this.reload = function () {
+
+        if (typeof _this.record.func === 'function') {
+            if (typeof _this.record.data != "undefined")
+                _this.record.func(_this.record.data);
+            else {
+                _this.record.func();
+            }
+        }
+
+    };
+
+
+
+    var _loadpage_func;
     /*
     data ：{
         url: 内容的地址
@@ -96,7 +99,6 @@ var curhref = (function () {
         }
         _this._loadpage();
     }
-    var _loadpage_func;
 
     _this._loadpage = function () {
 
@@ -116,9 +118,11 @@ var curhref = (function () {
         return false;
     }
 
+
+
     if ("onhashchange" in window) {
         window.onhashchange = _this._loadpage;
     }
 
     return _this;
-}());
+}(window));
