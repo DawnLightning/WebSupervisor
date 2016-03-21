@@ -10,6 +10,8 @@ using PagedList;
 using WebSupervisor.Code.Placement;
 using WebSupervisor.Controllers.CheckUser;
 using WebSupervisor.Code.Classes;
+using System.IO;
+using System.Text;
 
 namespace WebSupervisor.Controllers
 {
@@ -304,49 +306,83 @@ namespace WebSupervisor.Controllers
             return count.Count();
 
         }
-        /// <summary>
-        /// 接受的是督导的的id
+   /// <summary>
+        /// 删除教师
+
         /// </summary>
         /// <param name="tid"></param>
         /// <returns></returns>
-        private ActionResult DeleteSupervisor(string tid)
+        [HttpPost]
+        public ActionResult DeleteTeacher()
+
         {
             try
             {
-                string delete_teachers = string.Format("delete from teachers where tid='{0}'", tid);
-                string delete_sparetime = string.Format("delete from sparetime where tid='{0}'", tid);
-                string delete_checkclass = string.Format("delete from checkclass where tid='{0}'", tid);
-                DBHelper.ExecuteNonQuery(delete_teachers, CommandType.Text, null);
-                DBHelper.ExecuteNonQuery(delete_sparetime, CommandType.Text, null);
-                DBHelper.ExecuteNonQuery(delete_checkclass, CommandType.Text, null);
-                return this.Json(new jsondata(1, "删除成功"));
+                Stream s = System.Web.HttpContext.Current.Request.InputStream;
+                byte[] b = new byte[s.Length];
+                s.Read(b, 0, (int)s.Length);
+                string tid = Encoding.UTF8.GetString(b);
+                string result =HttpUtility.UrlDecode(tid).Replace("[","").Replace("]","");
+                string [] ids=result.Split(',');
+                string[] idarray = new string[ids.Length];
+                for (int i=0;i<ids.Length;i++)
+                {
+                    idarray[i] = ids[i].Replace('"', ' ').Trim();
+                }
+
+                for (int i=0;i<idarray.Length;i++)
+                {
+                    string delete_teachers = string.Format("delete from teachers where tid='{0}'", idarray[i]);
+                    string delete_classes = string.Format("delete from classes where teachername='{0}'", id2teachername(idarray[i]));
+                    string delete_sparetime = string.Format("delete from sparetime where tid='{0}'",idarray[i]);
+                    string delete_checkclass = string.Format("delete from checkclass where tid='{0}'", idarray[i]);
+                    DBHelper.ExecuteNonQuery(delete_teachers, CommandType.Text, null);
+                    DBHelper.ExecuteNonQuery(delete_classes, CommandType.Text, null);
+                    DBHelper.ExecuteNonQuery(delete_sparetime, CommandType.Text, null);
+                    DBHelper.ExecuteNonQuery(delete_checkclass, CommandType.Text, null);
+                }
+               
+                return this.Json(new jsondata(0, "删除成功"), JsonRequestBehavior.AllowGet);
+
             }
             catch (Exception)
             {
-                return this.Json(new jsondata(0, "删除失败"));
+                return this.Json(new jsondata(1, "删除失败"), JsonRequestBehavior.AllowGet);
+
             }
+
 
         }
+        
         /// <summary>
-        /// 删除教师
-        /// </summary>
-        /// <param name="tid"></param>
-        /// <returns></returns>
-        private ActionResult DeleteTeacher(string tid)
-        {
-            try
-            {
+        /// 将id转换为教师姓名
 
-                string delete_teachers = string.Format("delete from teachers where tid='{0}'", tid);
-                string delete_classes = string.Format("delete from classes where tid='{0}'", tid);
-                DBHelper.ExecuteNonQuery(delete_teachers, CommandType.Text, null);
-                DBHelper.ExecuteNonQuery(delete_classes, CommandType.Text, null);
-                return this.Json(new jsondata(1, "删除成功"));
-            }
-            catch (Exception)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        private string id2teachername(string id)
+
+        {
+          
+            foreach (TeachersModel teacher in teacherlist)
+
             {
-                return this.Json(new jsondata(0, "删除失败"));
+                if (teacher.Tid.Equals(id))
+                {
+                    return teacher.TeacherName;
+                }
+
+
+
+
+
+
             }
+            return "";
+
+
+
+
 
 
         }
