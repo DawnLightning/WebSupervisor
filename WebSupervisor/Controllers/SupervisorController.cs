@@ -76,7 +76,7 @@ namespace WebSupervisor.Controllers
                 {
                     referencelist = (from t in teacherlist
                                      join c in classlist on t.TeacherName equals c.TeacherName
-                                     where t.College == Session["College"].ToString() 
+                                     where t.College == Session["College"].ToString()
                                      select new ReferenceModel
                                      {
                                          Id = i++,
@@ -95,7 +95,7 @@ namespace WebSupervisor.Controllers
                                      {
                                          Id = i++,
                                          Cid = c.Cid,
-                                         time = CalendarTools.getdata(Common.Year, c.Day, c.Week - CalendarTools.weekdays(CalendarTools.CaculateWeekDay(Common.Year, Common.Month, Common.Day)), Common.Month, Common.Day).ToLongDateString() + "" + com.AddSeparator(c.ClassNumber)+"节",
+                                         time = CalendarTools.getdata(Common.Year, c.Day, c.Week - CalendarTools.weekdays(CalendarTools.CaculateWeekDay(Common.Year, Common.Month, Common.Day)), Common.Month, Common.Day).ToLongDateString() + "" + com.AddSeparator(c.ClassNumber) + "节",
                                          TeacherName = c.TeacherName,
                                          Address = c.Address,
                                          Major = c.Major,
@@ -109,20 +109,20 @@ namespace WebSupervisor.Controllers
         }
         public ActionResult ReferenceSure(string cid)
         {
-            var classesl =( from c in classlist
-                           where c.Cid == cid
-                           select new
-                           {
-                               c.Week,
-                               c.Day,
-                               c.ClassNumber,
-                               c.TeacherName,
-                               c.ClassType
-                           }).First();
-            return RedirectToAction("ArrageAddallselect",new {week=classesl.Week,day=classesl.Day,classnumber=classesl.ClassNumber,teachername=classesl.TeacherName,classtype=classesl.ClassType });
+            var classesl = (from c in classlist
+                            where c.Cid == cid
+                            select new
+                            {
+                                c.Week,
+                                c.Day,
+                                c.ClassNumber,
+                                c.TeacherName,
+                                c.ClassType
+                            }).First();
+            return RedirectToAction("ArrageAddallselect", new { week = classesl.Week, day = classesl.Day, classnumber = classesl.ClassNumber, teachername = classesl.TeacherName, classtype = classesl.ClassType });
         }
         public ActionResult Supervisor()
-        {            
+        {
             return PartialView();
         }
         public PartialViewResult SupervisorList(int page = 1)
@@ -160,26 +160,54 @@ namespace WebSupervisor.Controllers
         }
         public string SupervisorName(int p = 0)
         {
-            string c= "";
-            List<string> te;
+            string c = "";
             if (Session["Power"].ToString() == "管理员")
-                te =(from t in teacherlist
-                    where t.College==Session["College"].ToString()
-                    select t.TeacherName).ToList();
-            else
-                te = (from t in teacherlist
-                      select t.TeacherName).ToList();
-            for (int i = p * 9; i < 9*p+9; i++)
             {
-                if(i<te.Count)
-                c+= "<li>" + te[i]+ "<a href='#tab2'></a></li>";
+                var te = (from t in teacherlist
+                          where t.College == Session["College"].ToString()
+                          select new
+                          {
+                              t.TeacherName,
+                              t.Tid
+                          }).ToList();
+                for (int i = p * 9; i < 9 * p + 9; i++)
+                {
+                    if (i < te.Count)
+                        c += "<li>" + te[i].TeacherName + "<a href='#tab2' value='"+te[i].Tid+"' ></a></li>";
+                }
+            }
+            else
+            {
+                var te = (from t in teacherlist
+                          select new
+                          {
+                              t.TeacherName,
+                              t.Tid
+                          }).ToList();
+                for (int i = p * 9; i < 9 * p + 9; i++)
+                {
+                    if (i < te.Count)
+                        c += "<li name='del' value='" + te[i].Tid + "'>" + te[i].TeacherName + "<a  href='#tab2' ></a></li>";
+                }
             }
             return c;
         }
-        public ActionResult HandSpareTime()
+        public ActionResult ShowSpareTime(string tid= "1994                          ", int week = 1)
         {
-            return PartialView();
+            var hlist = (from sp in splist
+                     where sp.Tid == tid && sp.Week == week
+                     select new HandSpareTime
+                     {
+                          Day=sp.Day,
+                          Pclassnumber= Convert.ToInt32(sp.ClassNumber.ToString().Substring(0, sp.ClassNumber.ToString().Length / 2)),
+                          Nclassnumber= Convert.ToInt32(sp.ClassNumber.ToString().Substring(sp.ClassNumber.ToString().Length / 2, sp.ClassNumber.ToString().Length / 2))
+                     }).ToList();
+            return Json(hlist,JsonRequestBehavior.AllowGet);
         }
+        public ActionResult SaveSpareTime(string tid,int week,object dclassnumber)
+        {
+            return Json(new { });
+        } 
         //自动填补空闲时间
         [AllowAnonymous]
         [HttpPost]
@@ -190,9 +218,9 @@ namespace WebSupervisor.Controllers
                            select x;
             foreach (var cherkname in cherkbox)
             {
-                var t =( from te in teacherlist
-                        where te.Tid == cherkname
-                        select te.TeacherName).First();
+                var t = (from te in teacherlist
+                         where te.Tid == cherkname
+                         select te.TeacherName).First();
                 MakeSpareTime.AutoSelectSpareTime(t);
                 //string i=list[index].TeacherName;
                 //string a;
@@ -213,7 +241,7 @@ namespace WebSupervisor.Controllers
                                          select c).ToList();
                 arrageadd.FirstSupervisorList = (from s in splist
                                                  join t in teacherlist on s.Tid equals t.Tid
-                                                 where t.College == Session["College"].ToString()&& s.Week == @select[0] && s.Day == @select[1] && s.ClassNumber == @select[2]
+                                                 where t.College == Session["College"].ToString() && s.Week == @select[0] && s.Day == @select[1] && s.ClassNumber == @select[2]
                                                  select new FirstSupervisorModel
                                                  {
                                                      TeacherName = t.TeacherName,
@@ -250,7 +278,7 @@ namespace WebSupervisor.Controllers
                                                       Total = ch.total
                                                   }).ToList();
             }
-            return Json(arrageadd,JsonRequestBehavior.AllowGet);
+            return Json(arrageadd, JsonRequestBehavior.AllowGet);
         }
         private string Trueflase(int i)
         {
@@ -295,9 +323,9 @@ namespace WebSupervisor.Controllers
             }
             catch (Exception)
             {
-                return this.Json(new jsondata(0,"删除失败"));
+                return this.Json(new jsondata(0, "删除失败"));
             }
-        
+
         }
         /// <summary>
         /// 删除教师
@@ -310,7 +338,7 @@ namespace WebSupervisor.Controllers
             {
 
                 string delete_teachers = string.Format("delete from teachers where tid='{0}'", tid);
-                string delete_classes = string.Format("delete from classes where tid='{0}'",tid);
+                string delete_classes = string.Format("delete from classes where tid='{0}'", tid);
                 DBHelper.ExecuteNonQuery(delete_teachers, CommandType.Text, null);
                 DBHelper.ExecuteNonQuery(delete_classes, CommandType.Text, null);
                 return this.Json(new jsondata(1, "删除成功"));
@@ -319,7 +347,7 @@ namespace WebSupervisor.Controllers
             {
                 return this.Json(new jsondata(0, "删除失败"));
             }
-           
+
 
         }
     }
