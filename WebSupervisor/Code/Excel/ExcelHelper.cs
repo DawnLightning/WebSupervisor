@@ -29,7 +29,7 @@ namespace WebSupervisor
         /// </summary>
         /// <param Name="strFileName">excel文档路径</param>
         /// <returns></returns>
-        public int Import(string strFileName)
+        public int Import(string strFileName,string college)
         {
 
             Excel_dt = new DataTable();
@@ -151,13 +151,14 @@ namespace WebSupervisor
 
                             int classnumindex = strclassname.IndexOf("-");
                             string tname = ClearTechnicalTitle(teachernamepick);
-                            string tid = tname;
+                            string tid = collegeid(college) + i.ToString(); 
                             if (i == 7)
                             {
                                 SqlParameter[] sp = new SqlParameter[2];
                                 sp[0] = new SqlParameter("@tid", tid);
                                 sp[1] = new SqlParameter("@teachername", tname);
-                                DBHelper.ExecuteNonQuery("INSERT INTO [dbo].[teachers] ([tid], [teachername]) VALUES (@tid,@teachername)", CommandType.Text, sp);
+                                sp[2] = new SqlParameter("@college", college);
+                                DBHelper.ExecuteNonQuery("INSERT INTO [dbo].[teachers] ([tid], [teachername],[college]) VALUES (@tid,@teachername,@college)", CommandType.Text, sp);
                             }
 
                             ClassesModel model = new ClassesModel();
@@ -183,9 +184,6 @@ namespace WebSupervisor
 
                     }
                 }
-
-
-
             }
 
             DBHelper.BulkInsert<ClassesModel>(list);
@@ -266,13 +264,13 @@ namespace WebSupervisor
             }
             for (int i=0;i<Excel_dt.Rows.Count;i++)
             {
-                if (Excel_dt.Rows[i][0].ToString().Length!=0&& Excel_dt.Rows[i][1].ToString().Length!=0&& Excel_dt.Rows[i][2].ToString().Length==11)
+                if (Excel_dt.Rows[i][0].ToString().Length!=0&& Excel_dt.Rows[i][1].ToString().Length==11)
                 {
                     TeachersModel m = new TeachersModel();
-                    m.Tid = Excel_dt.Rows[i][0].ToString();
-                    m.TeacherName = Excel_dt.Rows[i][1].ToString();
-                    m.Phone = Excel_dt.Rows[i][2].ToString();
-                    if (Excel_dt.Rows[i][3].ToString() != null && Excel_dt.Rows[i][3].ToString() == "1")
+                    m.Tid = collegeid(college) + i.ToString();
+                    m.TeacherName = Excel_dt.Rows[i][0].ToString();
+                    m.Phone = Excel_dt.Rows[i][1].ToString();
+                    if (Excel_dt.Rows[i][2].ToString() != null && Excel_dt.Rows[i][2].ToString() == "1")
                     {
                         m.Indentify = 1;
                     }
@@ -643,6 +641,46 @@ namespace WebSupervisor
             return newclassnumber;
         }
         #endregion
+        private string collegeid(string college)
+        {
+            switch (college)
+            {
+                case "研究生学院":
+                    return "1";
+                case "第一临床医学院":
+                    return "2";
+                case "第二临床医学院":
+                    return "3";
+                case "第三临床医学院":
+                    return "4";
+                case "公共卫生学院":
+                    return "5";
+                case "护理学院":
+                    return "6";
+                case "基础医学院":
+                    return "7";
+                case "外国语学院":
+                    return "8";
+                case "人文与管理学院":
+                    return "9";
+                case "信息工程学院":
+                    return "10";
+                case "药学院":
+                    return "11";
+                case "医学检验学院":
+                    return "12";
+                case "继续教育学院":
+                    return "13";
+                case "社会科学部":
+                    return "14";
+                case "体育教学部":
+                    return "15";
+                default:
+                    return "未知";
+
+            }
+              
+        }
     }
 
     public class ExportExcelModel{

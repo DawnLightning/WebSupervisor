@@ -87,8 +87,11 @@ namespace WebSupervisor.Controllers
             if (!System.IO.File.Exists(fullFileName))
             {
                 Filedata.SaveAs(fullFileName);
-                ExcelHelper excel = new ExcelHelper();
-                excel.Import(fullFileName);
+                if(Session["College"]!=null)
+                {
+                    ExcelHelper excel = new ExcelHelper();
+                    excel.Import(fullFileName, Session["College"].ToString());
+                }
                
             }
 

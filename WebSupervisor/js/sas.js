@@ -1,5 +1,17 @@
 ﻿// JavaScript Document
-
+/*
+ * 改变特定标签内的html内容
+ * url: 内容的地址
+ * tag: 标签，如
+ *      <div id="divid" class="divclass"></div>
+ *      tag参数可以是 字符串 "#divid" 或 ".divclass"
+*/
+function replacetag(url, tag) {
+    xmlhttpget(url, function (text) {
+        curhref.save(url, tag);
+        $(tag).html(text);
+    });
+}
 //---------Supervisor--------------------
 function selectallweek(thisbox, thisform) {
     var check = thisbox.checked;
