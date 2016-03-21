@@ -20,11 +20,26 @@ $(function(){
 		//	//up.settings('formData', {aaaaa:'1111111',bb:'2222'});
 		//	up.Huploadify('settings','formData', {aaaaa:'1111111',bb:'2222'});
 		//},
-		//onUploadSuccess:function(file){
-		//	alert('上传成功');
-		//},
-		onUploadComplete:function(){
-			alert('上传完成');
+		onUploadSuccess: function (file) {
+		   
+
+			
+		},
+		onUploadComplete: function (file,data) {
+		  
+		    //file.name 文件名
+		    //data是后台返回的数据
+		    $.ajax({
+		        contentType: 'text/json; charset=utf-8',
+		        url: '/Schedule/ScheduleInport',
+		        dataType: 'json',
+		        type:'post',
+		        data:data
+		    }).done(function (data) {
+		        //一个文件上传完毕后
+		    }).error(function (data) {
+		      
+		    });
 		},
 		/*getUploadedSize:function(file){
 			var data = {

@@ -12,6 +12,7 @@ using PagedList.Mvc;
 using WebSupervisor.Code.Classes;
 using WebSupervisor.Code.Word;
 using WebSupervisor.Controllers.CheckUser;
+using System.Text;
 
 namespace WebSupervisor.Controllers
 {
@@ -20,6 +21,7 @@ namespace WebSupervisor.Controllers
     {
         
         List<ClassesModel> lstclasses = DBHelper.ExecuteList<ClassesModel>("select * from classes", CommandType.Text, null);
+        static List<ReportFileStatusModel>  lstfile = new List<ReportFileStatusModel>();
         // GET: Schedule
         public PartialViewResult Schedule()
         {
@@ -34,10 +36,7 @@ namespace WebSupervisor.Controllers
             IPagedList<ClassesModel> Lclasses = lstclasses.ToPagedList(page, 12);
             return PartialView(Lclasses);
         }
-        public ActionResult ScheduleInport()
-        {
-            return PartialView();
-        }
+    
         public ActionResult ScheduleExport(string cbspcial = "全部", string cbname = "全部", string cbclass = "全部", int page = 1)
         {
 
@@ -65,6 +64,8 @@ namespace WebSupervisor.Controllers
         }
         public ActionResult Upload(HttpPostedFileBase Filedata)
         {
+           
+          
             // 没有文件上传，直接返回
             if (Filedata == null || string.IsNullOrEmpty(Filedata.FileName) || Filedata.ContentLength == 0)
             {
@@ -87,12 +88,29 @@ namespace WebSupervisor.Controllers
             if (!System.IO.File.Exists(fullFileName))
             {
                 Filedata.SaveAs(fullFileName);
-                ExcelHelper excel = new ExcelHelper();
-                excel.Import(fullFileName);
                
+
+            }else
+            {
+                System.IO.File.Delete(fullFileName);
+                Filedata.SaveAs(fullFileName);
             }
 
-            return this.Json(new { });
+            ExcelHelper excel = new ExcelHelper();
+            
+            int code=excel.Import(fullFileName);
+            switch (code)
+            {
+                case 0:
+                    return Json(new jsondata(1, filename));
+                case 1:
+                    return Json(new jsondata(0, filename));
+                case -1:
+                    return Json(new jsondata(1, filename));
+                default:
+                    return Json(new jsondata(1, filename));
+            }
+            
         }
         public ActionResult ExportCList(string cbspcial = "全部", string cbname = "全部", string cbclass = "全部")
         {
@@ -110,6 +128,26 @@ namespace WebSupervisor.Controllers
               
             ex.MakeWordDoc(selectExport(cbspcial, cbname, cbclass), fullFileName, wordpath);
             return File(fullFileName, "application/zip-x-compressed", filename);
+        }
+      
+        [HttpPost]
+        public ActionResult ScheduleInport()
+        {
+            Stream s = System.Web.HttpContext.Current.Request.InputStream;
+            byte[] b = new byte[s.Length];
+            s.Read(b, 0, (int)s.Length);
+            string json = Encoding.UTF8.GetString(b);
+            ReportFileStatusModel f = Common.JsonToObject<ReportFileStatusModel>(json);
+            lstfile.Add(f);
+            IPagedList<ReportFileStatusModel> Lfile = lstfile.ToPagedList(1, 12);
+            return PartialView("ScheduleInport", Lfile);
+        }
+        [HttpGet]
+        public ActionResult ScheduleInport(int page = 1)
+        {
+           
+            IPagedList<ReportFileStatusModel> Lfile = lstfile.ToPagedList(page, 12);
+            return PartialView(Lfile);
         }
         private List<ClassesModel> selectExport(string cbspcial, string cbname, string cbclass)
         {

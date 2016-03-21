@@ -169,4 +169,11 @@ namespace WebSupervisor.Models
         public string ClassType { set; get; }
         public int SupervisorsSum { set; get; }
     }
+    /// <summary>
+    /// 导入文件
+    /// </summary>
+    public class ReportFileStatusModel{
+        public int code { set; get; }
+        public string msg { set; get; }
+    }
 }
