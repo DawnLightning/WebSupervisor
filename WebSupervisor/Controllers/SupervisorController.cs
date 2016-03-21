@@ -127,6 +127,12 @@ namespace WebSupervisor.Controllers
         {
             return PartialView();
         }
+
+        /// <summary>
+        /// 显示督导信息总览表
+        /// </summary>
+        /// <param name="page"></param>
+        /// <returns></returns>
         public PartialViewResult SupervisorList(int page = 1)
         {
             List<SupervisorViewModel> spvlist = new List<SupervisorViewModel>();
@@ -160,27 +166,68 @@ namespace WebSupervisor.Controllers
             IPagedList<SupervisorViewModel> Iteachers = spvlist.ToPagedList(page, 10);
             return PartialView(Iteachers);
         }
+
+        /// <summary>
+        /// 显示督导老师姓名
+        /// </summary>
+        /// <param name="p">页码</param>
+        /// <returns></returns>
         public string SupervisorName(int p = 0)
         {
             string c = "";
-            List<string> te;
             if (Session["Power"].ToString() == "管理员")
-                te = (from t in teacherlist
-                      where t.College == Session["College"].ToString()
-                      select t.TeacherName).ToList();
-            else
-                te = (from t in teacherlist
-                      select t.TeacherName).ToList();
-            for (int i = p * 9; i < 9 * p + 9; i++)
             {
-                if (i < te.Count)
-                    c += "<li>" + te[i] + "<a href='#tab2'></a></li>";
+                var te = (from t in teacherlist
+                          where t.College == Session["College"].ToString()
+                          select new
+                          {
+                              t.TeacherName,
+                              t.Tid
+                          }).ToList();
+                for (int i = p * 9; i < 9 * p + 9; i++)
+                {
+                    if (i < te.Count)
+                        c += "<li>" + te[i].TeacherName + "<a href='#tab2' value='" + te[i].Tid + "' ></a></li>";
+                }
+            }
+            else
+            {
+                var te = (from t in teacherlist
+                          select new
+                          {
+                              t.TeacherName,
+                              t.Tid
+                          }).ToList();
+                for (int i = p * 9; i < 9 * p + 9; i++)
+                {
+                    if (i < te.Count)
+                        c += "<li name='del' value='" + te[i].Tid + "'>" + te[i].TeacherName + "<a  href='#tab2' ></a></li>";
+                }
             }
             return c;
         }
-        public ActionResult HandSpareTime()
+        
+        /// <summary>
+        /// 显示手动填补
+        /// </summary>
+        /// <param name="tid">默认值为测试所用</param>
+        /// <param name="week"></param>
+        /// <returns></returns>
+        public ActionResult ShowSpareTime(string tid = "1994                          ", int week = 1)
         {
-            return PartialView();
+            var hlist = (from sp in splist
+                         where sp.Tid == tid && sp.Week == week
+                         select new HandSpareTime
+                         {
+                             Day = sp.Day,
+                             Pclassnumber = Convert.ToInt32(sp.ClassNumber.ToString().Substring(0, sp.ClassNumber.ToString().Length / 2)),
+                             Nclassnumber = Convert.ToInt32(sp.ClassNumber.ToString().Substring(sp.ClassNumber.ToString().Length / 2, sp.ClassNumber.ToString().Length / 2))
+                         }).ToList();
+            return Json(hlist, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult SaveSpareTime(string tid, int week, object dclassnumber)
+        {
+            return Json(new { });
         }
         //自动填补空闲时间
         [AllowAnonymous]
@@ -278,7 +325,7 @@ namespace WebSupervisor.Controllers
             return count.Count();
 
         }
-       
+
         /// <summary>
         /// 删除教师
         /// </summary>
@@ -286,6 +333,7 @@ namespace WebSupervisor.Controllers
         /// <returns></returns>
         [HttpPost]
         public ActionResult DeleteTeacher()
+
         {
             try
             {
@@ -293,45 +341,49 @@ namespace WebSupervisor.Controllers
                 byte[] b = new byte[s.Length];
                 s.Read(b, 0, (int)s.Length);
                 string tid = Encoding.UTF8.GetString(b);
-                string result =HttpUtility.UrlDecode(tid).Replace("[","").Replace("]","");
-                string [] ids=result.Split(',');
+                string result = HttpUtility.UrlDecode(tid).Replace("[", "").Replace("]", "");
+                string[] ids = result.Split(',');
                 string[] idarray = new string[ids.Length];
-                for (int i=0;i<ids.Length;i++)
+                for (int i = 0; i < ids.Length; i++)
                 {
                     idarray[i] = ids[i].Replace('"', ' ').Trim();
                 }
 
-                for (int i=0;i<idarray.Length;i++)
+                for (int i = 0; i < idarray.Length; i++)
                 {
                     string delete_teachers = string.Format("delete from teachers where tid='{0}'", idarray[i]);
                     string delete_classes = string.Format("delete from classes where teachername='{0}'", id2teachername(idarray[i]));
-                    string delete_sparetime = string.Format("delete from sparetime where tid='{0}'",idarray[i]);
+                    string delete_sparetime = string.Format("delete from sparetime where tid='{0}'", idarray[i]);
                     string delete_checkclass = string.Format("delete from checkclass where tid='{0}'", idarray[i]);
                     DBHelper.ExecuteNonQuery(delete_teachers, CommandType.Text, null);
                     DBHelper.ExecuteNonQuery(delete_classes, CommandType.Text, null);
                     DBHelper.ExecuteNonQuery(delete_sparetime, CommandType.Text, null);
                     DBHelper.ExecuteNonQuery(delete_checkclass, CommandType.Text, null);
                 }
-               
+
                 return this.Json(new jsondata(0, "删除成功"), JsonRequestBehavior.AllowGet);
+
             }
             catch (Exception)
             {
                 return this.Json(new jsondata(1, "删除失败"), JsonRequestBehavior.AllowGet);
+
             }
 
 
         }
-        
+
         /// <summary>
         /// 将id转换为教师姓名
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         private string id2teachername(string id)
+
         {
-          
+
             foreach (TeachersModel teacher in teacherlist)
+
             {
                 if (teacher.Tid.Equals(id))
                 {

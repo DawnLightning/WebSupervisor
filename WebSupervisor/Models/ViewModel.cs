@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace WebSupervisor.Models
 {
-
+    public class HandSpareTime
+    {
+        public int Day;
+        public int Pclassnumber;
+        public int Nclassnumber;
+    }
     /// <summary>
     /// 首选督导
     /// </summary>

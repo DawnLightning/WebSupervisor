@@ -7,29 +7,29 @@
                 <ul id="navtab" class="tabss">
                     <li class="active" style="width:130px;height:45px;text-align:center;vertical-align:middle;font-size:16px;font-weight:500;line-height:45px; ">总览<a href="#tab1"></a></li>
                     <content id="supervisorname">
-                    @Html.Action("SupervisorName")
+                        @Html.Action("SupervisorName")
                     </content>
-                   @*<li>2<a href="#tab2"></a></li>
-                    <li>2<a href="#tab2"></a></li>
-                    <li>2<a href="#tab2"></a></li>
-                    <li>2<a href="#tab2"></a></li>
-                    <li>2<a href="#tab2"></a></li>
-                    <li>2<a href="#tab2"></a></li>
-                    <li>2<a href="#tab2"></a></li>
-                    <li>2<a href="#tab2"></a></li>
-                    <li>2<a href="#tab2"></a></li>*@              <!--注意：文字放在li与a之间 不然点击没有效果 li包括总览只有9个 不然有些页面会溢出-->
+                    @*<li>2<a href="#tab2"></a></li>
+                        <li>2<a href="#tab2"></a></li>
+                        <li>2<a href="#tab2"></a></li>
+                        <li>2<a href="#tab2"></a></li>
+                        <li>2<a href="#tab2"></a></li>
+                        <li>2<a href="#tab2"></a></li>
+                        <li>2<a href="#tab2"></a></li>
+                        <li>2<a href="#tab2"></a></li>
+                        <li>2<a href="#tab2"></a></li>*@              <!--注意：文字放在li与a之间 不然点击没有效果 li包括总览只有9个 不然有些页面会溢出-->
                 </ul>
                 @{
                     var i = 0;
-                <div>
-                    <button  id="lastpage" class="btn btn-default btn-sm" aria-label="Left Align" >
-                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                    </button>
-                    <button  id="nextpage" class="btn btn-default btn-sm">
-                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                    </button>
-                </div>
-                    }
+                    <div>
+                        <button id="lastpage" class="btn btn-default btn-sm" aria-label="Left Align">
+                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        </button>
+                        <button id="nextpage" class="btn btn-default btn-sm">
+                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                }
             </div>
 
             <div class="vrtab">
@@ -60,155 +60,598 @@
                         </div>
                     </form>
                     <!--dis-->
-                        <div id="tab2" class="tab_contents" style="display: none; ">
-                            <form action="#!/Supervisor/HandSpareTime">
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-4 col-sm-7 col-xs-12">
-                                        <button type="button" class="button green">
-                                            清空全部
-                                        </button>
-                                        @*<button type="button" class="button red">
-                                            移除勾选
-                                        </button>*@
-                                        <button type="submit" class="button blue">
-                                            保存
-                                        </button>
-                                    </div>
-                                    <!--col-->
-                                </div>
-                                <!--row-->
-                              @Html.Action("HandSpareTime")
-                            </form>
-                                <!--TABLE-->
-                                <div class="row">
-                                    <div class="muchadd col-lg-1 col-md-2 col-sm-3 cpl-sx-12">
-                                        <input type="checkbox" name="add">
-                                        &nbsp;批量增加&nbsp;&nbsp;
-                                    </div>
-                                    <div class="col-lg-5 col-md-8 col-sm-9 cpl-sx-12">
-                                        <div class="weeks">
-                                            第&nbsp;
-                                            <input type="text" name="lastweek" />
-                                            &nbsp;周&nbsp;--&nbsp;第&nbsp;
-                                            <input type="text" name="nextweek" />
-                                            &nbsp;周
+                    <div id="tab2" class="tab_contents" style="display: none; ">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-7 col-xs-12">
+                                @*<button type="button" class="button green">
+                                    清空全部
+                                </button>*@
+                                @*<button type="button" class="button red">
+                                        移除勾选
+                                    </button>*@
+                                <button type="button" class="button blue" id="save">
+                                    保存
+                                </button>
+                            </div>
+                            <!--col-->
+                        </div>
+                        <!--row-->
+                         <form>
+                        <div>
+                            <!--TABLE-->
+                            <p>
+                            </p>
+                            <table class="table" style="font-size:20px">
+                                <tr bgcolor="f5f5f5" style="text-align:center">
+                                    <th>
+                                        <input id="checkweek" type="checkbox" name="checkweek" onClick="selectallweek(this,this.form)">
+                                        全选
+                                    </th>
+                                    <th>
+                                        <input type="checkbox" id="1day" name="checkday" onClick="selectday(this,'1')">
+                                        星期一
+                                    </th>
+                                    <th>
+                                        <input type="checkbox" id="2sday" name="checkday" onClick="selectday(this,'2')">
+                                        星期二
+                                    </th>
+                                    <th>
+                                        <input type="checkbox" id="3nesday" name="checkday" onClick="selectday(this,'3')">
+                                        星期三
+                                    </th>
+                                    <th>
+                                        <input type="checkbox" id="4rsday" name="checkday" onClick="selectday(this,'4')">
+                                        星期四
+                                    </th>
+                                    <th>
+                                        <input type="checkbox" id="5day" name="checkday" onClick="selectday(this,'5')">
+                                        星期五
+                                    </th>
+                                    <th>
+                                        <input type="checkbox" id="6urday" name="checkday" onClick="selectday(this,'6')">
+                                        星期六
+                                    </th>
+                                    <th>
+                                        <input type="checkbox" id="7day" name="checkday" onClick="selectday(this,'7')">
+                                        星期天
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        上午
+                                    </td>
+                                    <td>
+                                        <div class="divblock">
+                                            <input id="1" type="checkbox" name="1">
+                                            1
                                         </div>
-                                        <div class="con">
-                                            <button type="button" class="button blue">
-                                                确认
-                                            </button>
+                                        <div class="divblock">
+                                            <input id="2" type="checkbox" name="1">
+                                            2
                                         </div>
-                                    </div>
+                                        <div class="divblock">
+                                            <input id="3" type="checkbox" name="1">
+                                            3
+                                        </div>
+                                        <div class="divblock">
+                                            <input id="4" type="checkbox" name="1">
+                                            4
+                                        </div>
+                                        <div class="divblock">
+                                            <input id="5" type="checkbox" name="1">
+                                            5
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="divblock">
+                                            <input id="1" type="checkbox" name="2">
+                                            1
+                                        </div>
+                                        <div class="divblock">
+                                            <input id="2" type="checkbox" name="2">
+                                            2
+                                        </div>
+                                        <div class="divblock">
+                                            <input id="3" type="checkbox" name="2">
+                                            3
+                                        </div>
+                                        <div class="divblock">
+                                            <input id="4" type="checkbox" name="2">
+                                            4
+                                        </div>
+                                        <div class="divblock">
+                                            <input id="5" type="checkbox" name="2">
+                                            5
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="divblock">
+                                            <input id="1" type="checkbox" name="3">
+                                            1
+                                        </div>
+                                        <div class="divblock">
+                                            <input id="2" type="checkbox" name="3">
+                                            2
+                                        </div>
+                                        <div class="divblock">
+                                            <input id="3" type="checkbox" name="3">
+                                            3
+                                        </div>
+                                        <div class="divblock">
+                                            <input id="4" type="checkbox" name="3">
+                                            4
+                                        </div>
+                                        <div class="divblock">
+                                            <input id="5" type="checkbox" name="3">
+                                            5
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="divblock">
+                                            <input id="1" type="checkbox" name="4">
+                                            1
+                                        </div>
+                                        <div class="divblock">
+                                            <input id="2" type="checkbox" name="4">
+                                            2
+                                        </div>
+                                        <div class="divblock">
+                                            <input id="3" type="checkbox" name="4">
+                                            3
+                                        </div>
+                                        <div class="divblock">
+                                            <input id="4" type="checkbox" name="4">
+                                            4
+                                        </div>
+                                        <div class="divblock">
+                                            <input id="5" type="checkbox" name="4">
+                                            5
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="divblock">
+                                            <input id="1" type="checkbox" name="5">
+                                            1
+                                        </div>
+                                        <div class="divblock">
+                                            <input id="2" type="checkbox" name="5">
+                                            2
+                                        </div>
+                                        <div class="divblock">
+                                            <input id="3" type="checkbox" name="5">
+                                            3
+                                        </div>
+                                        <div class="divblock">
+                                            <input id="4" type="checkbox" name="5">
+                                            4
+                                        </div>
+                                        <div class="divblock">
+                                            <input id="5" type="checkbox" name="5">
+                                            5
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="divblock">
+                                            <input id="1" type="checkbox" name="6">
+                                            1
+                                        </div>
+                                        <div class="divblock">
+                                            <input id="2" type="checkbox" name="6">
+                                            2
+                                        </div>
+                                        <div class="divblock">
+                                            <input id="3" type="checkbox" name="6">
+                                            3
+                                        </div>
+                                        <div class="divblock">
+                                            <input id="4" type="checkbox" name="6">
+                                            4
+                                        </div>
+                                        <div class="divblock">
+                                            <input id="5" type="checkbox" name="6">
+                                            5
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="divblock">
+                                            <input id="1" type="checkbox" name="7">
+                                            1
+                                        </div>
+                                        <div class="divblock">
+                                            <input id="2" type="checkbox" name="7">
+                                            2
+                                        </div>
+                                        <div class="divblock">
+                                            <input id="3" type="checkbox" name="7">
+                                            3
+                                        </div>
+                                        <div class="divblock">
+                                            <input id="4" type="checkbox" name="7">
+                                            4
+                                        </div>
+                                        <div class="divblock">
+                                            <input id="5" type="checkbox" name="7">
+                                            5
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        下午
+                                    </td>
+                                    <td>
+                                        <div class="divblock">
+                                            <input id="6" type="checkbox" name="1">
+                                            6
+                                        </div>
+                                        <div class="divblock">
+                                            <input id="7" type="checkbox" name="1">
+                                            7
+                                        </div>
+                                        <div class="divblock">
+                                            <input id="8" type="checkbox" name="1">
+                                            8
+                                        </div>
+                                        <div class="divblock">
+                                            <input id="9" type="checkbox" name="1">
+                                            9
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="divblock">
+                                            <input id="6" type="checkbox" name="2">
+                                            6
+                                        </div>
+                                        <div class="divblock">
+                                            <input id="7" type="checkbox" name="2">
+                                            7
+                                        </div>
+                                        <div class="divblock">
+                                            <input id="8" type="checkbox" name="2">
+                                            8
+                                        </div>
+                                        <div class="divblock">
+                                            <input id="9" type="checkbox" name="2">
+                                            9
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="divblock">
+                                            <input id="6" type="checkbox" name="3">
+                                            6
+                                        </div>
+                                        <div class="divblock">
+                                            <input id="7" type="checkbox" name="3">
+                                            7
+                                        </div>
+                                        <div class="divblock">
+                                            <input id="8" type="checkbox" name="3">
+                                            8
+                                        </div>
+                                        <div class="divblock">
+                                            <input id="9" type="checkbox" name="3">
+                                            9
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="divblock">
+                                            <input id="6" type="checkbox" name="4">
+                                            6
+                                        </div>
+                                        <div class="divblock">
+                                            <input id="7" type="checkbox" name="4">
+                                            7
+                                        </div>
+                                        <div class="divblock">
+                                            <input id="8" type="checkbox" name="4">
+                                            8
+                                        </div>
+                                        <div class="divblock">
+                                            <input id="9" type="checkbox" name="4">
+                                            9
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="divblock">
+                                            <input id="6" type="checkbox" name="5">
+                                            6
+                                        </div>
+                                        <div class="divblock">
+                                            <input id="7" type="checkbox" name="5">
+                                            7
+                                        </div>
+                                        <div class="divblock">
+                                            <input id="8" type="checkbox" name="5">
+                                            8
+                                        </div>
+                                        <div class="divblock">
+                                            <input id="9" type="checkbox" name="5">
+                                            9
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="divblock">
+                                            <input id="6" type="checkbox" name="6">
+                                            6
+                                        </div>
+                                        <div class="divblock">
+                                            <input id="7" type="checkbox" name="6">
+                                            7
+                                        </div>
+                                        <div class="divblock">
+                                            <input id="8" type="checkbox" name="6">
+                                            8
+                                        </div>
+                                        <div class="divblock">
+                                            <input id="9" type="checkbox" name="6">
+                                            9
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="divblock">
+                                            <input id="6" type="checkbox" name="7">
+                                            6
+                                        </div>
+                                        <div class="divblock">
+                                            <input id="7" type="checkbox" name="7">
+                                            7
+                                        </div>
+                                        <div class="divblock">
+                                            <input id="8" type="checkbox" name="7">
+                                            8
+                                        </div>
+                                        <div class="divblock">
+                                            <input id="9" type="checkbox" name="7">
+                                            9
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        晚上
+                                    </td>
+                                    <td>
+                                        <div class="divblock">
+                                            <input id="10" type="checkbox" name="1">
+                                            10
+                                        </div>
+                                        <div class="divblock">
+                                            <input id="11" type="checkbox" name="1">
+                                            11
+                                        </div>
+                                        <div class="divblock">
+                                            <input id="12" type="checkbox" name="1">
+                                            12
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="divblock">
+                                            <input id="10" type="checkbox" name="2">
+                                            10
+                                        </div>
+                                        <div class="divblock">
+                                            <input id="11" type="checkbox" name="2">
+                                            11
+                                        </div>
+                                        <div class="divblock">
+                                            <input id="12" type="checkbox" name="2">
+                                            12
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="divblock">
+                                            <input id="10" type="checkbox" name="3">
+                                            10
+                                        </div>
+                                        <div class="divblock">
+                                            <input id="11" type="checkbox" name="3">
+                                            11
+                                        </div>
+                                        <div class="divblock">
+                                            <input id="12" type="checkbox" name="3">
+                                            12
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="divblock">
+                                            <input id="10" type="checkbox" name="4">
+                                            10
+                                        </div>
+                                        <div class="divblock">
+                                            <input id="11" type="checkbox" name="4">
+                                            11
+                                        </div>
+                                        <div class="divblock">
+                                            <input id="12" type="checkbox" name="4">
+                                            12
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="divblock">
+                                            <input id="10" type="checkbox" name="5">
+                                            10
+                                        </div>
+                                        <div class="divblock">
+                                            <input id="11" type="checkbox" name="5">
+                                            11
+                                        </div>
+                                        <div class="divblock">
+                                            <input id="12" type="checkbox" name="5">
+                                            12
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="divblock">
+                                            <input id="10" type="checkbox" name="6">
+                                            10
+                                        </div>
+                                        <div class="divblock">
+                                            <input id="11" type="checkbox" name="6">
+                                            11
+                                        </div>
+                                        <div class="divblock">
+                                            <input id="12" type="checkbox" name="6">
+                                            12
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="divblock">
+                                            <input id="10" type="checkbox" name="7">
+                                            10
+                                        </div>
+                                        <div class="divblock">
+                                            <input id="11" type="checkbox" name="7">
+                                            11
+                                        </div>
+                                        <div class="divblock">
+                                            <input id="12" type="checkbox" name="7">
+                                            12
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                        </div>
+                        </form>
+                        <!--TABLE-->
+                        <div class="row">
+                            <div class="muchadd col-lg-1 col-md-2 col-sm-3 cpl-sx-12">
+                                <input type="checkbox" name="add">
+                                &nbsp;批量增加&nbsp;&nbsp;
+                            </div>
+                            <div class="col-lg-5 col-md-8 col-sm-9 cpl-sx-12">
+                                <div class="weeks">
+                                    第&nbsp;
+                                    <input type="text" name="lastweek" />
+                                    &nbsp;周&nbsp;--&nbsp;第&nbsp;
+                                    <input type="text" name="nextweek" />
+                                    &nbsp;周
                                 </div>
-                                <!--row-->
-                                <div class="twenty">
-                                    <nav>
-                                        周次：
-                                        <ul class="pagination">
-                                            <li>
-                                                <a href="#">
-                                                    1
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    2
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    3
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    4
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    5
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    6
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    7
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    8
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    9
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    10
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    11
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    12
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    13
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    14
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    15
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    16
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    17
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    18
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    19
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    20
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </nav>
+                                <div class="con">
+                                    <button type="button" class="button blue">
+                                        确认
+                                    </button>
                                 </div>
-</div> <!--2-->
+                            </div>
+                        </div>
+                        <!--row-->
+                        <div class="twenty">
+                            <nav>
+                                周次：
+                                <ul class="pagination">
+                                    <li>
+                                        <a href="#" value="1">
+                                            1
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" value="2">
+                                            2
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" value="3">
+                                            3
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" value="4">
+                                            4
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" value="5">
+                                            5
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" value="6">
+                                            6
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" value="7">
+                                            7
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" value="8">
+                                            8
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" value="9">
+                                            9
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" value="10">
+                                            10
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" value="11">
+                                            11
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" value="12">
+                                            12
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" value="13">
+                                            13
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" value="14">
+                                            14
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" value="15">
+                                            15
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" value="16">
+                                            16
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" value="17">
+                                            17
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" value="18">
+                                            18
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" value="19">
+                                            19
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" value="20">
+                                            20
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div> <!--2-->
                 </div>
             </div>
         </div>
@@ -217,73 +660,65 @@
 </div>
 <!-- contain -->
 <script>
-    $("#lastpage").click(function(){ @{if (i > 0) { i--; } } $.get("/Supervisor/SupervisorName", { p: @i }, function (result) {
-        $("#supervisorname").html(result);
-    });})
-    $("#nextpage").click(function(){ @{i++; } $.get("/Supervisor/SupervisorName", { p: @i }, function (result) {
-        $("#supervisorname").html(result);
-    });})
-    //$(document).ready(function () {
-    //    var str = new Array();
-    //    $("#sure").click(function () {
-    //        $("input[name='chebox']:checked").each(function () {
-    //            //if ($(this).attr("checked")==true) {
-    //            str.push($(this).val())
-    //            //alert($(this).val());
-    //            //}              
-    //        })
-    //        for (i in str) {
-    //            //    alert[str[i]];
-    //            $.ajax({
-    //                url: '/Supervisor/ReferenceSure',
-    //                type: 'post',
-    //                contentType: 'application/json;charset=utf-8',
-    //                data: JSON.stringify({
-    //                    "cid": str[i],
-    //                }),
-    //                async: false,
-    //                success: function (arrageadd) {
-    //                    //for (i in classeslist) {
-    //                    //$().fi('<td>' + teachernames[i] + '</td>');
-    //                    $("#week").find("option[id='0']").html(arrageadd.classeslist[0].Week);
-    //                    $("#day").find("option[id='0']").html(arrageadd.classeslist[0].Day);
-    //                    $("#classnumber").find("option[id='0']").html(arrageadd.classeslist[0].ClassNumber);
-    //                    $("#teachername").find("option[id='0']").html(arrageadd.classeslist[0].TeacherName);
-    //                    $("#classtype").find("option[id='0']").html(arrageadd.classeslist[0].ClassType);
-    //                    $("#classeslist").find("td[id='address']").html(arrageadd.classeslist[0].Address);
-    //                    $("#classeslist").find("td[id='classcontent']").html(arrageadd.classeslist[0].ClassContent);
-    //                    $("#classeslist").find("td[id='classtype']").html(arrageadd.classeslist[0].ClassType);
-    //                    $("#classeslist").find("td[id='major']").html(arrageadd.classeslist[0].Major);
-    //                    $("#classeslist").find("td[id='classname']").html(arrageadd.classeslist[0].ClassName);
-    //                    $("#classeslist").find("td[id='cid']").html(arrageadd.classeslist[0].Cid);//替换 ;
-    //                    //}
-    //                },
-    //                error: function () {
-    //                    alert("出错了");
-    //                }
-    //            })
-    //        }
-    //    })
-    //    $("#autofill").click(function () {
-            
-    //    })
-    //    $.ajax({
-    //        url: '/Supervisor/Reference',
-    //        type: 'post',
-    //        contentType: 'application/json;charset=utf-8',
-    //        async: false,
-    //        data: JSON.stringify({
-    //            "year": year,
-    //            "day": day,
-    //            "month": month,
-    //        }),
-    //        success: function (data) {
-    //            $("#wrapper").html(data);
-    //        },
-    //        error: function () {
-    //            alert("出错了");
-    //        }
-    //    })
-
-    //});
+    var tid;
+    //tid: tid,
+    $(document).ready(function () {
+        $("#lastpage").click(function(){ @{if (i > 0) { i--; } } $.get("/Supervisor/SupervisorName", { p: @i }, function (result) {
+            $("#supervisorname").html(result);
+        });})
+        $("#nextpage").click(function(){ @{i++; } $.get("/Supervisor/SupervisorName", { p: @i }, function (result) {
+            $("#supervisorname").html(result);
+        });})
+        $("li[name='del']").click(function(){
+            tid=$(this).val();
+            $.ajax({
+                url: '/Supervisor/ShowSpareTime',
+                type: 'post',
+                //contentType: 'application/json;charset=utf-8',
+                //async: false,
+                dataType: "json",
+                //data: {tid:$(this).val()},
+                success: function (hlist) {
+                    for(i in hlist)
+                    {
+                        $("input[name='"+hlist[i].Day+"'][id='"+hlist[i].Pclassnumber+"']").attr('checked','checked');
+                        $("input[name='"+hlist[i].Day+"'][id='"+hlist[i].Nclassnumber+"']").attr('checked','checked');
+                    }
+                },
+                error: function () {
+                    alert("出错了");
+                }
+            })
+        })
+        $("a[href='#']").click(function(){
+            var w=$(this).attr('value');
+            $.get("/Supervisor/ShowSpareTime", { tid: tid,week:w }, function (hlist) {
+                for(i in hlist)
+                {
+                    $("input[name='"+hlist[i].Day+"'][id='"+hlist[i].Pclassnumber+"']").attr('checked','checked');
+                    $("input[name='"+hlist[i].Day+"'][id='"+hlist[i].Nclassnumber+"']").attr('checked','checked');
+                }
+            }
+            );
+        })
+        $("#save").click(function(){
+            var $check_boxes = $('input[type=checkbox][name!="checkweek"][name!="checkday"]:checked');  
+            if($check_boxes.length<=0){ alert('您未勾选，请勾选！');return;   }  
+            if(confirm('您确定要保存吗？')){  
+                var dropIds = new Array();  
+                $check_boxes.each(function(){  
+                    dropIds.push($(this).val());  
+                });  
+                $.ajax({  
+                    type:'post',  
+                    traditional :true,  
+                    url:'/Supervisor/SaveSpareTime',  
+                    data:{'dropIds':dropIds},  
+                    success:function(data){  
+ 
+                    }  
+                });  
+            } 
+        })
+    })
 </script>
