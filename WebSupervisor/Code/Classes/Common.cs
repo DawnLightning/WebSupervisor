@@ -19,8 +19,23 @@ namespace WebSupervisor.Code.Classes
             msg = _msg;
         }
     }
-     public class Common
+  
+    public class Common
     {
+        /// <summary>
+        /// Json转对象
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="json"></param>
+        /// <returns></returns>
+        public static T JsonToObject<T>(string json)
+        {
+            var ser = new System.Runtime.Serialization.Json.DataContractJsonSerializer(typeof(T));
+            var ms = new MemoryStream(Encoding.UTF8.GetBytes(json));
+            var jsonObject = (T)ser.ReadObject(ms);
+            ms.Close();
+            return jsonObject;
+        }
         /// <summary>
         /// 配置文件路径
         /// </summary>
