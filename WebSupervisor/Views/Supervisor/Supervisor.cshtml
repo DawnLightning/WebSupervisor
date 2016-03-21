@@ -692,7 +692,7 @@
         })
         $("a[href='#']").click(function(){
             var w=$(this).attr('value');
-            $.get("/Supervisor/ShowSpareTime", { week:w }, function (hlist) {
+            $.get("/Supervisor/ShowSpareTime", { tid: tid,week:w }, function (hlist) {
                 for(i in hlist)
                 {
                     $("input[name='"+hlist[i].Day+"'][id='"+hlist[i].Pclassnumber+"']").attr('checked','checked');
@@ -721,66 +721,4 @@
             } 
         })
     })
-    //    var str = new Array();
-    //    $("#sure").click(function () {
-    //        $("input[name='chebox']:checked").each(function () {
-    //            //if ($(this).attr("checked")==true) {
-    //            str.push($(this).val())
-    //            //alert($(this).val());
-    //            //}
-    //        })
-    //        for (i in str) {
-    //            //    alert[str[i]];
-    //            $.ajax({
-    //                url: '/Supervisor/ReferenceSure',
-    //                type: 'post',
-    //                contentType: 'application/json;charset=utf-8',
-    //                data: JSON.stringify({
-    //                    "cid": str[i],
-    //                }),
-    //                async: false,
-    //                success: function (arrageadd) {
-    //                    //for (i in classeslist) {
-    //                    //$().fi('<td>' + teachernames[i] + '</td>');
-    //                    $("#week").find("option[id='0']").html(arrageadd.classeslist[0].Week);
-    //                    $("#day").find("option[id='0']").html(arrageadd.classeslist[0].Day);
-    //                    $("#classnumber").find("option[id='0']").html(arrageadd.classeslist[0].ClassNumber);
-    //                    $("#teachername").find("option[id='0']").html(arrageadd.classeslist[0].TeacherName);
-    //                    $("#classtype").find("option[id='0']").html(arrageadd.classeslist[0].ClassType);
-    //                    $("#classeslist").find("td[id='address']").html(arrageadd.classeslist[0].Address);
-    //                    $("#classeslist").find("td[id='classcontent']").html(arrageadd.classeslist[0].ClassContent);
-    //                    $("#classeslist").find("td[id='classtype']").html(arrageadd.classeslist[0].ClassType);
-    //                    $("#classeslist").find("td[id='major']").html(arrageadd.classeslist[0].Major);
-    //                    $("#classeslist").find("td[id='classname']").html(arrageadd.classeslist[0].ClassName);
-    //                    $("#classeslist").find("td[id='cid']").html(arrageadd.classeslist[0].Cid);//替换 ;
-    //                    //}
-    //                },
-    //                error: function () {
-    //                    alert("出错了");
-    //                }
-    //            })
-    //        }
-    //    })
-    //    $("#autofill").click(function () {
-
-    //    })
-    //    $.ajax({
-    //        url: '/Supervisor/Reference',
-    //        type: 'post',
-    //        contentType: 'application/json;charset=utf-8',
-    //        async: false,
-    //        data: JSON.stringify({
-    //            "year": year,
-    //            "day": day,
-    //            "month": month,
-    //        }),
-    //        success: function (data) {
-    //            $("#wrapper").html(data);
-    //        },
-    //        error: function () {
-    //            alert("出错了");
-    //        }
-    //    })
-
-    //});
 </script>

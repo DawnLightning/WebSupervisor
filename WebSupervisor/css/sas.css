@@ -143,6 +143,7 @@ height: 150px;
 clear:both;
 padding-left: 10px;
 padding-top:120px;
+z-index: -2;
 }
 /* =============================================================================
   welcome admin

@@ -178,6 +178,7 @@
     <Content Include="image\8.png" />
     <Content Include="image\9.gif" />
     <Content Include="js\btn.js" />
+    <Content Include="js\curhref.js" />
     <Content Include="js\html5shiv.min.js" />
     <Content Include="js\jquery.fileDownload.js" />
     <Content Include="js\jquery.Huploadify.js" />
@@ -188,6 +189,7 @@
     <Content Include="js\pikaday.js" />
     <Content Include="js\respond.min.js" />
     <Content Include="js\sas.js" />
+    <Content Include="js\sas.old.js" />
     <Content Include="js\sweetalert.min.js" />
     <Content Include="js\vtab.js" />
     <Content Include="less\vtab.js" />
