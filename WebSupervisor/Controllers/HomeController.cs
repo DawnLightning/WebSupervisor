@@ -11,6 +11,8 @@ using WebSupervisor.Code.Classes;
 using WebSupervisor.Controllers.CheckUser;
 using PagedList;
 using WebSupervisor.Code.Placement;
+using System.IO;
+using System.Text;
 
 namespace WebSupervisor.Controllers
 {
@@ -129,7 +131,7 @@ namespace WebSupervisor.Controllers
             {
                 arragetemplist = (from a in arragelist
                                   join b in classlist on a.Cid equals b.Cid
-                                  join t in teacherlist on b.TeacherName equals t.TeacherName
+                                  //join t in teacherlist on b.TeacherName equals t.TeacherName
                                   where a.Stauts == 1
                                   select new ConfirmModel
                                   {
@@ -282,23 +284,36 @@ namespace WebSupervisor.Controllers
         /// </summary>
         /// <param name="tid"></param>
         /// <returns></returns>
-        private ActionResult DeleteArrage(string pid)
+        [HttpPost]
+        public ActionResult DeleteArrage()
         {
+          
             try
             {
+                Stream s = System.Web.HttpContext.Current.Request.InputStream;
+                byte[] b = new byte[s.Length];
+                s.Read(b, 0, (int)s.Length);
+                string tid = Encoding.UTF8.GetString(b);
+                string result = HttpUtility.UrlDecode(tid).Replace("[", "").Replace("]", "");
+                string[] ids = result.Split(',');
+                string[] idarray = new string[ids.Length];
+                for (int i = 0; i < ids.Length; i++)
+                {
+                    idarray[i] = ids[i].Replace('"', ' ').Trim();
+                }
 
-                string delete_arrage = string.Format("delete from arrage where pid='{0}'", pid);
-                
-                DBHelper.ExecuteNonQuery(delete_arrage, CommandType.Text, null);
-                
-                return this.Json(new jsondata(1, "删除成功"));
+                for (int i = 0; i < idarray.Length; i++)
+                {
+                    string delete_arrage = string.Format("delete from arrage where pid='{0}'", idarray[i]);
+                    DBHelper.ExecuteNonQuery(delete_arrage, CommandType.Text, null);
+                }
+
+                return this.Json(new jsondata(0, "删除成功"), JsonRequestBehavior.AllowGet);
             }
             catch (Exception)
             {
-                return this.Json(new jsondata(0, "删除失败"));
+                return this.Json(new jsondata(1, "删除失败"), JsonRequestBehavior.AllowGet);
             }
-
-
         }
     }
 }

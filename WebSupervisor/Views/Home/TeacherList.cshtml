@@ -8,7 +8,7 @@
         <button type="button" class="button green" onClick="$('#addtr').show()">
             添加
         </button>
-        <button type="button" name="btntddelete" class="button red" formaction="/Supervisor/DeleteTeacher" formmethod="get">
+        <button type="button" name="btntddelete" class="button red" formaction="/Supervisor/DeleteTeacher" formmethod="post">
             删除
         </button>
         <button type="button" class="button orange" onclick="edite3()" ;>
@@ -135,7 +135,7 @@
                         <tr>
                             <td width=2%>
 
-                                <input type="checkbox" name="tdcbid" value="@item.Tid">
+                                <input type="checkbox" name="tdcbid" value=@item.Tid>
 
                             </td>
                             <td>

@@ -105,11 +105,11 @@ $(document).ready(function () {
     $(document).on("click", "[name='btntddelete']", function () {
 
         var url = $(this).attr("formaction");
-        var method = ((typeof $(this).attr("formmethod") != "undefined") ? $(this).attr("formmethod") : "GET");
+        var method = ((typeof $(this).attr("formmethod") != "undefined") ? $(this).attr("formmethod") : "POST");
         var tab_content = $(this).parents(".tab_content");
         var id = [];
         tab_content.find("form td input[type='checkbox'][checked='checked']").each(function (i, e) {
-            id[i] = $(this).val();
+            id[i] = $(this).val().replace(/\s+/g, "");
         });
 
         if (typeof id == "undefined") {
@@ -122,16 +122,25 @@ $(document).ready(function () {
                 type: "warning",
                 showCancelButton: true,
                 closeOnConfirm: false,
-                confirmButtonText: "是的，我要删除",
+                confirmButtonText: "确认",
                 confirmButtonColor: "#ec6c62"
             }, function () {
                 $.ajax({
+                    contentType: 'text/json; charset=utf-8',
                     url: url,
+                    dataType: 'json',
                     type: method,
-                    data: { tids: JSON.stringify(id) }
+                    data: JSON.stringify(id)
                 }).done(function (data) {
+
+                    //if (data.code == 0) {
+                    //  
+                    //} else {
+                    //    swal("OMG", "删除操作失败了!", "error");
+                    //}
                     swal("操作成功!", "已成功删除数据！", "success");
-                    curhref.reload();
+                       curhref.reload();
+
 
                 }).error(function (data) {
                     swal("OMG", "删除操作失败了!", "error");
