@@ -29,12 +29,10 @@ namespace WebSupervisor
         /// </summary>
         /// <param Name="strFileName">excel文档路径</param>
         /// <returns></returns>
-        public int Import(string strFileName, string college)
+        public int Import(string strFileName,string college)
         {
             try
             {
-
-
                 Excel_dt = new DataTable();
                 HSSFWorkbook hssfworkbook;
                 using (FileStream file = new FileStream(strFileName, FileMode.Open, FileAccess.Read))
@@ -132,6 +130,8 @@ namespace WebSupervisor
                                 teachernamepick = teachername.Substring(0, index2);
                                 teachername = teachername.Remove(0, index2 + 1);
                             }
+
+
                             int j;
                             //判断星期几，返回对应的数字
                             switch (Excel_dt.Rows[i][name[1]].ToString().Substring(0, 1))
@@ -147,17 +147,18 @@ namespace WebSupervisor
                             {
                                 //获取节次  
                                 string strclassname = Excel_dt.Rows[i][name[2]].ToString();
+
                                 int classnumindex = strclassname.IndexOf("-");
                                 string tname = ClearTechnicalTitle(teachernamepick);
-                                string tid = collegeid(college) + i.ToString();
-                                if (i == 7)
-                                {
-                                    SqlParameter[] sp = new SqlParameter[2];
-                                    sp[0] = new SqlParameter("@tid", tid);
-                                    sp[1] = new SqlParameter("@teachername", tname);
-                                    sp[2] = new SqlParameter("@college", college);
-                                    DBHelper.ExecuteNonQuery("INSERT INTO [dbo].[teachers] ([tid], [teachername],[college]) VALUES (@tid,@teachername,@college)", CommandType.Text, sp);
-                                }
+                                string tid = collegeid(college)+tname;
+                                //if (i == 7)
+                                //{
+                                //    SqlParameter[] sp = new SqlParameter[3];
+                                //    sp[0] = new SqlParameter("@tid", tid);
+                                //    sp[1] = new SqlParameter("@teachername", tname);
+                                //    sp[2] = new SqlParameter("@college", college);
+                                //    DBHelper.ExecuteNonQuery("INSERT INTO [dbo].[teachers] ([tid], [teachername],[college]) VALUES (@tid,@teachername,@college)", CommandType.Text, sp);
+                                //}
                                 ClassesModel model = new ClassesModel();
                                 model.Cid = tid + Excel_dt.Rows[i][name[0]].ToString() + j.ToString() + strclassname.Substring(0, classnumindex) + strclassname.Substring(classnumindex + 1);
                                 model.Day = j;
@@ -172,18 +173,22 @@ namespace WebSupervisor
                                 model.Major = major;
                                 list.Add(model);
                             }
+                            else
+                            {
+                                return 0;
+                            }
                         }
                     }
                 }
+
                 DBHelper.BulkInsert<ClassesModel>(list);
+
                 return 1;
             }
             catch (Exception)
             {
                 return -1;
             }
-
-
         }
         private int Teacher(string strTeacher)
         {

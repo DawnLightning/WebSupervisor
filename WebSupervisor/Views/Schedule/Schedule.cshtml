@@ -25,13 +25,63 @@
 
         </div>
         <div id="tab2" class="tab_content" style="display: none; ">
-            @Html.Action("ScheduleInport");
-        </div>
+            <div class="row">
+                <div class="po-right">
+                    <div class="btn-group">
+                        <span>
+                            <button type="button" class="sch-btn blue" id="upload" value="read" />
+                        </span>
+                    </div>
+                </div>
+                <!--po-right-->
+            </div>
+            <div id="t">
+                @Html.Action("ScheduleInport");
+            </div>
         <div id="tab3" class="tab_content" style="display: none; ">
             @Html.Action("ScheduleExport");
         </div>
     </div>
 </div>
-<script src="~/js/jquery.js"></script>
 <script src="~/js/jquery.Huploadify.js"></script>
-<script src="~/js/btn.js"></script>
+ <script>
+        $(function () {
+            var up = $('#upload').Huploadify({
+                requeueErrors: true,
+                queueSizeLimit: 5,
+                //queueID:filelist,
+                auto: true,
+                fileTypeExts: '*.xls;*.xlsx;',
+                multi: true,
+                //fileSizeLimit:99999999,
+                breakPoints: false,
+                saveInfoLocal: true,
+                showUploadedPercent: true,//是否实时显示上传的百分比，如20%
+                showUploadedSize: true,
+                removeTimeout: 20,
+                uploader: '/Schedule/Upload',
+                fileObjName: 'Filedata',
+                onUploadSuccess: function (file) {
+
+
+
+                },
+                onUploadComplete: function (file, data) {
+
+                    //file.name 文件名
+                    //data是后台返回的数据
+                    $.ajax({
+                        contentType: 'text/json; charset=utf-8',
+                        url: '/Schedule/ScheduleInport',
+                        dataType: 'json',
+                        type: 'post',
+                        data: data,
+                        complete: function () {
+                            $.get("/Schedule/ScheduleInport", function (view) { $("#t").html(view); });
+                            //一个文件上传完毕后
+                        }
+                    });
+                }
+            });
+        });
+</script>

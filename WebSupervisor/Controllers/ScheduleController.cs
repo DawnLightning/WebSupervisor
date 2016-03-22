@@ -75,7 +75,7 @@ namespace WebSupervisor.Controllers
             //获取文件完整文件名
             string filename = Path.GetFileName(Filedata.FileName);
             //文件存放路径格式：~/App_Data/用户名/Excel/文件名
-            string virtualPath = string.Format("~/App_Data/{0}/{1}/{2}", Session["AdminUser"], "Excel", filename);
+            string virtualPath = string.Format("~/App_Data/{0}/{1}/{2}", Session["AdminUser"], "进度表", filename);
             string fullFileName = this.Server.MapPath(virtualPath);
 
             //创建文件夹，保存文件
