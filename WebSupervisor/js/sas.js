@@ -139,7 +139,7 @@ $(document).ready(function () {
                     //    swal("OMG", "删除操作失败了!", "error");
                     //}
                     swal("操作成功!", "已成功删除数据！", "success");
-                       curhref.reload();
+                    curhref.reload();
 
 
                 }).error(function (data) {
