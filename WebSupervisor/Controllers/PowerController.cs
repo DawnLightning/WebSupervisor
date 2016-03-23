@@ -8,6 +8,8 @@ using System.Data;
 using WebDAL;
 using WebSupervisor.Code.Classes;
 using PagedList;
+using System.IO;
+using System.Text;
 
 namespace WebSupervisor.Controllers
 {
@@ -64,22 +66,37 @@ namespace WebSupervisor.Controllers
         /// </summary>
         /// <param name="tid"></param>
         /// <returns></returns>
-        private ActionResult DeleteAdmin(string uid)
+        [HttpPost]
+        public ActionResult DeleteAdmin()
         {
+       
+
             try
             {
+                Stream s = System.Web.HttpContext.Current.Request.InputStream;
+                byte[] b = new byte[s.Length];
+                s.Read(b, 0, (int)s.Length);
+                string tid = Encoding.UTF8.GetString(b);
+                string result = HttpUtility.UrlDecode(tid).Replace("[", "").Replace("]", "");
+                string[] ids = result.Split(',');
+                string[] idarray = new string[ids.Length];
+                for (int i = 0; i < ids.Length; i++)
+                {
+                    idarray[i] = ids[i].Replace('"', ' ').Trim();
+                }
 
-                string delete_admin = string.Format("delete from admin where uid={0}", uid);
-             
-                DBHelper.ExecuteNonQuery(delete_admin, CommandType.Text, null);
-                return this.Json(new jsondata(1, "删除成功"));
+                for (int i = 0; i < idarray.Length; i++)
+                {
+                    string delete_admin = string.Format("delete from admin where uid={0}", idarray[i]);
+                    DBHelper.ExecuteNonQuery(delete_admin, CommandType.Text, null);
+                }
+
+                return this.Json(new jsondata(0, "删除成功"), JsonRequestBehavior.AllowGet);
             }
             catch (Exception)
             {
-                return this.Json(new jsondata(0, "删除失败"));
+                return this.Json(new jsondata(1, "删除失败"), JsonRequestBehavior.AllowGet);
             }
-
-
         }
 
     }
