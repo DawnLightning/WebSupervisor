@@ -8,6 +8,15 @@ namespace WebSupervisor.Models
 {
 
     /// <summary>
+    /// 手动填补显示
+    /// </summary>
+    public class HandSpareTime
+    {
+        public int Day;
+        public int Pclassnumber;
+        public int Nclassnumber;
+    }
+    /// <summary>
     /// 首选督导
     /// </summary>
     public class FirstSupervisorModel

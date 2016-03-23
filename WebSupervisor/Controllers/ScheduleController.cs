@@ -64,8 +64,8 @@ namespace WebSupervisor.Controllers
         }
         public ActionResult Upload(HttpPostedFileBase Filedata)
         {
-           
-          
+
+
             // 没有文件上传，直接返回
             if (Filedata == null || string.IsNullOrEmpty(Filedata.FileName) || Filedata.ContentLength == 0)
             {
@@ -75,7 +75,7 @@ namespace WebSupervisor.Controllers
             //获取文件完整文件名
             string filename = Path.GetFileName(Filedata.FileName);
             //文件存放路径格式：~/App_Data/用户名/Excel/文件名
-            string virtualPath = string.Format("~/App_Data/{0}/{1}/{2}", Session["AdminUser"], "Excel", filename);
+            string virtualPath = string.Format("~/App_Data/{0}/{1}/{2}", Session["AdminUser"], "进度表", filename);
             string fullFileName = this.Server.MapPath(virtualPath);
 
             //创建文件夹，保存文件
@@ -84,33 +84,37 @@ namespace WebSupervisor.Controllers
             {
                 Directory.CreateDirectory(path);
             }
-               
+
             if (!System.IO.File.Exists(fullFileName))
             {
                 Filedata.SaveAs(fullFileName);
-               
 
-            }else
+
+            }
+            else
             {
                 System.IO.File.Delete(fullFileName);
                 Filedata.SaveAs(fullFileName);
             }
-
-            ExcelHelper excel = new ExcelHelper();
-            
-            int code=excel.Import(fullFileName);
-            switch (code)
+            if (Session["College"] != null)
             {
-                case 0:
-                    return Json(new jsondata(1, filename));
-                case 1:
-                    return Json(new jsondata(0, filename));
-                case -1:
-                    return Json(new jsondata(1, filename));
-                default:
-                    return Json(new jsondata(1, filename));
+                ExcelHelper excel = new ExcelHelper();
+
+                int code = excel.Import(fullFileName, Session["College"].ToString());
+                switch (code)
+                {
+                    case 0:
+                        return Json(new jsondata(1, filename));
+                    case 1:
+                        return Json(new jsondata(0, filename));
+                    case -1:
+                        return Json(new jsondata(1, filename));
+                    default:
+                        return Json(new jsondata(1, filename));
+                }
             }
-            
+            else return Json(new jsondata(0, filename));
+
         }
         public ActionResult ExportCList(string cbspcial = "全部", string cbname = "全部", string cbclass = "全部")
         {

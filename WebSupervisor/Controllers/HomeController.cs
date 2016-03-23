@@ -158,6 +158,43 @@ namespace WebSupervisor.Controllers
         {
             return PartialView();
         }
+        public ActionResult InputTeacher(HttpPostedFileBase Filedata)
+        {
+            try
+            {
+                // 没有文件上传，直接返回
+                if (Filedata == null || string.IsNullOrEmpty(Filedata.FileName) || Filedata.ContentLength == 0)
+                {
+                    return HttpNotFound();
+                }
+
+                //获取文件完整文件名
+                string filename = Path.GetFileName(Filedata.FileName);
+                //文件存放路径格式：~/App_Data/用户名/Excel/文件名
+                string virtualPath = string.Format("~/App_Data/{0}/{1}/{2}", Session["AdminUser"], "教师信息表", filename);
+                string fullFileName = this.Server.MapPath(virtualPath);
+
+                //创建文件夹，保存文件
+                string path = Path.GetDirectoryName(fullFileName);
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+
+                if (!System.IO.File.Exists(fullFileName))
+                {
+                    Filedata.SaveAs(fullFileName);
+                    if (Session["College"] != null)
+                    {
+                        string s = Session["College"].ToString();
+                        ExcelHelper excel = new ExcelHelper();
+                        excel.ReadTeacherTable(fullFileName, Session["College"].ToString());
+                    }
+                }
+                return Json(new jsondata(1, "成功导入"));
+            }
+            catch { return Json(new jsondata(0, "导入失败")); }
+        }
         [HttpPost]
         public ActionResult AddTeacher(FormCollection fc)
         {
