@@ -54,7 +54,7 @@
                     var checkname = item.Cid;
                     int nowday = item.Day;
                     int nowWeeks = item.Week;
-                    string time = CalendarTools.getdata(Common.Year, nowWeeks, nowday - CalendarTools.weekdays(CalendarTools.CaculateWeekDay(Common.Year, Common.Month, Common.Day)), Common.Month, Common.Day).ToLongDateString() + "" + com.AddSeparator(item.ClassNumber);
+                    string time = CalendarTools.getdata(Common.Year, nowWeeks, nowday - CalendarTools.weekdays(CalendarTools.CaculateWeekDay(Common.Year, Common.Month, Common.Day)), Common.Month, Common.Day).ToLongDateString() + "" + com.AddSeparator(item.ClassNumber)+"节";
                     <tr>
                         <td width=2%>
                             <input type="hidden" name="idname" value="Cid">

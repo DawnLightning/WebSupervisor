@@ -37,6 +37,7 @@ namespace WebSupervisor.Controllers
             List<ReferenceModel> referencelist = new List<ReferenceModel>();
             if (year != "" && month != "" && day != "")
             {
+                int a = int.Parse(month);
                 int thisday = CalendarTools.weekdays(CalendarTools.CaculateWeekDay(int.Parse(year), int.Parse(month), int.Parse(day)));
                 int thisweek = CalendarTools.WeekOfYear(int.Parse(year), int.Parse(month), int.Parse(day)) - CalendarTools.WeekOfYear(Common.Year, Common.Month, Common.Day) + 1;
                 if (Session["Power"].ToString() == "管理员")
@@ -47,7 +48,7 @@ namespace WebSupervisor.Controllers
                                      select new ReferenceModel
                                      {
                                          Id = i++,
-                                         time = CalendarTools.getdata(Common.Year, c.Day, c.Week - CalendarTools.weekdays(CalendarTools.CaculateWeekDay(Common.Year, Common.Month, Common.Day)), Common.Month, Common.Day).ToLongDateString() + "" + com.AddSeparator(c.ClassNumber),
+                                         time = CalendarTools.getdata(Common.Year, thisweek, thisday - CalendarTools.weekdays(CalendarTools.CaculateWeekDay(Common.Year, Common.Month, Common.Day)), Common.Month, Common.Day).ToLongDateString() + "" + com.AddSeparator(c.ClassNumber) + "节",
                                          TeacherName = c.TeacherName,
                                          Address = c.Address,
                                          Major = c.Major,
@@ -63,7 +64,7 @@ namespace WebSupervisor.Controllers
                                      {
                                          Id = i++,
                                          Cid = c.Cid,
-                                         time = CalendarTools.getdata(Common.Year, c.Day, c.Week - CalendarTools.weekdays(CalendarTools.CaculateWeekDay(Common.Year, Common.Month, Common.Day)), Common.Month, Common.Day).ToLongDateString() + "" + com.AddSeparator(c.ClassNumber),
+                                         time = CalendarTools.getdata(Common.Year, thisweek, thisday - CalendarTools.weekdays(CalendarTools.CaculateWeekDay(Common.Year, Common.Month, Common.Day)), Common.Month, Common.Day).ToLongDateString() + "" + com.AddSeparator(c.ClassNumber) + "节",
                                          TeacherName = c.TeacherName,
                                          Address = c.Address,
                                          Major = c.Major,
@@ -82,7 +83,7 @@ namespace WebSupervisor.Controllers
                                      select new ReferenceModel
                                      {
                                          Id = i++,
-                                         time = CalendarTools.getdata(Common.Year, c.Day, c.Week - CalendarTools.weekdays(CalendarTools.CaculateWeekDay(Common.Year, Common.Month, Common.Day)), Common.Month, Common.Day).ToLongDateString() + "" + com.AddSeparator(c.ClassNumber),
+                                         time = CalendarTools.getdata(Common.Year, c.Week, c.Day - CalendarTools.weekdays(CalendarTools.CaculateWeekDay(Common.Year, Common.Month, Common.Day)), Common.Month, Common.Day).ToLongDateString() + "" + com.AddSeparator(c.ClassNumber) + "节",
                                          TeacherName = c.TeacherName,
                                          Address = c.Address,
                                          Major = c.Major,
@@ -97,7 +98,7 @@ namespace WebSupervisor.Controllers
                                      {
                                          Id = i++,
                                          Cid = c.Cid,
-                                         time = CalendarTools.getdata(Common.Year, c.Day, c.Week - CalendarTools.weekdays(CalendarTools.CaculateWeekDay(Common.Year, Common.Month, Common.Day)), Common.Month, Common.Day).ToLongDateString() + "" + com.AddSeparator(c.ClassNumber) + "节",
+                                         time = CalendarTools.getdata(Common.Year, c.Week, c.Day - CalendarTools.weekdays(CalendarTools.CaculateWeekDay(Common.Year, Common.Month, Common.Day)), Common.Month, Common.Day).ToLongDateString() + "" + com.AddSeparator(c.ClassNumber) + "节",
                                          TeacherName = c.TeacherName,
                                          Address = c.Address,
                                          Major = c.Major,
@@ -325,7 +326,7 @@ namespace WebSupervisor.Controllers
             return count.Count();
 
         }
-       
+
         /// <summary>
         /// 删除教师
         /// </summary>
@@ -340,26 +341,26 @@ namespace WebSupervisor.Controllers
                 byte[] b = new byte[s.Length];
                 s.Read(b, 0, (int)s.Length);
                 string tid = Encoding.UTF8.GetString(b);
-                string result =HttpUtility.UrlDecode(tid).Replace("[","").Replace("]","");
-                string [] ids=result.Split(',');
+                string result = HttpUtility.UrlDecode(tid).Replace("[", "").Replace("]", "");
+                string[] ids = result.Split(',');
                 string[] idarray = new string[ids.Length];
-                for (int i=0;i<ids.Length;i++)
+                for (int i = 0; i < ids.Length; i++)
                 {
                     idarray[i] = ids[i].Replace('"', ' ').Trim();
                 }
 
-                for (int i=0;i<idarray.Length;i++)
+                for (int i = 0; i < idarray.Length; i++)
                 {
                     string delete_teachers = string.Format("delete from teachers where tid='{0}'", idarray[i]);
                     string delete_classes = string.Format("delete from classes where teachername='{0}'", id2teachername(idarray[i]));
-                    string delete_sparetime = string.Format("delete from sparetime where tid='{0}'",idarray[i]);
+                    string delete_sparetime = string.Format("delete from sparetime where tid='{0}'", idarray[i]);
                     string delete_checkclass = string.Format("delete from checkclass where tid='{0}'", idarray[i]);
                     DBHelper.ExecuteNonQuery(delete_teachers, CommandType.Text, null);
                     DBHelper.ExecuteNonQuery(delete_classes, CommandType.Text, null);
                     DBHelper.ExecuteNonQuery(delete_sparetime, CommandType.Text, null);
                     DBHelper.ExecuteNonQuery(delete_checkclass, CommandType.Text, null);
                 }
-               
+
                 return this.Json(new jsondata(0, "删除成功"), JsonRequestBehavior.AllowGet);
             }
             catch (Exception)
@@ -369,7 +370,7 @@ namespace WebSupervisor.Controllers
 
 
         }
-        
+
         /// <summary>
         /// 将id转换为教师姓名
         /// </summary>
@@ -377,7 +378,7 @@ namespace WebSupervisor.Controllers
         /// <returns></returns>
         private string id2teachername(string id)
         {
-          
+
             foreach (TeachersModel teacher in teacherlist)
             {
                 if (teacher.Tid.Equals(id))
