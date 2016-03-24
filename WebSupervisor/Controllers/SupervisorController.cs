@@ -266,6 +266,7 @@ namespace WebSupervisor.Controllers
                                                  where t.College == Session["College"].ToString() && s.Week == @select[0] && s.Day == @select[1] && s.ClassNumber == @select[2]
                                                  select new FirstSupervisorModel
                                                  {
+                                                     Tid = t.Tid,
                                                      TeacherName = t.TeacherName,
                                                      IsArrage = Trueflase(s.Assign)
                                                  }).ToList();
@@ -274,6 +275,7 @@ namespace WebSupervisor.Controllers
                                                   where t.College == Session["College"].ToString()
                                                   select new SecondSupervisorModel
                                                   {
+                                                      Tid = t.Tid,
                                                       TeacherName = t.TeacherName,
                                                       Total = ch.total
                                                   }).ToList();
