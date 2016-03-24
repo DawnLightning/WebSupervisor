@@ -662,42 +662,43 @@
 <script>
     var tid;
     //tid: tid,
-    $(document).ready(function () {
-        $("#lastpage").click(function(){ @{if (i > 0) { i--; } } $.get("/Supervisor/SupervisorName", { p: @i }, function (result) {
-            $("#supervisorname").html(result);
-        });})
-        $("#nextpage").click(function(){ @{i++; } $.get("/Supervisor/SupervisorName", { p: @i }, function (result) {
-            $("#supervisorname").html(result);
-        });})
-        $("li[name='del']").click(function(){
-            tid=$(this).val();
-            $.ajax({
-                url: '/Supervisor/ShowSpareTime',
-                type: 'post',
-                dataType: "json",
-                //data: {tid:$(this).val()},
-                success: function (hlist) {
-                    for(i in hlist)
-                    {
-                        $("input[name='"+hlist[i].Day+"'][id='"+hlist[i].Pclassnumber+"']").attr('checked','checked');
-                        $("input[name='"+hlist[i].Day+"'][id='"+hlist[i].Nclassnumber+"']").attr('checked','checked');
-                    }
-                },
-                error: function () {
-                    alert("出错了");
-                }
-            })
-        })
-        $("a[href='#']").click(function(){
-            var w=$(this).attr('value');
-            $.get("/Supervisor/ShowSpareTime", { tid: tid,week:w }, function (hlist) {
+    $("#lastpage").click(function(){ @{if (i > 0) { i--; } } $.get("/Supervisor/SupervisorName", { p: @i }, function (result) {
+        $("#supervisorname").html(result);
+    });})
+    $("#nextpage").click(function(){ @{i++; } $.get("/Supervisor/SupervisorName", { p: @i }, function (result) {
+        $("#supervisorname").html(result);
+    });})
+    $("li[name='del']").click(function(){
+        tid=$(this).val();
+        $.ajax({
+            url: '/Supervisor/ShowSpareTime',
+            type: 'post',
+            dataType: "json",
+            data: {tid:tid},
+            async:false,
+            success: function (hlist) {
                 for(i in hlist)
                 {
-                    $("input[name='"+hlist[i].Day+"'][id='"+hlist[i].Pclassnumber+"']").attr('checked','checked');
-                    $("input[name='"+hlist[i].Day+"'][id='"+hlist[i].Nclassnumber+"']").attr('checked','checked');
+                    $("input[name='"+hlist[i].Day+"'][id='"+hlist[i].Pclassnumber+"']").prop('checked',true);
+                    $("input[name='"+hlist[i].Day+"'][id='"+hlist[i].Nclassnumber+"']").prop('checked',true);
                 }
+            },
+            error: function () {
+                alert("出错了");
             }
-            );
         })
+    })
+    $("a[href='#']").click(function(){
+        var w=$(this).attr('value');
+        $.get("/Supervisor/ShowSpareTime", { tid: tid,week:w }, function (hlist) {
+            for(i in hlist)
+            {
+                $("input[name='"+hlist[i].Day+"'][id='"+hlist[i].Pclassnumber+"']").prop('checked',true);
+                $("input[name='"+hlist[i].Day+"'][id='"+hlist[i].Nclassnumber+"']").prop('checked',true);
+            }
+        }
+        );
+    })
+    $(document).ready(function () {
     })
 </script>
