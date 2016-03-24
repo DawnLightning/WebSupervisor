@@ -1,6 +1,6 @@
 ﻿<div class="contain">
     <ul class="tabs">
-        <li class="active">      
+        <li class="active">
             <a href="#tab1">
                 临时表
             </a>
@@ -17,314 +17,287 @@
         </li>
     </ul>
 
-        <div class="tab_container"style="overflow-x:auto;">
+    <div class="tab_container" style="overflow-x:auto;">
+        <div id="tab1" class="tab_content" style="display: block; ">
             @Html.Action("ConfirmTemp")
+        </div>
+
+        <div id="tab2" class="tab_content" style="display: none; ">
             @Html.Action("ConfirmSure")
-            <div id="tab3" class="tab_content" style="display: none; ">
-                <div class="row">
-                    <div class="col-lg-3 col-sm-4 col-xs-9">
-                        <a href="#" class="button green" onclick="resend();" >
-                            重发
-                        </a>
-                        <a href="#" class="button red" onclick="deletesure();" >
-                            删除
-                        </a>
-                    </div>
+        </div>
+        <div id="tab3" class="tab_content" style="display: none; ">
+            <div class="row">
+                <div class="col-lg-3 col-sm-4 col-xs-9">
+                    <a href="#" class="button green" onclick="resend();">
+                        重发
+                    </a>
+                    <a href="#" class="button red" onclick="deletesure();">
+                        删除
+                    </a>
                 </div>
-                <div>
-                    <!-- /.table开始 -->
-                    <p></p>
-                    <table class="table table-condensed table-hover table-responsive ove">
-                        <tr bgcolor="#f5f5f5">
-                            <th width=2%>
-                                <form>
-                                    <input id="checkall" type="checkbox" name="checkall">
-                                </form>
-                            </th>
-                            <th>
-                                <p>
-                                    收件人
-                                </p>
-                            </th>
-                            <th>
-                                <p>
-                                    身份
-                                </p>
-                            </th>
-                            <th>
-                                <p>
-                                    主题
-                                </p>
-                            </th>
-                            <th>
-                                <p>
-                                    时间
-                                </p>
-                            </th>
-                            <th>
-                                <p>
-                                    类型
-                                </p>
-                            </th>
-                            <th>
-                                <p>
-                                    状态
-                                </p>
-                            </th>
-                        </tr>
-                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-                        <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-                    </table>
-                </div>
-                <!-- /.table -->
-                <div class="row">
-                    <div class="col-lg-9 col-sm-6 col-xs-4">
-                    </div>
-                    <div class="col-lg-3 col-sm-6 col-xs-8">
-                        <div class="pages">
-                            <p>
-                                页数：
-                            </p>
-                            <form method="get">
-                                <input type="text" name="pages" />
+            </div>
+            <div>
+                <!-- /.table开始 -->
+                <p></p>
+                <table class="table table-condensed table-hover table-responsive ove">
+                    <tr bgcolor="#f5f5f5">
+                        <th width=2%>
+                            <form>
+                                <input id="checkall" type="checkbox" name="checkall">
                             </form>
-                            <a href="#" class="button gray">
-                                下一页
-                            </a>
-                            <a href="#" class="button gray">
-                                上一页
-                            </a>
-                            <a href="#" class="button gray">
-                                转到
-                            </a>
-                        </div>
+                        </th>
+                        <th>
+                            <p>
+                                收件人
+                            </p>
+                        </th>
+                        <th>
+                            <p>
+                                身份
+                            </p>
+                        </th>
+                        <th>
+                            <p>
+                                主题
+                            </p>
+                        </th>
+                        <th>
+                            <p>
+                                时间
+                            </p>
+                        </th>
+                        <th>
+                            <p>
+                                类型
+                            </p>
+                        </th>
+                        <th>
+                            <p>
+                                状态
+                            </p>
+                        </th>
+                    </tr>
+                    <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                    <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                    <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                    <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                    <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                    <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                    <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                    <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                    <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                    <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                    <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                    <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                </table>
+            </div>
+            <!-- /.table -->
+            <div class="row">
+                <div class="col-lg-9 col-sm-6 col-xs-4">
+                </div>
+                <div class="col-lg-3 col-sm-6 col-xs-8">
+                    <div class="pages">
+                        <p>
+                            页数：
+                        </p>
+                        <form method="get">
+                            <input type="text" name="pages" />
+                        </form>
+                        <a href="#" class="button gray">
+                            下一页
+                        </a>
+                        <a href="#" class="button gray">
+                            上一页
+                        </a>
+                        <a href="#" class="button gray">
+                            转到
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <script>
-        //临时表按钮 保存
-        function save() {
+</div>
+<script>
+    //临时表按钮 保存
+    function save() {
+        swal({
+            title: "已保存",//放js显示乱码 所以放这里
+            timer: 1500,
+            showConfirmButton: false,
+            type: "success"
+        });
+        document.getElementById("editable1").contentEditable = "false";
+    };
+    //确认表 发送日志 按钮 删除
+    function delete1() {
+        swal({
+            title: "确认删除？",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Ok",
+            closeOnConfirm: false
+        },
+        function () {
             swal({
-                title: "已保存",//放js显示乱码 所以放这里
+                title: "已删除",
                 timer: 1500,
                 showConfirmButton: false,
                 type: "success"
             });
-            document.getElementById("editable1").contentEditable = "false";
-        };
-        //确认表 发送日志 按钮 删除
-        function delete1() {
-            swal({
-                title: "确认删除？",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Ok",
-                closeOnConfirm: false
-            },
-            function () {
-                swal({
-                    title: "已删除",
-                    timer: 1500,
-                    showConfirmButton: false,
-                    type: "success"
-                });
-            });
-        };
-        //确认表按钮 发送安排
-        function sendMsg() {
-            swal({
-                title: "已发送",
-                timer: 1500,
-                showConfirmButton: false,
-                type: "success"
-            });
-        };
-        //确认表按钮 发送结果
-        function sendResult() {
-            swal({
-                title: "已发送",
-                timer: 1500,
-                showConfirmButton: false,
-                type: "success"
-            });
-        };
-        //发送日志按钮 重发
-        function resend() {
-            swal({
-                title: "已重发",
-                timer: 1500,
-                showConfirmButton: false,
-                type: "success"
-            });
-        };
+        });
+    };
+    //确认表按钮 发送安排
+    function sendMsg() {
+        swal({
+            title: "已发送",
+            timer: 1500,
+            showConfirmButton: false,
+            type: "success"
+        });
+    };
+    //确认表按钮 发送结果
+    function sendResult() {
+        swal({
+            title: "已发送",
+            timer: 1500,
+            showConfirmButton: false,
+            type: "success"
+        });
+    };
+    //发送日志按钮 重发
+    function resend() {
+        swal({
+            title: "已重发",
+            timer: 1500,
+            showConfirmButton: false,
+            type: "success"
+        });
+    };
 
-    </script>
+</script>
 
-    <script id="Home_ConfirmTemp_header_template" type="text/template">
-        <tr bgcolor="#f5f5f5">
-            <th width=2%><input id="checkall" type="checkbox" name="checkall"></th>
-            <th><p>课程</p></th>
-            <th><p>授课内容</p></th>
-            <th><p>授课方式</p></th>
-            <th><p>专业</p></th>
-            <th><p>教室</p></th>
-            <th><p>教师</p></th>
-            <th><p>周次</p></th>
-            <th><p>听课时间</p></th>
-            <th><p>人员安排</p></th>
-        </tr>
-    </script>
-    <script id="Home_ConfirmSure_header_template" type="text/template">
-        <tr bgcolor="#f5f5f5">
-            <th width=2%><input id="checkall" type="checkbox" name="checkall"></th>
-            <th><p>课程</p></th>
-            <th><p>授课内容</p></th>
-            <th><p>授课方式</p></th>
-            <th><p>专业</p></th>
-            <th><p>教室</p></th>
-            <th><p>教师</p></th>
-            <th><p>周次</p></th>
-            <th><p>听课时间</p></th>
-            <th><p>人员安排</p></th>
-            <th><p>分数</p></th>
-        </tr>
-    </script>
+<script id="Home_ConfirmTemp_header_template" type="text/template">
+    <tr bgcolor="#f5f5f5">
+        <th width=2%><input id="checkall" type="checkbox" name="checkall"></th>
+        <th><p>课程</p></th>
+        <th><p>授课内容</p></th>
+        <th><p>授课方式</p></th>
+        <th><p>专业</p></th>
+        <th><p>教室</p></th>
+        <th><p>教师</p></th>
+        <th><p>周次</p></th>
+        <th><p>听课时间</p></th>
+        <th><p>人员安排</p></th>
+    </tr>
+</script>
+<script id="Home_ConfirmSure_header_template" type="text/template">
+    <tr bgcolor="#f5f5f5">
+        <th width=2%><input id="checkall" type="checkbox" name="checkall"></th>
+        <th><p>课程</p></th>
+        <th><p>授课内容</p></th>
+        <th><p>授课方式</p></th>
+        <th><p>专业</p></th>
+        <th><p>教室</p></th>
+        <th><p>教师</p></th>
+        <th><p>周次</p></th>
+        <th><p>听课时间</p></th>
+        <th><p>人员安排</p></th>
+        <th><p>分数</p></th>
+    </tr>
+</script>
 
-    <script id="Home_ConfirmTemp_empty_template" type="text/template">
-        <tr>
-            <td width=2%><input type="checkbox"></td>
-            <td> &nbsp;</td>
-            <td> &nbsp;</td>
-            <td> &nbsp;</td>
-            <td> &nbsp;</td>
-            <td> &nbsp;</td>
-            <td> &nbsp;</td>
-            <td> &nbsp;</td>
-            <td> &nbsp;</td>
-            <td> &nbsp;</td>
-        </tr>
-    </script>
-    <script id="Home_ConfirmSure_empty_template" type="text/template">
-        <tr>
-            <td width=2%><input type="checkbox"></td>
-            <td> &nbsp;</td>
-            <td> &nbsp;</td>
-            <td> &nbsp;</td>
-            <td> &nbsp;</td>
-            <td> &nbsp;</td>
-            <td> &nbsp;</td>
-            <td> &nbsp;</td>
-            <td> &nbsp;</td>
-            <td> &nbsp;</td>
-            <td> &nbsp;</td>
-        </tr>
-    </script>
-    <script id="Home_ConfirmTemp_template" type="text/template">
-        {{#list}}
-        <tr>
-            <td width=2%><input type="checkbox"></td>
-            <td> {{ . }}</td>
-            <td> {{ ClassContent}}</td>
-            <td> {{ ClassType}}</td>
-            <td> {{ Major}}</td>
-            <td> {{ Address}}</td>
-            <td> {{ TeacherName}}</td>
-            <td> {{ Week}}</td>
-            <td> {{ time}}</td>
-            <td> {{ SuperVisors}}</td>
-        </tr>
-        {{/list}}
-    </script>
-    <script id="Home_ConfirmSure_template" type="text/template">
-        {{#list}}
-        <tr>
-            <td width=2%><input type="checkbox"></td>
-            <td> {{ . }}</td>
-            <td> {{ ClassContent}}</td>
-            <td> {{ ClassType}}</td>
-            <td> {{ Major}}</td>
-            <td> {{ Address}}</td>
-            <td> {{ TeacherName}}</td>
-            <td> {{ Week}}</td>
-            <td> {{ time}}</td>
-            <td> {{ SuperVisors}}</td>
-            <td> {{ score}}</td>
-        </tr>
-        {{/list}}
-    </script>
-    <script id="Home_ConfirmTemp_td_new_template" type="text/template">
-            <td width=2%><input type="checkbox"></td>
-            <td><input type="text" id="ClassName" name="ClassName" value="" /> </td>
-            <td><input type="text" id="ClassContent" name="ClassContent" value="" /> </td>
-            <td><input type="text" id="ClassType" name="ClassType" value="" /> </td>
-            <td><input type="text" id="Major" name="Major" value="" /> </td>
-            <td><input type="text" id="Address" name="Address" value="" /> </td>
-            <td><input type="text" id="TeacherName" name="TeacherName" value="" /> </td>
-            <td><input type="text" id="Week" name="Week" value="" /> </td>
-            <td><input type="text" id="time" name="time" value="" /> </td>
-            <td><input type="text" id="SuperVisors" name="SuperVisors" value="" /> </td>
-    </script>
-    <script id="Home_ConfirmSure_td_new_template" type="text/template">
-            <td width=2%><input type="checkbox"></td>
-            <td><input type="text" id="ClassName" name="ClassName" value="" /> </td>
-            <td><input type="text" id="ClassContent" name="ClassContent" value="" /> </td>
-            <td><input type="text" id="ClassType" name="ClassType" value="" /> </td>
-            <td><input type="text" id="Major" name="Major" value="" /> </td>
-            <td><input type="text" id="Address" name="Address" value="" /> </td>
-            <td><input type="text" id="TeacherName" name="TeacherName" value="" /> </td>
-            <td><input type="text" id="Week" name="Week" value="" /> </td>
-            <td><input type="text" id="time" name="time" value="" /> </td>
-            <td><input type="text" id="SuperVisors" name="SuperVisors" value="" /> </td>
-            <td><input type="text" id="SuperVisors" name="SuperVisors" value="" /> </td>
-    </script>
-    <script id="Home_ConfirmTemp_edit_template" type="text/template">
-        {{#list}}
-        <tr>
-            <td width=2%><input type="checkbox"></td>
-            <td><input type="text" id="ClassName" name="ClassName" value="{{ ClassName}}" /> </td>
-            <td><input type="text" id="ClassContent" name="ClassContent" value="{{ ClassContent}}" /> </td>
-            <td><input type="text" id="ClassType" name="ClassType" value="{{ ClassType}}" /> </td>
-            <td><input type="text" id="Major" name="Major" value="{{ Major}}" /> </td>
-            <td><input type="text" id="Address" name="Address" value="{{ Address}}" /> </td>
-            <td><input type="text" id="TeacherName" name="TeacherName" value="{{ TeacherName}}" /> </td>
-            <td><input type="text" id="Week" name="Week" value="{{ Week}}" /> </td>
-            <td><input type="text" id="time" name="time" value="{{ time}}" /> </td>
-            <td><input type="text" id="SuperVisors" name="SuperVisors" value="{{ SuperVisors}}" /> </td>
-        </tr>
-        {{/list}}
-    </script>
-    <script id="Home_ConfirmSure_edit_template" type="text/template">
-        {{#list}}
-        <tr>
-            <td width=2%><input type="checkbox"></td>
-            <td><input type="text" id="ClassName" name="ClassName" value="{{ ClassName}}" /> </td>
-            <td><input type="text" id="ClassContent" name="ClassContent" value="{{ ClassContent}}" /> </td>
-            <td><input type="text" id="ClassType" name="ClassType" value="{{ ClassType}}" /> </td>
-            <td><input type="text" id="Major" name="Major" value="{{ Major}}" /> </td>
-            <td><input type="text" id="Address" name="Address" value="{{ Address}}" /> </td>
-            <td><input type="text" id="TeacherName" name="TeacherName" value="{{ TeacherName}}" /> </td>
-            <td><input type="text" id="Week" name="Week" value="{{ Week}}" /> </td>
-            <td><input type="text" id="time" name="time" value="{{ time}}" /> </td>
-            <td><input type="text" id="SuperVisors" name="SuperVisors" value="{{ SuperVisors}}" /> </td>
-            <td><input type="text" id="SuperVisors" name="SuperVisors" value="{{ score}}" /> </td>
-        </tr>
-        {{/list}}
-    </script>
-
-    <script id="Home_ConfirmSure_td_edit_template" type="text/template">
+<script id="Home_ConfirmTemp_empty_template" type="text/template">
+    <tr>
+        <td width=2%><input type="checkbox"></td>
+        <td> &nbsp;</td>
+        <td> &nbsp;</td>
+        <td> &nbsp;</td>
+        <td> &nbsp;</td>
+        <td> &nbsp;</td>
+        <td> &nbsp;</td>
+        <td> &nbsp;</td>
+        <td> &nbsp;</td>
+        <td> &nbsp;</td>
+    </tr>
+</script>
+<script id="Home_ConfirmSure_empty_template" type="text/template">
+    <tr>
+        <td width=2%><input type="checkbox"></td>
+        <td> &nbsp;</td>
+        <td> &nbsp;</td>
+        <td> &nbsp;</td>
+        <td> &nbsp;</td>
+        <td> &nbsp;</td>
+        <td> &nbsp;</td>
+        <td> &nbsp;</td>
+        <td> &nbsp;</td>
+        <td> &nbsp;</td>
+        <td> &nbsp;</td>
+    </tr>
+</script>
+<script id="Home_ConfirmTemp_template" type="text/template">
+    {{#list}}
+    <tr>
+        <td width=2%><input type="checkbox"></td>
+        <td> {{ . }}</td>
+        <td> {{ ClassContent}}</td>
+        <td> {{ ClassType}}</td>
+        <td> {{ Major}}</td>
+        <td> {{ Address}}</td>
+        <td> {{ TeacherName}}</td>
+        <td> {{ Week}}</td>
+        <td> {{ time}}</td>
+        <td> {{ SuperVisors}}</td>
+    </tr>
+    {{/list}}
+</script>
+<script id="Home_ConfirmSure_template" type="text/template">
+    {{#list}}
+    <tr>
+        <td width=2%><input type="checkbox"></td>
+        <td> {{ . }}</td>
+        <td> {{ ClassContent}}</td>
+        <td> {{ ClassType}}</td>
+        <td> {{ Major}}</td>
+        <td> {{ Address}}</td>
+        <td> {{ TeacherName}}</td>
+        <td> {{ Week}}</td>
+        <td> {{ time}}</td>
+        <td> {{ SuperVisors}}</td>
+        <td> {{ score}}</td>
+    </tr>
+    {{/list}}
+</script>
+<script id="Home_ConfirmTemp_td_new_template" type="text/template">
+    <td width=2%><input type="checkbox"></td>
+    <td><input type="text" id="ClassName" name="ClassName" value="" /> </td>
+    <td><input type="text" id="ClassContent" name="ClassContent" value="" /> </td>
+    <td><input type="text" id="ClassType" name="ClassType" value="" /> </td>
+    <td><input type="text" id="Major" name="Major" value="" /> </td>
+    <td><input type="text" id="Address" name="Address" value="" /> </td>
+    <td><input type="text" id="TeacherName" name="TeacherName" value="" /> </td>
+    <td><input type="text" id="Week" name="Week" value="" /> </td>
+    <td><input type="text" id="time" name="time" value="" /> </td>
+    <td><input type="text" id="SuperVisors" name="SuperVisors" value="" /> </td>
+</script>
+<script id="Home_ConfirmSure_td_new_template" type="text/template">
+    <td width=2%><input type="checkbox"></td>
+    <td><input type="text" id="ClassName" name="ClassName" value="" /> </td>
+    <td><input type="text" id="ClassContent" name="ClassContent" value="" /> </td>
+    <td><input type="text" id="ClassType" name="ClassType" value="" /> </td>
+    <td><input type="text" id="Major" name="Major" value="" /> </td>
+    <td><input type="text" id="Address" name="Address" value="" /> </td>
+    <td><input type="text" id="TeacherName" name="TeacherName" value="" /> </td>
+    <td><input type="text" id="Week" name="Week" value="" /> </td>
+    <td><input type="text" id="time" name="time" value="" /> </td>
+    <td><input type="text" id="SuperVisors" name="SuperVisors" value="" /> </td>
+    <td><input type="text" id="SuperVisors" name="SuperVisors" value="" /> </td>
+</script>
+<script id="Home_ConfirmTemp_edit_template" type="text/template">
+    {{#list}}
+    <tr>
         <td width=2%><input type="checkbox"></td>
         <td><input type="text" id="ClassName" name="ClassName" value="{{ ClassName}}" /> </td>
         <td><input type="text" id="ClassContent" name="ClassContent" value="{{ ClassContent}}" /> </td>
@@ -335,23 +308,55 @@
         <td><input type="text" id="Week" name="Week" value="{{ Week}}" /> </td>
         <td><input type="text" id="time" name="time" value="{{ time}}" /> </td>
         <td><input type="text" id="SuperVisors" name="SuperVisors" value="{{ SuperVisors}}" /> </td>
-        <td><input type="text" id="SuperVisors" name="SuperVisors" value="{{score}}" /> </td>
+    </tr>
+    {{/list}}
+</script>
+<script id="Home_ConfirmSure_edit_template" type="text/template">
+    {{#list}}
+    <tr>
+        <td width=2%><input type="checkbox"></td>
+        <td><input type="text" id="ClassName" name="ClassName" value="{{ ClassName}}" /> </td>
+        <td><input type="text" id="ClassContent" name="ClassContent" value="{{ ClassContent}}" /> </td>
+        <td><input type="text" id="ClassType" name="ClassType" value="{{ ClassType}}" /> </td>
+        <td><input type="text" id="Major" name="Major" value="{{ Major}}" /> </td>
+        <td><input type="text" id="Address" name="Address" value="{{ Address}}" /> </td>
+        <td><input type="text" id="TeacherName" name="TeacherName" value="{{ TeacherName}}" /> </td>
+        <td><input type="text" id="Week" name="Week" value="{{ Week}}" /> </td>
+        <td><input type="text" id="time" name="time" value="{{ time}}" /> </td>
+        <td><input type="text" id="SuperVisors" name="SuperVisors" value="{{ SuperVisors}}" /> </td>
+        <td><input type="text" id="SuperVisors" name="SuperVisors" value="{{ score}}" /> </td>
+    </tr>
+    {{/list}}
+</script>
+
+<script id="Home_ConfirmSure_td_edit_template" type="text/template">
+    <td width=2%><input type="checkbox"></td>
+    <td><input type="text" id="ClassName" name="ClassName" value="{{ ClassName}}" /> </td>
+    <td><input type="text" id="ClassContent" name="ClassContent" value="{{ ClassContent}}" /> </td>
+    <td><input type="text" id="ClassType" name="ClassType" value="{{ ClassType}}" /> </td>
+    <td><input type="text" id="Major" name="Major" value="{{ Major}}" /> </td>
+    <td><input type="text" id="Address" name="Address" value="{{ Address}}" /> </td>
+    <td><input type="text" id="TeacherName" name="TeacherName" value="{{ TeacherName}}" /> </td>
+    <td><input type="text" id="Week" name="Week" value="{{ Week}}" /> </td>
+    <td><input type="text" id="time" name="time" value="{{ time}}" /> </td>
+    <td><input type="text" id="SuperVisors" name="SuperVisors" value="{{ SuperVisors}}" /> </td>
+    <td><input type="text" id="SuperVisors" name="SuperVisors" value="{{score}}" /> </td>
+    <input type="button" id="tdsubmit" value="submit" />
+    <input type="button" id="tdcancel" value="cancel" />
+</script>
+<script id="Home_ConfirmTemp_td_edit_template" type="text/template">
+    <td width=2%><input type="checkbox"></td>
+    <td><input type="text" id="ClassName" name="ClassName" value="{{ ClassName}}" /> </td>
+    <td><input type="text" id="ClassContent" name="ClassContent" value="{{ ClassContent}}" /> </td>
+    <td><input type="text" id="ClassType" name="ClassType" value="{{ ClassType}}" /> </td>
+    <td><input type="text" id="Major" name="Major" value="{{ Major}}" /> </td>
+    <td><input type="text" id="Address" name="Address" value="{{ Address}}" /> </td>
+    <td><input type="text" id="TeacherName" name="TeacherName" value="{{ TeacherName}}" /> </td>
+    <td><input type="text" id="Week" name="Week" value="{{ Week}}" /> </td>
+    <td><input type="text" id="time" name="time" value="{{ time}}" /> </td>
+    <td><input type="text" id="SuperVisors" name="SuperVisors" value="{{ SuperVisors}}" /> </td>
+    <td>
         <input type="button" id="tdsubmit" value="submit" />
         <input type="button" id="tdcancel" value="cancel" />
-    </script>
-    <script id="Home_ConfirmTemp_td_edit_template" type="text/template">
-        <td width=2%><input type="checkbox"></td>
-        <td><input type="text" id="ClassName" name="ClassName" value="{{ ClassName}}" /> </td>
-        <td><input type="text" id="ClassContent" name="ClassContent" value="{{ ClassContent}}" /> </td>
-        <td><input type="text" id="ClassType" name="ClassType" value="{{ ClassType}}" /> </td>
-        <td><input type="text" id="Major" name="Major" value="{{ Major}}" /> </td>
-        <td><input type="text" id="Address" name="Address" value="{{ Address}}" /> </td>
-        <td><input type="text" id="TeacherName" name="TeacherName" value="{{ TeacherName}}" /> </td>
-        <td><input type="text" id="Week" name="Week" value="{{ Week}}" /> </td>
-        <td><input type="text" id="time" name="time" value="{{ time}}" /> </td>
-        <td><input type="text" id="SuperVisors" name="SuperVisors" value="{{ SuperVisors}}" /> </td>
-        <td>
-            <input type="button" id="tdsubmit" value="submit" />
-            <input type="button" id="tdcancel" value="cancel" />
-        </td>
-    </script>
+    </td>
+</script>
