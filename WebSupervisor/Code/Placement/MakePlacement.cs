@@ -55,11 +55,7 @@ namespace WebSupervisor.Code.Placement
                         {
                             if (GetDaySpareCount(Day) >= config.MinPeople && GetWeekArrageCount(Week) <= config.PlanNumber - 1)
                             {
-                                UpdataDay(listcheckcount);
-                              
-                             
-                              
-                                  
+                                UpdataDay(listcheckcount);                                                                                                                          
                                     for (Index = 0; Index < 15; Index++)
                                     {
                                         List<SpareTimeModel> sptlist = GetSpareTimeList(spareclass[Index]);

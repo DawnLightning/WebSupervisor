@@ -237,21 +237,19 @@ namespace WebSupervisor.Controllers
             {
                 com.xmlSave(path);
 
-                return Content("<script language='javascript' type='text/javascript'>alert('保存成功！！');window.location.href= '/Home/Set'</script>");
+                return Json(new jsondata(1, "保存成功！"), JsonRequestBehavior.AllowGet);
             }
             catch (Exception)
             {
-                return Content("<script language='javascript' type='text/javascript'>alert('保存失败！！');window.location.href= '/Home/Set'</script>");
+                return Json(new jsondata(0, "保存失败！"), JsonRequestBehavior.AllowGet);
             }
 
         }
 
 
-        public PartialViewResult Teacher(int page = 1)
+        public PartialViewResult Teacher()
         {
-
-            IPagedList<TeachersModel> Iteachers = teacherlist.ToPagedList(page, 10);
-            return PartialView(Iteachers);
+            return PartialView();
         }
         public PartialViewResult TeacherList(int page = 1)
         {
@@ -293,7 +291,7 @@ namespace WebSupervisor.Controllers
         {
             MakePlacement mp = new MakePlacement(ac);
             mp.CreatPlan();
-            return Json(new { web = 1 });
+            return Redirect("/#!/Home/Confirm");
         }
         //根据周天节次获得教师姓名
         public ActionResult ArrageAddwdc(string week, string day, string classnumber)

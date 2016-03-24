@@ -21,6 +21,7 @@ namespace WebSupervisor
         DataTable Excel_dt;
         List<ClassesModel> list = new List<ClassesModel>();
         List<TeachersModel> teacherlist = new List<TeachersModel>();
+        List<CheckClassModel> checkclasslist = new List<CheckClassModel>();
         List<string> dcs = new List<string> { "序号", "课程", "授课内容", "授课方式", "专业", "教室", "教师", "周次", "听课时间", "听课人员安排", "分数", "申报" };//表格的列头信息
         List<string> ListSupervisor = new List<string>();//暂存分离出的督导员
         #region 读取教学进度表
@@ -265,12 +266,18 @@ namespace WebSupervisor
                 if (Excel_dt.Rows[i][0].ToString().Length != 0 && Excel_dt.Rows[i][1].ToString().Length == 11)
                 {
                     TeachersModel m = new TeachersModel();
-                    m.Tid = collegeid(college) + i.ToString();
+                    m.Tid = collegeid(college) + i.ToString();                    
                     m.TeacherName = Excel_dt.Rows[i][0].ToString();
                     m.Phone = Excel_dt.Rows[i][1].ToString();
                     if (Excel_dt.Rows[i][2].ToString() != null && Excel_dt.Rows[i][2].ToString() == "1")
                     {
                         m.Indentify = 1;
+                        CheckClassModel c = new CheckClassModel();
+                        c.Tid = collegeid(college) + i.ToString();
+                        c.DayNumber = 0;
+                        c.WeekNumber = 0;
+                        c.total = 0;
+                        checkclasslist.Add(c);
                     }
                     else
                     {
@@ -288,6 +295,7 @@ namespace WebSupervisor
 
             }
             DBHelper.BulkInsert<TeachersModel>(teacherlist);
+            DBHelper.BulkInsert<CheckClassModel>(checkclasslist);
         }
         #endregion
         #region 导出安排表excel表格

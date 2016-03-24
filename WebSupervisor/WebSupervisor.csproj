@@ -177,7 +177,6 @@
     <Content Include="image\7.png" />
     <Content Include="image\8.png" />
     <Content Include="image\9.gif" />
-    <Content Include="js\btn.js" />
     <Content Include="js\curhref.js" />
     <Content Include="js\html5shiv.min.js" />
     <Content Include="js\jquery.fileDownload.js" />
