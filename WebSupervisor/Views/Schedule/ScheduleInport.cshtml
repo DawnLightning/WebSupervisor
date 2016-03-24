@@ -110,3 +110,49 @@
   
 </div>
 <!-- /.table -->
+<script src="~/js/jquery.Huploadify.js"></script>
+<script>
+$(function () {
+    var up = $('#upload').Huploadify({
+        requeueErrors: true,
+        queueSizeLimit: 5,
+        //queueID:filelist,
+        auto: true,
+        fileTypeExts: '*.xls;*.xlsx;',
+        multi: true,
+        //fileSizeLimit:99999999,
+        breakPoints: false,
+        saveInfoLocal: true,
+        showUploadedPercent: true,//是否实时显示上传的百分比，如20%
+        showUploadedSize: true,
+        removeTimeout: 20,
+        uploader: '/Schedule/Upload',
+        fileObjName: 'Filedata',
+        onUploadSuccess: function (file) {
+
+
+
+        },
+        onUploadComplete: function (file, data) {
+
+            //file.name 文件名
+            //data是后台返回的数据
+            $.ajax({
+                contentType: 'text/json; charset=utf-8',
+                url: '/Schedule/ScheduleInport',
+                dataType: 'json',
+                type: 'post',
+                data: data,
+                complete: function () {
+                    //$.get("/Schedule/ScheduleInport", function (view) { $("#tab2").html(view); });
+                    curhref.replacetag({
+                        url: "/Schedule/ScheduleInport",
+                        tag: "#tab2"
+                    });
+                    //一个文件上传完毕后
+                }
+            });
+        }
+    });
+});
+</script>
