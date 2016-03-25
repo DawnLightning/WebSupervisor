@@ -1,6 +1,9 @@
 ﻿.btnmodify{
 
 }
+.clear_line{
+    clear:both;
+}
 .checked_box{
     width:32px;
     height:32px;

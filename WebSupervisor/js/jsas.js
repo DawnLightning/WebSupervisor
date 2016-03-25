@@ -223,7 +223,7 @@ $(document).ready(function () {
     $(document).on("click", "#tablesupervisor2 tr", function () {
         if ($(this).children("td:first").hasClass("checked_box")) {
             $(this).children("td:first").removeClass("checked_box");
-            $("#tablesupervisor tbody").find("tr[name='" + $(this).attr("name") + "'").remove();
+            $("#tablesupervisor tbody").find("tr[name='" + $(this).attr("name") + "']").remove();
         }
         else {
             $(this).children("td:first").addClass("checked_box");
