@@ -22,7 +22,14 @@ namespace WebSupervisor.Controllers
         
         List<ClassesModel> lstclasses = DBHelper.ExecuteList<ClassesModel>("select * from classes", CommandType.Text, null);
         //string selectcommand = string.Format(, Session["College"].ToString());
+        int a;
         static List<ReportFileStatusModel>  lstfile = new List<ReportFileStatusModel>();
+        public ScheduleController()
+        {
+            int i = 0;
+            a = i;
+            string s = Session["College"].ToString();
+        }
         // GET: Schedule+
         public PartialViewResult Schedule()
         {
