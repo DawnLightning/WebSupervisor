@@ -13,12 +13,14 @@
     clear:both;
 }
 .checked_box{
-    width:32px;
-    height:32px;
-    background-image:url("images/check_box_32px_1181750_easyicon.net.png")
+    width:16px;
+    height:16px;
+    background-image:url("images/check_box_32px_1181750_easyicon.net.png");
+    background-size:contain;
 }
 .checked_box_blank{
-    width:32px;
-    height:32px;
-    background-image:url("images/check_box_outline_blank_32px_1181751_easyicon.net.png")
+    width:16px;
+    height:16px;
+    background-image:url("images/check_box_outline_blank_32px_1181751_easyicon.net.png");
+     background-size:contain;
 }
