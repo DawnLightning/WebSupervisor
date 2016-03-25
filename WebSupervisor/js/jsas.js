@@ -1,39 +1,5 @@
 ﻿// JavaScript Document
 
-//---------Supervisor--------------------
-function selectallweek(thisbox, thisform) {
-    var check = thisbox.checked;
-    // 遍历 form  
-    for (var i = 0; i < thisform.elements.length; i++) {
-        // 提取控件  
-        var checkbox = thisform.elements[i];
-        // 检查是否是指定的控件  
-        if (checkbox.name != thisbox.name && checkbox.type === "checkbox" && checkbox.checked != check) {
-            checkbox.checked = check;
-        }
-    }
-}
-
-function selectday(thisday, dayname) {
-    var allCheckBoxs = document.getElementsByName(dayname);
-    var selectOrUnselect = true;
-    if (thisday.checked) {
-        selectOrUnselect = false;
-    }
-
-    if (selectOrUnselect) {
-
-        for (var i = 0; i < allCheckBoxs.length; i++) {
-            allCheckBoxs[i].checked = false;
-        }
-    } else {
-        for (var i = 0; i < allCheckBoxs.length; i++) {
-            allCheckBoxs[i].checked = true;
-        }
-    }
-}
-
-
 //-------------------Ready------------------------
 $(document).ready(function () {
     //----------------checkbox----------------
@@ -212,7 +178,109 @@ $(document).ready(function () {
 
 
 
+    //---------Supervisor-----------
+    function check_box(box, force) {
+        var checked = $(box).hasClass("checked_box");
+        if (typeof force === "boolean") {
+            checked = force ? false : true;
+        }
+        if (checked) {
+            $(box).removeClass("checked_box");
+            $(box).addClass("checked_box_blank");
+        }
+        else {
+            $(box).removeClass("checked_box_blank");
+            $(box).addClass("checked_box");
+        }
+    }
+    function get_free_time() {
+        var freetime = {};
+        $("div[name='freetime']").each(function (i, e) {
+            var d = i % 7 + 1, t = parseInt(i / 7) + 1;
+            /*  
+        //二维
+              if (typeof freetime[d] == "undefined") {
+                  freetime[d] = {};
+              }
+              freetime[d][t] = $(e).hasClass("checked_box");
+              */
+            //一维
+            if ($(e).hasClass("checked_box")) {
+                if (typeof freetime[d] == "undefined") {
+                    freetime[d] = [];
+                }
+                freetime[d].push(t);
+            }
+        });
+        return freetime;
+    }
+    $(document).on("click", "#submit_freetime", function () {
 
+        $.ajax({
+            url: '/Supervisor/SaveSpareTime',
+            type: 'post',
+            dataType: "json",
+            data: { freetime: JSON.stringify(get_free_time()) },
+            async: false,
+            success: function () {
+                //这里
+            },
+            error: function () {
+                alert("出错了");
+            }
+        })
+    });
+    $(document).on("click", "div[name='freetime']",
+    function () {
+        check_box(this);
+    });
+
+    $(document).on("click", "div[name='freetime_check_row']",
+    function () {
+        var checked;
+        if ($(this).data("checked")) {
+            $(this).removeData("checked");
+            checked = false;
+        } else {
+            $(this).data("checked", true);
+            checked = true;
+        }
+        $(this).parents("tr").find("div[name='freetime']").each(function () {
+            check_box(this, checked);
+        });
+    });
+    $(document).on("click", "div[name='freetime_check_week']",
+    function () {
+        var checked;
+        if ($(this).data("checked")) {
+            $(this).removeData("checked");
+            checked = false;
+        } else {
+            $(this).data("checked", true);
+            checked = true;
+        }
+        $(this).parents("table").find("div[name='freetime']").each(function () {
+            check_box(this, checked);
+        });
+    });
+    $(document).on("click", "div[name='freetime_check_day']",
+    function () {
+        var i = $("div[name='freetime_check_day']").index(this);
+
+        var checked;
+        if ($(this).data("checked")) {
+            $(this).removeData("checked");
+            checked = false;
+        } else {
+
+            $(this).data("checked", true);
+            checked = true;
+        }
+        $(this).parents("table").find("tr").each(function () {
+
+            check_box($(this).find("div[name='freetime']").eq(i), checked);
+        });
+    });
     //---------Share/_ArrageAdd-----------
     $(document).on("click", "#tablesupervisor1 tr", function () {
         $(this).siblings().find("td:first").removeClass("checked_box");
