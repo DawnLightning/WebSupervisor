@@ -290,7 +290,7 @@ namespace WebSupervisor.Controllers
         public ActionResult AutoArrange(ArrageConfigModel ac)
         {
             MakePlacement mp = new MakePlacement(ac);
-            mp.CreatPlan();
+            mp.CreatPlan(Session["College"].ToString());
             return Redirect("/#!/Home/Confirm");
         }
         //根据周天节次获得教师姓名

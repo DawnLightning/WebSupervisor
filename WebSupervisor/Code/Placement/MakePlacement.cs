@@ -29,20 +29,20 @@ namespace WebSupervisor.Code.Placement
         /// <summary>
         /// 重新生成听课安排
         /// </summary>
-        public void ReCreatPlan()
+        public void ReCreatPlan(string college)
         {
             if (ResetArrageData()>0)
             {
                 ResetCheckClass();
                 ResetClases();
                 ResetSpareTime();
-                CreatPlan();
+                CreatPlan(college);
             }
         }
         /// <summary>
         /// 生成听课安排
         /// </summary>
-        public void CreatPlan()
+        public void CreatPlan(string college)
         {
             if (config!=null)
             {
@@ -73,7 +73,7 @@ namespace WebSupervisor.Code.Placement
                                         {
                                             foreach (SpareTimeModel spt in sptlist)
                                             {
-                                                group = group + "," + IdToName(spt.Tid);
+                                                group = group + "," + IdToName(spt.Tid,college);
                                                
                                             }
                                             WritePlacement(sptlist, classmodel, group);
@@ -82,7 +82,7 @@ namespace WebSupervisor.Code.Placement
                                         {
                                             for (int i = 0; i < config.MaxPeople; i++)
                                             {
-                                                group = group + "," + IdToName(sptlist[i].Tid);
+                                                group = group + "," + IdToName(sptlist[i].Tid,college);
                                               
                                             }
                                             WritePlacement(sptlist, classmodel, group);
@@ -320,13 +320,23 @@ namespace WebSupervisor.Code.Placement
         /// </summary>
         /// <param name="tid"></param>
         /// <returns></returns>
-        private string IdToName(string tid)
+        private string IdToName(string tid,string college)
         {
             foreach (TeachersModel model in listsupervisor)
             {
-                if (model.Tid.Equals(tid))
+                if (college == null)
                 {
-                    return model.TeacherName;
+                    if (model.Tid.Equals(tid))
+                    {
+                        return model.TeacherName;
+                    }
+                }
+                else
+                {
+                    if (model.Tid.Equals(tid)&&model.College.Equals(college))
+                    {
+                        return model.TeacherName;
+                    }
                 }
             }
             return "";

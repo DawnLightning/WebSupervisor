@@ -8,6 +8,7 @@ using WebDAL;
 using System.Data;
 using System.Data.SqlClient;
 using WebSupervisor.Code.Placement;
+using WebSupervisor.Code.Classes;
 
 namespace WebSupervisor.Controllers
 {
@@ -55,16 +56,16 @@ namespace WebSupervisor.Controllers
                 }
                     
             }
-            foreach (SupervisorModel supervisor in lstsupervisor)
-            {
-                if (supervisor.Phone == username && supervisor.Password == password)
-                {
-                    Session["AdminUser"] = username;
-                    return RedirectToAction("CheifSupervisor", "Supervisor", "");
-                }
-            
-            }
-            return Content("<script language='javascript' type='text/javascript'>alert('账号或者密码有误，请核对后再登录！！');window.location.href= '/Account/Login'</script>");
+            //foreach (SupervisorModel supervisor in lstsupervisor)
+            //{
+            //    if (supervisor.Phone == username && supervisor.Password == password)
+            //    {
+            //        Session["AdminUser"] = username;
+            //        return RedirectToAction("CheifSupervisor", "Supervisor", "");
+            //    }
+
+            //}
+            return this.Json(new jsondata(0, "账号或密码有错，请核对！"), JsonRequestBehavior.AllowGet);
         }
         /// <summary>
         /// 注销

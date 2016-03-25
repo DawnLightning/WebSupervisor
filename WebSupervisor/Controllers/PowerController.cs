@@ -15,7 +15,7 @@ namespace WebSupervisor.Controllers
 {
     public class PowerController : Controller
     {
-        List<AdminModel> adminlist = DBHelper.ExecuteList<AdminModel>("select * from [admin]", CommandType.Text, null);
+        List<AdminModel> adminlist = DBHelper.ExecuteList<AdminModel>("select * from admin", CommandType.Text, null);
         // GET: Power
         public ActionResult Index()
         {
@@ -34,11 +34,11 @@ namespace WebSupervisor.Controllers
         {
 
             //SqlParameterCollection
-            List<AdminModel> id = DBHelper.ExecuteList<AdminModel>("select * from admin", CommandType.Text, null);
+            //List<AdminModel> adminlist = DBHelper.ExecuteList<AdminModel>("select * from admin", CommandType.Text, null);
 
             AdminModel model = new AdminModel();
 
-            model.UId = id.Max(m => m.UId) + 1;
+            model.UId = adminlist.Max(m => m.UId) + 1;
             model.UserName = fc["username"];
             model.Password = fc["password"];
             model.College = fc["college"];

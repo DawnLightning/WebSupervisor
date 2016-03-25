@@ -21,8 +21,9 @@ namespace WebSupervisor.Controllers
     {
         
         List<ClassesModel> lstclasses = DBHelper.ExecuteList<ClassesModel>("select * from classes", CommandType.Text, null);
+        //string selectcommand = string.Format(, Session["College"].ToString());
         static List<ReportFileStatusModel>  lstfile = new List<ReportFileStatusModel>();
-        // GET: Schedule
+        // GET: Schedule+
         public PartialViewResult Schedule()
         {
             return PartialView();
@@ -30,11 +31,22 @@ namespace WebSupervisor.Controllers
 
         public PartialViewResult ScheduleList(int page = 1)
         {
-
             string path = Server.MapPath(Common.ConfPath);
             ViewBag.path = path;
-            IPagedList<ClassesModel> Lclasses = lstclasses.ToPagedList(page, 12);
-            return PartialView(Lclasses);
+            if (Session["Power"].ToString() == "管理员")
+            {
+                List<TeachersModel> techernames = DBHelper.ExecuteList<TeachersModel>("SELECT teachername FROM [dbo].[teachers] where college='" + Session["College"].ToString()+"'", CommandType.Text, null);
+                IPagedList<ClassesModel> Lclasses = (from c in lstclasses
+                                                     join tn in techernames on c.TeacherName equals tn.TeacherName
+                                                     select c).ToPagedList(page, 12);
+                return PartialView(Lclasses);
+            }
+            else
+            {
+                IPagedList<ClassesModel> Lclasses = lstclasses.ToPagedList(page, 12);
+                return PartialView(Lclasses);
+            }
+
         }
     
         public ActionResult ScheduleExport(string cbspcial = "全部", string cbname = "全部", string cbclass = "全部", int page = 1)
