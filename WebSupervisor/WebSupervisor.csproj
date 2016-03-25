@@ -148,6 +148,9 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="css\images\check_box_32px_1181750_easyicon.net.png" />
+    <Content Include="css\images\check_box_outline_blank_32px_1181751_easyicon.net.png" />
+    <Content Include="css\jsas.css" />
     <Content Include="css\lj.css" />
     <Content Include="css\pikaday.css" />
     <Content Include="css\sas.css" />
@@ -187,8 +190,9 @@
     <Content Include="js\npm.js" />
     <Content Include="js\pikaday.js" />
     <Content Include="js\respond.min.js" />
+    <Content Include="js\jsas.js" />
     <Content Include="js\sas.js" />
-    <Content Include="js\sas.old.js" />
+    <Content Include="js\jsas.old.js" />
     <Content Include="js\sweetalert.min.js" />
     <Content Include="js\vtab.js" />
     <Content Include="less\vtab.js" />
@@ -375,6 +379,9 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

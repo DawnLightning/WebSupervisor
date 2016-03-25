@@ -21,6 +21,7 @@ namespace WebSupervisor.Models
     /// </summary>
     public class FirstSupervisorModel
     {
+        public string Tid { set; get; }
         public string TeacherName { set; get; }
         public string IsArrage { set; get; }
     }
@@ -30,6 +31,7 @@ namespace WebSupervisor.Models
     /// </summary>
     public class SecondSupervisorModel
     {
+        public string Tid { set; get; }
         public string TeacherName { set; get; }
         public int Total { set; get; }
     }
