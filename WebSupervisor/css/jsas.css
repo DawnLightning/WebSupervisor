@@ -1,6 +1,14 @@
 ﻿.btnmodify{
 
 }
+.divbutton{
+    display:block;
+   border:0;
+}
+.divbutton:hover{
+    
+   border:1px solid #f2f2f2;
+}
 .clear_line{
     clear:both;
 }
@@ -10,5 +18,7 @@
     background-image:url("images/check_box_32px_1181750_easyicon.net.png")
 }
 .checked_box_blank{
+    width:32px;
+    height:32px;
     background-image:url("images/check_box_outline_blank_32px_1181751_easyicon.net.png")
 }
