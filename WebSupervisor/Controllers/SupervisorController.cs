@@ -216,14 +216,39 @@ namespace WebSupervisor.Controllers
         /// <returns></returns>
         public ActionResult ShowSpareTime(string tid, int week = 1)
         {
-            var hlist = (from sp in splist
-                         where sp.Tid == tid && sp.Week == week
-                         select new HandSpareTime
-                         {
-                             Day = sp.Day,
-                             Pclassnumber = Convert.ToInt32(sp.ClassNumber.ToString().Substring(0, sp.ClassNumber.ToString().Length / 2)),
-                             Nclassnumber = Convert.ToInt32(sp.ClassNumber.ToString().Substring(sp.ClassNumber.ToString().Length / 2, sp.ClassNumber.ToString().Length / 2))
-                         }).ToList();
+
+            var hlist = new HandSpareTime();
+            hlist.Tid = tid;
+            hlist.Week = week;
+            //foreach(SpareTimeModel sp in splist)
+            //{
+            //    if (sp.Tid == tid && sp.Week == week)
+            //    {
+            //        Freetime fr = new Freetime();
+            //        fr.Day = sp.Day;
+            //        if(s)
+            //    }
+            //}
+            hlist.FreeTimel = (from sp in splist
+                               where sp.Tid == tid && sp.Week == week
+                               group sp by sp.Day into s
+                               select new Freetime
+                               {
+                                   Day = s.Key,
+                                   Classnumberl = classnumberl((from sd in s
+                                                   select sd.ClassNumber).ToList())
+                 //Tid = sp.Tid,
+                 //Week = sp.Week,
+                 //FreeTimel=from sd in sp
+                 //          select new Freetime
+                 //          {
+                 //              Day=sd.Day
+                 //          }
+                 //select 
+                 //Day = sp.Day,
+                 //Pclassnumber = Convert.ToInt32(sp.ClassNumber.ToString().Substring(0, sp.ClassNumber.ToString().Length / 2)),
+                 //Nclassnumber = Convert.ToInt32(sp.ClassNumber.ToString().Substring(sp.ClassNumber.ToString().Length / 2, sp.ClassNumber.ToString().Length / 2))
+             }).ToList();
             return Json(hlist, JsonRequestBehavior.AllowGet);
         }
         public ActionResult SaveSpareTime(string tid, int week, object dclassnumber)
@@ -373,6 +398,20 @@ namespace WebSupervisor.Controllers
             }
 
 
+        }
+        //拆分数据库传出来的节次
+        private List<int> classnumberl(List<int> l)
+        {
+            List<int> cl = new List<int>();
+            foreach(int classnumber in l)
+            {
+                int pclassnumber = Convert.ToInt32(classnumber.ToString().Substring(0, classnumber.ToString().Length / 2));
+                cl.Add(pclassnumber);
+                int nclassnumber = Convert.ToInt32(classnumber.ToString().Substring(classnumber.ToString().Length / 2, classnumber.ToString().Length / 2));
+                cl.Add(nclassnumber);
+            }
+            cl = cl.Distinct().ToList();
+            return cl;
         }
 
         /// <summary>
