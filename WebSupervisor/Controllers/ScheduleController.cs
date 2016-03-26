@@ -55,20 +55,28 @@ namespace WebSupervisor.Controllers
 
             string path = Server.MapPath(Common.ConfPath);
             ViewBag.path = path;
-            string[] lstteachername = new string[lstclasses.Count];
-            string[] lstclassname = new string[lstclasses.Count];
-            string[] lstmajor = new string[lstclasses.Count];
-            for (int i = 0; i < lstclasses.Count; i++)
+            List<TeachersModel> teacherlist = new List<TeachersModel>();
+            //var teacherlist=DBHelper.ExecuteList
+            if (Session["College"] != null)
+                teacherlist = DBHelper.ExecuteList<TeachersModel>("SELECT * FROM [dbo].[teachers] where college='" + Session["College"].ToString() + "'", CommandType.Text, null);
+            else teacherlist = DBHelper.ExecuteList<TeachersModel>("SELECT * FROM [dbo].[teachers]", CommandType.Text, null);
+            var classesl = (from c in lstclasses
+                           join t in teacherlist on c.TeacherName equals t.TeacherName
+                           select c).ToList();
+            string[] lstteachername = new string[classesl.Count];
+            string[] lstclassname = new string[classesl.Count];
+            string[] lstmajor = new string[classesl.Count];
+            for (int i = 0; i < classesl.Count; i++)
             {
-                lstteachername[i] = lstclasses[i].TeacherName;
-                lstclassname[i] = lstclasses[i].ClassName;
-                lstmajor[i] = lstclasses[i].Major;
+                lstteachername[i] = classesl[i].TeacherName;
+                lstclassname[i] = classesl[i].ClassName;
+                lstmajor[i] = classesl[i].Major;
             }
             ViewBag.TeacherName = lstteachername.Distinct().ToArray();
             ViewBag.ClassName = lstclassname.Distinct().ToArray();
             ViewBag.Major = lstmajor.Distinct().ToArray();
 
-            var lstmodel = selectExport(cbspcial, cbname, cbclass).ToPagedList(page, 10);
+            var lstmodel = selectExport(cbspcial, cbname, cbclass,classesl).ToPagedList(page, 10);
             return PartialView(lstmodel);
         }
         public PartialViewResult Auto()
@@ -143,7 +151,7 @@ namespace WebSupervisor.Controllers
                 Directory.CreateDirectory(path);
             }
               
-            ex.MakeWordDoc(selectExport(cbspcial, cbname, cbclass), fullFileName, wordpath);
+            ex.MakeWordDoc(selectExport(cbspcial, cbname, cbclass,lstclasses), fullFileName, wordpath);
             return File(fullFileName, "application/zip-x-compressed", filename);
         }
       
@@ -166,7 +174,7 @@ namespace WebSupervisor.Controllers
             IPagedList<ReportFileStatusModel> Lfile = lstfile.ToPagedList(page, 12);
             return PartialView(Lfile);
         }
-        private List<ClassesModel> selectExport(string cbspcial, string cbname, string cbclass)
+        private List<ClassesModel> selectExport(string cbspcial, string cbname, string cbclass,List<ClassesModel> l)
         {
            
             List<ClassesModel> clist = new List<ClassesModel>();
@@ -196,10 +204,10 @@ namespace WebSupervisor.Controllers
                 condition.Add(cbspcial);
             }
             if (condition.Count == 0)
-                clist = lstclasses;
+                clist = l;
             else
             {
-                foreach (ClassesModel c in lstclasses)
+                foreach (ClassesModel c in l)
                 {
                     
                     if (c.Major == condition[2] || c.ClassName == condition[1] || c.TeacherName == condition[0])
