@@ -153,7 +153,7 @@ $(document).ready(function () {
 
 
     //----------------Menu----------------
-    $(document).on("click", ".mm-menu__link", function () {
+    $(document).on("click", ".mm-menu__link", function (eventObject) {
 
         var url = $(this).attr("href");
         var title = $(this).find(".mm-menu__link-text").text();
@@ -193,34 +193,107 @@ $(document).ready(function () {
             $(box).addClass("checked_box");
         }
     }
-    function get_free_time() {
-        var freetime = {};
-        $("div[name='freetime']").each(function (i, e) {
-            var d = i % 7 + 1, t = parseInt(i / 7) + 1;
-            /*  
-        //二维
-              if (typeof freetime[d] == "undefined") {
-                  freetime[d] = {};
-              }
-              freetime[d][t] = $(e).hasClass("checked_box");
-              */
-            //一维
-            if ($(e).hasClass("checked_box")) {
-                if (typeof freetime[d] == "undefined") {
-                    freetime[d] = [];
-                }
-                freetime[d].push(t);
-            }
-        });
-        return freetime;
+    var free_time_config = {
+        table_selector: "div[name='freetime']",
+        week_load_selector: "div#freetime_week_load"
     }
+    window.free_time = (function () {
+        var _this = {
+            data: {
+                tid: null,
+                week: 1,
+                week_to_save: [],
+                free_time_data: {}
+            },
+            i2dt: function (index) {
+                var d = index % 7 + 1, t = parseInt(index / 7) + 1;
+                return { day: d, time: t }
+            },
+            dt2i: function (data) {
+                return (data.time - 1) * 7 + data.day - 1;
+            },
+        };
+        _this.get_cur_tid = function () {
+            return _this.data.tid;
+        }
+        _this.show_free_time_by_week = function (week) {
+            _this.data.week = week ? week : _this.data.week;
+            check_box(free_time_config.table_selector, false);
+            if (typeof _this.data.free_time_data === "undefined") {
+                return;
+            }
+            var weekdata = _this.data.free_time_data[_this.data.week];
+            if (typeof weekdata === "undefined") {
+                return;
+            }
+            for (d in weekdata) {
+                for (t in weekdata[d]) {
+                    var i = _this.dt2i({ day: d, time: weekdata[d][t] });
+                    check_box($(free_time_config.table_selector).eq(i), true);
+                }
+            }
+        };
+        _this.get_week_to_save = function () {
+            var weeks = [];
+            $("#freetime_week_save .divbutton_active").each(function () {
+                weeks.push($(this).text());
+            });
+            _this.data.week_to_save = weeks;
+            return weeks;
+        };
+        _this.get_free_time_by_table = function () {
+            var freetime = {};
+            $(free_time_config.table_selector).each(function (i, e) {
+                var d = i % 7 + 1, t = parseInt(i / 7) + 1;
+                /*  
+                //二维
+                  if (typeof freetime[d] == "undefined") {
+                      freetime[d] = {};
+                  }
+                  freetime[d][t] = $(e).hasClass("checked_box");
+                  */
+                //一维
+                if ($(e).hasClass("checked_box")) {
+                    if (typeof freetime[d] == "undefined") {
+                        freetime[d] = [];
+                    }
+                    freetime[d].push(t);
+                }
+            });
+            return freetime;
+        };
+        _this.show_free_time_by_tid = function (tid) {
+            _this.data.tid = tid;
+            $.ajax({
+                url: '/Supervisor/ShowSpareTime',
+                type: 'get',
+                dataType: "json",
+                data: { tid: _this.data.tid },
+                success: function (data) {
+                    _this.data.free_time_data = data.free_time;
+                    //_this.show_free_time_by_week();
+                    $(free_time_config.week_load_selector + " .divbutton").eq(_this.data.week - 1).click();
+
+                },
+                error: function () {
+                    alert("出错了");
+                }
+            });
+        };
+        return _this;
+    }());
+
     $(document).on("click", "#submit_freetime", function () {
 
         $.ajax({
             url: '/Supervisor/SaveSpareTime',
             type: 'post',
             dataType: "json",
-            data: { freetime: JSON.stringify(get_free_time()) },
+            data: {
+                tid: free_time.get_cur_tid,
+                freetime: JSON.stringify(free_time.get_free_time_by_table()),
+                week: JSON.stringify(free_time.get_week_to_save())
+            },
             async: false,
             success: function () {
                 //这里
@@ -230,56 +303,71 @@ $(document).ready(function () {
             }
         })
     });
-    $(document).on("click", "div[name='freetime']",
-    function () {
-        check_box(this);
+
+    $(document).on("click", ".table-freetime", function (event) {
+        var tag = $(event.target);
+        var checked;
+        if (tag.attr("name") == 'freetime') {
+            check_box(tag);
+        }
+        else if (tag.attr("name") == 'freetime_check_row') {
+            if (tag.data("checked")) {
+                tag.removeData("checked");
+                checked = false;
+            } else {
+                tag.data("checked", true);
+                checked = true;
+            }
+            tag.parents("tr").find("div[name='freetime']").each(function () {
+                check_box(this, checked);
+            });
+        }
+        else if (tag.attr("name") == 'freetime_check_week') {
+            if (tag.data("checked")) {
+                tag.removeData("checked");
+                checked = false;
+            } else {
+                tag.data("checked", true);
+                checked = true;
+            }
+            tag.parents("table").find("div[name='freetime']").each(function () {
+                check_box(this, checked);
+            });
+        }
+        else if (tag.attr("name") == 'freetime_check_day') {
+            var i = $("div[name='freetime_check_day']").index(tag);
+
+            if (tag.data("checked")) {
+                tag.removeData("checked");
+                checked = false;
+            } else {
+
+                tag.data("checked", true);
+                checked = true;
+            }
+            tag.parents("table").find("tr").each(function () {
+
+                check_box($(this).find("div[name='freetime']").eq(i), checked);
+            });
+        }
     });
 
-    $(document).on("click", "div[name='freetime_check_row']",
-    function () {
-        var checked;
-        if ($(this).data("checked")) {
-            $(this).removeData("checked");
-            checked = false;
+    $(document).on("click", "div#freetime_week_save",
+    function (event) {
+        if ($(event.target).hasClass("divbutton_active")) {
+            $(event.target).removeClass("divbutton_active");
         } else {
-            $(this).data("checked", true);
-            checked = true;
+            $(event.target).addClass("divbutton_active");
         }
-        $(this).parents("tr").find("div[name='freetime']").each(function () {
-            check_box(this, checked);
-        });
     });
-    $(document).on("click", "div[name='freetime_check_week']",
-    function () {
-        var checked;
-        if ($(this).data("checked")) {
-            $(this).removeData("checked");
-            checked = false;
-        } else {
-            $(this).data("checked", true);
-            checked = true;
+
+    $(document).on("click", free_time_config.week_load_selector,
+    function (event) {
+        if ($(event.target).hasClass("divbutton")) {
+            $(event.target).siblings().removeClass("divbutton_active");
+            $(event.target).addClass("divbutton_active");
+            free_time.show_free_time_by_week($(event.target).text());
         }
-        $(this).parents("table").find("div[name='freetime']").each(function () {
-            check_box(this, checked);
-        });
-    });
-    $(document).on("click", "div[name='freetime_check_day']",
-    function () {
-        var i = $("div[name='freetime_check_day']").index(this);
-
-        var checked;
-        if ($(this).data("checked")) {
-            $(this).removeData("checked");
-            checked = false;
-        } else {
-
-            $(this).data("checked", true);
-            checked = true;
-        }
-        $(this).parents("table").find("tr").each(function () {
-
-            check_box($(this).find("div[name='freetime']").eq(i), checked);
-        });
     });
     //---------Share/_ArrageAdd-----------
     $(document).on("click", "#tablesupervisor1 tr", function () {

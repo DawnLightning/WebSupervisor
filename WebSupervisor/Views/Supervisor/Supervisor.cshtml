@@ -52,234 +52,206 @@
                     </form>
                     <!--dis-->
                     <div id="tab2" class="tab_contents" style="display: none; ">
-                        <div class="row">
-                            <div class="col-lg-4 col-md-4 col-sm-7 col-xs-12">
-                                <button type="button" class="button blue" id="submit_freetime">
-                                    保存
-                                </button>
-                            </div>
-                            <!--col-->
+                        <input id="freetime_tid" type="hidden"/>
+                        <div class="col-md-3">
+                                点击周次查看：
+                                <div id="freetime_week_load"></div>
+                            
                         </div>
                         <!--row-->
-                        <form>
-                            <div>
-                                <!--TABLE-->
-                                <p>
-                                </p>
-                                <table class="table table-striped" style="font-size:20px">
-                                    <thead>
-                                        <tr>
-                                            <th colspan="2">
+                        <div class="col-md-6">
+                            <table class="table table-striped table-freetime" style="font-size:20px">
+                                <thead>
+                                    <tr>
+                                        <th colspan="2">
 
-                                                <div name="freetime_check_week" class="divbutton">
-                                                    全选
-                                                </div>
-                                            </th>
-                                            <th>
-                                                <div name="freetime_check_day" class="divbutton">
-                                                    星期一
-                                                </div>
-                                            </th>
-                                            <th>
-                                                 <div name="freetime_check_day" class="divbutton">
-                                                    星期二
-                                                </div>
-                                            </th>
-                                            <th>
-                                                 <div name="freetime_check_day" class="divbutton">
-                                                    星期三
-                                                </div>
-                                            </th>
-                                            <th>
-                                                 <div name="freetime_check_day" class="divbutton">
-                                                    星期四
-                                                </div>
-                                            </th>
-                                            <th>
-                                                 <div name="freetime_check_day" class="divbutton">
-                                                    星期五
-                                                </div>
-                                            </th>
-                                            <th>
-                                                 <div name="freetime_check_day" class="divbutton">
-                                                    星期六
-                                                </div>
-                                            </th>
-                                            <th>
-                                                 <div name="freetime_check_day" class="divbutton">
-                                                    星期天
-                                                </div>
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th rowspan="5">
-                                                上午
-                                            </th>
-                                            <td><div class="divbutton" name="freetime_check_row" >1</div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
+                                            <div name="freetime_check_week" class="divbutton">
+                                                全选
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div name="freetime_check_day" class="divbutton">
+                                                星期一
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div name="freetime_check_day" class="divbutton">
+                                                星期二
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div name="freetime_check_day" class="divbutton">
+                                                星期三
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div name="freetime_check_day" class="divbutton">
+                                                星期四
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div name="freetime_check_day" class="divbutton">
+                                                星期五
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div name="freetime_check_day" class="divbutton">
+                                                星期六
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div name="freetime_check_day" class="divbutton">
+                                                星期天
+                                            </div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th rowspan="5">
+                                            上午
+                                        </th>
+                                        <td><div class="divbutton" name="freetime_check_row">1</div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
 
-                                        </tr>
-                                        <tr>
-                                            <td><div class="divbutton" name="freetime_check_row" >2</div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                        </tr>
-                                        <tr>
-                                            <td><div class="divbutton" name="freetime_check_row" >3</div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                        </tr>
-                                        <tr>
-                                            <td><div class="divbutton" name="freetime_check_row" >4</div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                        </tr>
-                                        <tr>
-                                            <td><div class="divbutton" name="freetime_check_row" >5</div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
+                                    </tr>
+                                    <tr>
+                                        <td><div class="divbutton" name="freetime_check_row">2</div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                    </tr>
+                                    <tr>
+                                        <td><div class="divbutton" name="freetime_check_row">3</div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                    </tr>
+                                    <tr>
+                                        <td><div class="divbutton" name="freetime_check_row">4</div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                    </tr>
+                                    <tr>
+                                        <td><div class="divbutton" name="freetime_check_row">5</div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
 
-                                        </tr>
-                                        <tr>
-                                            <th rowspan="4">
-                                                下午
-                                            </th>
-                                            <td><div class="divbutton" name="freetime_check_row" >6</div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
+                                    </tr>
+                                    <tr>
+                                        <th rowspan="4">
+                                            下午
+                                        </th>
+                                        <td><div class="divbutton" name="freetime_check_row">6</div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
 
-                                        </tr>
-                                        <tr>
-                                            <td><div class="divbutton" name="freetime_check_row" >7</div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                        </tr>
-                                        <tr>
-                                            <td><div class="divbutton" name="freetime_check_row" >8</div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                        </tr>
-                                        <tr>
-                                            <td><div class="divbutton" name="freetime_check_row" >9</div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                        </tr>
-                                        <tr>
-                                            <th rowspan="3">
-                                                晚上
-                                            </th>
-                                            <td><div class="divbutton" name="freetime_check_row" >10</div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
+                                    </tr>
+                                    <tr>
+                                        <td><div class="divbutton" name="freetime_check_row">7</div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                    </tr>
+                                    <tr>
+                                        <td><div class="divbutton" name="freetime_check_row">8</div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                    </tr>
+                                    <tr>
+                                        <td><div class="divbutton" name="freetime_check_row">9</div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                    </tr>
+                                    <tr>
+                                        <th rowspan="3">
+                                            晚上
+                                        </th>
+                                        <td><div class="divbutton" name="freetime_check_row">10</div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
 
-                                        </tr>
-                                        <tr>
-                                            <td><div class="divbutton" name="freetime_check_row" >11</div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                        </tr>
-                                        <tr>
-                                            <td><div class="divbutton" name="freetime_check_row" >12</div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                            <td><div class="divblock checked_box_blank " name="freetime" ></div></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </form>
+                                    </tr>
+                                    <tr>
+                                        <td><div class="divbutton" name="freetime_check_row">11</div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                    </tr>
+                                    <tr>
+                                        <td><div class="divbutton" name="freetime_check_row">12</div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                        <td><div class="divblock checked_box_blank " name="freetime"></div></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                         <!--TABLE-->
-                        <div class="row">
-                            <div class="muchadd col-lg-1 col-md-2 col-sm-3 cpl-sx-12">
-                                <input type="checkbox" name="add">
-                                &nbsp;批量增加&nbsp;&nbsp;
-                            </div>
-                            <div class="col-lg-5 col-md-8 col-sm-9 cpl-sx-12">
-                                <div class="weeks">
-                                    第&nbsp;
-                                    <input type="text" name="lastweek" />
-                                    &nbsp;周&nbsp;--&nbsp;第&nbsp;
-                                    <input type="text" name="nextweek" />
-                                    &nbsp;周
-                                </div>
-                                <div class="con">
-                                    <button type="button" class="button blue" >
-                                        确认
-                                    </button>
-                                </div>
-                            </div>
+                        <div class="col-md-3">                            
+                            选择保存的周次：
+                            <div  id="freetime_week_save"></div>
+                            <button type="button" class="button blue" id="submit_freetime">
+                                保存
+                            </button>
                         </div>
-                        <!--row-->
-                        <div class="twenty">
-                            <nav>
-                                周次：
-                                <ul class="pagination" id="supervisor_page">
-                                </ul>
-                            </nav>
-                        </div>
-                    </div> <!--2-->
+                    </div> 
                 </div>
             </div>
         </div>
@@ -288,27 +260,18 @@
 </div>
 <!-- contain -->
 <script>
-    var tid;
+
     function genlist(){
         var data={list:[]};
         for(var i=1;i<=20;i++){
             data.list.push(i);
         }
-        var page="{{#list}}<li><a href=\"/Supervisor/ShowSpareTime\">{{.}}</a></li>{{/list}}";
+        var page="{{#list}}<div class=\"col-md-3 divbutton\">{{.}}</div>{{/list}}";
     
-        $("ul#supervisor_page").html(Mustache.render(page, data));
-    }; genlist();
+        $("div[id^='freetime_week_']").html(Mustache.render(page, data));
+    }; 
+    genlist();
 
-    $("ul#supervisor_page").on("click","a",function(){
-        var w=$(this).text();
-        $.get("/Supervisor/ShowSpareTime", { tid: tid,week:w }, function (hlist) {
-
-        });
-        return false;
-    });
-
-
-    //tid: tid,
     $("#lastpage").click(function(){ @{if (i > 0) { i--; } } $.get("/Supervisor/SupervisorName", { p: @i }, function (result) {
         $("#supervisorname").html(result);
     });})
@@ -316,18 +279,6 @@
         $("#supervisorname").html(result);
     });})
     $("li[name='del']").click(function(){
-        tid=$(this).val();
-        $.ajax({
-            url: '/Supervisor/ShowSpareTime',
-            type: 'get',
-            dataType: "json",
-            data: {tid:tid},
-            success: function () {
-                
-            },
-            error: function () {
-                alert("出错了");
-            }
-        })
+       free_time.show_free_time_by_tid($(this).val());
     })
 </script>

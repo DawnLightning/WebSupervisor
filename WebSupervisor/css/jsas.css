@@ -3,24 +3,36 @@
 }
 .divbutton{
     display:block;
-   border:0;
+    border:2px solid transparent;
+   cursor:pointer;
 }
 .divbutton:hover{
-    
-   border:1px solid #f2f2f2;
+   border:2px solid #f2f2f2;
+   cursor:pointer
+}
+.divbutton_active{
+   border:2px solid #f2f2f2;
+   background-color:#daebfa;
+   cursor:pointer
 }
 .clear_line{
     clear:both;
 }
 .checked_box{
-    width:16px;
-    height:16px;
-    background-image:url("images/check_box_32px_1181750_easyicon.net.png");
-    background-size:contain;
+   cursor:pointer;
+    width:24px;
+    height:24px;
+    background-image:url("images/check_box_24px_1181750_easyicon.net.png");
 }
 .checked_box_blank{
-    width:16px;
-    height:16px;
-    background-image:url("images/check_box_outline_blank_32px_1181751_easyicon.net.png");
-     background-size:contain;
+   cursor:pointer;
+    width:24px;
+    height:24px;
+    background-image:url("images/check_box_outline_blank_24px_1181751_easyicon.net.png");
+}
+.table-freetime{
+    width:initial;
+}
+.table-freetime th,td{
+    vertical-align:middle !important;
 }
