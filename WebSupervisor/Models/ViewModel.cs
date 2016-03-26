@@ -13,13 +13,17 @@ namespace WebSupervisor.Models
     public class HandSpareTime
     {
      public string Tid { set; get; }
-     public int Week { set; get; }
      public List<Freetime> FreeTimel { set; get; }
     }
     public class Freetime
     {
-        public int Day;
-        public List<int> Classnumberl;
+        public int Week { set; get;}
+        public List<DayClassesNumber> DayClist { set; get; }
+    }
+    public class DayClassesNumber
+    {
+        public int Day { set; get; }
+        public List<int> Classnumberl { set; get; }
     }
     /// <summary>
     /// 首选督导

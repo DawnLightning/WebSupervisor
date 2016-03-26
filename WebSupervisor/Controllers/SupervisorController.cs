@@ -214,40 +214,25 @@ namespace WebSupervisor.Controllers
         /// <param name="tid">默认值为测试所用</param>
         /// <param name="week"></param>
         /// <returns></returns>
-        public ActionResult ShowSpareTime(string tid, int week = 1)
+        public ActionResult ShowSpareTime(string tid)
         {
 
             var hlist = new HandSpareTime();
             hlist.Tid = tid;
-            hlist.Week = week;
-            //foreach(SpareTimeModel sp in splist)
-            //{
-            //    if (sp.Tid == tid && sp.Week == week)
-            //    {
-            //        Freetime fr = new Freetime();
-            //        fr.Day = sp.Day;
-            //        if(s)
-            //    }
-            //}
             hlist.FreeTimel = (from sp in splist
-                               where sp.Tid == tid && sp.Week == week
-                               group sp by sp.Day into s
+                               where sp.Tid == tid 
+                               group sp by sp.Week into s
                                select new Freetime
                                {
-                                   Day = s.Key,
-                                   Classnumberl = classnumberl((from sd in s
-                                                   select sd.ClassNumber).ToList())
-                 //Tid = sp.Tid,
-                 //Week = sp.Week,
-                 //FreeTimel=from sd in sp
-                 //          select new Freetime
-                 //          {
-                 //              Day=sd.Day
-                 //          }
-                 //select 
-                 //Day = sp.Day,
-                 //Pclassnumber = Convert.ToInt32(sp.ClassNumber.ToString().Substring(0, sp.ClassNumber.ToString().Length / 2)),
-                 //Nclassnumber = Convert.ToInt32(sp.ClassNumber.ToString().Substring(sp.ClassNumber.ToString().Length / 2, sp.ClassNumber.ToString().Length / 2))
+                                   Week = s.Key,
+                                   DayClist=(from s1 in s
+                                            group s1 by s1.Day into s2
+                                            select new DayClassesNumber
+                                            {
+                                                Day = s2.Key,
+                                                Classnumberl = classnumberl((from s3 in s2
+                                                                             select s3.ClassNumber).ToList())
+                                            }).ToList()
              }).ToList();
             return Json(hlist, JsonRequestBehavior.AllowGet);
         }
