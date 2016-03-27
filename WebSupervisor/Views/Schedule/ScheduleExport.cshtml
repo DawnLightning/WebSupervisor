@@ -7,13 +7,13 @@
             <div class="btn-group">
                 <select id="teachername">
                     <option value="0" id="0">请选择老师</option>
-                    @{
-                        foreach (var item in ViewBag.TeacherName)
-                        {
-                               <option value=@item>@item</option>
-                        }
+                    @*@{
+                            foreach (var item in ViewBag.TeacherName)
+                            {
+                                <option value=@item>@item</option>
+                            }
 
-                    }
+                        }*@
                 </select>
                 <!--教师姓名-->
             </div>
@@ -21,12 +21,12 @@
             <div class="btn-group">
                 <select id="classname">
                     <option value="0" id="0">请选择课程</option>
-                    @{
-                        foreach (var item in ViewBag.ClassName)
-                        {
-                            <option value=@item>@item</option>
-                        }
-                    }
+                    @*@{
+                            foreach (var item in ViewBag.ClassName)
+                            {
+                                <option value=@item>@item</option>
+                            }
+                        }*@
                 </select>
                 <!--课程-->
             </div>
@@ -34,13 +34,13 @@
             <div class="btn-group">
                 <select id="major">
                     <option value="0" id="0">请选择专业</option>
-                    @{
-                        foreach (var item in ViewBag.Major)
-                        {
-                            <option value=@item>@item</option>
-                        }
+                    @*@{
+                            foreach (var item in ViewBag.Major)
+                            {
+                                <option value=@item>@item</option>
+                            }
 
-                    }
+                        }*@
                 </select>
                 <!--专业-->
             </div>
@@ -55,42 +55,41 @@
     </div>
 </div>
 <!--row-->
-
-<table class="table table-condensed table-hover table-responsive ove">
-    <tr bgcolor="#f5f5f5">
-        <th>
-            <p>
-                教师
-            </p>
-        </th>
-        <th>
-            <p>
-                课程
-            </p>
-        </th>
-        <th>
-            <p>
-                专业
-            </p>
-        </th>
-    </tr>
-    @{
-        foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @item.TeacherName
-                </td>
-                <td>
-                    @item.ClassName
-                </td>
-                <td>
-                    @item.Major
-                </td>
-            </tr>
+    <table class="table table-condensed table-hover table-responsive ove " id="classtable">
+        <tr bgcolor="#f5f5f5">
+            <th>
+                <p>
+                    教师
+                </p>
+            </th>
+            <th>
+                <p>
+                    课程
+                </p>
+            </th>
+            <th>
+                <p>
+                    专业
+                </p>
+            </th>
+        </tr>
+        @{
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.TeacherName
+                    </td>
+                    <td>
+                        @item.ClassName
+                    </td>
+                    <td>
+                        @item.Major
+                    </td>
+                </tr>
+            }
         }
-    }
-</table>
+    </table>
 <div class="pager" style="text-align: center;">
 
     <span style="height: 10px; line-height: 10px;">共 @Model.TotalItemCount.ToString() 条记录，当前第 @Model.PageNumber 页/共 @Model.PageCount 页 </span>

@@ -212,7 +212,6 @@ namespace WebSupervisor.Controllers
         /// 显示手动填补
         /// </summary>
         /// <param name="tid">默认值为测试所用</param>
-        /// <param name="week"></param>
         /// <returns></returns>
         public ActionResult ShowSpareTime(string tid)
         {
@@ -236,9 +235,28 @@ namespace WebSupervisor.Controllers
              }).ToList();
             return Json(hlist, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult SaveSpareTime(string tid, int week, object dclassnumber)
+        public ActionResult SaveSpareTime(string tid, int[] week,List<Freetime> freetime )
         {
-            return Json(new { });
+            try
+            {
+                foreach (int w in week)
+                {
+                    foreach (Freetime f in freetime)
+                    {
+                        foreach (DayClassesNumber dc in f.DayClist)
+                        {
+                            dc.Classnumberl = classesnummerge(dc.Classnumberl.ToArray());
+                            foreach (int c in dc.Classnumberl)
+                            {
+                                string update = string.Format("update sparetime set classnumber={0} where tid='{1}' and week='{2}' and day='{3}'", c, tid, w, dc.Day);
+                                DBHelper.ExecuteNonQuery(update, CommandType.Text, null);
+                            }
+                        }
+                    }
+                }
+                return Json(new jsondata(1, "保存成功!!"));
+            }
+            catch(Exception ex) { return Json(new jsondata(0, "遇到错误保存失败！！"+ex.Message)); }
         }
         //自动填补空闲时间
         [AllowAnonymous]
@@ -331,6 +349,14 @@ namespace WebSupervisor.Controllers
             }
 
         }
+
+        /// <summary>
+        /// 获得督导员数目
+        /// </summary>
+        /// <param name="week"></param>
+        /// <param name="day"></param>
+        /// <param name="classnumber"></param>
+        /// <returns></returns>
         private int numbersupervisor(int week, int day, int classnumber)
         {
             var count = from sp in splist
@@ -339,6 +365,24 @@ namespace WebSupervisor.Controllers
                         select spl;
             return count.Count();
 
+        }
+        private List<int> classesnummerge(int[] clnum)
+        {
+            List<string> spareclass = new List<string> { "12", "13", "23", "24", "34", "35", "45", "67", "68", "78", "79", "89", "1011", "1112", "1012" };//枚举所有的连续节次
+            List<int> list = new List<int>();
+
+            for (int i = 0; i < clnum.Length; i++)
+            {
+                for (int j = i + 1; j < clnum.Length; j++)
+                {
+                    string str = string.Format("{0}{1}", clnum[i], clnum[j]);
+                    if (spareclass.Contains(str))
+                    {
+                        list.Add(int.Parse(str));
+                    }
+                }
+            }
+            return list;
         }
 
         /// <summary>
