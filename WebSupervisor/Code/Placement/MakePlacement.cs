@@ -10,10 +10,10 @@ namespace WebSupervisor.Code.Placement
     public class MakePlacement
     {
         static List<int> spareclass = new List<int> { 12, 13, 23, 24, 34, 35, 45, 67, 68, 78, 79, 89, 1011, 1112, 1012 };//枚举所有的连续节次
-        List<ClassesModel> listclasses = DBHelper.ExecuteList<ClassesModel>("select * from classes", CommandType.Text, null);//课程表
-        List<TeachersModel> listsupervisor = DBHelper.ExecuteList<TeachersModel>("select * from teachers where indentify=1", CommandType.Text, null);//督导表
-        List<CheckClassModel> listcheckcount = DBHelper.ExecuteList<CheckClassModel>("select * from checkclass", CommandType.Text, null);//听课情况表
-        List<SpareTimeModel> listsparetime = DBHelper.ExecuteList<SpareTimeModel>("select * from sparetime", CommandType.Text, null);//空闲时间表
+        List<ClassesModel> listclasses = new List<ClassesModel>();
+        List<TeachersModel> listsupervisor = new List<TeachersModel>();
+        List<CheckClassModel> listcheckcount = new List<CheckClassModel>();
+        List<SpareTimeModel> listsparetime = new List<SpareTimeModel>();
         List<ArrageModel> listarrage = new List<ArrageModel>();//安排表
         List<SpareTimeModel> temp = new List<SpareTimeModel>();//用于暂存sparetime的数据，提高查询效率
         List<SpareTimeModel> listchange = new List<SpareTimeModel>();//存储更新过的数据,避免过多的数据更新
@@ -25,6 +25,68 @@ namespace WebSupervisor.Code.Placement
         public MakePlacement(ArrageConfigModel config)
         {
             this.config = config;
+           
+        }
+        /// <summary>
+        /// 筛选数据
+        /// </summary>
+        /// <param name="college">学院</param>
+        /// <returns>0代表失败，1代表成功</returns>
+        private int initdata(string college)
+        {
+            try
+            {
+                string select_teacher = string.Format("select * from teachers where college='{0}'", college);
+                listsupervisor = DBHelper.ExecuteList<TeachersModel>(select_teacher, CommandType.Text, null);//督导表
+                if (listsupervisor.Count >= 0)
+                {
+                    foreach (TeachersModel tmodel in listsupervisor)
+                    {
+                        if (tmodel.Indentify==1)
+                        {
+                            string select_sparetime = string.Format("select * from sparetime where tid='{0}'", tmodel.Tid);
+                            string select_checkclass = string.Format("select * from checkclass where tid='{0}'", tmodel.Tid);
+
+                            List<SpareTimeModel> sptemp = DBHelper.ExecuteList<SpareTimeModel>(select_sparetime, CommandType.Text, null);
+                            List<CheckClassModel> chtemp = DBHelper.ExecuteList<CheckClassModel>(select_checkclass, CommandType.Text, null);
+
+                            CopyDataToList<SpareTimeModel>(sptemp, listsparetime);
+                            CopyDataToList<CheckClassModel>(chtemp, listcheckcount);
+                        }
+                        string select_class = string.Format("select * from classes where teachername like '%{0}%'", tmodel.TeacherName);
+                        List<ClassesModel> classestemp = DBHelper.ExecuteList<ClassesModel>(select_class, CommandType.Text, null);
+                        CopyDataToList<ClassesModel>(classestemp, listclasses);
+
+                    }
+                    return 1;
+                   
+                }
+                else
+                {
+                    return 0;
+                }
+
+            }
+            catch (Exception )
+            {
+                return 0;
+            }
+
+
+
+        }
+        /// <summary>
+        /// 将临时筛选的数据放入全局变量
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source">临时数据</param>
+        /// <param name="target">保存变量</param>
+        private void CopyDataToList<T>(List<T> source,List<T> target)
+        {
+            foreach (T t in source)
+            {
+                target.Add(t);
+            }
         }
         /// <summary>
         /// 重新生成听课安排
@@ -44,7 +106,7 @@ namespace WebSupervisor.Code.Placement
         /// </summary>
         public void CreatPlan(string college)
         {
-            if (config!=null)
+            if (config!=null&& initdata(college)>0)
             {
                 for (Week = config.Bweek; Week < config.Eweek; Week++)
                 {
@@ -58,11 +120,12 @@ namespace WebSupervisor.Code.Placement
                                 UpdataDay(listcheckcount);                                                                                                                          
                                     for (Index = 0; Index < 15; Index++)
                                     {
-                                        List<SpareTimeModel> sptlist = GetSpareTimeList(spareclass[Index]);
+                                      
                                         ClassesModel classmodel = GetClass(Week, Day, spareclass[Index]);
                                     //做非空判断，如果为空就不满足听课条件了（没上课老师）,循环继续
                                     if (classmodel != null)
                                     {
+                                        List<SpareTimeModel> sptlist = GetSpareTimeList(spareclass[Index]);
                                         string group = "";//督导小组
                                         int count = sptlist.Count;
                                         if (count < config.MinPeople)
@@ -73,7 +136,7 @@ namespace WebSupervisor.Code.Placement
                                         {
                                             foreach (SpareTimeModel spt in sptlist)
                                             {
-                                                group = group + "," + IdToName(spt.Tid,college);
+                                                group = group + "," + IdToName(spt.Tid);
                                                
                                             }
                                             WritePlacement(sptlist, classmodel, group);
@@ -82,7 +145,7 @@ namespace WebSupervisor.Code.Placement
                                         {
                                             for (int i = 0; i < config.MaxPeople; i++)
                                             {
-                                                group = group + "," + IdToName(sptlist[i].Tid,college);
+                                                group = group + "," + IdToName(sptlist[i].Tid);
                                               
                                             }
                                             WritePlacement(sptlist, classmodel, group);
@@ -99,9 +162,10 @@ namespace WebSupervisor.Code.Placement
                         }
                     }
                 }
+                UpdateAll();
             }
+            
 
-            UpdateAll();
         } 
         /// <summary>
         /// 所有督导的周听课归零
@@ -320,26 +384,16 @@ namespace WebSupervisor.Code.Placement
         /// </summary>
         /// <param name="tid"></param>
         /// <returns></returns>
-        private string IdToName(string tid,string college)
+        private string IdToName(string tid)
         {
             foreach (TeachersModel model in listsupervisor)
             {
-                if (college == null)
+                if (tid.Equals(model.Tid))
                 {
-                    if (model.Tid.Equals(tid))
-                    {
-                        return model.TeacherName;
-                    }
-                }
-                else
-                {
-                    if (model.Tid.Equals(tid)&&model.College.Equals(college))
-                    {
-                        return model.TeacherName;
-                    }
+                    return model.TeacherName;
                 }
             }
-            return "";
+            return tid;
         }
         /// <summary>
         /// 生成听课安排
