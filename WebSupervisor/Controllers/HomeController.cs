@@ -80,28 +80,25 @@ namespace WebSupervisor.Controllers
                                       SuperVisors = a.SuperVisors
                                   }).ToList();
             }
-                IPagedList<ConfirmModel> iplarrage = arragetemplist.ToPagedList(page, 11);
+            IPagedList<ConfirmModel> iplarrage = arragetemplist.ToPagedList(page, 11);
             if (ajax)
                 return Json(iplarrage, JsonRequestBehavior.AllowGet);
             return PartialView(iplarrage);
         }
         [HttpPost]
-        public ActionResult SaveArrage(FormCollection fc)
+        public ActionResult SureArrage(string[] pids)
         {
             try
             {
-                var cherkbox = from x in fc.AllKeys
-                               where fc[x] != "checkall"
-                               select x;
-                foreach (var cherkname in cherkbox)
+                foreach (var pid in pids)
                 {
-                    SqlParameter s = new SqlParameter("@cid", cherkname);
-                    DBHelper.ExecuteNonQuery("update arrage set stauts=1 where cid=@cid", CommandType.Text, s);
+                    string uapdatecommond = string.Format("update arrage set stauts=1 where pid='{0}'",pid);
+                    DBHelper.ExecuteNonQuery(uapdatecommond, CommandType.Text, null);
 
                 }
-                return Json(new jsondata(1, "保存成功！"), JsonRequestBehavior.AllowGet);
+                return Json(new jsondata(0, "保存成功！"), JsonRequestBehavior.AllowGet);
             }
-            catch { return Json(new jsondata(0, "保存失败！"), JsonRequestBehavior.AllowGet); }
+            catch { return Json(new jsondata(1, "保存失败！"), JsonRequestBehavior.AllowGet); }
         }
         public ActionResult ConfirmSure(int page = 1, bool ajax = false)
         {
@@ -322,7 +319,7 @@ namespace WebSupervisor.Controllers
         [HttpPost]
         public ActionResult DeleteArrage()
         {
-          
+
             try
             {
                 Stream s = System.Web.HttpContext.Current.Request.InputStream;
@@ -349,6 +346,52 @@ namespace WebSupervisor.Controllers
             {
                 return this.Json(new jsondata(1, "删除失败"), JsonRequestBehavior.AllowGet);
             }
+        }
+        /// <summary>
+        /// 导出安排表
+        /// </summary>
+        /// <param name="pids"></param>
+        /// <returns></returns>
+        public ActionResult ExportArrage(string[] pids)
+        {
+            Common com = new Common();
+            List<ExportExcelModel> expel = new List<ExportExcelModel>();
+            foreach (string pid in pids)
+            {
+                var exe = from c in classlist
+                          join a in arragelist on c.Cid equals a.Cid
+                          where a.Pid == pid
+                          select new ExportExcelModel
+                          {
+                              classname = c.ClassName,
+                              classcontent = c.ClassContent,
+                              classroom = c.Address,
+                              classtype = c.ClassType,
+                              major = c.Major,
+                              supervisors = a.SuperVisors,
+                              teachername = c.TeacherName,
+                              time = CalendarTools.getdata(Common.Year, c.Week, c.Day - CalendarTools.weekdays(CalendarTools.CaculateWeekDay(Common.Year, Common.Month, Common.Day)), Common.Month, Common.Day).ToLongDateString() + "" + com.AddSeparator(c.ClassNumber) + "节",
+                              week = c.Week.ToString()
+                          };
+                expel.Add(exe.First());
+            }
+            string term;
+            if (Common.Month < 8)
+                term = "二";
+            else term = "一";
+            string filename = string.Format("{0}{1}-{2}学年第{3}学期听课安排检查表", Session["College"], (Common.Year - 1).ToString(), Common.Year.ToString(), term);
+            string virtualPath = string.Format("~/App_Data/{0}/{1}/{2}", Session["AdminUser"], "听课安排检查表", filename + ".xls");
+            string fullFileName = this.Server.MapPath(virtualPath);
+            //创建文件夹，保存文件
+            string path = Path.GetDirectoryName(fullFileName);
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+
+            ExcelHelper exh = new ExcelHelper();
+            exh.Export(expel, filename, fullFileName);
+            return File(fullFileName, "application/zip-x-compressed", filename + ".xls");
         }
     }
 }

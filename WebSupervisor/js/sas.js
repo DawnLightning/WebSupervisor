@@ -1,22 +1,44 @@
-﻿
+﻿//获得指定id的checkbox.val
+var str = function (checkid)
+{
+    var array = new Array()
+    $("input[id='"+checkid+"']:checked").each(function () {
+        array.push($(this).val())
+    });
+    return array;
+}
+//导出听课安排表
+function exportarrage() {
+    $.ajax({
+        url: '/Home/ExportArrage',
+        type: 'post',
+        data: { pids: str(arragecheck) },
+        async: false,
+        //success: function (arrageadd) {
 
+        //},
+        error: function () {
+            alert("出错了");
+        }
+    });
+}
 //------------------wrote by myloverhxx <myloverhxx@163.com>-----------------------
 /*临时表删除*/
-function deletesure() {
-    swal({
-        title: "确认删除?",
-        type: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#DD6B55",
-        confirmButtonText: "确认",
-        closeOnConfirm: false
-    },
-      function () {
-          swal("",
-            "已删除",
-            "success");
-      });
-}
+//function deletesure() {
+//    swal({
+//        title: "确认删除?",
+//        type: "warning",
+//        showCancelButton: true,
+//        confirmButtonColor: "#DD6B55",
+//        confirmButtonText: "确认",
+//        closeOnConfirm: false
+//    },
+//      function () {
+//          swal("",
+//            "已删除",
+//            "success");
+//      });
+//}
 /*临时表按钮 修改*/
 function edite1() {
     document.getElementById("editable1").contentEditable = "true";
