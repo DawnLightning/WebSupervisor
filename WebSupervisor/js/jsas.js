@@ -42,11 +42,11 @@ $(document).ready(function () {
 
         $.fileDownload($(this).attr('href'), {
             successCallback: function (url) {
-                swal({ title: "Success!", type: "success", timer: 2000, showConfirmButton: false });
+                swal({ title: "成功！", type: "success", timer: 2000, showConfirmButton: false });
                 // alert('You just got a file download dialog or ribbon for this URL :' + url);
             },
             failCallback: function (html, url) {
-                swal('Error!', 'File download failed!', 'error');
+                swal('错误！', '下载失败！', 'error');
                 /*alert('Your file download just failed for this URL:' + url + '\r\n' +
                         'Here was the resulting error HTML: \r\n' + html
                         );*/
@@ -387,5 +387,65 @@ $(document).ready(function () {
             $("#tablesupervisor tbody > td").wrap("<tr name=\"" + $(this).attr("name") + "\"></tr>");
 
         }
+    });
+    //---------Home/ConfirmTemp-----------
+    $(document).on("click", "#btnsurearrage", function () {
+        var array = new Array()
+        $("input[id='checktemparrage']:checked").each(function () {
+            array.push($(this).val())
+        });
+        $.post("/Home/SureArrage", { pids: array },
+            function (data) {
+                if (data.code == 0) {
+                    swal({
+                        title: "已经成功确认",//放js显示乱码 所以放这里
+                        timer: 1500,
+                        showConfirmButton: false,
+                        type: "success"
+                    });
+                    curhref.replacetag({ url: "/Home/ConfirmTemp", tag: "#tab1" });
+                    curhref.replacetag({ url: "/Home/ConfirmSure", tag: "#tab2" });
+                }
+                else {
+                    swal({
+                        title: "确认安排失败",//放js显示乱码 所以放这里
+                        timer: 1500,
+                        showConfirmButton: false,
+                        type: "error"
+                    });
+                }
+            });
+    });
+    //---------Home/ConfirmSure-----------
+    $(document).on("click", "#exportarrage", function () {
+        var array = new Array()
+        $("input[id='checkconfirmsure']:checked").each(function () {
+            array.push($(this).val())
+        });
+        //$.ajax({
+        //    url: '/Home/ExportArrage',
+        //    type: 'post',
+        //    data: { pids: array },
+        //    //async: false,
+        //    success: function () {
+        $.fileDownload("/Home/ExportArrage", {
+                    httpMethod:"Post",
+                    data:{pids:array},
+                    successCallback: function (url) {
+                        swal({ title: "成功！", type: "success", timer: 2000, showConfirmButton: false });
+                        // alert('You just got a file download dialog or ribbon for this URL :' + url);
+                    },
+                    failCallback: function (html, url) {
+                        swal('错误！', '下载失败！', 'error');
+                        /*alert('Your file download just failed for this URL:' + url + '\r\n' +
+                                'Here was the resulting error HTML: \r\n' + html
+                                );*/
+                    }
+                });
+        //    },
+        //    //error: function () {
+        //    //    alert("出错了");
+        //    //}
+        //});
     });
 });

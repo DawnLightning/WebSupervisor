@@ -1,27 +1,27 @@
-﻿//获得指定id的checkbox.val
-var str = function (checkid)
-{
-    var array = new Array()
-    $("input[id='"+checkid+"']:checked").each(function () {
-        array.push($(this).val())
-    });
-    return array;
-}
+﻿////获得指定id的checkbox.val
+//var str = function (checkid)
+//{
+//    var array = new Array()
+//    $("input[id='"+checkid+"']:checked").each(function () {
+//        array.push($(this).val())
+//    });
+//    return array;
+//}
 //导出听课安排表
-function exportarrage() {
-    $.ajax({
-        url: '/Home/ExportArrage',
-        type: 'post',
-        data: { pids: str(arragecheck) },
-        async: false,
-        //success: function (arrageadd) {
+//function exportarrage() {
+//    $.ajax({
+//        url: '/Home/ExportArrage',
+//        type: 'post',
+//        data: { pids: str(arragecheck) },
+//        async: false,
+//        //success: function (arrageadd) {
 
-        //},
-        error: function () {
-            alert("出错了");
-        }
-    });
-}
+//        //},
+//        error: function () {
+//            alert("出错了");
+//        }
+//    });
+//}
 //------------------wrote by myloverhxx <myloverhxx@163.com>-----------------------
 /*临时表删除*/
 //function deletesure() {

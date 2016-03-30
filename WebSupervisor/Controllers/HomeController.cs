@@ -92,7 +92,7 @@ namespace WebSupervisor.Controllers
             {
                 foreach (var pid in pids)
                 {
-                    string uapdatecommond = string.Format("update arrage set stauts=1 where pid='{0}'",pid);
+                    string uapdatecommond = string.Format("update arrage set stauts='1' where pid='{0}'",pid);
                     DBHelper.ExecuteNonQuery(uapdatecommond, CommandType.Text, null);
 
                 }
