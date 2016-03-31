@@ -254,6 +254,17 @@ namespace WebSupervisor.Controllers
             IPagedList<TeachersModel> Iteachers = teacherlist.ToPagedList(page, 10);
             return PartialView(Iteachers);
         }
+        public ActionResult UpdateTeacher(string tid,string property,string value)
+        {
+            if(!string.IsNullOrEmpty(value.Trim()))
+            {
+                string updateteachers = string.Format("update teachers set {0}='{1}' where tid='{2}'", property, value, tid);
+                DBHelper.ExecuteNonQuery(updateteachers, CommandType.Text, null);
+            }
+            //return Json(new jsondata(0,"更新成功"))
+            //}
+            return null;
+        }
         [HttpPost]
         public ActionResult SetInfo(FormCollection fc)
         {

@@ -58,6 +58,10 @@ function edite4() {
 };
 //教师信息按钮 保存
 function tsave() {
+    var array = new Array()
+        $("input[id='"+checkid+"']:checked").each(function () {
+            array.push($(this).val())
+        });
     swal({
         title: "已保存",//放js显示乱码 所以放这里
         timer: 1500,

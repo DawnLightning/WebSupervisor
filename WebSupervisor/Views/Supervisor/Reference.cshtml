@@ -85,7 +85,7 @@
                                 var item = Model[i];
                                 <tr>
                                     <td width=2%>
-                                        <input type="checkbox" name="chebox" value=@item.Cid>
+                                        <input type="checkbox" name="checkreference" value="@item.Cid">
                                     </td>
                                     <td>
                                         @item.Id
@@ -145,7 +145,7 @@
             </div>
             <!-- /.table -->
             <div class="po-right">
-                <button id="sure" class="sch-btn blue" style="margin-top:-9px;"  data-toggle="modal" data-target=".bs-example-modal-lg">
+                <button id="surereference" class="sch-btn blue" style="margin-top:-9px;"  data-toggle="modal" data-target=".bs-example-modal-lg">
                     确认安排
                 </button>
             </div>
@@ -178,47 +178,45 @@
 </script>
 <script>
     $(document).ready(function () {
-        var str = new Array();
-        $("#sure").click(function () {
-            $("input[name='chebox']:checked").each(function () {
-                //if ($(this).attr("checked")==true) {
-                    str.push($(this).val())
-                    //alert($(this).val());
-                //}              
-            })
-            for (i in str)
-            {
-            //    alert[str[i]];
-                $.ajax({
-                    url: '/Supervisor/ReferenceSure',
-                    type: 'post',
-                    contentType: 'application/json;charset=utf-8',
-                    data: JSON.stringify({
-                        "cid": str[i],
-                    }),
-                    async: false,
-                    success: function (arrageadd) {
-                        //for (i in classeslist) {
-                        //$().fi('<td>' + teachernames[i] + '</td>');
-                        $("#week").find("option[id='0']").html(arrageadd.classeslist[0].Week);
-                        $("#day").find("option[id='0']").html(arrageadd.classeslist[0].Day);
-                        $("#classnumber").find("option[id='0']").html(arrageadd.classeslist[0].ClassNumber);
-                        $("#teachername").find("option[id='0']").html(arrageadd.classeslist[0].TeacherName);
-                        $("#classtype").find("option[id='0']").html(arrageadd.classeslist[0].ClassType);
-                        $("#classeslist").find("td[id='address']").html(arrageadd.classeslist[0].Address);
-                        $("#classeslist").find("td[id='classcontent']").html(arrageadd.classeslist[0].ClassContent);
-                        $("#classeslist").find("td[id='classtype']").html(arrageadd.classeslist[0].ClassType);
-                        $("#classeslist").find("td[id='major']").html(arrageadd.classeslist[0].Major);
-                        $("#classeslist").find("td[id='classname']").html(arrageadd.classeslist[0].ClassName);
-                        $("#classeslist").find("td[id='cid']").html(arrageadd.classeslist[0].Cid);//替换 ;
-                        //}
-                    },
-                    error: function () {
-                        alert("出错了");
-                    }
-                })
-            }
-        })
+        //var str = new Array();
+        //$("#surereference").click(function () {
+        //    $("input[name='checkreference']:checked").each(function () {
+        //        //if ($(this).attr("checked")==true) {
+        //            str.push($(this).val())
+        //            //alert($(this).val());
+        //        //}              
+        //    })
+        //    for (i in str)
+        //    {
+        //    //    alert[str[i]];
+        //        $.ajax({
+        //            url: '/Supervisor/ReferenceSure',
+        //            type: 'post',
+        //            //contentType: 'application/json;charset=utf-8',
+        //            data: { cid: str[i] },
+        //            async: false,
+        //            success: function (arrageadd) {
+        //                //for (i in classeslist) {
+        //                //$().fi('<td>' + teachernames[i] + '</td>');
+        //                $("#week").find("option[id='0']").html(arrageadd.classeslist[0].Week);
+        //                $("#day").find("option[id='0']").html(arrageadd.classeslist[0].Day);
+        //                $("#classnumber").find("option[id='0']").html(arrageadd.classeslist[0].ClassNumber);
+        //                $("#teachername").find("option[id='0']").html(arrageadd.classeslist[0].TeacherName);
+        //                $("#classtype").find("option[id='0']").html(arrageadd.classeslist[0].ClassType);
+        //                $("#classeslist").find("td[id='address']").html(arrageadd.classeslist[0].Address);
+        //                $("#classeslist").find("td[id='classcontent']").html(arrageadd.classeslist[0].ClassContent);
+        //                $("#classeslist").find("td[id='classtype']").html(arrageadd.classeslist[0].ClassType);
+        //                $("#classeslist").find("td[id='major']").html(arrageadd.classeslist[0].Major);
+        //                $("#classeslist").find("td[id='classname']").html(arrageadd.classeslist[0].ClassName);
+        //                $("#classeslist").find("td[id='cid']").html(arrageadd.classeslist[0].Cid);//替换 ;
+        //                //}
+        //            },
+        //            error: function () {
+        //                alert("出错了");
+        //            }
+        //        })
+        //    }
+        //})
         var datepicker = new Pikaday({
             field: jQuery('#datepicker')[0],
             minDate: new Date('2000-01-01'),

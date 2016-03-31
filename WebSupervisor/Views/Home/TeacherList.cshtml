@@ -11,12 +11,6 @@
         <button type="button" name="btntddelete" class="button red" formaction="/Supervisor/DeleteTeacher" formmethod="post">
             删除
         </button>
-        <button type="button" class="button orange" onclick="edite3()" ;>
-            修改
-        </button>
-        <button type="button" class="button blue" onclick="tsave()" ;>
-            保存
-        </button>
     </div>
 </div>
 <!-- /.row -->
@@ -69,7 +63,7 @@
                         是否督导
                     </p>
                 </th>
-                <th>
+                @*<th>
                     <p>
                        操作
                     </p>
@@ -78,7 +72,7 @@
                     <p>
                         审核状态
                     </p>
-                </th>
+                </th>*@
             </tr>
             <tr id="addtr" style="display:none">
                 <td>
@@ -120,7 +114,7 @@
 
                         TeachersModel item = Model[i];
                         string identify = "";
-                        string islimit = "";
+                        //string islimit = "";
                         if (item.Indentify == 0)
                         {
                             identify = "否";
@@ -129,50 +123,50 @@
                         {
                             identify = "是";
                         }
-                        if (item.Islimit == 0)
-                        {
-                            islimit = "未审核";
-                        }
-                        else
-                        {
-                            islimit = "已审核";
-                        }
-                        <tr>
+                        //if (item.Islimit == 0)
+                        //{
+                        //    islimit = "未审核";
+                        //}
+                        //else
+                        //{
+                        //    islimit = "已审核";
+                        //}
+                        <tr value="@item.Tid">
                             <td width=2%>
 
                                 <input type="checkbox" name="tdcbid" value=@item.Tid>
 
                             </td>
-                            <td>
+                            <td id="tid">
                                 @item.Tid
                             </td>
-                            <td>
+                            <td id="teachername">
                                 @item.TeacherName
                             </td>
-                            <td>
+                            <td id="title">
                                 @item.Title
                             </td>
-                            <td>
+                            <td id="teacherroom">
                                 @item.TeacherRoom
                             </td>
-                            <td>
+                            <td id="phone">
                                 @item.Phone
                             </td>
-                            <td>
+                            <td id="email">
                                 @item.Email
                             </td>
-                            <td>
+                            <td id="identify">
 
                                 @identify
 
                             </td>
-                            <td>
+                            @*<td id="islimit">
                                 @islimit
                             </td>
 
                             <td>
                                 <input type="button" value="修改"  class="btnmodify teacherbtn blue"  />
-                            </td>
+                            </td>*@
 
                         </tr>
                     }

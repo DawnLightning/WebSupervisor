@@ -429,23 +429,116 @@ $(document).ready(function () {
         //    //async: false,
         //    success: function () {
         $.fileDownload("/Home/ExportArrage", {
-                    httpMethod:"Post",
-                    data:{pids:array},
-                    successCallback: function (url) {
-                        swal({ title: "成功！", type: "success", timer: 2000, showConfirmButton: false });
-                        // alert('You just got a file download dialog or ribbon for this URL :' + url);
-                    },
-                    failCallback: function (html, url) {
-                        swal('错误！', '下载失败！', 'error');
-                        /*alert('Your file download just failed for this URL:' + url + '\r\n' +
-                                'Here was the resulting error HTML: \r\n' + html
-                                );*/
-                    }
-                });
+            httpMethod:"Post",
+            data:{pids:array},
+            successCallback: function (url) {
+                swal({ title: "成功！", type: "success", timer: 2000, showConfirmButton: false });
+                // alert('You just got a file download dialog or ribbon for this URL :' + url);
+            },
+            failCallback: function (html, url) {
+                swal('错误！', '下载失败！', 'error');
+                /*alert('Your file download just failed for this URL:' + url + '\r\n' +
+                        'Here was the resulting error HTML: \r\n' + html
+                        );*/
+            }
+        });
         //    },
         //    //error: function () {
         //    //    alert("出错了");
         //    //}
         //});
+    });
+    //---------Home/Teacher-----------
+    $(document).on("click", "#teachertable td", function () {
+        //$('table td').click(function(){    
+        if (!$(this).is('.input')) {
+            var v=$.trim($(this).text());
+            if (v == 0)
+                v = "&nbsp";
+            $(this).addClass('input').html('<input type="text" style="text-align:left" value="' + v + '" />').find('input').focus().blur(function () {
+                var thisid = $(this).parent().attr("id");    
+                var thisvalue=$(this).val();    
+                var thisname = $(this).parent().parent().attr("value");
+                 
+                $.ajax({    
+                    type: 'POST',    
+                    url: '/Home/UpdateTeacher',    
+                    data: {tid:thisname,property:thisid,value:thisvalue}
+                });    
+                $(this).parent().removeClass('input').html($(this).val() || 0);    
+            });                        
+        }    
+    }).hover(function(){    
+        $(this).addClass('hover');    
+    },function(){    
+        $(this).removeClass('hover');   
+        //var inputObj=$("<input type='text'/>");//可以直接写HTML作为DOM对象包装成一个Jquery对象。
+
+        //var tdObj=$(this);//this代表响应的DOM 的对象。
+
+        //inputObj.appendTo(tdObj);//插入文本框  appendTo方法是：把文本框放如TD中。
+
+        ////append方法是：对TD对象追加一个文本框
+
+        ////让文本框充满整个TD
+
+        //inputObj.width(tdObj.width());
+
+        ////去掉文本框的边框：border-width：0  //文本框边框为0
+
+        //inputObj.css("border-width：0");
+
+        ////让文本框中的文字格式和TD的格式大小差不多。
+
+        //inputObj.css("font-size:16px");
+
+        ////设置文本框的背景色和当前被填充的TD的背景色一样
+
+        //inputObj.css("background-color,tdObj.css('background-color')");
+
+        ////插入前要把当前TD的内容放入文本框中。
+
+        //inputObj.val(tdObj.html());//TD对象是HTML的值。而InputObj对象是VAL的值。
+
+        //tdObj.html("");//清空TD内容
+    });
+    //---------Supervisor/Reference-----------
+    $(document).on("click", "#surereference", function () {
+        var str = new Array();
+        $("input[name='checkreference']:checked").each(function () {
+            //if ($(this).attr("checked")==true) {
+            str.push($(this).val())
+            //alert($(this).val());
+            //}              
+        })
+        for (i in str) {
+            //    alert[str[i]];
+            $.ajax({
+                url: '/Supervisor/ReferenceSure',
+                type: 'post',
+                //contentType: 'application/json;charset=utf-8',
+                data: { cid: str[i] },
+                async: false,
+                success: function (arrageadd) {
+                    //for (i in classeslist) {
+                    //$().fi('<td>' + teachernames[i] + '</td>');
+                    $("#week").find("option[id='0']").html(arrageadd.classeslist[0].Week);
+                    $("#day").find("option[id='0']").html(arrageadd.classeslist[0].Day);
+                    $("#classnumber").find("option[id='0']").html(arrageadd.classeslist[0].ClassNumber);
+                    $("#teachername").find("option[id='0']").html(arrageadd.classeslist[0].TeacherName);
+                    $("#classtype").find("option[id='0']").html(arrageadd.classeslist[0].ClassType);
+                    $("#classeslist").find("td[id='address']").html(arrageadd.classeslist[0].Address);
+                    $("#classeslist").find("td[id='classcontent']").html(arrageadd.classeslist[0].ClassContent);
+                    $("#classeslist").find("td[id='classtype']").html(arrageadd.classeslist[0].ClassType);
+                    $("#classeslist").find("td[id='major']").html(arrageadd.classeslist[0].Major);
+                    $("#classeslist").find("td[id='classname']").html(arrageadd.classeslist[0].ClassName);
+                    $("#classeslist").find("td[id='cid']").html(arrageadd.classeslist[0].Cid);//替换 ;
+                    //}
+                },
+                error: function () {
+                    alert("出错了");
+                }
+            })
+        }
     });
 });
