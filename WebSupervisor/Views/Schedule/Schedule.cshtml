@@ -20,15 +20,19 @@
         </li>
     </ul>
     <div class="tab_container" style="overflow-x:auto;"> 
-        <div id="tab1" class="tab_content" style="display: block; ">
+        <div id="tab1" class="tab_content" style="display: block; " name="tabcontent">
             @Html.Action("ScheduleList");
 
         </div>
-        <div id="tab2" class="tab_content" style="display: none; ">
+        <div id="tab2" class="tab_content" style="display: none; " name="tabcontent">
             @Html.Action("ScheduleInport");
         </div>
-        <div id="tab3" class="tab_content" style="display: none; ">
+        <div id="tab3" class="tab_content"  style="display: none; " name="tabcontent">
             @Html.Action("ScheduleExport");
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function () {
+    })
+</script>

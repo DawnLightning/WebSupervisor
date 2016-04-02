@@ -6,7 +6,7 @@
         <button class="button green" data-toggle="modal" data-target=".bs-example-modal-lg">
             添加
         </button>
-        <button class="button orange" data-toggle="modal" data-target=".bs-example-modal-lg">修改</button>
+        <button class="button orange" data-toggle="modal" data-target=".bs-example-modal-lg" id="modifyarrage">修改</button>
         <button class="button blue"  id="btnsurearrage">确认安排</button>
     </div>
     <div class="col-lg-6 col-sm-3 col-xs-0">
@@ -59,7 +59,7 @@
                         <td width=2%>
                             <input type="hidden" name="idname" value="Cid">
                             <input type="hidden" name="id" value="@item.Cid">
-                            <input type="checkbox"  id="checktemparrage" value="@checkname">
+                            <input type="checkbox"  id="checktemparrage" value="@checkname" name="@item.Cid">
                         </td>
                         <td>@item.ClassName</td>
                         <td>@item.ClassContent</td>

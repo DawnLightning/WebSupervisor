@@ -4,7 +4,7 @@
 @model IPagedList<ConfirmModel>
 <div class="row">
     <div class="col-lg-5 col-sm-12 col-xs-12">
-        <a href="#" class="button orange" data-toggle="modal" data-target=".bs-example-modal-lg">
+        <a href="#" class="button orange" data-toggle="modal" data-target=".bs-example-modal-lg" id="modifyarrage">
             修改
         </a>
         <button type="button" class="button red" name="btntddelete" formaction="/Home/DeleteArrage" formmethod="post">
@@ -100,7 +100,7 @@
                                 <td width=2%>
                                     <input type="hidden" name="idname" value="Cid">
                                     <input type="hidden" name="id" value="@item.Cid">
-                                    <input type="checkbox" name="@checkname" value="@checkname" id="checkconfirmsure">
+                                    <input type="checkbox" name="@item.Cid" value="@checkname" id="checkconfirmsure">
                                 </td>
                                 <td>
                                     @item.ClassName

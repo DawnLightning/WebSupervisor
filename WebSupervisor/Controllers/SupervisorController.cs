@@ -216,7 +216,7 @@ namespace WebSupervisor.Controllers
         /// </summary>
         /// <param name="tid">默认值为测试所用</param>
         /// <returns></returns>
-        public ActionResult ShowSpareTime(string tid)
+        public ActionResult ShowSpareTime(string tid,int week=1)
         {
 
             var hlist = new HandSpareTime();

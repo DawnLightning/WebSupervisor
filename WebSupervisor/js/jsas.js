@@ -61,7 +61,7 @@ $(document).ready(function () {
             var href = $(this).attr("href");
             curhref.replacetag({
                 url: href,
-                tag: $(this).parents(".tab_content")
+                tag: $(this).parents("[name='tabcontent']")
             });
         }
         return false;
@@ -268,7 +268,7 @@ $(document).ready(function () {
                 url: '/Supervisor/ShowSpareTime',
                 type: 'get',
                 dataType: "json",
-                data: { tid: _this.data.tid },
+                data: { tid: _this.data.tid,week:_this.data.week },
                 success: function (data) {
                     _this.data.free_time_data = data.free_time;
                     //_this.show_free_time_by_week();
@@ -386,6 +386,52 @@ $(document).ready(function () {
             $("#tablesupervisor tbody").append($(this).find("td:eq(1)").clone());
             $("#tablesupervisor tbody > td").wrap("<tr name=\"" + $(this).attr("name") + "\"></tr>");
 
+        }
+    });
+    //---------Home/ConfirmTemp&&ConfirmSure-----------
+    $(document).on("click", "#modifyarrage", function () {
+        var str = new Array();
+        $("td input[type='checkbox'][checked='checked']").each(function () {
+            //if ($(this).attr("checked")==true) {
+            str.push($(this).attr("name"));
+            //alert($(this).val());
+            //}              
+        })
+        for (i in str) {
+            //    alert[str[i]];
+            $.ajax({
+                url: '/Supervisor/ReferenceSure',
+                type: 'post',
+                //contentType: 'application/json;charset=utf-8',
+                data: { cid: str[i] },
+                async: false,
+                success: function (arrageadd) {
+                    //for (i in classeslist) {
+                    //$().fi('<td>' + teachernames[i] + '</td>');
+                    $("#week").find("option[id='0']").html(arrageadd.classeslist[0].Week);
+                    $("#day").find("option[id='0']").html(arrageadd.classeslist[0].Day);
+                    $("#classnumber").find("option[id='0']").html(arrageadd.classeslist[0].ClassNumber);
+                    $("#teachername").find("option[id='0']").html(arrageadd.classeslist[0].TeacherName);
+                    $("#classtype").find("option[id='0']").html(arrageadd.classeslist[0].ClassType);
+                    $("#classeslist").find("td[id='address']").html(arrageadd.classeslist[0].Address);
+                    $("#classeslist").find("td[id='classcontent']").html(arrageadd.classeslist[0].ClassContent);
+                    $("#classeslist").find("td[id='classtype']").html(arrageadd.classeslist[0].ClassType);
+                    $("#classeslist").find("td[id='major']").html(arrageadd.classeslist[0].Major);
+                    $("#classeslist").find("td[id='classname']").html(arrageadd.classeslist[0].ClassName);
+                    $("#classeslist").find("td[id='cid']").html(arrageadd.classeslist[0].Cid);//替换 ;
+                    //}
+                    $("[id^='tablesupervisor']").find("tr:gt(0)").remove();
+                    var tr = "{{#FirstSupervisorList}}<tr name=\"{{ Tid}}\"><td>&nbsp;&nbsp;</td><td>{{ TeacherName}}</td><td>{{ IsArrage}}</td></tr>{{/FirstSupervisorList}}";
+                    var tr2 = "{{#SecondSupervisorList}}<tr name=\"{{ Tid}}\"><td>&nbsp;&nbsp;</td><td>{{ TeacherName}}</td><td>{{ Total}}</td></tr>{{/SecondSupervisorList}}";
+
+                    $("#tablesupervisor1 tbody").append(Mustache.render(tr, arrageadd));
+                    $("#tablesupervisor2 tbody").append(Mustache.render(tr2, arrageadd));
+                    $("#tablesupervisor tbody").append("<tr id=\"shead\"></tr>");
+                },
+                error: function () {
+                    alert("出错了");
+                }
+            })
         }
     });
     //---------Home/ConfirmTemp-----------
@@ -534,6 +580,13 @@ $(document).ready(function () {
                     $("#classeslist").find("td[id='classname']").html(arrageadd.classeslist[0].ClassName);
                     $("#classeslist").find("td[id='cid']").html(arrageadd.classeslist[0].Cid);//替换 ;
                     //}
+                    $("[id^='tablesupervisor']").find("tr:gt(0)").remove();
+                    var tr = "{{#FirstSupervisorList}}<tr name=\"{{ Tid}}\"><td>&nbsp;&nbsp;</td><td>{{ TeacherName}}</td><td>{{ IsArrage}}</td></tr>{{/FirstSupervisorList}}";
+                    var tr2 = "{{#SecondSupervisorList}}<tr name=\"{{ Tid}}\"><td>&nbsp;&nbsp;</td><td>{{ TeacherName}}</td><td>{{ Total}}</td></tr>{{/SecondSupervisorList}}";
+
+                    $("#tablesupervisor1 tbody").append(Mustache.render(tr, arrageadd));
+                    $("#tablesupervisor2 tbody").append(Mustache.render(tr2, arrageadd));
+                    $("#tablesupervisor tbody").append("<tr id=\"shead\"></tr>");
                 },
                 error: function () {
                     alert("出错了");
@@ -541,4 +594,39 @@ $(document).ready(function () {
             })
         }
     });
+    //---------Schedule/ScheduleExport-----------
+    var findclasses = function (teachername, classname, major) {
+
+        if (teachername != 0 || classname != 0 || major != 0) {
+            if (teachername == 0)
+                teachername = "全部"
+            if (classname == 0)
+                classname = "全部"
+            if (major == 0)
+                major = "全部"
+            $.ajax({
+                url: '/Schedule/ScheduleExport',
+                type: 'post',
+                async: false,
+                data: { cbname: teachername, cbclass: classname, cbspcial: major },
+                success: function (htm) {
+                    $("[name='tabcontent']").html(htm)
+                },
+                error: function () {
+                    alert("出错了");
+                }
+            })
+        }
+        return true;
+    }
+    $(document).on("change", "[name='Sselect']", function () {
+        var teachername = $("#teachername").val();
+        var classname = $("#classname").val();
+        var major = $("#major").val();
+        findclasses(teachername, classname, major);
+    });
+    //$("").change(function () {
+       
+
+    //});
 });

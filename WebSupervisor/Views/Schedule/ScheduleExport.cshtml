@@ -5,42 +5,51 @@
         <div class="po-right">
 
             <div class="btn-group">
-                <select id="teachername">
-                    <option value="0" id="0">请选择老师</option>
-                    @*@{
-                            foreach (var item in ViewBag.TeacherName)
-                            {
-                                <option value=@item>@item</option>
-                            }
+                <select id="teachername" name="Sselect">                    
+                    @{
+                        if (ViewBag.TeacherName.Length > 1)
+                        {
+                            <option value="0" id="0">全部</option>
+                        }
+                        foreach (var item in ViewBag.TeacherName)
+                        {
+                            <option value=@item>@item</option>
+                        }
 
-                        }*@
+                    }
                 </select>
                 <!--教师姓名-->
             </div>
             <!--btn-group-->
             <div class="btn-group">
-                <select id="classname">
-                    <option value="0" id="0">请选择课程</option>
-                    @*@{
-                            foreach (var item in ViewBag.ClassName)
-                            {
-                                <option value=@item>@item</option>
-                            }
-                        }*@
+                <select id="classname" name="Sselect">
+                    @{
+                        if (ViewBag.ClassName.Length>1)
+                        {
+                            <option value="0" id="0">全部</option>
+                        }
+                        foreach (var item in ViewBag.ClassName)
+                        {
+                            <option value=@item>@item</option>
+                        }
+                    }
                 </select>
                 <!--课程-->
             </div>
             <!--btn-group-->
             <div class="btn-group">
-                <select id="major">
-                    <option value="0" id="0">请选择专业</option>
-                    @*@{
-                            foreach (var item in ViewBag.Major)
-                            {
-                                <option value=@item>@item</option>
-                            }
+                <select id="major" name="Sselect">
+                    @{
+                        if (ViewBag.Major.Length > 1)
+                        {
+                            <option value="0" id="0">全部</option>
+                        }
+                        foreach (var item in ViewBag.Major)
+                        {
+                            <option value=@item>@item</option>
+                        }
 
-                        }*@
+                    }
                 </select>
                 <!--专业-->
             </div>
@@ -55,7 +64,7 @@
     </div>
 </div>
 <!--row-->
-    <table class="table table-condensed table-hover table-responsive ove " id="classtable">
+    <table class="table table-condensed table-hover table-responsive ove " id="classtable" name="tabcontent">
         <tr bgcolor="#f5f5f5">
             <th>
                 <p>
@@ -113,29 +122,5 @@
     }))
 </div>
 <script>
-    var findclasses=function(teachername,classname,major)
-    {
-        if (teachername != 0 || classname != 0 || major != 0) {
-            $.ajax({
-                url: '/Schedule/ScheduleExport',
-                type: 'post',
-                async: false,
-                data: { cbname: teachername, cbclass: classname, cbspcial: major },
-                success: function (htm) {
-                    $("#tab3").html(htm)
-                },
-                error: function () {
-                    alert("出错了");
-                }
-            })
-        }
-            return true;
-    }
-    $("select").change(function () {
-        var teachername = $("#teachername").val();
-        var classname = $("#classname").val();
-        var major = $("#major").val();
-        findclasses(teachername, classname, major);
 
-    });
 </script>
