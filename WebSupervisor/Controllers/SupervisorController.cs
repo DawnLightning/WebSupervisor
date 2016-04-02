@@ -216,26 +216,26 @@ namespace WebSupervisor.Controllers
         /// </summary>
         /// <param name="tid">默认值为测试所用</param>
         /// <returns></returns>
-        public ActionResult ShowSpareTime(string tid,int week=1)
+        public ActionResult ShowSpareTime(string tid)
         {
 
             var hlist = new HandSpareTime();
             hlist.Tid = tid;
             hlist.FreeTimel = (from sp in splist
-                               where sp.Tid == tid 
+                               where sp.Tid == tid
                                group sp by sp.Week into s
                                select new Freetime
                                {
                                    Week = s.Key,
-                                   DayClist=(from s1 in s
-                                            group s1 by s1.Day into s2
-                                            select new DayClassesNumber
-                                            {
-                                                Day = s2.Key,
-                                                Classnumberl = classnumberl((from s3 in s2
-                                                                             select s3.ClassNumber).ToList())
-                                            }).ToList()
-             }).ToList();
+                                   DayClist = (from s1 in s
+                                               group s1 by s1.Day into s2
+                                               select new DayClassesNumber
+                                               {
+                                                   Day = s2.Key,
+                                                   Classnumberl = classnumberl((from s3 in s2
+                                                                                select s3.ClassNumber).ToList())
+                                               }).ToList()
+                               }).ToList();
             return Json(hlist, JsonRequestBehavior.AllowGet);
         }
         public ActionResult SaveSpareTime(string tid, int[] week,List<Freetime> freetime )
@@ -389,7 +389,21 @@ namespace WebSupervisor.Controllers
             }
             return list;
         }
-
+        public ActionResult RmSupervisor(string[] tids)
+        {
+            try
+            {
+                foreach (string tid in tids)
+                {
+                    string updateteachers = string.Format("update teachers set indentify=0 where tid='{0}'", tid);
+                    string delectsparetime = string.Format("delete from sparetime where tid='{0}'", tid);
+                    DBHelper.ExecuteNonQuery(updateteachers, CommandType.Text, null);
+                    DBHelper.ExecuteNonQuery(delectsparetime, CommandType.Text, null);
+                }
+                return this.Json(new jsondata(0, "删除成功"), JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception) { return this.Json(new jsondata(1, "删除失败"), JsonRequestBehavior.AllowGet); }
+        }
         /// <summary>
         /// 删除教师
         /// </summary>

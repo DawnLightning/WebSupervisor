@@ -369,6 +369,34 @@ $(document).ready(function () {
             free_time.show_free_time_by_week($(event.target).text());
         }
     });
+    $(document).on("click", "#btnrmsupervisor", function () {
+        var array = new Array()
+        $("input[id='checksupervisor']:checked").each(function () {
+            array.push($(this).attr("name"))
+        });
+        $.post("/Supervisor/RmSupervisor", { tids: array },
+        function (data) {
+            if (data.code == 0) {
+                swal({
+                    title: "已经成功确认",//放js显示乱码 所以放这里
+                    timer: 1500,
+                    showConfirmButton: false,
+                    type: "success"
+                });
+                curhref.replacetag({ url: "/Supervisor/Supervisor", tag: "#wrapper" });
+            }
+            else {
+                swal({
+                    title: "确认安排失败",//放js显示乱码 所以放这里
+                    timer: 1500,
+                    showConfirmButton: false,
+                    type: "error"
+                });
+            }
+        }
+            );
+    });
+
     //---------Share/_ArrageAdd-----------
     $(document).on("click", "#tablesupervisor1 tr", function () {
         $(this).siblings().find("td:first").removeClass("checked_box");
@@ -505,7 +533,10 @@ $(document).ready(function () {
                 var thisid = $(this).parent().attr("id");    
                 var thisvalue=$(this).val();    
                 var thisname = $(this).parent().parent().attr("value");
-                 
+                if (thisvalue = "是")
+                    thisvalue = 1;
+                if (thisvalue = "否")
+                    thisvalue = 0;
                 $.ajax({    
                     type: 'POST',    
                     url: '/Home/UpdateTeacher',    
@@ -620,9 +651,9 @@ $(document).ready(function () {
         return true;
     }
     $(document).on("change", "[name='Sselect']", function () {
-        var teachername = $("#teachername").val();
-        var classname = $("#classname").val();
-        var major = $("#major").val();
+        var teachername = $("select[id='teachername']").val();
+        var classname = $("select[id='classname']").val();
+        var major = $("select[id='major']").val();
         findclasses(teachername, classname, major);
     });
     //$("").change(function () {
