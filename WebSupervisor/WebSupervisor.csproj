@@ -191,7 +191,6 @@
     <Content Include="js\pikaday.js" />
     <Content Include="js\respond.min.js" />
     <Content Include="js\jsas.js" />
-    <Content Include="js\sas.js" />
     <Content Include="js\jsas.old.js" />
     <Content Include="js\sweetalert.min.js" />
     <Content Include="js\vtab.js" />

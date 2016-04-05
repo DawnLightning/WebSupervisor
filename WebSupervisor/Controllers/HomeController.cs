@@ -256,14 +256,27 @@ namespace WebSupervisor.Controllers
         }
         public ActionResult UpdateTeacher(string tid,string property,string value)
         {
-            if(!string.IsNullOrEmpty(value.Trim()))
+            try
             {
-                string updateteachers = string.Format("update teachers set {0}='{1}' where tid='{2}'", property, value, tid);
-                DBHelper.ExecuteNonQuery(updateteachers, CommandType.Text, null);
+                if (!string.IsNullOrEmpty(value.Trim()))
+                {
+                    string updateteachers = string.Format("update teachers set {0}='{1}' where tid='{2}'", property, value, tid);
+                    DBHelper.ExecuteNonQuery(updateteachers, CommandType.Text, null);
+                    if (property == "indentify"&&value=="1")
+                    {
+                        CheckClassModel c = new CheckClassModel();
+                        c.Tid = tid;
+                        c.DayNumber = 0;
+                        c.WeekNumber = 0;
+                        c.total = 0;
+                        DBHelper.Insert<CheckClassModel>(c);
+                    } 
+                }
+                return Json(new jsondata(0, "更新成功"));
             }
-            //return Json(new jsondata(0,"更新成功"))
-            //}
-            return null;
+            catch (Exception) { return Json(new jsondata(1, "更新失败")); }
+            ////}
+            //return null;
         }
         [HttpPost]
         public ActionResult SetInfo(FormCollection fc)
@@ -299,6 +312,13 @@ namespace WebSupervisor.Controllers
         {
             MakePlacement mp = new MakePlacement(ac);
             mp.CreatPlan(Session["College"].ToString());
+            return Redirect("/#!/Home/Confirm");
+        }
+        [HttpPost]
+        public ActionResult ReAutoArrange(ArrageConfigModel ac)
+        {
+            MakePlacement mp = new MakePlacement(ac);
+            mp.ReCreatPlan(Session["College"].ToString());
             return Redirect("/#!/Home/Confirm");
         }
         //根据周天节次获得教师姓名

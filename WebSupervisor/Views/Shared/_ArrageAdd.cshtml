@@ -266,77 +266,9 @@
             </div>
         </div>
     </div>
-    <script>
+    @*<script>
         $(document).ready(function () {
-            var findteachername = function (week, day, classnumber) {
-                if (week != 0 && day != 0 && classnumber != 0) {
-                    $.ajax({
-                        url: '/Home/ArrageAddwdc',
-                        type: 'post',
-                        contentType: 'application/json;charset=utf-8',
-                        async: false,
-                        data: JSON.stringify({
-                            "week": week,
-                            "day": day,
-                            "classnumber": classnumber,
-                        }),
-                        success: function (teachernames) {
-                            $("#teachername").empty();
-                            for (i in teachernames) {
-                                $("#teachername").append('<option value="' + teachernames[i] + '">' + teachernames[i] + '</option>');  //添加一项option ;
-                            }
-                        },
-                        error: function () {
-                            alert("出错了");
-                        }
-                    })
-                    return true;
-                }
-                else
-                    return false;
-            }
-            var isallselect = function (week, day, classnumber, teachername, classtype) {
-                if (week != 0 && day != 0 && classnumber != 0 && teachername != 0 && classtype != 0) {
-                    $.ajax({
-                        url: '/Supervisor/ArrageAddallselect',
-                        async: false,
-                        type: 'post',
-                        contentType: 'application/json;charset=utf-8',
-                        data: JSON.stringify({
-                            "week": week,
-                            "day": day,
-                            "classnumber": classnumber,
-                            "teachername": teachername,
-                            "classtype": classtype
-                        }),
-                        success: function (arrageadd) {
 
-                            $("#classeslist").find("td[id='address']").html(arrageadd.classeslist[0].Address);
-                            $("#classeslist").find("td[id='classcontent']").html(arrageadd.classeslist[0].ClassContent);
-                            $("#classeslist").find("td[id='classtype']").html(arrageadd.classeslist[0].ClassType);
-                            $("#classeslist").find("td[id='major']").html(arrageadd.classeslist[0].Major);
-                            $("#classeslist").find("td[id='classname']").html(arrageadd.classeslist[0].ClassName);
-                            $("#classeslist").find("td[id='cid']").html(arrageadd.classeslist[0].Cid);//替换 ;
-
-                            $("[id^='tablesupervisor']").find("tr:gt(0)").remove();
-                            var tr = "{{#FirstSupervisorList}}<tr name=\"{{ Tid}}\"><td>&nbsp;&nbsp;</td><td>{{ TeacherName}}</td><td>{{ IsArrage}}</td></tr>{{/FirstSupervisorList}}";
-                            var tr2 = "{{#SecondSupervisorList}}<tr name=\"{{ Tid}}\"><td>&nbsp;&nbsp;</td><td>{{ TeacherName}}</td><td>{{ Total}}</td></tr>{{/SecondSupervisorList}}";
-
-                            $("#tablesupervisor1 tbody").append(Mustache.render(tr, arrageadd));
-                            $("#tablesupervisor2 tbody").append(Mustache.render(tr2, arrageadd));
-                            $("#tablesupervisor tbody").append("<tr id=\"shead\"></tr>");
-
-                            //}
-                        },
-                        error: function () {
-                            alert("出错了");
-                        }
-                    })
-                    return true;
-                }
-                else
-                    return false;
-            }
             $("select").change(function () {
                 var week = $("#week").val();
                 var day = $("#day").val();
@@ -348,5 +280,5 @@
                 }
             });
         });
-    </script>
+    </script>*@
 </div>

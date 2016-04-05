@@ -17,7 +17,7 @@ namespace WebSupervisor.Models
 
         public string Password { set; get; }
         public string College { set; get; }
-        public int NumSMS { set; get; }
+        //public int NumSMS { set; get; }
 
         public int Power { set; get; }
         public string Phone { set; get; }
