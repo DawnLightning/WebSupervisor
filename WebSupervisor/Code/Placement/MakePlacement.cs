@@ -143,7 +143,9 @@ namespace WebSupervisor.Code.Placement
                                         }
                                         else if (count > config.MaxPeople)
                                         {
-                                            for (int i = 0; i < config.MaxPeople; i++)
+                                            Random r = new Random();
+                                            int numpeople = r.Next(config.MinPeople,config.MinPeople);
+                                            for (int i = 0; i <numpeople; i++)
                                             {
                                                 group = group + "," + IdToName(sptlist[i].Tid);
                                               
@@ -308,7 +310,7 @@ namespace WebSupervisor.Code.Placement
             listcheckcount=listcheckcount.OrderBy(m => m.total).ToList();
             foreach (CheckClassModel model in listcheckcount)
             {
-                if (model.DayNumber==0&&model.WeekNumber<2)
+                if (model.DayNumber==config.DayListen&&model.WeekNumber<config.WeekListen)
                 {
                     truelist.Add(model);
                 }
@@ -317,9 +319,10 @@ namespace WebSupervisor.Code.Placement
             {
                 foreach (SpareTimeModel model in temp)
                 {
-                    if (model.ClassNumber.Equals(classnumber)&&model.Tid.Equals(model.Tid))
+                    if (model.ClassNumber.Equals(classnumber)&&cmodel.Tid.Equals(model.Tid))
                     {
                         list.Add(model);
+                        break;
                     }
                 }
             }
