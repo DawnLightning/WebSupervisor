@@ -1,175 +1,14 @@
-﻿@model IPagedList<ReferenceModel>
+﻿
 <link rel="stylesheet" href="~/css/pikaday.css">
 <div class="contain" id="classtable">
     <div class="tab_container"style="overflow-x:auto;">
-        <div id="tab1" class="tab_content" style="display: block; " name="tabcontent">
+        <div id="tab1" class="tab_content" style="display: block; ">
             <div class="po-left">
                 <input type="button" id="datepicker" class="datapicker data-margin" style=" width:200px;background:url(image/15.png) no-repeat left top">
             </div>
-            <!--left-->
-            <div>
-                <table class="table table-condensed table-hover table-responsive ove">
-                    <tr bgcolor="#f5f5f5">
-                        <th width=2%>
-                        </th>
-                        <th>
-                            <p>
-                                序号
-                            </p>
-                        </th>
-                        <th>
-                            <p>
-                                上课时间
-                            </p>
-                        </th>
-                        <th>
-                            <p>
-                                上课教师
-                            </p>
-                        </th>
-                        <th>
-                            <p>
-                                上课地点
-                            </p>
-                        </th>
-                        <th>
-                            <p>
-                                专业
-                            </p>
-                        </th>
-                        <th>
-                            <p>
-                                课程类型
-                            </p>
-                        </th>
-                        <th>
-                            <p>
-                                督导人数
-                            </p>
-                        </th>
-                    </tr>
-                    @{
-                        if (Model == null)
-                        {
-                            <tr>
-                                <td>
-                                    &nbsp;
-                                </td>
-                                <td>
-                                    &nbsp;
-                                </td>
-                                <td>
-                                    &nbsp;
-                                </td>
-                                <td>
-                                    &nbsp;
-                                </td>
-                                <td>
-                                    &nbsp;
-                                </td>
-                                <td>
-                                    &nbsp;
-                                </td>
-                                <td>
-                                    &nbsp;
-                                </td>
-                                <td>
-                                    &nbsp;
-                                </td>
-                            </tr>
-                        }
-                        for (int i = 0; i < Model.PageSize; i++)
-                        {
-                            if (i < Model.Count)
-                            {
-                                var item = Model[i];
-                                <tr>
-                                    <td width=2%>
-                                        <input type="checkbox" name="checkreference" value="@item.Cid">
-                                    </td>
-                                    <td>
-                                        @item.Id
-                                    </td>
-                                    <td>
-                                        @item.time
-                                    </td>
-                                    <td>
-                                        @item.TeacherName
-                                    </td>
-                                    <td>
-                                        @item.Address
-                                    </td>
-                                    <td>
-                                        @item.Major
-                                    </td>
-                                    <td>
-                                        @item.ClassType
-                                    </td>
-                                    <td>
-                                        @item.SupervisorsSum
-                                    </td>
-                                </tr>
-                            }
-                            else
-                            {
-                                <tr>
-                                    <td>
-                                        &nbsp;
-                                    </td>
-                                    <td>
-                                        &nbsp;
-                                    </td>
-                                    <td>
-                                        &nbsp;
-                                    </td>
-                                    <td>
-                                        &nbsp;
-                                    </td>
-                                    <td>
-                                        &nbsp;
-                                    </td>
-                                    <td>
-                                        &nbsp;
-                                    </td>
-                                    <td>
-                                        &nbsp;
-                                    </td>
-                                    <td>
-                                        &nbsp;
-                                    </td>
-                                </tr>
-                            }
-                        }
-                    }
-                </table>
-            </div>
-            <!-- /.table -->
-            <div class="po-right">
-                <button id="surereference" class="sch-btn blue" style="margin-top:-9px;"  data-toggle="modal" data-target=".bs-example-modal-lg">
-                    确认安排
-                </button>
-            </div>
-            <div class="pager" style="text-align: center;">
-                <span style="height: 10px; line-height: 10px;">共 @Model.TotalItemCount.ToString() 条记录，当前第 @Model.PageNumber 页/共 @Model.PageCount 页 </span>
-                @Html.PagedListPager(
-                Model,
-                page => Url.Action("Reference", "Supervisor", new { page }),
-                PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new PagedListRenderOptions
-                {
-                    LinkToFirstPageFormat = "首页",
-                    LinkToNextPageFormat = "下一页",
-                    LinkToPreviousPageFormat = "上一页",
-                    LinkToLastPageFormat = "末页",
-                    DisplayItemSliceAndTotal = false,
-                    MaximumPageNumbersToDisplay = 10,
-                    DisplayLinkToIndividualPages = true
-                }, new AjaxOptions()
-                {
-                    HttpMethod = "GET",
-                    InsertionMode = InsertionMode.Replace,
-                    UpdateTargetId = "classtable"
-                }))
-            </div>
+            <div  name="tabcontent">
+            @Html.Action("ReferenceList"); 
+                </div>  
         </div>
     </div>
 </div>
@@ -249,12 +88,4 @@
         });
 
     });
-</script>
-<script>
-        $(".pagination-container .pagination a").each(function () {
-            if (typeof $(this).attr("href") != "undefined") {
-                var href = "javascript:navpage('" + $(this).attr("href") + "')";
-                $(this).attr("href", href);
-            }
-        })
 </script>

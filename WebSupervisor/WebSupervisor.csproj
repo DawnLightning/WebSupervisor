@@ -362,6 +362,7 @@
     <Content Include="Views\Supervisor\SupervisorList.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Account\TeacherInfo.cshtml" />
+    <Content Include="Views\Supervisor\ReferenceList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

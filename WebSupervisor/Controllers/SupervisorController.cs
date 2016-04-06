@@ -22,15 +22,15 @@ namespace WebSupervisor.Controllers
         List<SpareTimeModel> splist = DBHelper.ExecuteList<SpareTimeModel>("select * from sparetime", CommandType.Text, null);
         List<ClassesModel> classlist = DBHelper.ExecuteList<ClassesModel>("select * from classes", CommandType.Text, null);
         // GET: SupervisorPage
-        public ActionResult CheifSupervisor()
+        //public ActionResult CheifSupervisor()
+        //{
+        //    return View();
+        //}
+        public PartialViewResult Reference()
         {
-            return View();
+            return PartialView();
         }
-        public ActionResult NormalSupervisor()
-        {
-            return View();
-        }
-        public ActionResult Reference(string year = "", string month = "", string day = "", int page = 1)
+        public ActionResult ReferenceList(string year = "", string month = "", string day = "", int page = 1)
         {
             int i = 1;
             Common com = new Common();
