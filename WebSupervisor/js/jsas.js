@@ -42,11 +42,11 @@ $(document).ready(function () {
 
         $.fileDownload($(this).attr('href'), {
             successCallback: function (url) {
-                swal({ title: "Success!", type: "success", timer: 2000, showConfirmButton: false });
+                swal({ title: "成功！", type: "success", timer: 2000, showConfirmButton: false });
                 // alert('You just got a file download dialog or ribbon for this URL :' + url);
             },
             failCallback: function (html, url) {
-                swal('Error!', 'File download failed!', 'error');
+                swal('错误！', '下载失败！', 'error');
                 /*alert('Your file download just failed for this URL:' + url + '\r\n' +
                         'Here was the resulting error HTML: \r\n' + html
                         );*/
@@ -61,7 +61,7 @@ $(document).ready(function () {
             var href = $(this).attr("href");
             curhref.replacetag({
                 url: href,
-                tag: $(this).parents(".tab_content")
+                tag: $(this).parents("[name='tabcontent']")
             });
         }
         return false;
@@ -268,7 +268,7 @@ $(document).ready(function () {
                 url: '/Supervisor/ShowSpareTime',
                 type: 'get',
                 dataType: "json",
-                data: { tid: _this.data.tid },
+                data: { tid: _this.data.tid,week:_this.data.week },
                 success: function (data) {
                     _this.data.free_time_data = data.free_time;
                     //_this.show_free_time_by_week();
@@ -369,7 +369,104 @@ $(document).ready(function () {
             free_time.show_free_time_by_week($(event.target).text());
         }
     });
+    $(document).on("click", "#btnrmsupervisor", function () {
+        var array = new Array()
+        $("input[id='checksupervisor']:checked").each(function () {
+            array.push($(this).attr("name"))
+        });
+        $.post("/Supervisor/RmSupervisor", { tids: array },
+        function (data) {
+            if (data.code == 0) {
+                swal({
+                    title: "已经成功确认",//放js显示乱码 所以放这里
+                    timer: 1500,
+                    showConfirmButton: false,
+                    type: "success"
+                });
+                curhref.replacetag({ url: "/Supervisor/Supervisor", tag: "#wrapper" });
+            }
+            else {
+                swal({
+                    title: "确认安排失败",//放js显示乱码 所以放这里
+                    timer: 1500,
+                    showConfirmButton: false,
+                    type: "error"
+                });
+            }
+        }
+            );
+    });
+
     //---------Share/_ArrageAdd-----------
+    var findteachername = function (week, day, classnumber) {
+        if (week != 0 && day != 0 && classnumber != 0) {
+            $.ajax({
+                url: '/Home/ArrageAddwdc',
+                type: 'post',
+                contentType: 'application/json;charset=utf-8',
+                async: false,
+                data: JSON.stringify({
+                    "week": week,
+                    "day": day,
+                    "classnumber": classnumber,
+                }),
+                success: function (teachernames) {
+                    $("#teachername").empty();
+                    for (i in teachernames) {
+                        $("#teachername").append('<option value="' + teachernames[i] + '">' + teachernames[i] + '</option>');  //添加一项option ;
+                    }
+                },
+                error: function () {
+                    alert("出错了");
+                }
+            })
+            return true;
+        }
+        else
+            return false;
+    }
+    var isallselect = function (week, day, classnumber, teachername, classtype) {
+        if (week != 0 && day != 0 && classnumber != 0 && teachername != 0 && classtype != 0) {
+            $.ajax({
+                url: '/Supervisor/ArrageAddallselect',
+                async: false,
+                type: 'post',
+                contentType: 'application/json;charset=utf-8',
+                data: JSON.stringify({
+                    "week": week,
+                    "day": day,
+                    "classnumber": classnumber,
+                    "teachername": teachername,
+                    "classtype": classtype
+                }),
+                success: function (arrageadd) {
+
+                    $("#classeslist").find("td[id='address']").html(arrageadd.classeslist[0].Address);
+                    $("#classeslist").find("td[id='classcontent']").html(arrageadd.classeslist[0].ClassContent);
+                    $("#classeslist").find("td[id='classtype']").html(arrageadd.classeslist[0].ClassType);
+                    $("#classeslist").find("td[id='major']").html(arrageadd.classeslist[0].Major);
+                    $("#classeslist").find("td[id='classname']").html(arrageadd.classeslist[0].ClassName);
+                    $("#classeslist").find("td[id='cid']").html(arrageadd.classeslist[0].Cid);//替换 ;
+
+                    $("[id^='tablesupervisor']").find("tr:gt(0)").remove();
+                    var tr = "{{#FirstSupervisorList}}<tr name=\"{{ Tid}}\"><td>&nbsp;&nbsp;</td><td>{{ TeacherName}}</td><td>{{ IsArrage}}</td></tr>{{/FirstSupervisorList}}";
+                    var tr2 = "{{#SecondSupervisorList}}<tr name=\"{{ Tid}}\"><td>&nbsp;&nbsp;</td><td>{{ TeacherName}}</td><td>{{ Total}}</td></tr>{{/SecondSupervisorList}}";
+
+                    $("#tablesupervisor1 tbody").append(Mustache.render(tr, arrageadd));
+                    $("#tablesupervisor2 tbody").append(Mustache.render(tr2, arrageadd));
+                    $("#tablesupervisor tbody").append("<tr id=\"shead\"></tr>");
+
+                    //}
+                },
+                error: function () {
+                    alert("出错了");
+                }
+            })
+            return true;
+        }
+        else
+            return false;
+    }
     $(document).on("click", "#tablesupervisor1 tr", function () {
         $(this).siblings().find("td:first").removeClass("checked_box");
         $(this).children("td:first").addClass("checked_box");
@@ -388,4 +485,285 @@ $(document).ready(function () {
 
         }
     });
+    $(document).on("change", "select", function () {
+        var week = $("#week").val();
+        var day = $("#day").val();
+        var classnumber = $("#classnumber").val();
+        var classtype = $("#classtype").val();
+        var teachername = $("#teachername").val();
+        if (findteachername(week, day, classnumber) == true) {
+            isallselect(week, day, classnumber, teachername, classtype);
+        }
+    });
+    //---------Home/ConfirmTemp&&ConfirmSure-----------
+    $(document).on("click", "#modifyarrage", function () {
+        var str = new Array();
+        $("td input[type='checkbox'][checked='checked']").each(function () {
+            //if ($(this).attr("checked")==true) {
+            str.push($(this).attr("name"));
+            //alert($(this).val());
+            //}              
+        })
+        for (i in str) {
+            //    alert[str[i]];
+            $.ajax({
+                url: '/Supervisor/ReferenceSure',
+                type: 'post',
+                //contentType: 'application/json;charset=utf-8',
+                data: { cid: str[i] },
+                async: false,
+                success: function (arrageadd) {
+                    //for (i in classeslist) {
+                    //$().fi('<td>' + teachernames[i] + '</td>');
+                    $("#week").find("option[id='0']").html(arrageadd.classeslist[0].Week);
+                    $("#day").find("option[id='0']").html(arrageadd.classeslist[0].Day);
+                    $("#classnumber").find("option[id='0']").html(arrageadd.classeslist[0].ClassNumber);
+                    $("#teachername").find("option[id='0']").html(arrageadd.classeslist[0].TeacherName);
+                    $("#classtype").find("option[id='0']").html(arrageadd.classeslist[0].ClassType);
+                    $("#classeslist").find("td[id='address']").html(arrageadd.classeslist[0].Address);
+                    $("#classeslist").find("td[id='classcontent']").html(arrageadd.classeslist[0].ClassContent);
+                    $("#classeslist").find("td[id='classtype']").html(arrageadd.classeslist[0].ClassType);
+                    $("#classeslist").find("td[id='major']").html(arrageadd.classeslist[0].Major);
+                    $("#classeslist").find("td[id='classname']").html(arrageadd.classeslist[0].ClassName);
+                    $("#classeslist").find("td[id='cid']").html(arrageadd.classeslist[0].Cid);//替换 ;
+                    //}
+                    $("[id^='tablesupervisor']").find("tr:gt(0)").remove();
+                    var tr = "{{#FirstSupervisorList}}<tr name=\"{{ Tid}}\"><td>&nbsp;&nbsp;</td><td>{{ TeacherName}}</td><td>{{ IsArrage}}</td></tr>{{/FirstSupervisorList}}";
+                    var tr2 = "{{#SecondSupervisorList}}<tr name=\"{{ Tid}}\"><td>&nbsp;&nbsp;</td><td>{{ TeacherName}}</td><td>{{ Total}}</td></tr>{{/SecondSupervisorList}}";
+
+                    $("#tablesupervisor1 tbody").append(Mustache.render(tr, arrageadd));
+                    $("#tablesupervisor2 tbody").append(Mustache.render(tr2, arrageadd));
+                    $("#tablesupervisor tbody").append("<tr id=\"shead\"></tr>");
+                },
+                error: function () {
+                    alert("出错了");
+                }
+            })
+        }
+    });
+    //---------Home/ConfirmTemp-----------
+    $(document).on("click", "#btnsurearrage", function () {
+        var array = new Array()
+        $("input[id='checktemparrage']:checked").each(function () {
+            array.push($(this).val())
+        });
+        $.post("/Home/SureArrage", { pids: array },
+            function (data) {
+                if (data.code == 0) {
+                    swal({
+                        title: "已经成功确认",//放js显示乱码 所以放这里
+                        timer: 1500,
+                        showConfirmButton: false,
+                        type: "success"
+                    });
+                    curhref.replacetag({ url: "/Home/ConfirmTemp", tag: "#tab1" });
+                    curhref.replacetag({ url: "/Home/ConfirmSure", tag: "#tab2" });
+                }
+                else {
+                    swal({
+                        title: "确认安排失败",//放js显示乱码 所以放这里
+                        timer: 1500,
+                        showConfirmButton: false,
+                        type: "error"
+                    });
+                }
+            });
+    });
+    //---------Home/ConfirmSure-----------
+    $(document).on("click", "#exportarrage", function () {
+        var array = new Array()
+        $("input[id='checkconfirmsure']:checked").each(function () {
+            array.push($(this).val())
+        });
+        //$.ajax({
+        //    url: '/Home/ExportArrage',
+        //    type: 'post',
+        //    data: { pids: array },
+        //    //async: false,
+        //    success: function () {
+        $.fileDownload("/Home/ExportArrage", {
+            httpMethod:"Post",
+            data:{pids:array},
+            successCallback: function (url) {
+                swal({ title: "成功！", type: "success", timer: 2000, showConfirmButton: false });
+                // alert('You just got a file download dialog or ribbon for this URL :' + url);
+            },
+            failCallback: function (html, url) {
+                swal('错误！', '下载失败！', 'error');
+                /*alert('Your file download just failed for this URL:' + url + '\r\n' +
+                        'Here was the resulting error HTML: \r\n' + html
+                        );*/
+            }
+        });
+        //    },
+        //    //error: function () {
+        //    //    alert("出错了");
+        //    //}
+        //});
+    });
+    //---------Home/Teacher-----------
+    $(document).on("click", "#teachertable td", function () {
+        //$('table td').click(function(){    
+        if (!$(this).is('.input')) {
+            var v=$.trim($(this).text());
+            if (v == 0)
+                v = "&nbsp";
+            $(this).addClass('input').html('<input type="text" style="text-align:left" value="' + v + '" />').find('input').focus().blur(function () {
+                var thisid = $(this).parent().attr("id");    
+                var thisvalue=$(this).val();    
+                var thisname = $(this).parent().parent().attr("value");
+                if (thisvalue == "是")
+                    thisvalue = 1;
+                if (thisvalue == "否")
+                    thisvalue = 0;
+                $.ajax({    
+                    type: 'POST',    
+                    url: '/Home/UpdateTeacher',    
+                    data: {tid:thisname,property:thisid,value:thisvalue}
+                });    
+                $(this).parent().removeClass('input').html($(this).val() || 0);    
+            });                        
+        }    
+    }).hover(function(){    
+        $(this).addClass('hover');    
+    },function(){    
+        $(this).removeClass('hover');   
+        //var inputObj=$("<input type='text'/>");//可以直接写HTML作为DOM对象包装成一个Jquery对象。
+
+        //var tdObj=$(this);//this代表响应的DOM 的对象。
+
+        //inputObj.appendTo(tdObj);//插入文本框  appendTo方法是：把文本框放如TD中。
+
+        ////append方法是：对TD对象追加一个文本框
+
+        ////让文本框充满整个TD
+
+        //inputObj.width(tdObj.width());
+
+        ////去掉文本框的边框：border-width：0  //文本框边框为0
+
+        //inputObj.css("border-width：0");
+
+        ////让文本框中的文字格式和TD的格式大小差不多。
+
+        //inputObj.css("font-size:16px");
+
+        ////设置文本框的背景色和当前被填充的TD的背景色一样
+
+        //inputObj.css("background-color,tdObj.css('background-color')");
+
+        ////插入前要把当前TD的内容放入文本框中。
+
+        //inputObj.val(tdObj.html());//TD对象是HTML的值。而InputObj对象是VAL的值。
+
+        //tdObj.html("");//清空TD内容
+    });
+    //---------Power/Key-----------
+    $(document).on("click", "#admintable td", function () {
+        //$('table td').click(function(){    
+        if (!$(this).is('.input')) {
+            var v = $.trim($(this).text());
+            if (v == 0)
+                v = "&nbsp";
+            $(this).addClass('input').html('<input type="text" style="text-align:left" value="' + v + '" />').find('input').focus().blur(function () {
+                var thisid = $(this).parent().attr("id");
+                var thisvalue = $(this).val();
+                var thisname = $(this).parent().parent().attr("value");         
+                $.ajax({
+                    type: 'POST',
+                    url: '/Power/UpdateAdmin',
+                    data: { uid: thisname, property: thisid, value: thisvalue }
+                });
+                $(this).parent().removeClass('input').html($(this).val() || 0);
+            });
+        }
+    }).hover(function () {
+        $(this).addClass('hover');
+    }, function () {
+        $(this).removeClass('hover');
+    });
+    //---------Supervisor/Reference-----------
+    $(document).on("click", "#surereference", function () {
+        var str = new Array();
+        $("input[name='checkreference']:checked").each(function () {
+            //if ($(this).attr("checked")==true) {
+            str.push($(this).val())
+            //alert($(this).val());
+            //}              
+        })
+        for (i in str) {
+            //    alert[str[i]];
+            $.ajax({
+                url: '/Supervisor/ReferenceSure',
+                type: 'post',
+                //contentType: 'application/json;charset=utf-8',
+                data: { cid: str[i] },
+                async: false,
+                success: function (arrageadd) {
+                    //for (i in classeslist) {
+                    //$().fi('<td>' + teachernames[i] + '</td>');
+                    $("#week").find("option[id='0']").html(arrageadd.classeslist[0].Week);
+                    $("#day").find("option[id='0']").html(arrageadd.classeslist[0].Day);
+                    $("#classnumber").find("option[id='0']").html(arrageadd.classeslist[0].ClassNumber);
+                    $("#teachername").find("option[id='0']").html(arrageadd.classeslist[0].TeacherName);
+                    $("#classtype").find("option[id='0']").html(arrageadd.classeslist[0].ClassType);
+                    $("#classeslist").find("td[id='address']").html(arrageadd.classeslist[0].Address);
+                    $("#classeslist").find("td[id='classcontent']").html(arrageadd.classeslist[0].ClassContent);
+                    $("#classeslist").find("td[id='classtype']").html(arrageadd.classeslist[0].ClassType);
+                    $("#classeslist").find("td[id='major']").html(arrageadd.classeslist[0].Major);
+                    $("#classeslist").find("td[id='classname']").html(arrageadd.classeslist[0].ClassName);
+                    $("#classeslist").find("td[id='cid']").html(arrageadd.classeslist[0].Cid);//替换 ;
+                    //}
+                    $("[id^='tablesupervisor']").find("tr:gt(0)").remove();
+                    var tr = "{{#FirstSupervisorList}}<tr name=\"{{ Tid}}\"><td>&nbsp;&nbsp;</td><td>{{ TeacherName}}</td><td>{{ IsArrage}}</td></tr>{{/FirstSupervisorList}}";
+                    var tr2 = "{{#SecondSupervisorList}}<tr name=\"{{ Tid}}\"><td>&nbsp;&nbsp;</td><td>{{ TeacherName}}</td><td>{{ Total}}</td></tr>{{/SecondSupervisorList}}";
+
+                    $("#tablesupervisor1 tbody").append(Mustache.render(tr, arrageadd));
+                    $("#tablesupervisor2 tbody").append(Mustache.render(tr2, arrageadd));
+                    $("#tablesupervisor tbody").append("<tr id=\"shead\"></tr>");
+                },
+                error: function () {
+                    alert("出错了");
+                }
+            })
+        }
+    });
+    //---------Schedule/ScheduleExport-----------
+    var findclasses = function (teachername, classname, major) {
+
+        if (teachername != 0 || classname != 0 || major != 0) {
+            if (teachername == 0)
+                teachername = "全部"
+            if (classname == 0)
+                classname = "全部"
+            if (major == 0)
+                major = "全部"
+            $.ajax({
+                url: '/Schedule/ScheduleExport',
+                type: 'post',
+                async: false,
+                data: { cbname: teachername, cbclass: classname, cbspcial: major },
+                success: function (htm) {
+                    $("[name='tabcontent']").html(htm)
+                },
+                error: function () {
+                    alert("出错了");
+                }
+            })
+        }
+        return true;
+    }
+    $(document).on("change", "select[name='Sselect']", function () {
+        //var teachername = document.getElementById("teachernae").val();
+        //var classname =document.getElementById("teachernae").val();
+        //var major = document.getElementById("teachernae").val();
+        var teachername = $("select[id='teachername'] option:selected").val();
+        var classname = $("select[id='classname'] option:selected").val();
+        var major = $("select[id='major'] option:selected").val();
+        findclasses(teachername, classname, major);
+    });
+    //$("").change(function () {
+       
+
+    //});
 });

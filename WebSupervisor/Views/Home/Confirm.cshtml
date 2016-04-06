@@ -18,14 +18,14 @@
     </ul>
 
     <div class="tab_container" style="overflow-x:auto;">
-        <div id="tab1" class="tab_content" style="display: block; ">
+        <div id="tab1" class="tab_content" style="display: block;" name="tabcontent">
             @Html.Action("ConfirmTemp")
         </div>
 
-        <div id="tab2" class="tab_content" style="display: none; ">
+        <div id="tab2" class="tab_content" style="display: none; " name="tabcontent">
             @Html.Action("ConfirmSure")
         </div>
-        <div id="tab3" class="tab_content" style="display: none; ">
+        <div id="tab3" class="tab_content" style="display: none; " name="tabcontent">
             <div class="row">
                 <div class="col-lg-3 col-sm-4 col-xs-9">
                     <a href="#" class="button green" onclick="resend();">
@@ -118,17 +118,9 @@
         </div>
     </div>
 </div>
+<!--添加弹窗-->
+@RenderPage("~/Views/Shared/_ArrageAdd.cshtml")
 <script>
-    //临时表按钮 保存
-    function save() {
-        swal({
-            title: "已保存",//放js显示乱码 所以放这里
-            timer: 1500,
-            showConfirmButton: false,
-            type: "success"
-        });
-        document.getElementById("editable1").contentEditable = "false";
-    };
     //确认表 发送日志 按钮 删除
     function delete1() {
         swal({

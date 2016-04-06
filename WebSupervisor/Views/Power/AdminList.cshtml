@@ -35,11 +35,11 @@
                     邮箱
                 </p>
             </th>
-            <th>
+            @*<th>
                 <p>
                     剩余短信
                 </p>
-            </th>
+            </th>*@
             <th>
                 <p>
                     &nbsp;
@@ -67,9 +67,9 @@
             <td>
                 <input type="text" id="email" name="email" />
             </td>
-            <td>
+            @*<td>
                 <input type="text" id="numsms" name="numsms" />
-            </td>
+            </td>*@
             <td class="checkboxpadding1">
                 <input type="submit" id="btnsubmit" value="添加" class="teacherbtn blue" />
                 <input type="button" id="btncancel" value="取消" class="teacherbtn red" onclick="$('#addadmin').hide();"/>
@@ -84,30 +84,30 @@
 
 
 
-                <tr>
+                <tr value="@Model[i].UId">
                     <td width=2%>
 
                         <input type="checkbox" name="admincheck" value=@Model[i].UId>
 
                     </td>
-                    <td>
+                    <td id="usename">
                         @Model[i].UserName
                     </td>
-                    <td>
+                    <td id="password">
                         @Model[i].Password
                     </td>
-                    <td>
+                    <td id="college">
                         @Model[i].College
                     </td>
-                    <td>
+                    <td id="phone">
                         @Model[i].Phone
                     </td>
-                    <td>
+                    <td id="email">
                         @Model[i].Email
                     </td>
-                    <td>
+                    @*<td>
                         @Model[i].NumSMS
-                    </td>
+                    </td>*@
                     <td>
                         &nbsp;
                     </td>

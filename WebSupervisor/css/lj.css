@@ -1,4 +1,4 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 /* CSS Document */
 html,body{
 	width: 100%;
@@ -69,7 +69,7 @@ html ul.tabs li, html ul.tabs li a:active {
 	border-radius:7px;
 }
 .tab_content {
-	padding: 0px;
-	font-size: 1.2em;
+	/*padding: 0px;
+	font-size: 1.2em;*/
 }
 /*---------------------------------------------*/

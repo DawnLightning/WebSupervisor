@@ -47,6 +47,7 @@ namespace WebSupervisor.Controllers
                                      where t.College == Session["College"].ToString() && c.Week == thisweek && c.Day == thisday
                                      select new ReferenceModel
                                      {
+                                         Cid=c.Cid,
                                          Id = i++,
                                          time = CalendarTools.getdata(Common.Year, thisweek, thisday - CalendarTools.weekdays(CalendarTools.CaculateWeekDay(Common.Year, Common.Month, Common.Day)), Common.Month, Common.Day).ToLongDateString() + "" + com.AddSeparator(c.ClassNumber) + "节",
                                          TeacherName = c.TeacherName,
@@ -83,6 +84,7 @@ namespace WebSupervisor.Controllers
                                      select new ReferenceModel
                                      {
                                          Id = i++,
+                                         Cid=c.Cid,
                                          time = CalendarTools.getdata(Common.Year, c.Week, c.Day - CalendarTools.weekdays(CalendarTools.CaculateWeekDay(Common.Year, Common.Month, Common.Day)), Common.Month, Common.Day).ToLongDateString() + "" + com.AddSeparator(c.ClassNumber) + "节",
                                          TeacherName = c.TeacherName,
                                          Address = c.Address,
@@ -116,6 +118,7 @@ namespace WebSupervisor.Controllers
                             where c.Cid == cid
                             select new
                             {
+                                c.Cid,
                                 c.Week,
                                 c.Day,
                                 c.ClassNumber,
@@ -219,20 +222,20 @@ namespace WebSupervisor.Controllers
             var hlist = new HandSpareTime();
             hlist.Tid = tid;
             hlist.FreeTimel = (from sp in splist
-                               where sp.Tid == tid 
+                               where sp.Tid == tid
                                group sp by sp.Week into s
                                select new Freetime
                                {
                                    Week = s.Key,
-                                   DayClist=(from s1 in s
-                                            group s1 by s1.Day into s2
-                                            select new DayClassesNumber
-                                            {
-                                                Day = s2.Key,
-                                                Classnumberl = classnumberl((from s3 in s2
-                                                                             select s3.ClassNumber).ToList())
-                                            }).ToList()
-             }).ToList();
+                                   DayClist = (from s1 in s
+                                               group s1 by s1.Day into s2
+                                               select new DayClassesNumber
+                                               {
+                                                   Day = s2.Key,
+                                                   Classnumberl = classnumberl((from s3 in s2
+                                                                                select s3.ClassNumber).ToList())
+                                               }).ToList()
+                               }).ToList();
             return Json(hlist, JsonRequestBehavior.AllowGet);
         }
         public ActionResult SaveSpareTime(string tid, int[] week,List<Freetime> freetime )
@@ -281,13 +284,15 @@ namespace WebSupervisor.Controllers
         {
             int[] select = new int[] { int.Parse(week), int.Parse(day), int.Parse(classnumber) };
             List<CheckClassModel> checkclasslist = DBHelper.ExecuteList<CheckClassModel>("select * from checkclass", CommandType.Text, null);
+
             ArrageAddModel arrageadd = new ArrageAddModel();
             if (Session["Power"].ToString() == "管理员")
             {
+                List<TeachersModel> telist = DBHelper.ExecuteList<TeachersModel>("select * from teachers where college='" + Session["College"].ToString() + "'", CommandType.Text, null);
                 arrageadd.classeslist = (from c in classlist
-                                         join t in teacherlist on c.TeacherName equals t.TeacherName
+                                         join t in telist on c.TeacherName equals t.TeacherName
                                          where c.Week == @select[0] && c.Day == @select[1] && c.ClassNumber == @select[2] && c.TeacherName == teachername
-                                         && c.ClassType == classtype && t.College == Session["College"].ToString()
+                                         && c.ClassType == classtype
                                          select c).ToList();
                 arrageadd.FirstSupervisorList = (from s in splist
                                                  join t in teacherlist on s.Tid equals t.Tid
@@ -384,7 +389,21 @@ namespace WebSupervisor.Controllers
             }
             return list;
         }
-
+        public ActionResult RmSupervisor(string[] tids)
+        {
+            try
+            {
+                foreach (string tid in tids)
+                {
+                    string updateteachers = string.Format("update teachers set indentify=0 where tid='{0}'", tid);
+                    string delectsparetime = string.Format("delete from sparetime where tid='{0}'", tid);
+                    DBHelper.ExecuteNonQuery(updateteachers, CommandType.Text, null);
+                    DBHelper.ExecuteNonQuery(delectsparetime, CommandType.Text, null);
+                }
+                return this.Json(new jsondata(0, "删除成功"), JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception) { return this.Json(new jsondata(1, "删除失败"), JsonRequestBehavior.AllowGet); }
+        }
         /// <summary>
         /// 删除教师
         /// </summary>

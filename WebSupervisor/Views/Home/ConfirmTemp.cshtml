@@ -6,8 +6,8 @@
         <button class="button green" data-toggle="modal" data-target=".bs-example-modal-lg">
             添加
         </button>
-        <button href="#" class="button orange" onclick="edite1();">修改</button>
-        <button type="submit" class="button blue" onclick="save();">保存</button>
+        <button class="button orange" data-toggle="modal" data-target=".bs-example-modal-lg" id="modifyarrage">修改</button>
+        <button class="button blue"  id="btnsurearrage">确认安排</button>
     </div>
     <div class="col-lg-6 col-sm-3 col-xs-0">
     </div>
@@ -51,7 +51,7 @@
                 if (i < Model.Count)
                 {
                     var item = Model[i];
-                    var checkname = item.Cid;
+                    var checkname = item.Cid + item.Week.ToString()+ item.Day.ToString() + item.ClassNumber.ToString();
                     int nowday = item.Day;
                     int nowWeeks = item.Week;
                     string time = CalendarTools.getdata(Common.Year, nowWeeks, nowday - CalendarTools.weekdays(CalendarTools.CaculateWeekDay(Common.Year, Common.Month, Common.Day)), Common.Month, Common.Day).ToLongDateString() + "" + com.AddSeparator(item.ClassNumber)+"节";
@@ -59,7 +59,7 @@
                         <td width=2%>
                             <input type="hidden" name="idname" value="Cid">
                             <input type="hidden" name="id" value="@item.Cid">
-                            <input type="checkbox" name="@checkname">
+                            <input type="checkbox"  id="checktemparrage" value="@checkname" name="@item.Cid">
                         </td>
                         <td>@item.ClassName</td>
                         <td>@item.ClassContent</td>
@@ -111,8 +111,6 @@
         }
     </table>
 </div>
-<!--添加弹窗-->
-@RenderPage("~/Views/Shared/_ArrageAdd.cshtml")
 <!-- /.table -->
 <!-- /.table -->
 <div class="pager" style="text-align: center;">
@@ -137,3 +135,33 @@
         UpdateTargetId = "Home_ConfirmTemp"
     }))
 </div>
+<script>
+    ////临时表按钮 保存
+    //function save() {
+    //    var array = new Array()
+    //    $("input[id='checktemparrage']:checked").each(function () {
+    //        array.push($(this).val())
+    //    });
+    //    $.post("/Home/SureArrage", { pids: array },
+    //        function (data) {
+    //            if (data.code == 0) {
+    //                swal({
+    //                    title: "已经成功确认",//放js显示乱码 所以放这里
+    //                    timer: 1500,
+    //                    showConfirmButton: false,
+    //                    type: "success"
+    //                }); curhref.replacetag({ url: "/Home/ConfirmTemp", tag: "#tab1" });
+    //            }
+    //            else {
+    //                swal({
+    //                    title: "确认安排失败",//放js显示乱码 所以放这里
+    //                    timer: 1500,
+    //                    showConfirmButton: false,
+    //                    type: "error"
+    //                });
+    //            }
+    //        });
+    //    document.getElementById("editable1").contentEditable = "false";
+    //};onclick="save();"
+    //$("#Home_ConfirmTemp").mouseover(function () { $("#showDiv").show(); })
+</script>

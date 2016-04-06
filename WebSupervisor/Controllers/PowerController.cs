@@ -42,12 +42,12 @@ namespace WebSupervisor.Controllers
             model.UserName = fc["username"];
             model.Password = fc["password"];
             model.College = fc["college"];
-            model.NumSMS = Convert.ToInt32(fc["numsms"]);
+            //model.NumSMS = Convert.ToInt32(fc["numsms"]);
             model.Power = 0;
             model.Email = fc["email"];
             model.Phone = fc["phone"];
-            string insertcommand = string.Format("SET IDENTITY_INSERT admin ON insert into admin(uid, username, password, college, numsms, power, phone, email) values({0},'{1}','{2}','{3}',{4},{5},'{6}','{7}')",
-               model.UId, model.UserName, model.Password, model.College, model.NumSMS, model.Power, model.Phone, model.Email);
+            string insertcommand = string.Format("SET IDENTITY_INSERT admin ON insert into admin(uid, username, password, college,power, phone, email) values({0},'{1}','{2}','{3}',{4},{5},'{6}','{7}')",
+               model.UId, model.UserName, model.Password, model.College,model.Power, model.Phone, model.Email);
 
             if (DBHelper.ExecuteNonQuery(insertcommand, CommandType.Text, null) > 0)
             {
@@ -98,6 +98,18 @@ namespace WebSupervisor.Controllers
                 return this.Json(new jsondata(1, "删除失败"), JsonRequestBehavior.AllowGet);
             }
         }
-
+        public ActionResult UpdateAdmin(string uid,string property,string value)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(value.Trim()))
+                {
+                    string updateteachers = string.Format("update admin set {0}='{1}' where uid='{2}'", property, value, uid);
+                    DBHelper.ExecuteNonQuery(updateteachers, CommandType.Text, null);
+                }
+                return Json(new jsondata(0, "更新成功"));
+            }
+            catch (Exception) { return Json(new jsondata(1, "更新失败")); }
+        }
     }
 }
