@@ -346,8 +346,6 @@
     <Content Include="less\mixins\vendor-prefixes.less" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Supervisor\CheifSupervisor.cshtml" />
-    <Content Include="Views\Supervisor\NormalSupervisor.cshtml" />
     <Content Include="Views\Supervisor\Supervisor.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\_Menu.cshtml" />
@@ -362,6 +360,8 @@
     <Content Include="Views\Home\ConfirmSure.cshtml" />
     <Content Include="Views\Shared\_ArrageAdd.cshtml" />
     <Content Include="Views\Supervisor\SupervisorList.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Account\TeacherInfo.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -154,12 +154,16 @@ namespace WebSupervisor
                                 string tid = collegeid(college) + tname;
                                 //if (i == 7)
                                 //{
-                                //    SqlParameter[] sp = new SqlParameter[3];
-                                //    sp[0] = new SqlParameter("@tid", tid);
-                                //    sp[1] = new SqlParameter("@teachername", tname);
-                                //    sp[2] = new SqlParameter("@college", college);
-                                //    DBHelper.ExecuteNonQuery("INSERT INTO [dbo].[teachers] ([tid], [teachername],[college]) VALUES (@tid,@teachername,@college)", CommandType.Text, sp);
-                                //}
+                                    SqlParameter[] sp = new SqlParameter[3];
+                                    sp[0] = new SqlParameter("@tid", tid);
+                                    sp[1] = new SqlParameter("@teachername", tname);
+                                    sp[2] = new SqlParameter("@college", college);
+                                    DBHelper.ExecuteNonQuery("INSERT INTO [dbo].[teachers] ([tid], [teachername],[college]) VALUES (@tid,@teachername,@college)", CommandType.Text, sp);
+                                    //}
+                                //    TeachersModel te = new TeachersModel();
+                                //te.Tid = tid;
+                                //te.TeacherName = tname;
+                                //te.Phone = "0";
                                 ClassesModel model = new ClassesModel();
                                 model.Cid = tid + Excel_dt.Rows[i][name[0]].ToString() + j.ToString() + strclassname.Substring(0, classnumindex) + strclassname.Substring(classnumindex + 1);
                                 model.Day = j;
@@ -173,6 +177,9 @@ namespace WebSupervisor
                                 model.CheckNumber = 0;
                                 model.Major = major;
                                 list.Add(model);
+                                //DBHelper.ExecuteNonQuery("INSERT INTO [dbo].[teachers] ([tid], [teachername], [phone], [email], [college], [indentify], [title], [islimit], [password], [teacherroom]) VALUES ("+''N'39', N'黄晓丽', N'13929462568', N' ', N'第二临床医学院', 0, N' ', 1, N'123', N' ') ", CommandType.Text, null);
+                                //DBHelper.Insert<TeachersModel>(te);
+                                //teacherlist.Add(te);
                             }
                             else
                             {
@@ -181,12 +188,12 @@ namespace WebSupervisor
                         }
                     }
                 }
-
+                //DBHelper.BulkInsert<TeachersModel>(teacherlist);
                 DBHelper.BulkInsert<ClassesModel>(list);
 
                 return 1;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return -1;
             }
@@ -266,14 +273,14 @@ namespace WebSupervisor
                 if (Excel_dt.Rows[i][0].ToString().Length != 0 && Excel_dt.Rows[i][1].ToString().Length == 11)
                 {
                     TeachersModel m = new TeachersModel();
-                    m.Tid = collegeid(college) + i.ToString();                    
+                    m.Tid = collegeid(college) + Excel_dt.Rows[i][0].ToString();                    
                     m.TeacherName = Excel_dt.Rows[i][0].ToString();
                     m.Phone = Excel_dt.Rows[i][1].ToString();
                     if (Excel_dt.Rows[i][2].ToString() != null && Excel_dt.Rows[i][2].ToString() == "1")
                     {
                         m.Indentify = 1;
                         CheckClassModel c = new CheckClassModel();
-                        c.Tid = collegeid(college) + i.ToString();
+                        c.Tid = collegeid(college) + Excel_dt.Rows[i][0].ToString();
                         c.DayNumber = 0;
                         c.WeekNumber = 0;
                         c.total = 0;

@@ -67,12 +67,12 @@
                     <p>
                        操作
                     </p>
-                </th>
+                </th>*@
                 <th>
                     <p>
-                        审核状态
+                        已审核
                     </p>
-                </th>*@
+                </th>
             </tr>
             <tr id="addtr" style="display:none">
                 <td>
@@ -114,7 +114,7 @@
 
                         TeachersModel item = Model[i];
                         string identify = "";
-                        //string islimit = "";
+                        string islimit = "";
                         if (item.Indentify == 0)
                         {
                             identify = "否";
@@ -123,14 +123,14 @@
                         {
                             identify = "是";
                         }
-                        //if (item.Islimit == 0)
-                        //{
-                        //    islimit = "未审核";
-                        //}
-                        //else
-                        //{
-                        //    islimit = "已审核";
-                        //}
+                        if (item.Islimit == 0)
+                        {
+                            islimit = "否";
+                        }
+                        else
+                        {
+                            islimit = "是";
+                        }
                         <tr value="@item.Tid">
                             <td width=2%>
 
@@ -160,14 +160,9 @@
                                 @identify
 
                             </td>
-                            @*<td id="islimit">
+                            <td id="islimit">
                                 @islimit
                             </td>
-
-                            <td>
-                                <input type="button" value="修改"  class="btnmodify teacherbtn blue"  />
-                            </td>*@
-
                         </tr>
                     }
                     else

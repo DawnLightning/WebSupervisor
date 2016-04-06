@@ -79,5 +79,62 @@ namespace WebSupervisor.Controllers
             }
             return RedirectToAction("Login");
         }
+        public PartialViewResult TeacherInfo()
+        {
+            return PartialView();
+        }
+        [HttpPost]
+        public ActionResult InfoTeacher(TeachersModel te)
+        {
+            try
+            {
+                te.Tid = collegeid(te.College) + te.TeacherName;
+                string insertteacher = string.Format("INSERT INTO [dbo].[teachers] ([tid], [teachername], [phone], [email], [college], [indentify], [title], [islimit], [password], [teacherroom]) VALUES (N'{0}', N'{1}', N'{2}', N'{3} ', N'{4}', 0, N' {5}', 1, N'123', N'{6}')",te.Tid,te.TeacherName,te.Phone,te.Email,te.College,te.Title,te.TeacherRoom);
+                DBHelper.ExecuteNonQuery(insertteacher, CommandType.Text, null);
+                //DBHelper.Insert<TeachersModel>(te);
+                return Json(new jsondata(0, "添加成功！"));
+            }
+            catch (Exception) { return Json(new jsondata(1, "添加失败！")); }
+        }
+        private string collegeid(string college)
+        {
+            switch (college)
+            {
+                case "研究生学院":
+                    return "1";
+                case "第一临床医学院":
+                    return "2";
+                case "第二临床医学院":
+                    return "3";
+                case "第三临床医学院":
+                    return "4";
+                case "公共卫生学院":
+                    return "5";
+                case "护理学院":
+                    return "6";
+                case "基础医学院":
+                    return "7";
+                case "外国语学院":
+                    return "8";
+                case "人文与管理学院":
+                    return "9";
+                case "信息工程学院":
+                    return "10";
+                case "药学院":
+                    return "11";
+                case "医学检验学院":
+                    return "12";
+                case "继续教育学院":
+                    return "13";
+                case "社会科学部":
+                    return "14";
+                case "体育教学部":
+                    return "15";
+                default:
+                    return "未知";
+
+            }
+
+        }
     }
 }

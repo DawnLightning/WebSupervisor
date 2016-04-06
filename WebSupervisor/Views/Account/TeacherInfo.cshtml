@@ -1,0 +1,63 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Page.Title = "主页";
+}
+@section Style {
+    <link rel="stylesheet" href="~/Content/bootstrap.css">
+    <link rel="stylesheet" href="~/css/sweetalert.css">
+    <link rel="stylesheet" href="~/css/sas.css">
+    <link rel="stylesheet" href="~/css/style.css">
+    <link rel="stylesheet" href="~/css/tabs.css">
+    <link rel="stylesheet" href="~/css/jsas.css">
+}  <div class="header">
+    <span class=" dd-title-center dd-title-white">   督导&nbsp;|&nbsp;</span><span class="dd-title-blue">填写教师信息<a href="/" class="admin admin-text">返回</a><img src="~/image/14.png" class="admin admin-1"></span>
+</div>
+<div id="page">
+    <div class="container-fluid">
+        <div id="wrapper" class="wrapper" style="font-size: 1.2em; margin-left:37%; margin-top:6%;">
+            <form action="/Account/InfoTeacher" method="post">
+                <div class="form-inline">
+                    <label for="教师号" class="time-color">部门:</label>
+                    <select name="College" style="width:220px;height:40px;background-color: rgb(34,43,82);" class="form-control text-style">
+                        <option>第二临床医学院</option>
+                        <option>信息工程学院</option>
+                        <option>护理学院</option>
+                        <option>公共卫生管理学院</option>
+                        <option>人文管理学院</option>
+                        <option>药学院</option>
+                        <option>基础医学院</option>
+                        <option>外国语学院</option>
+                        <option>第一临床医学院</option>
+                        <option>研究生学院</option>
+                        <option>医学检验学院</option>
+                        <option>继续教育学院</option>
+                        <option>研究生学院</option>
+                        <option>社会教学部</option>
+                        <option>体育教学部</option>
+                    </select>
+                </div>
+                <div class="form-inline mar-two">
+                    <label for="教研室" class="time-color">教研室：</label>
+                    <input name="TeacherRoom" type="text" style="width:220px; height:40px;background-color: rgb(40,53,95);" class=" form-control text-style" />
+                </div>
+                <div class="form-inline mar-two">
+                    <label for="职称" class="time-color">职称：</label>
+                    <input name="Title" type="text" style="width:220px; height:40px;background-color: rgb(48,65,109);" class=" form-control text-style" />
+                </div>
+                <div class="form-inline mar-two">
+                    <label for="教师姓名" class="time-color">姓名：</label>
+                    <input name="TeacherName" type="text" style="width:220px; height:40px;background-color: rgb(55,79,125);" class=" form-control text-style" />
+                </div>
+                <div class="form-inline mar-two">
+                    <label for="电话" class="time-color">电话：</label>
+                    <input name="Phone" type="text" style="width:220px; height:40px;background-color: rgb(63,93,143);" maxlength="11" class=" form-control text-style" />
+                </div>
+                <div class="form-inline mar-two">
+                    <label for="邮箱" class="time-color">邮箱：</label>
+                    <input name="Email" type="email" style="width:220px; height:40px;background-color: rgb(71,107,159);" class=" form-control text-style" />
+                </div>
+                <button name="Tsave" type="submit" class="text-style3 in-row-btn" >保存</button>
+            </form>
+        </div><!--wrapper-->
+        </div><!--container-fluid-->
+    </div><!--page-->
