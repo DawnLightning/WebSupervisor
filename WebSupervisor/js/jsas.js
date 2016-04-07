@@ -37,23 +37,23 @@ $(document).ready(function () {
 
     //--------------download-----------------
 
-    $(document).on("click", "a.fileDownloadPromise", function () {
-        swal({ title: "Waiting", text: "The file is downloading.", type: "info", timer: 2000, showConfirmButton: false });
+    //$(document).on("click", "a.fileDownloadPromise", function () {
+    //    swal({ title: "Waiting", text: "The file is downloading.", type: "info", timer: 2000, showConfirmButton: false });
 
-        $.fileDownload($(this).attr('href'), {
-            successCallback: function (url) {
-                swal({ title: "成功！", type: "success", timer: 2000, showConfirmButton: false });
-                // alert('You just got a file download dialog or ribbon for this URL :' + url);
-            },
-            failCallback: function (html, url) {
-                swal('错误！', '下载失败！', 'error');
-                /*alert('Your file download just failed for this URL:' + url + '\r\n' +
-                        'Here was the resulting error HTML: \r\n' + html
-                        );*/
-            }
-        });
-        return false; //this is critical to stop the click event which will trigger a normal file download
-    });
+    //    $.fileDownload($(this).attr('href'), {
+    //        successCallback: function (url) {
+    //            swal({ title: "成功！", type: "success", timer: 2000, showConfirmButton: false });
+    //            // alert('You just got a file download dialog or ribbon for this URL :' + url);
+    //        },
+    //        failCallback: function (html, url) {
+    //            swal('错误！', '下载失败！', 'error');
+    //            /*alert('Your file download just failed for this URL:' + url + '\r\n' +
+    //                    'Here was the resulting error HTML: \r\n' + html
+    //                    );*/
+    //        }
+    //    });
+    //    return false; //this is critical to stop the click event which will trigger a normal file download
+    //});
     //----------------tab_content pagination----------------
     $(document).on("click", ".pagination-container .pagination a", function () {
 
@@ -487,7 +487,7 @@ $(document).ready(function () {
 
         }
     });
-    $(document).on("change", "select", function () {
+    $(document).on("change", "form select", function () {
         var week = $("#week").val();
         var day = $("#day").val();
         var classnumber = $("#classnumber").val();
@@ -604,16 +604,11 @@ $(document).ready(function () {
     });
     //---------Home/ConfirmSure-----------
     $(document).on("click", "#exportarrage", function () {
+        swal({ title: "Waiting", text: "The file is downloading.", type: "info", timer: 2000, showConfirmButton: false });
         var array = new Array()
         $("input[id='checkconfirmsure']:checked").each(function () {
             array.push($(this).val())
         });
-        //$.ajax({
-        //    url: '/Home/ExportArrage',
-        //    type: 'post',
-        //    data: { pids: array },
-        //    //async: false,
-        //    success: function () {
         $.fileDownload("/Home/ExportArrage", {
             httpMethod: "Post",
             data: { pids: array },
@@ -623,19 +618,11 @@ $(document).ready(function () {
             },
             failCallback: function (html, url) {
                 swal('错误！', '下载失败！', 'error');
-                /*alert('Your file download just failed for this URL:' + url + '\r\n' +
-                        'Here was the resulting error HTML: \r\n' + html
-                        );*/
             }
         });
-        //    },
-        //    //error: function () {
-        //    //    alert("出错了");
-        //    //}
-        //});
     });
     //---------Home/Teacher-----------
-    $(document).on("click", "#teachertable td", function () {
+    $(document).on("click", "#teachertable td[width!='2%']", function () {
         //$('table td').click(function(){    
         if (!$(this).is('.input')) {
             var v = $.trim($(this).text());
@@ -661,38 +648,9 @@ $(document).ready(function () {
         $(this).addClass('hover');
     }, function () {
         $(this).removeClass('hover');
-        //var inputObj=$("<input type='text'/>");//可以直接写HTML作为DOM对象包装成一个Jquery对象。
-
-        //var tdObj=$(this);//this代表响应的DOM 的对象。
-
-        //inputObj.appendTo(tdObj);//插入文本框  appendTo方法是：把文本框放如TD中。
-
-        ////append方法是：对TD对象追加一个文本框
-
-        ////让文本框充满整个TD
-
-        //inputObj.width(tdObj.width());
-
-        ////去掉文本框的边框：border-width：0  //文本框边框为0
-
-        //inputObj.css("border-width：0");
-
-        ////让文本框中的文字格式和TD的格式大小差不多。
-
-        //inputObj.css("font-size:16px");
-
-        ////设置文本框的背景色和当前被填充的TD的背景色一样
-
-        //inputObj.css("background-color,tdObj.css('background-color')");
-
-        ////插入前要把当前TD的内容放入文本框中。
-
-        //inputObj.val(tdObj.html());//TD对象是HTML的值。而InputObj对象是VAL的值。
-
-        //tdObj.html("");//清空TD内容
     });
     //---------Power/Key-----------
-    $(document).on("click", "#admintable td", function () {
+    $(document).on("click", "#admintable td[width!='2%']", function () {
         //$('table td').click(function(){    
         if (!$(this).is('.input')) {
             var v = $.trim($(this).text());
@@ -795,8 +753,27 @@ $(document).ready(function () {
         var major = $("select[id='major'] option:selected").val();
         findclasses(teachername, classname, major);
     });
-    //$("").change(function () {
-
-
-    //});
+    $(document).on("click", "#btnexport", function () {
+        swal({ title: "Waiting", text: "The file is downloading.", type: "info", timer: 3000, showConfirmButton: false });
+        var teachername = $("select[id='teachername'] option:selected").val();
+        var classname = $("select[id='classname'] option:selected").val();
+        var major = $("select[id='major'] option:selected").val();
+        if (teachername == 0)
+            teachername = "全部"
+        if (classname == 0)
+            classname = "全部"
+        if (major == 0)
+            major = "全部"
+        $.fileDownload("/Schedule/ExportCList", {
+            httpMethod: "Post",
+            data: {cbspcial:major,cbclass:classname,cbname:teachername },
+            successCallback: function (url) {
+                swal({ title: "成功！", type: "success", timer: 2000, showConfirmButton: false });
+                // alert('You just got a file download dialog or ribbon for this URL :' + url);
+            },
+            failCallback: function (html, url) {
+                swal('错误！', '下载失败！', 'error');
+            }
+        });
+    });
 });

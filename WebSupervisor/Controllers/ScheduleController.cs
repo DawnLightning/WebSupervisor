@@ -21,32 +21,10 @@ namespace WebSupervisor.Controllers
     {
         
         List<ClassesModel> lstclasses = DBHelper.ExecuteList<ClassesModel>("select * from classes", CommandType.Text, null);
-        //string s=
-        //string selectcommand = string.Format(, Session["College"].ToString());
         static List<ReportFileStatusModel>  lstfile = new List<ReportFileStatusModel>();
         // GET: Schedule+
         public PartialViewResult Schedule()
         {
-            //List<TeachersModel> teacherlist = new List<TeachersModel>();
-            ////var teacherlist=DBHelper.ExecuteList
-            //if (Session["College"] != null)
-            //    teacherlist = DBHelper.ExecuteList<TeachersModel>("SELECT * FROM [dbo].[teachers] where college='" + Session["College"].ToString() + "'", CommandType.Text, null);
-            //else teacherlist = DBHelper.ExecuteList<TeachersModel>("SELECT * FROM [dbo].[teachers]", CommandType.Text, null);
-            //var classesl = (from c in lstclasses
-            //                join t in teacherlist on c.TeacherName equals t.TeacherName
-            //                select c).ToList();
-            //string[] lstteachername = new string[classesl.Count];
-            //string[] lstclassname = new string[classesl.Count];
-            //string[] lstmajor = new string[classesl.Count];
-            //for (int i = 0; i < classesl.Count; i++)
-            //{
-            //    lstteachername[i] = classesl[i].TeacherName;
-            //    lstclassname[i] = classesl[i].ClassName;
-            //    lstmajor[i] = classesl[i].Major;
-            //}
-            //ViewBag.TeacherName = lstteachername.Distinct().ToArray();
-            //ViewBag.ClassName = lstclassname.Distinct().ToArray();
-            //ViewBag.Major = lstmajor.Distinct().ToArray();
             return PartialView();
         }
 
@@ -83,16 +61,6 @@ namespace WebSupervisor.Controllers
             var classesl = (from c in lstclasses
                            join t in teacherlist on c.TeacherName equals t.TeacherName
                            select c).ToList();
-            //string[] lstteachername = new string[classesl.Count];
-            //string[] lstclassname = new string[classesl.Count];
-            //string[] lstmajor = new string[classesl.Count];
-            //for (int i = 0; i < classesl.Count; i++)
-            //{
-            //    lstteachername[i] = classesl[i].TeacherName;
-            //    lstclassname[i] = classesl[i].ClassName;
-            //    lstmajor[i] = classesl[i].Major;
-            //}
-            //ViewBag.isselect = isselect;
             var lstmodel = selectExport(cbspcial, cbname, cbclass, classesl);
             ViewBag.TeacherName = lstmodel.Select(t=>t.TeacherName).Distinct().ToArray();
             ViewBag.ClassName = lstmodel.Select(c=>c.ClassName).Distinct().ToArray();
@@ -197,31 +165,6 @@ namespace WebSupervisor.Controllers
         private List<ClassesModel> selectExport(string cbspcial, string cbname, string cbclass,List<ClassesModel> l)
         {
             List<ClassesModel> clist = new List<ClassesModel>();
-            //string[] condition = new string[3];
-            //if (cbname == "全部")
-            //{
-            //    condition[0] ="";
-            //}
-            //else
-            //{
-            //    condition[0]=cbname;
-            //}
-            //if (cbclass == "全部")
-            //{
-            //    condition[1] = "";
-            //}
-            //else
-            //{
-            //    condition[1]=cbclass;
-            //}
-            //if (cbspcial == "全部")
-            //{
-            //    condition[2] = "";
-            //}
-            //else
-            //{
-            //    condition[2]=cbspcial;
-            //}
             if (cbname == "全部" && cbclass == "全部" && cbspcial == "全部")
                 clist = l;
             else
