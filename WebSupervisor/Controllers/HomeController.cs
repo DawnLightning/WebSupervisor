@@ -311,7 +311,7 @@ namespace WebSupervisor.Controllers
         public ActionResult AutoArrange(ArrageConfigModel ac)
         {
             MakePlacement mp = new MakePlacement(ac);
-            mp.CreatPlan(Session["College"].ToString());
+            mp.ReCreatPlan(Session["College"].ToString());
             return Redirect("/#!/Home/Confirm");
         }
         [HttpPost]

@@ -79,6 +79,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="NPOI">
       <HintPath>..\..\sas1\SAS\SAS\DLL\NPOI.dll</HintPath>
     </Reference>
@@ -254,6 +258,7 @@
     <Compile Include="Models\ArrageModel.cs" />
     <Compile Include="Models\CheckClassModel.cs" />
     <Compile Include="Models\ClassesModel.cs" />
+    <Compile Include="Models\DbModel.cs" />
     <Compile Include="Models\SpareTimeModel.cs" />
     <Compile Include="Models\TeachersModel.cs" />
     <Compile Include="Models\UserModel.cs" />

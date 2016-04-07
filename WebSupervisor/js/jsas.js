@@ -206,11 +206,13 @@ $(document).ready(function () {
                 free_time_data: {}
             },
             i2dt: function (index) {
+                index = parseInt(index);
                 var d = index % 7 + 1, t = parseInt(index / 7) + 1;
                 return { day: d, time: t }
             },
             dt2i: function (data) {
-                return (data.time - 1) * 7 + data.day - 1;
+
+                return (parseInt(data.time) - 1) * 7 + parseInt(data.day) - 1;
             },
         };
         _this.get_cur_tid = function () {
@@ -268,9 +270,9 @@ $(document).ready(function () {
                 url: '/Supervisor/ShowSpareTime',
                 type: 'get',
                 dataType: "json",
-                data: { tid: _this.data.tid,week:_this.data.week },
+                data: { tid: _this.data.tid },
                 success: function (data) {
-                    _this.data.free_time_data = data.free_time;
+                    _this.data.free_time_data = data.data;
                     //_this.show_free_time_by_week();
                     $(free_time_config.week_load_selector + " .divbutton").eq(_this.data.week - 1).click();
 
@@ -613,8 +615,8 @@ $(document).ready(function () {
         //    //async: false,
         //    success: function () {
         $.fileDownload("/Home/ExportArrage", {
-            httpMethod:"Post",
-            data:{pids:array},
+            httpMethod: "Post",
+            data: { pids: array },
             successCallback: function (url) {
                 swal({ title: "成功！", type: "success", timer: 2000, showConfirmButton: false });
                 // alert('You just got a file download dialog or ribbon for this URL :' + url);
@@ -636,29 +638,29 @@ $(document).ready(function () {
     $(document).on("click", "#teachertable td", function () {
         //$('table td').click(function(){    
         if (!$(this).is('.input')) {
-            var v=$.trim($(this).text());
+            var v = $.trim($(this).text());
             if (v == 0)
                 v = "&nbsp";
             $(this).addClass('input').html('<input type="text" style="text-align:left" value="' + v + '" />').find('input').focus().blur(function () {
-                var thisid = $(this).parent().attr("id");    
-                var thisvalue=$(this).val();    
+                var thisid = $(this).parent().attr("id");
+                var thisvalue = $(this).val();
                 var thisname = $(this).parent().parent().attr("value");
                 if (thisvalue == "是")
                     thisvalue = 1;
                 if (thisvalue == "否")
                     thisvalue = 0;
-                $.ajax({    
-                    type: 'POST',    
-                    url: '/Home/UpdateTeacher',    
-                    data: {tid:thisname,property:thisid,value:thisvalue}
-                });    
-                $(this).parent().removeClass('input').html($(this).val() || 0);    
-            });                        
-        }    
-    }).hover(function(){    
-        $(this).addClass('hover');    
-    },function(){    
-        $(this).removeClass('hover');   
+                $.ajax({
+                    type: 'POST',
+                    url: '/Home/UpdateTeacher',
+                    data: { tid: thisname, property: thisid, value: thisvalue }
+                });
+                $(this).parent().removeClass('input').html($(this).val() || 0);
+            });
+        }
+    }).hover(function () {
+        $(this).addClass('hover');
+    }, function () {
+        $(this).removeClass('hover');
         //var inputObj=$("<input type='text'/>");//可以直接写HTML作为DOM对象包装成一个Jquery对象。
 
         //var tdObj=$(this);//this代表响应的DOM 的对象。
@@ -699,7 +701,7 @@ $(document).ready(function () {
             $(this).addClass('input').html('<input type="text" style="text-align:left" value="' + v + '" />').find('input').focus().blur(function () {
                 var thisid = $(this).parent().attr("id");
                 var thisvalue = $(this).val();
-                var thisname = $(this).parent().parent().attr("value");         
+                var thisname = $(this).parent().parent().attr("value");
                 $.ajax({
                     type: 'POST',
                     url: '/Power/UpdateAdmin',
@@ -794,7 +796,7 @@ $(document).ready(function () {
         findclasses(teachername, classname, major);
     });
     //$("").change(function () {
-       
+
 
     //});
 });
