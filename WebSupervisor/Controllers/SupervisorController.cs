@@ -47,7 +47,7 @@ namespace WebSupervisor.Controllers
                                      where t.College == Session["College"].ToString() && c.Week == thisweek && c.Day == thisday
                                      select new ReferenceModel
                                      {
-                                         Cid=c.Cid,
+                                         Cid = c.Cid,
                                          Id = i++,
                                          time = CalendarTools.getdata(Common.Year, thisweek, thisday - CalendarTools.weekdays(CalendarTools.CaculateWeekDay(Common.Year, Common.Month, Common.Day)), Common.Month, Common.Day).ToLongDateString() + "" + com.AddSeparator(c.ClassNumber) + "节",
                                          TeacherName = c.TeacherName,
@@ -84,7 +84,7 @@ namespace WebSupervisor.Controllers
                                      select new ReferenceModel
                                      {
                                          Id = i++,
-                                         Cid=c.Cid,
+                                         Cid = c.Cid,
                                          time = CalendarTools.getdata(Common.Year, c.Week, c.Day - CalendarTools.weekdays(CalendarTools.CaculateWeekDay(Common.Year, Common.Month, Common.Day)), Common.Month, Common.Day).ToLongDateString() + "" + com.AddSeparator(c.ClassNumber) + "节",
                                          TeacherName = c.TeacherName,
                                          Address = c.Address,
@@ -216,50 +216,59 @@ namespace WebSupervisor.Controllers
         /// </summary>
         /// <param name="tid">默认值为测试所用</param>
         /// <returns></returns>
-        public ActionResult ShowSpareTime(string tid)
+        public string ShowSpareTime(string tid)
         {
 
-            var hlist = new HandSpareTime();
-            hlist.Tid = tid;
-            hlist.FreeTimel = (from sp in splist
-                               where sp.Tid == tid
-                               group sp by sp.Week into s
-                               select new Freetime
-                               {
-                                   Week = s.Key,
-                                   DayClist = (from s1 in s
-                                               group s1 by s1.Day into s2
-                                               select new DayClassesNumber
-                                               {
-                                                   Day = s2.Key,
-                                                   Classnumberl = classnumberl((from s3 in s2
-                                                                                select s3.ClassNumber).ToList())
-                                               }).ToList()
-                               }).ToList();
-            return Json(hlist, JsonRequestBehavior.AllowGet);
+            //-----freetime----------
+            try
+            {
+                string sql = string.Format("select * from freetime where tid = {0}", tid);
+                List<Db_freetime> dbft = DBHelper.ExecuteList<Db_freetime>(sql, CommandType.Text, null);
+                Dictionary<int, object> d = new Dictionary<int, object>();
+                foreach (var ft in dbft)
+                {
+                    d.Add(ft.week, Newtonsoft.Json.JsonConvert.DeserializeObject(ft.freetime));
+                }
+
+                return mkjson.show(0, d);
+            }
+            catch (Exception ex) { return mkjson.show(1, null, "遇到错误保存失败！！" + ex.Message); }
+
         }
-        public ActionResult SaveSpareTime(string tid, int[] week,List<Freetime> freetime )
+        public ActionResult SaveSpareTime(string tid, string week, string freetime)
         {
             try
             {
-                foreach (int w in week)
+                foreach (int w in Newtonsoft.Json.JsonConvert.DeserializeObject<int[]>(week))
                 {
-                    foreach (Freetime f in freetime)
+                    var ft = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<int, int[]>>(freetime);
+                    //-----freetime----------
+                    try
                     {
-                        foreach (DayClassesNumber dc in f.DayClist)
-                        {
-                            dc.Classnumberl = classesnummerge(dc.Classnumberl.ToArray());
-                            foreach (int c in dc.Classnumberl)
-                            {
-                                string update = string.Format("update sparetime set classnumber={0} where tid='{1}' and week='{2}' and day='{3}'", c, tid, w, dc.Day);
-                                DBHelper.ExecuteNonQuery(update, CommandType.Text, null);
-                            }
-                        }
+                        string sql = string.Format("insert into freetime(tid,week,freetime) values('{0}','{1}','{2}')", tid, w, freetime);
+                        DBHelper.ExecuteNonQuery(sql, CommandType.Text, null);
                     }
+                    catch
+                    {
+                        string sql = string.Format("update freetime set freetime='{0}' where tid='{1}' and week='{2}'", freetime, tid, w);
+                        DBHelper.ExecuteNonQuery(sql, CommandType.Text, null);
+                    }
+                    //-----freetime end----------
+                    //-----sparetime-----------
+                    foreach (var f in ft)
+                    {
+                        foreach (int c in classesnummerge(f.Value))
+                        {
+                            string update = string.Format("update sparetime set classnumber={0} where tid='{1}' and week='{2}' and day='{3}'", c, tid, w, f.Key);
+                            DBHelper.ExecuteNonQuery(update, CommandType.Text, null);
+                        }
+
+                    }
+                    //-----sparetime end-----------
                 }
-                return Json(new jsondata(1, "保存成功!!"));
+                return Json(new mkjson());
             }
-            catch(Exception ex) { return Json(new jsondata(0, "遇到错误保存失败！！"+ex.Message)); }
+            catch (Exception ex) { return Json(new jsondata(0, "遇到错误保存失败！！" + ex.Message)); }
         }
         //自动填补空闲时间
         [AllowAnonymous]
@@ -451,7 +460,7 @@ namespace WebSupervisor.Controllers
         private List<int> classnumberl(List<int> l)
         {
             List<int> cl = new List<int>();
-            foreach(int classnumber in l)
+            foreach (int classnumber in l)
             {
                 int pclassnumber = Convert.ToInt32(classnumber.ToString().Substring(0, classnumber.ToString().Length / 2));
                 cl.Add(pclassnumber);

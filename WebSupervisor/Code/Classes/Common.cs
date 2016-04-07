@@ -13,13 +13,29 @@ namespace WebSupervisor.Code.Classes
     {
         public int code;
         public string msg;
-        public jsondata(int _code,string _msg)
+        public jsondata(int _code, string _msg)
         {
             code = _code;
             msg = _msg;
         }
     }
-  
+    public class mkjson
+    {
+        public int code;
+        public object data;
+        public string msg;
+        public mkjson(int _code = 0, object obj = null, string _msg = "success")
+        {
+            code = _code;
+            data = obj;
+            msg = _msg;
+        }
+        public static string show(int _code = 0, object obj = null, string _msg = "success")
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(new mkjson(_code, obj, _msg));
+        }
+    }
+
     public class Common
     {
         /// <summary>
@@ -52,14 +68,14 @@ namespace WebSupervisor.Code.Classes
         /// <summary>
         /// 保存xml
         /// </summary>
-        public  void xmlSave(string path)
+        public void xmlSave(string path)
         {
-        
+
             XElement xe = new XElement("Config",
                new XElement("Year", Year.ToString()),
                new XElement("Month", Month.ToString()),
                new XElement("Day", Day.ToString())
-              
+
                );
             xe.Save(path);
             xe.RemoveAll();
@@ -67,28 +83,28 @@ namespace WebSupervisor.Code.Classes
         /// <summary>
         /// 读取xml
         /// </summary>
-        public  void xmlRead(string path)
+        public void xmlRead(string path)
         {
-            
-                if (File.Exists(path))
-                {
-                    XElement xe = XElement.Load(path);
 
-                    Year = Convert.ToInt32(xe.Element("Year").Value);
-                    Month = Convert.ToInt32(xe.Element("Month").Value);
-                    Day = Convert.ToInt32(xe.Element("Day").Value);
+            if (File.Exists(path))
+            {
+                XElement xe = XElement.Load(path);
 
-                   
+                Year = Convert.ToInt32(xe.Element("Year").Value);
+                Month = Convert.ToInt32(xe.Element("Month").Value);
+                Day = Convert.ToInt32(xe.Element("Day").Value);
 
-                    xe.RemoveAll();
 
-                   
-                }
-              
+
+                xe.RemoveAll();
+
+
+            }
+
         }
         #endregion
 
-       
+
         #region 输出Word文档
         public static void load_supervisor()
         {
