@@ -46,7 +46,7 @@ namespace WebSupervisor.Controllers
             model.Power = 0;
             model.Email = fc["email"];
             model.Phone = fc["phone"];
-            string insertcommand = string.Format("SET IDENTITY_INSERT admin ON insert into admin(uid, username, password, college,power, phone, email) values({0},'{1}','{2}','{3}',{4},{5},'{6}','{7}')",
+            string insertcommand = string.Format("SET IDENTITY_INSERT admin ON insert into admin(uid, username, password, college,power, phone, email) values('{0}','{1}','{2}','{3}','{4}','{5}','{6}')",
                model.UId, model.UserName, model.Password, model.College,model.Power, model.Phone, model.Email);
 
             if (DBHelper.ExecuteNonQuery(insertcommand, CommandType.Text, null) > 0)
