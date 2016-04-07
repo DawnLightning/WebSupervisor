@@ -92,7 +92,7 @@ namespace WebSupervisor.Controllers
             {
                 foreach (var pid in pids)
                 {
-                    string uapdatecommond = string.Format("update arrage set stauts='1' where pid='{0}'",pid);
+                    string uapdatecommond = string.Format("update arrage set stauts='1' where pid='{0}'", pid);
                     DBHelper.ExecuteNonQuery(uapdatecommond, CommandType.Text, null);
 
                 }
@@ -341,6 +341,28 @@ namespace WebSupervisor.Controllers
                                 select c.TeacherName).ToList();
             }
             return Json(teachernames);
+        }
+        public ActionResult ArrageAddSave(string cid, string pid, string supervisors)
+        {
+            try
+            {
+                string insertarrage = string.Format("insert into arrage (pid,cid,supervisors) values('{0}','{1}','{2}')", pid, cid, supervisors);
+                DBHelper.ExecuteNonQuery(insertarrage, CommandType.Text, null);
+                return Json(new jsondata(0, "保存成功！"));
+            }
+            catch(Exception ex)
+            {
+                if (ex.ToString().Contains("插入重复键"))
+                {
+                    string updatearrage = string.Format("update arrage set supervisors='{0}' where pid='{1}'", supervisors, pid);
+                    DBHelper.ExecuteNonQuery(updatearrage, CommandType.Text, null);
+                    return Json(new jsondata(0, "修改成功！"));
+                }
+                else
+                {
+                    return Json(new jsondata(1, "操作失败！！"));
+                }
+            }
         }
         /// <summary>
         /// 删除听课安排

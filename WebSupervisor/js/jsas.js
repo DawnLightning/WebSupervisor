@@ -449,7 +449,7 @@ $(document).ready(function () {
                     $("#classeslist").find("td[id='cid']").html(arrageadd.classeslist[0].Cid);//替换 ;
 
                     $("[id^='tablesupervisor']").find("tr:gt(0)").remove();
-                    var tr = "{{#FirstSupervisorList}}<tr name=\"{{ Tid}}\"><td>&nbsp;&nbsp;</td><td>{{ TeacherName}}</td><td>{{ IsArrage}}</td></tr>{{/FirstSupervisorList}}";
+                    var tr = "{{#FirstSupervisorList}}<tr name=\"{{ Tid}}\" ><td>&nbsp;&nbsp;</td><td>{{ TeacherName}}</td><td>{{ IsArrage}}</td></tr>{{/FirstSupervisorList}}";
                     var tr2 = "{{#SecondSupervisorList}}<tr name=\"{{ Tid}}\"><td>&nbsp;&nbsp;</td><td>{{ TeacherName}}</td><td>{{ Total}}</td></tr>{{/SecondSupervisorList}}";
 
                     $("#tablesupervisor1 tbody").append(Mustache.render(tr, arrageadd));
@@ -494,6 +494,37 @@ $(document).ready(function () {
         if (findteachername(week, day, classnumber) == true) {
             isallselect(week, day, classnumber, teachername, classtype);
         }
+    });
+    $(document).on("click", "#btnArrageAddsave", function () {
+        var supervisors;
+        var pid;
+        var cid;
+        var stauts;
+        $("#tablesupervisor tbody td").each(function () {
+            supervisors += $(this).text()+",";
+        });
+        cid = $("td#cid").text();
+        pid = cid + $("#week").val() + $("#day").val() + $("#classnumber").val();
+        status = 0;
+        $.post("/Home/ArrageAddSave", { pid:pid,cid:cid,supervisors:supervisors.substr(9) },
+    function (data) {
+        if (data.code == 0) {
+            swal({
+                title: data.msg,//放js显示乱码 所以放这里undef
+                timer: 1500,
+                showConfirmButton: false,
+                type: "success"
+            });
+        }
+        else {
+            swal({
+                title:data.msg,//放js显示乱码 所以放这里
+                timer: 1500,
+                showConfirmButton: false,
+                type: "error"
+            });
+        }
+    });
     });
     //---------Home/ConfirmTemp&&ConfirmSure-----------
     $(document).on("click", "#modifyarrage", function () {
