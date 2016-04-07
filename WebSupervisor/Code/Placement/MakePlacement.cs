@@ -36,7 +36,15 @@ namespace WebSupervisor.Code.Placement
         {
             try
             {
-                string select_teacher = string.Format("select * from teachers where college='{0}'", college);
+                string select_teacher = "";
+                if (college != "") {
+                    select_teacher = string.Format("select * from teachers where college='{0}'", college);
+                }
+                else
+                {
+                    select_teacher = "select * from teachers";
+                }
+               
                 listsupervisor = DBHelper.ExecuteList<TeachersModel>(select_teacher, CommandType.Text, null);//督导表
                 if (listsupervisor.Count >= 0)
                 {
@@ -95,9 +103,7 @@ namespace WebSupervisor.Code.Placement
         {
             if (ResetArrageData()>0)
             {
-                ResetCheckClass();
-                ResetClases();
-                ResetSpareTime();
+               
                 CreatPlan(college);
             }
         }
@@ -108,6 +114,9 @@ namespace WebSupervisor.Code.Placement
         {
             if (config!=null&& initdata(college)>0)
             {
+                ResetCheckClass();//重置督导听课次数
+                ResetClases();//重置教师被听课次数
+                ResetSpareTime();//重置督导空闲时间安排情况
                 for (Week = config.Bweek; Week < config.Eweek; Week++)
                 {
                     UpdataWeek(listcheckcount);
@@ -132,25 +141,30 @@ namespace WebSupervisor.Code.Placement
                                         {
                                             break;
                                         }
-                                        else if (count >= config.MinPeople && count <= config.MaxPeople)
+                                        else if (count >= config.MinPeople && count < config.MaxPeople)
                                         {
+                                            List<SpareTimeModel> tempsparetime = new List<SpareTimeModel>();
                                             foreach (SpareTimeModel spt in sptlist)
                                             {
                                                 group = group + "," + IdToName(spt.Tid);
+                                                tempsparetime.Add(spt);
                                                
                                             }
-                                            WritePlacement(sptlist, classmodel, group);
+                                            WritePlacement(tempsparetime, classmodel, group);
                                         }
-                                        else if (count > config.MaxPeople)
+                                        else if (count >=config.MaxPeople)
                                         {
                                             Random r = new Random();
-                                            int numpeople = r.Next(config.MinPeople,config.MinPeople);
+                                            int numpeople = r.Next(config.MinPeople,config.MaxPeople);
+                                         
+                                            List<SpareTimeModel> tempsparetime = new List<SpareTimeModel>();
                                             for (int i = 0; i <numpeople; i++)
                                             {
                                                 group = group + "," + IdToName(sptlist[i].Tid);
-                                              
+                                                tempsparetime.Add(sptlist[i]);
                                             }
-                                            WritePlacement(sptlist, classmodel, group);
+                                            
+                                            WritePlacement(tempsparetime, classmodel, group);
                                         }
                                         else
                                         {
@@ -223,7 +237,7 @@ namespace WebSupervisor.Code.Placement
             foreach (SpareTimeModel spt in listchange)
             {
 
-                string update = string.Format("update sparetime set tid={0},week={1},day={2},classnumber={3},assign={4} where tid={5} and week={6} and day={7} and classnumber={8}",
+                string update = string.Format("update sparetime set tid='{0}',week={1},day={2},classnumber={3},assign={4} where tid='{5}' and week={6} and day={7} and classnumber={8}",
                     spt.Tid,spt.Week,spt.Day,spt.ClassNumber,spt.Assign, spt.Tid, spt.Week, spt.Day, spt.ClassNumber);
                 DBHelper.ExecuteNonQuery(update,CommandType.Text,null);
             }
@@ -310,7 +324,7 @@ namespace WebSupervisor.Code.Placement
             listcheckcount=listcheckcount.OrderBy(m => m.total).ToList();
             foreach (CheckClassModel model in listcheckcount)
             {
-                if (model.DayNumber==config.DayListen&&model.WeekNumber<config.WeekListen)
+                if (model.DayNumber<config.DayListen&&model.WeekNumber<config.WeekListen)
                 {
                     truelist.Add(model);
                 }
