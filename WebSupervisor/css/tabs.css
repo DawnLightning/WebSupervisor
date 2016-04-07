@@ -29,7 +29,7 @@ ul.tabs {
 	left:5.5%;
 	list-style: none;
 	color:#fff;
-	font-size:0.8em;}
+	}
 ul.tabs li {
 	float: left;
 	margin:0; 
@@ -117,7 +117,7 @@ html ul.tabs li.active, html ul.tabs li.active {
 	left:2%;
     text-decoration: none;
 	text-align:center;
-    font: normal 0.7em/2em Microsoft YaHei;/*字大小跟字距*/
+    font: normal 1em/2em Microsoft YaHei;/*字大小跟字距*/
     text-shadow: 0.2px 0.2px 0.1px rgba(255,255,255, .22);
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
@@ -150,8 +150,8 @@ html ul.tabs li.active, html ul.tabs li.active {
 <!--表格-->
 .container .tab_container table{
 border-left:0px solid #8F8F8F;
-border-top:opx solid #8F8F8F;
-border-right:opx solid #8F8F8F;
+border-top:0px solid #8F8F8F;
+border-right:0px solid #8F8F8F;
 border-bottom:1px solid #8F8F8F;
 }
 
@@ -163,11 +163,11 @@ border-bottom:1px solid #8F8F8F;
     margin: 0px 9px 0 0;
 	width:45px;
 	height:20px;
-	top:4px; 
+	top:2px; 
     float:right;
 	left:-1%;
     text-decoration: none;
-    font: normal 0.6em/2em Microsoft YaHei;/*字大小跟字距*/
+    font: normal 1em/2em Microsoft YaHei;/*字大小跟字距*/
     text-shadow: 0.2px 0.2px 0.1px rgba(255,255,255, .22);
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
@@ -217,14 +217,14 @@ border-bottom:1px solid #8F8F8F;
 	width:45px;
 	height:22px;
 	position:relative;
-	top:4px; 
+	top:2px; 
 	float:left;
     left:10%;
 	}	
 .pages p{
-	font: normal 0.6em/2em Microsoft YaHei;/*字大小跟字距*/
+	font: normal 1em/2em Microsoft YaHei;/*字大小跟字距*/
 	position:relative;
-	top:4px;  /*3个top*/
+	top:2px;  /*3个top*/
 	float:left;
     left:9%;
 	color:#333;
@@ -241,7 +241,7 @@ border-bottom:1px solid #8F8F8F;
     float:right;
 	left:-1%;
     text-decoration: none;
-    font: normal 0.6em/2em Microsoft YaHei;/*字大小跟字距*/
+    font: normal 1em/2em Microsoft YaHei;/*字大小跟字距*/
     text-shadow: 0.2px 0.2px 0.1px rgba(255,255,255, .22);
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
@@ -292,7 +292,7 @@ border-bottom:1px solid #8F8F8F;
     left:10%;
 	}	
 .pagese p{
-	font: normal 0.6em/2em Microsoft YaHei;/*字大小跟字距*/
+	font: normal 1em/2em Microsoft YaHei;/*字大小跟字距*/
 	position:relative;
 	top:-1px;  /*3个top*/
 	float:left;
@@ -330,12 +330,12 @@ overflow:hidden;}
 th p{
 	text-align:center;
 	color:#383838;
-	font: bold 1.25em/2em Microsoft YaHei;/*字大小跟字距*/
+	font: bold 1em/2em Microsoft YaHei;/*字大小跟字距*/
 	}
 tr {
 	text-align:center;
 	color:#383838;
-	font: normal 0.60em/2em Microsoft YaHei;/*字大小跟字距*/
+	font: normal 1em/2em Microsoft YaHei;/*字大小跟字距*/
 	
 	}	
 /*table溢出 未完善定义*/
@@ -383,17 +383,18 @@ text-decoration:none;
     line-height:35px; 
     }/*字体不居中为了不被覆盖*/
 .listtab  { 
-    font: normal 17px/2em Microsoft YaHei;
+    font: normal 1.2em/2em Microsoft YaHei;
     padding:3px;
 	text-align:left;
 	}
 .listtab li{ 
-    font: normal 0.65em/2em Microsoft YaHei;
+    font: normal 1.2em/2em Microsoft YaHei;
     padding:0 0 0 10px;
 	}
 .vltab {
+    font: normal 1.2em/2em Microsoft YaHei;
     height:auto;
-    min-height:495px;
+    min-height:528px;
 	float:left;
 	width:12%; 
 	position:relative;
@@ -402,6 +403,7 @@ text-decoration:none;
 	overflow:hidden;
 	}/*over白板复上面*/
 .vrtab {
+     font: normal 1em/2em Microsoft YaHei;
 	float:left;
 	width:88%;
 	position:relative;
@@ -444,7 +446,7 @@ text-decoration:none;
     float:right;
 	left:-1%;
     text-decoration: none;
-    font: normal 0.65em/2em Microsoft YaHei;/*字大小跟字距*/
+    font: normal 1em/2em Microsoft YaHei;/*字大小跟字距*/
     text-shadow: 0.2px 0.2px 0.1px rgba(255,255,255, .22);
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
@@ -495,7 +497,7 @@ text-decoration:none;
      left:24%;
 	}	
 .dpages p{
-	font: normal 0.65em/2em Microsoft YaHei;/*字大小跟字距*/
+	font: normal 1em/2em Microsoft YaHei;/*字大小跟字距*/
 	position:relative;
 	top:-1px;  /*3个top*/
 	float:left;
@@ -515,13 +517,13 @@ text-decoration:none;
 .muchadd{
 	width:auto;
 	margin-left:2%;
-	font: normal 0.65em/2em Microsoft YaHei;/*字大小跟字距*/
+	font: normal 1em/2em Microsoft YaHei;/*字大小跟字距*/
     float:left;
 	}
 .weeks{
 	margin-top:-3px;
 	margin-right:16px;
-	font: normal 0.65em/2em Microsoft YaHei;/*字大小跟字距*/
+	font: normal 1em/2em Microsoft YaHei;/*字大小跟字距*/
 	}	
 .weeks input{
     border:2px solid #8F8F8F;
@@ -539,7 +541,7 @@ text-decoration:none;
     top:-24.5px;
 	left:45%;
     text-decoration: none;
-   font: normal 0.65em/2em Microsoft YaHei;/*字大小跟字距*/
+   font: normal 1em/2em Microsoft YaHei;/*字大小跟字距*/
     text-shadow: 0.2px 0.2px 0.1px rgba(255,255,255, .22);
     -webkit-border-radius: 9px;
     -moz-border-radius: 9px;
@@ -577,7 +579,7 @@ text-decoration:none;
 	-moz-box-shadow:0px 0px 0px rgba(225,225,225,0);
 }	
 .twenty{
-    font: normal 0.65em/2em Microsoft YaHei;/*字大小跟字距*/
+    font: normal 1em/2em Microsoft YaHei;/*字大小跟字距*/
 	margin-top:-30px;
 	float:right;}
 
@@ -628,3 +630,17 @@ text-decoration:none;
 .mar-two{
 	margin-top:3%
 }
+/* =============================================================================
+  supervisor-table
+============================================================================= */
+.table .table-striped .table-freetime th p{
+	text-align:center;
+	color:#383838;
+	font: bold 0.8em/2em Microsoft YaHei;/*字大小跟字距*/
+	}
+.table .table-striped .table-freetime tr {
+	text-align:center;
+	color:#383838;
+	font: normal 0.8em/2em Microsoft YaHei;/*字大小跟字距*/
+	
+	}

@@ -79,6 +79,7 @@ color : #000 ;
 }
 .margin-md{
   margin-top: 1em;
+  font-size: 1.2em;
 }
 .btn-margin{
   margin-left:20%;
@@ -93,7 +94,7 @@ color : #000 ;
   background-color: rgb(45,62,106);
   outline:none;
   color: rgb(229,222,189);
-  font-size: 1em;
+  font-size: 1.2em;
 }
 .text-style2{
   border-radius: 10px;
@@ -112,6 +113,7 @@ color : #000 ;
   background-color: #fff;
   color: rgb(56,83,130);
   outline:none;
+  font-size: 1.2em;
 }
 /* =============================================================================
   test
@@ -183,7 +185,7 @@ ul.set-tabs {
   left:35%;
   list-style: none;
   color:#fff;
-  font-size:0.8em;}
+  font-size:1em;}
 ul.set-tabs li {
   float: left;
   margin:0; 
@@ -226,6 +228,7 @@ html ul.set-tabs li.active, html ul.set-tabs li.active {
   margin-top: 28px;
   margin-bottom: 0;
   padding:0;
+
 }
 .set-tab_content {
   padding: 0px;
@@ -246,7 +249,7 @@ html ul.set-tabs li.active, html ul.set-tabs li.active {
   background-color: rgb(45,62,106);
   outline:none;
   color: rgb(229,222,189);
-  font-size: .875em;
+  font-size: 1em;
 }
 .color-mar1{
   margin-top: 10%;
@@ -281,7 +284,7 @@ html ul.set-tabs li.active, html ul.set-tabs li.active {
 }
 .time-color{
   color: #fff;
-  font-size: .875em;
+  font-size: 1em;
   font-weight: normal;
 }
 /* =============================================================================
@@ -387,7 +390,7 @@ html ul.sch-tabs li.active, html ul.sch-tabs li.active {
   top:10px;
   color:#fff;
   text-decoration: none;
-  font: normal 0.7em/2em Microsoft YaHei;/*字大小跟字距*/
+  font: normal 1em/2em Microsoft YaHei;/*字大小跟字距*/
   text-shadow: 0.2px 0.2px 0.1px rgba(255,255,255, .22);
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
