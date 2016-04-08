@@ -650,7 +650,7 @@ $(document).ready(function () {
         $(this).removeClass('hover');
     });
     //---------Power/Key-----------
-    $(document).on("click", "#admintable td[width!='2%']", function () {
+    $(document).on("click", "#admintable tr[id!='addadmin'] td[width!='2%']", function () {
         //$('table td').click(function(){    
         if (!$(this).is('.input')) {
             var v = $.trim($(this).text());
