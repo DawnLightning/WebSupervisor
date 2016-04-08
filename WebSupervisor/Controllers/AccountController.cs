@@ -89,7 +89,7 @@ namespace WebSupervisor.Controllers
             try
             {
                 te.Tid = collegeid(te.College) + te.TeacherName;
-                string insertteacher = string.Format("INSERT INTO [dbo].[teachers] ([tid], [teachername], [phone], [email], [college], [indentify], [title], [islimit], [password], [teacherroom]) VALUES (N'{0}', N'{1}', N'{2}', N'{3} ', N'{4}', 0, N' {5}', 1, N'123', N'{6}')",te.Tid,te.TeacherName,te.Phone,te.Email,te.College,te.Title,te.TeacherRoom);
+                string insertteacher = string.Format("INSERT INTO [dbo].[teachers] ([tid], [teachername], [phone], [email], [college], [indentify], [title], [islimit], [password], [teacherroom]) VALUES (N'{0}', N'{1}', N'{2}', N'{3} ', N'{4}', 0, N' {5}', 0, N'123', N'{6}')",te.Tid,te.TeacherName,te.Phone,te.Email,te.College,te.Title,te.TeacherRoom);
                 DBHelper.ExecuteNonQuery(insertteacher, CommandType.Text, null);
                 //DBHelper.Insert<TeachersModel>(te);
                 return Json(new jsondata(0, "添加成功！"));

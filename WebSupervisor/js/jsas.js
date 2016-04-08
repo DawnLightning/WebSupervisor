@@ -622,7 +622,7 @@ $(document).ready(function () {
         });
     });
     //---------Home/Teacher-----------
-    $(document).on("click", "#teachertable td[width!='2%']", function () {
+    $(document).on("click", "#teachertable tr[id!='addtr'] td[width!='2%']", function () {
         //$('table td').click(function(){    
         if (!$(this).is('.input')) {
             var v = $.trim($(this).text());
@@ -735,7 +735,7 @@ $(document).ready(function () {
                 async: false,
                 data: { cbname: teachername, cbclass: classname, cbspcial: major },
                 success: function (htm) {
-                    $("[name='tabcontent']").html(htm)
+                    $("#tab3").html(htm)
                 },
                 error: function () {
                     alert("出错了");
