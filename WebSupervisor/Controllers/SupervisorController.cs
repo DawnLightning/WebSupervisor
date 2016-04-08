@@ -222,7 +222,7 @@ namespace WebSupervisor.Controllers
             //-----freetime----------
             try
             {
-                string sql = string.Format("select * from freetime where tid = {0}", tid);
+                string sql = string.Format("select * from freetime where tid = '{0}'", tid);
                 List<Db_freetime> dbft = DBHelper.ExecuteList<Db_freetime>(sql, CommandType.Text, null);
                 Dictionary<int, object> d = new Dictionary<int, object>();
                 foreach (var ft in dbft)
@@ -232,7 +232,7 @@ namespace WebSupervisor.Controllers
 
                 return mkjson.show(0, d);
             }
-            catch (Exception ex) { return mkjson.show(1, null, "遇到错误保存失败！！" + ex.Message); }
+            catch (Exception ex) { return mkjson.show(1, null, "获取失败！\n" + ex.Message); }
 
         }
         public ActionResult SaveSpareTime(string tid, string week, string freetime)
