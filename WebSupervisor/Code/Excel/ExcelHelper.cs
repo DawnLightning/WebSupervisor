@@ -34,6 +34,7 @@ namespace WebSupervisor
         {
             try
             {
+                Common com = new Common();
                 Excel_dt = new DataTable();
                 HSSFWorkbook hssfworkbook;
                 using (FileStream file = new FileStream(strFileName, FileMode.Open, FileAccess.Read))
@@ -151,7 +152,7 @@ namespace WebSupervisor
 
                                 int classnumindex = strclassname.IndexOf("-");
                                 string tname = ClearTechnicalTitle(teachernamepick);
-                                string tid = collegeid(college) + tname;
+                                string tid = collegeid(college) + com.Get16binary(tname);
                                 //if (i == 7)
                                 //{
                                     SqlParameter[] sp = new SqlParameter[3];
@@ -231,6 +232,7 @@ namespace WebSupervisor
         /// <param name="college">学院</param>
         public void ReadTeacherTable(string filename, string college)
         {
+            Common com = new Common();
             Excel_dt = new DataTable();
             HSSFWorkbook hssfworkbook;
             using (FileStream file = new FileStream(filename, FileMode.Open, FileAccess.Read))
@@ -272,19 +274,21 @@ namespace WebSupervisor
             {
                 if (Excel_dt.Rows[i][0].ToString().Length != 0 && Excel_dt.Rows[i][1].ToString().Length == 11)
                 {
+                    string tname = Excel_dt.Rows[i][0].ToString();
                     TeachersModel m = new TeachersModel();
-                    m.Tid = collegeid(college) + Excel_dt.Rows[i][0].ToString();                    
+                    m.Tid = collegeid(college) +com.Get16binary(tname)  ;                    
                     m.TeacherName = Excel_dt.Rows[i][0].ToString();
                     m.Phone = Excel_dt.Rows[i][1].ToString();
                     if (Excel_dt.Rows[i][2].ToString() != null && Excel_dt.Rows[i][2].ToString() == "1")
                     {
                         m.Indentify = 1;
                         CheckClassModel c = new CheckClassModel();
-                        c.Tid = collegeid(college) + Excel_dt.Rows[i][0].ToString();
+                        c.Tid = collegeid(college) + com.Get16binary(tname);
                         c.DayNumber = 0;
                         c.WeekNumber = 0;
                         c.total = 0;
-                        checkclasslist.Add(c);
+                        //checkclasslist.Add(c);
+                        DBHelper.Insert<CheckClassModel>(c);
                     }
                     else
                     {
@@ -296,7 +300,8 @@ namespace WebSupervisor
                     m.Title = " ";
                     m.Email = " ";
                     m.College = college;
-                    teacherlist.Add(m);
+                    DBHelper.Insert<TeachersModel>(m);
+                    //teacherlist.Add(m);
                 }
 
 

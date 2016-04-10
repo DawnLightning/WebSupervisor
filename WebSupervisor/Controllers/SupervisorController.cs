@@ -35,6 +35,7 @@ namespace WebSupervisor.Controllers
             int i = 1;
             Common com = new Common();
             List<ReferenceModel> referencelist = new List<ReferenceModel>();
+            List<TeachersModel> teacherlist1=DBHelper.ExecuteList<TeachersModel>("select")
             if (year != "" && month != "" && day != "")
             {
                 int a = int.Parse(month);

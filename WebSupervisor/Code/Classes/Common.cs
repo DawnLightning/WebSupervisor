@@ -204,6 +204,18 @@ namespace WebSupervisor.Code.Classes
             }
             return newclassnumber;
         }
+        //汉字转16进制
+        public string Get16binary(string text)
+        {
+            byte[] bytes = Encoding.Unicode.GetBytes(text);
+            string[] strArr = new string[bytes.Length];
+            for (int i = 0; i < bytes.Length; i++)
+            {
+                strArr[i] = bytes[i].ToString("x");
+                
+            }
+            return string.Join("",strArr);
+        }
     }
 }
 
