@@ -35,15 +35,16 @@ namespace WebSupervisor.Controllers
             int i = 1;
             Common com = new Common();
             List<ReferenceModel> referencelist = new List<ReferenceModel>();
-            List<TeachersModel> teacherlist1=DBHelper.ExecuteList<TeachersModel>("select")
             if (year != "" && month != "" && day != "")
             {
+
                 int a = int.Parse(month);
                 int thisday = CalendarTools.weekdays(CalendarTools.CaculateWeekDay(int.Parse(year), int.Parse(month), int.Parse(day)));
                 int thisweek = CalendarTools.WeekOfYear(int.Parse(year), int.Parse(month), int.Parse(day)) - CalendarTools.WeekOfYear(Common.Year, Common.Month, Common.Day) + 1;
                 if (Session["Power"].ToString() == "管理员")
                 {
-                    referencelist = (from t in teacherlist
+                    List<TeachersModel> telist = DBHelper.ExecuteList<TeachersModel>("select * from teachers where college='" + Session["College"].ToString() + "'", CommandType.Text, null);
+                    referencelist = (from t in telist
                                      join c in classlist on t.TeacherName equals c.TeacherName
                                      where t.College == Session["College"].ToString() && c.Week == thisweek && c.Day == thisday
                                      select new ReferenceModel
@@ -79,7 +80,8 @@ namespace WebSupervisor.Controllers
             {
                 if (Session["Power"].ToString() == "管理员")
                 {
-                    referencelist = (from t in teacherlist
+                    List<TeachersModel> telist = DBHelper.ExecuteList<TeachersModel>("select * from teachers where college='" + Session["College"].ToString() + "'", CommandType.Text, null);
+                    referencelist = (from t in telist
                                      join c in classlist on t.TeacherName equals c.TeacherName
                                      where t.College == Session["College"].ToString()
                                      select new ReferenceModel
@@ -217,23 +219,44 @@ namespace WebSupervisor.Controllers
         /// </summary>
         /// <param name="tid">默认值为测试所用</param>
         /// <returns></returns>
-        public string ShowSpareTime(string tid)
-        {
-
+        public ActionResult ShowSpareTime(string tid, int week=1)
+        {            
             //-----freetime----------
             try
             {
-                string sql = string.Format("select * from freetime where tid = '{0}'", tid);
-                List<Db_freetime> dbft = DBHelper.ExecuteList<Db_freetime>(sql, CommandType.Text, null);
-                Dictionary<int, object> d = new Dictionary<int, object>();
-                foreach (var ft in dbft)
+                List<string> sl=new List<string>();
+                Db_freetime dbft = new Db_freetime();
+                dbft.tid = tid;
+                dbft.week = week;
+                for (int i = 1; i < 8; i++)
                 {
-                    d.Add(ft.week, Newtonsoft.Json.JsonConvert.DeserializeObject(ft.freetime));
+                    string selectsparetime = string.Format("select classnumber from sparetime where tid='{0}' and week='{1}' and day='{2}'", tid,week,i);
+                    var classnol = (from sp in splist
+                                   where sp.Week == week && sp.Tid == tid && sp.Day == i
+                                   select sp.ClassNumber).ToList();
+                    //List<int> classnol = DBHelper.ExecuteList<int>(selectsparetime, CommandType.Text, null);
+                    if(classnol.Count>0)
+                    {
+                        int[] stra = classnumberl(classnol).ToArray();
+                        string s0 = string.Join(",", stra);
+                        string s1 = string.Format("\"{0}\":[{1}]", i, s0);
+                        sl.Add(s1);
+                    }
                 }
+                string s = string.Join(",", sl);
+                dbft.freetime = string.Format("{{{0}}}", s);
+                //List<int> dayl=DBHelper.ExecuteList<int>()
+                //string sql = string.Format("select * from freetime where tid = '{0}'", tid);
+                //List<Db_freetime> dbft = DBHelper.ExecuteList<Db_freetime>(sql, CommandType.Text, null);
+                //Dictionary<int, object> d = new Dictionary<int, object>();
+                ////foreach (var ft in dbft)
+                ////{
+                //    d.Add(dbft.week, Newtonsoft.Json.JsonConvert.DeserializeObject(dbft.freetime));
+                //}
 
-                return mkjson.show(0, d);
+                return Json(dbft,JsonRequestBehavior.AllowGet);
             }
-            catch (Exception ex) { return mkjson.show(1, null, "获取失败！\n" + ex.Message); }
+            catch (Exception ex) { return null; }
 
         }
         public ActionResult SaveSpareTime(string tid, string week, string freetime)
