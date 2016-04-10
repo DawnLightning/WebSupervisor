@@ -219,44 +219,39 @@ namespace WebSupervisor.Controllers
         /// </summary>
         /// <param name="tid">默认值为测试所用</param>
         /// <returns></returns>
-        public ActionResult ShowSpareTime(string tid, int week=1)
+        public string ShowSpareTime(string tid)
         {            
             //-----freetime----------
             try
             {
                 List<string> sl=new List<string>();
-                Db_freetime dbft = new Db_freetime();
-                dbft.tid = tid;
-                dbft.week = week;
-                for (int i = 1; i < 8; i++)
+                
+                Dictionary<int, object> d = new Dictionary<int, object>();
+                for (int week = 1; week <= 20; week++)
                 {
-                    string selectsparetime = string.Format("select classnumber from sparetime where tid='{0}' and week='{1}' and day='{2}'", tid,week,i);
-                    var classnol = (from sp in splist
-                                   where sp.Week == week && sp.Tid == tid && sp.Day == i
-                                   select sp.ClassNumber).ToList();
-                    //List<int> classnol = DBHelper.ExecuteList<int>(selectsparetime, CommandType.Text, null);
-                    if(classnol.Count>0)
+                    for (int i = 1; i < 8; i++)
                     {
-                        int[] stra = classnumberl(classnol).ToArray();
-                        string s0 = string.Join(",", stra);
-                        string s1 = string.Format("\"{0}\":[{1}]", i, s0);
-                        sl.Add(s1);
+						//classnol 里的数据有问题
+                        string selectsparetime = string.Format("select classnumber from sparetime where tid='{0}' and week='{1}' and day='{2}'", tid, week, i);
+                        var classnol = (from sp in splist
+                                        where sp.Week == week && sp.Tid == tid && sp.Day == i
+                                        select sp.ClassNumber).ToList();
+                        //List<int> classnol = DBHelper.ExecuteList<int>(selectsparetime, CommandType.Text, null);
+                        if (classnol.Count > 0)
+                        {
+                            int[] stra = classnumberl(classnol).ToArray();
+                            string s0 = string.Join(",", stra);
+                            string s1 = string.Format("\"{0}\":[{1}]", i, s0);
+                            sl.Add(s1);
+                        }
                     }
+                    string s = string.Join(",", sl);
+                    string freetime = string.Format("{{{0}}}", s);
+                    d.Add(week, Newtonsoft.Json.JsonConvert.DeserializeObject(freetime));
                 }
-                string s = string.Join(",", sl);
-                dbft.freetime = string.Format("{{{0}}}", s);
-                //List<int> dayl=DBHelper.ExecuteList<int>()
-                //string sql = string.Format("select * from freetime where tid = '{0}'", tid);
-                //List<Db_freetime> dbft = DBHelper.ExecuteList<Db_freetime>(sql, CommandType.Text, null);
-                //Dictionary<int, object> d = new Dictionary<int, object>();
-                ////foreach (var ft in dbft)
-                ////{
-                //    d.Add(dbft.week, Newtonsoft.Json.JsonConvert.DeserializeObject(dbft.freetime));
-                //}
-
-                return Json(dbft,JsonRequestBehavior.AllowGet);
+                return mkjson.show(0, d);
             }
-            catch (Exception ex) { return null; }
+            catch (Exception ex) { return mkjson.show(1, null, "获取失败！\n" + ex.Message); }
 
         }
         public ActionResult SaveSpareTime(string tid, string week, string freetime)
@@ -266,18 +261,7 @@ namespace WebSupervisor.Controllers
                 foreach (int w in Newtonsoft.Json.JsonConvert.DeserializeObject<int[]>(week))
                 {
                     var ft = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<int, int[]>>(freetime);
-                    //-----freetime----------
-                    try
-                    {
-                        string sql = string.Format("insert into freetime(tid,week,freetime) values('{0}','{1}','{2}')", tid, w, freetime);
-                        DBHelper.ExecuteNonQuery(sql, CommandType.Text, null);
-                    }
-                    catch
-                    {
-                        string sql = string.Format("update freetime set freetime='{0}' where tid='{1}' and week='{2}'", freetime, tid, w);
-                        DBHelper.ExecuteNonQuery(sql, CommandType.Text, null);
-                    }
-                    //-----freetime end----------
+                 
                     //-----sparetime-----------
                     foreach (var f in ft)
                     {
