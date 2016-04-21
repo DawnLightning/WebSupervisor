@@ -10,9 +10,11 @@ using WebSupervisor.Code.Classes;
 using PagedList;
 using System.IO;
 using System.Text;
+using WebSupervisor.Controllers.CheckUser;
 
 namespace WebSupervisor.Controllers
 {
+    [AuthenAdmin]
     public class PowerController : Controller
     {
         List<AdminModel> adminlist = DBHelper.ExecuteList<AdminModel>("select * from admin", CommandType.Text, null);
@@ -52,7 +54,8 @@ namespace WebSupervisor.Controllers
             if (DBHelper.ExecuteNonQuery(insertcommand, CommandType.Text, null) > 0)
             {
                 DBHelper.ExecuteNonQuery("SET IDENTITY_INSERT admin OFF", CommandType.Text, null);
-                return Json(new jsondata(0, "添加成功！"), JsonRequestBehavior.AllowGet);
+                //return Json(new jsondata(0, "添加成功！"), JsonRequestBehavior.AllowGet);
+                return Redirect("/#!/Power/Key");
             }
             else
             {

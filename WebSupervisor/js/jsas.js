@@ -14,25 +14,30 @@ $(document).ready(function () {
         $(this.form).resetForm();
         $("#addtr").hide();
     });
-    $(document).on("click", "input#btnsubmit",
-    function () {
-        $(this.form).ajaxSubmit({
-            dataType: 'json',
-            success: function (data) {
-                if ("string" == typeof (data)) alert(data);
-                else if (data.code == 0) {
-                    alert("Success!" + '\n' + data.msg);
-                    navreload();
-                } else {
-                    alert("Error!" + '\n' + data.msg);
-                }
-            },
-            error: function (xhr) {
-                alert(xhr.responseText);
-            },
-            resetForm: true
-        });
-    });
+    //function submit(id,ur)
+    //{
+
+    //}
+    //$(document).on("click", "input#btnsubmit",
+    //function () {
+    //    $(this.form).ajaxSubmit({
+    //        //url:ur,
+    //        dataType: 'json',
+    //        success: function (data) {
+    //            if ("string" == typeof (data)) alert(data);
+    //            else if (data.code == 0) {
+    //                alert("Success!" + '\n' + data.msg);
+    //                navreload();
+    //            } else {
+    //                alert("Error!" + '\n' + data.msg);
+    //            }
+    //        },
+    //        error: function (xhr) {
+    //            alert(xhr.responseText);
+    //        },
+    //        resetForm: true
+    //    });
+    //});
 
 
     //--------------download-----------------

@@ -219,7 +219,8 @@ namespace WebSupervisor.Controllers
             model.Email = fc["teacherEmail"];
             model.College = fc["college"];
             DBHelper.Insert<TeachersModel>(model);
-            return Json(new jsondata(1, "添加成功！"), JsonRequestBehavior.AllowGet);
+            //return Json(new jsondata(1, "添加成功！"), JsonRequestBehavior.AllowGet);
+            return Redirect("/#!/Home/Teacher");
         }
         [HttpPost]
         public ActionResult SetDate(FormCollection fc)
