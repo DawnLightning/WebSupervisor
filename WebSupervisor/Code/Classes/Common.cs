@@ -9,30 +9,27 @@ using WebDAL;
 
 namespace WebSupervisor.Code.Classes
 {
-    public class jsondata
-    {
-        public int code;
-        public string msg;
-        public jsondata(int _code, string _msg)
-        {
-            code = _code;
-            msg = _msg;
-        }
-    }
     public class mkjson
     {
         public int code;
         public object data;
         public string msg;
-        public mkjson(int _code = 0, object obj = null, string _msg = "success")
+        public mkjson(string _msg, int _code = 0, object _data = null)
         {
-            code = _code;
-            data = obj;
             msg = _msg;
+            code = _code;
+            data = _data;
         }
-        public static string show(int _code = 0, object obj = null, string _msg = "success")
+        /// <summary>
+        /// 返回Json字符串
+        /// </summary>
+        /// <param name="_msg">消息，不能为空，约定成功返回 success </param>
+        /// <param name="_code">错误代码， 0 表示成功, 1 表示失败，默认为失败</param>
+        /// <param name="_data">需要返回的数据，默认为 null </param>
+        /// <returns></returns>
+        public static string show(string _msg, int _code = 1, object _data = null)
         {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(new mkjson(_code, obj, _msg));
+            return Newtonsoft.Json.JsonConvert.SerializeObject(new mkjson(_msg, _code, _data));
         }
     }
 
@@ -212,9 +209,9 @@ namespace WebSupervisor.Code.Classes
             for (int i = 0; i < bytes.Length; i++)
             {
                 strArr[i] = bytes[i].ToString("x");
-                
+
             }
-            return string.Join("",strArr);
+            return string.Join("", strArr);
         }
     }
 }

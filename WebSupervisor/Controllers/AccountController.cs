@@ -65,7 +65,7 @@ namespace WebSupervisor.Controllers
             //    }
 
             //}
-            return this.Json(new jsondata(0, "账号或密码有错，请核对！"), JsonRequestBehavior.AllowGet);
+            return this.Json(new mkjson("账号或密码有错，请核对！", 1), JsonRequestBehavior.AllowGet);
         }
         /// <summary>
         /// 注销
@@ -92,9 +92,9 @@ namespace WebSupervisor.Controllers
                 string insertteacher = string.Format("INSERT INTO [dbo].[teachers] ([tid], [teachername], [phone], [email], [college], [indentify], [title], [islimit], [password], [teacherroom]) VALUES (N'{0}', N'{1}', N'{2}', N'{3} ', N'{4}', 0, N' {5}', 0, N'123', N'{6}')",te.Tid,te.TeacherName,te.Phone,te.Email,te.College,te.Title,te.TeacherRoom);
                 DBHelper.ExecuteNonQuery(insertteacher, CommandType.Text, null);
                 //DBHelper.Insert<TeachersModel>(te);
-                return Json(new jsondata(0, "添加成功！"));
+                return Json(new mkjson("添加成功！", 0));
             }
-            catch (Exception) { return Json(new jsondata(1, "添加失败！")); }
+            catch (Exception) { return Json(new mkjson("添加失败！", 1)); }
         }
         private string collegeid(string college)
         {

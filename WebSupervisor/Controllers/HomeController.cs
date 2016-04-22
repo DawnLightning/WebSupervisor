@@ -96,9 +96,9 @@ namespace WebSupervisor.Controllers
                     DBHelper.ExecuteNonQuery(uapdatecommond, CommandType.Text, null);
 
                 }
-                return Json(new jsondata(0, "保存成功！"), JsonRequestBehavior.AllowGet);
+                return Json(new mkjson("保存成功！", 0), JsonRequestBehavior.AllowGet);
             }
-            catch { return Json(new jsondata(1, "保存失败！"), JsonRequestBehavior.AllowGet); }
+            catch { return Json(new mkjson("保存失败！", 1), JsonRequestBehavior.AllowGet); }
         }
         public ActionResult ConfirmSure(int page = 1, bool ajax = false)
         {
@@ -188,9 +188,9 @@ namespace WebSupervisor.Controllers
                         excel.ReadTeacherTable(fullFileName, Session["College"].ToString());
                     }
                 }
-                return Json(new jsondata(1, "成功导入"));
+                return Json(new mkjson("成功导入", 0));
             }
-            catch { return Json(new jsondata(0, "导入失败")); }
+            catch { return Json(new mkjson("导入失败", 1)); }
         }
         [HttpPost]
         public ActionResult AddTeacher(FormCollection fc)
@@ -235,11 +235,11 @@ namespace WebSupervisor.Controllers
             {
                 com.xmlSave(path);
 
-                return Json(new jsondata(1, "保存成功！"), JsonRequestBehavior.AllowGet);
+                return Json(new mkjson("保存成功！", 0), JsonRequestBehavior.AllowGet);
             }
             catch (Exception)
             {
-                return Json(new jsondata(0, "保存失败！"), JsonRequestBehavior.AllowGet);
+                return Json(new mkjson("保存失败！"), JsonRequestBehavior.AllowGet);
             }
 
         }
@@ -273,9 +273,9 @@ namespace WebSupervisor.Controllers
                         DBHelper.Insert<CheckClassModel>(c);
                     } 
                 }
-                return Json(new jsondata(0, "更新成功"));
+                return Json(new mkjson("更新成功", 0));
             }
-            catch (Exception) { return Json(new jsondata(1, "更新失败")); }
+            catch (Exception) { return Json(new mkjson("更新失败", 1)); }
             ////}
             //return null;
         }
@@ -349,7 +349,7 @@ namespace WebSupervisor.Controllers
             {
                 string insertarrage = string.Format("insert into arrage (pid,cid,supervisors) values('{0}','{1}','{2}')", pid, cid, supervisors);
                 DBHelper.ExecuteNonQuery(insertarrage, CommandType.Text, null);
-                return Json(new jsondata(0, "保存成功！"));
+                return Json(new mkjson("保存成功！", 0));
             }
             catch(Exception ex)
             {
@@ -357,11 +357,11 @@ namespace WebSupervisor.Controllers
                 {
                     string updatearrage = string.Format("update arrage set supervisors='{0}' where pid='{1}'", supervisors, pid);
                     DBHelper.ExecuteNonQuery(updatearrage, CommandType.Text, null);
-                    return Json(new jsondata(0, "修改成功！"));
+                    return Json(new mkjson("修改成功！", 0));
                 }
                 else
                 {
-                    return Json(new jsondata(1, "操作失败！！"));
+                    return Json(new mkjson("操作失败！！", 1));
                 }
             }
         }
@@ -394,11 +394,11 @@ namespace WebSupervisor.Controllers
                     DBHelper.ExecuteNonQuery(delete_arrage, CommandType.Text, null);
                 }
 
-                return this.Json(new jsondata(0, "删除成功"), JsonRequestBehavior.AllowGet);
+                return this.Json(new mkjson("删除成功", 0), JsonRequestBehavior.AllowGet);
             }
             catch (Exception)
             {
-                return this.Json(new jsondata(1, "删除失败"), JsonRequestBehavior.AllowGet);
+                return this.Json(new mkjson("删除失败", 1), JsonRequestBehavior.AllowGet);
             }
         }
         /// <summary>

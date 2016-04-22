@@ -113,16 +113,16 @@ namespace WebSupervisor.Controllers
                 switch (code)
                 {
                     case 0:
-                        return Json(new jsondata(1, filename));
+                        return Json(new mkjson(filename, 1));
                     case 1:
-                        return Json(new jsondata(0, filename));
+                        return Json(new mkjson(filename, 0));
                     case -1:
-                        return Json(new jsondata(1, filename));
+                        return Json(new mkjson(filename, 1));
                     default:
-                        return Json(new jsondata(1, filename));
+                        return Json(new mkjson(filename, 1));
                 }
             }
-            else return Json(new jsondata(0, filename));
+            else return Json(new mkjson(filename, 0));
 
         }
         public ActionResult ExportCList(string cbspcial = "全部", string cbname = "全部", string cbclass = "全部")
