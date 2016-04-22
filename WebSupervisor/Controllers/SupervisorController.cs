@@ -267,8 +267,12 @@ namespace WebSupervisor.Controllers
                     {
                         foreach (int c in classesnummerge(f.Value))
                         {
-                            string update = string.Format("update sparetime set classnumber={0} where tid='{1}' and week='{2}' and day='{3}'", c, tid, w, f.Key);
-                            DBHelper.ExecuteNonQuery(update, CommandType.Text, null);
+                            string updatesql = string.Format("update sparetime set classnumber={0} where tid='{1}' and week='{2}' and day='{3}'", c, tid, w, f.Key);
+                            if (DBHelper.ExecuteNonQuery(updatesql, CommandType.Text, null)==0)
+                            {
+                                string insertsql = string.Format("insert into sparetime (tid,week,day,classnumber) values('{0}','{1}','{2}','{3}') ");
+                                DBHelper.ExecuteNonQuery(insertsql, CommandType.Text, null);
+                            }
                         }
 
                     }
@@ -392,18 +396,37 @@ namespace WebSupervisor.Controllers
         {
             List<string> spareclass = new List<string> { "12", "13", "23", "24", "34", "35", "45", "67", "68", "78", "79", "89", "1011", "1112", "1012" };//枚举所有的连续节次
             List<int> list = new List<int>();
-
-            for (int i = 0; i < clnum.Length; i++)
-            {
-                for (int j = i + 1; j < clnum.Length; j++)
+            //if (clnum.Length == 1)
+            //{
+            //    string str = string.Format("{0}", clnum[0]);
+            //    foreach(var sp in spareclass)
+            //    {
+            //        if (sp.Contains(str))
+            //        {
+            //            list.Add(int.Parse(sp));
+            //        }
+            //    }
+            //}
+            //else
+            //{
+                for (int i = 0; i < clnum.Length; i++)
                 {
-                    string str = string.Format("{0}{1}", clnum[i], clnum[j]);
-                    if (spareclass.Contains(str))
+                    //int j = i + 1;
+                    //if(j)
+                    for (int j = i + 1; j < clnum.Length; j++)
                     {
-                        list.Add(int.Parse(str));
+                        string str = string.Format("{0}{1}", clnum[i], clnum[j]);
+                        foreach (var sp in spareclass)
+                        {
+                            if (sp.Contains(str))
+                            {
+                                list.Add(int.Parse(sp));
+                            }
+                        }
                     }
                 }
-            }
+            //}
+
             return list;
         }
         public ActionResult RmSupervisor(string[] tids)
