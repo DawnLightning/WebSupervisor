@@ -302,7 +302,15 @@ $(document).ready(function () {
                 week: JSON.stringify(free_time.get_week_to_save())
             },
             async: false,
-            success: function () {
+            success: function (data) {
+                if (data._code == 1) {
+                    alert(data._msg);
+                }
+                else {
+                    _this.data.free_time_data = data.data;
+                    //_this.show_free_time_by_week();
+                    $(free_time_config.week_load_selector + " .divbutton").eq(_this.data.week - 1).click();
+                }
                 //这里
             },
             error: function () {
@@ -508,12 +516,12 @@ $(document).ready(function () {
         var cid;
         var stauts;
         $("#tablesupervisor tbody td").each(function () {
-            supervisors += $(this).text()+",";
+            supervisors += $(this).text() + ",";
         });
         cid = $("td#cid").text();
         pid = cid + $("#week").val() + $("#day").val() + $("#classnumber").val();
         status = 0;
-        $.post("/Home/ArrageAddSave", { pid:pid,cid:cid,supervisors:supervisors.substr(9) },
+        $.post("/Home/ArrageAddSave", { pid: pid, cid: cid, supervisors: supervisors.substr(9) },
     function (data) {
         if (data.code == 0) {
             swal({
@@ -525,7 +533,7 @@ $(document).ready(function () {
         }
         else {
             swal({
-                title:data.msg,//放js显示乱码 所以放这里
+                title: data.msg,//放js显示乱码 所以放这里
                 timer: 1500,
                 showConfirmButton: false,
                 type: "error"
@@ -771,7 +779,7 @@ $(document).ready(function () {
             major = "全部"
         $.fileDownload("/Schedule/ExportCList", {
             httpMethod: "Post",
-            data: {cbspcial:major,cbclass:classname,cbname:teachername },
+            data: { cbspcial: major, cbclass: classname, cbname: teachername },
             successCallback: function (url) {
                 swal({ title: "成功！", type: "success", timer: 2000, showConfirmButton: false });
                 // alert('You just got a file download dialog or ribbon for this URL :' + url);

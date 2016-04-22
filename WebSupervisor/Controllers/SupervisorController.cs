@@ -254,7 +254,7 @@ namespace WebSupervisor.Controllers
             catch (Exception ex) { return mkjson.show("获取失败！\n" + ex.Message); }
 
         }
-        public string SaveSpareTime(string tid, string week, string freetime)
+        public ActionResult SaveSpareTime(string tid, string week, string freetime)
         {
             try
             {
@@ -267,20 +267,29 @@ namespace WebSupervisor.Controllers
                     {
                         foreach (int c in classesnummerge(f.Value))
                         {
-                            string updatesql = string.Format("update sparetime set classnumber={0} where tid='{1}' and week='{2}' and day='{3}'", c, tid, w, f.Key);
-                            if (DBHelper.ExecuteNonQuery(updatesql, CommandType.Text, null)==0)
+                            //string updatesql = string.Format("update sparetime set classnumber={0} where tid='{1}' and week='{2}' and day='{3}'and classnumber =", c, tid, w, f.Key);
+                            //if (DBHelper.ExecuteNonQuery(updatesql, CommandType.Text, null)==0)
+                            //{
+                            try
                             {
-                                string insertsql = string.Format("insert into sparetime (tid,week,day,classnumber) values('{0}','{1}','{2}','{3}') ");
+                                string insertsql = string.Format("insert into sparetime (tid,week,day,classnumber,assign) values('{0}','{1}','{2}','{3}','{4}')", tid, w, f.Key, c, 0);
                                 DBHelper.ExecuteNonQuery(insertsql, CommandType.Text, null);
                             }
+                            catch(Exception e)
+                            {
+                                //if(e.Message.Contains("重复的主键"))
+                                continue;
+                            }
+                              
+                            //}
                         }
 
                     }
                     //-----sparetime end-----------
                 }
-                return mkjson.show("success", 0);
+                return RedirectToAction("ShowSparetime",new { tid=tid});
             }
-            catch (Exception ex) { return mkjson.show("遇到错误保存失败！！" + ex.Message); }
+            catch (Exception ex) { return Json( new { _code = 1,_msg="保存失败" } ); }
         }
         //自动填补空闲时间
         [AllowAnonymous]
@@ -418,7 +427,7 @@ namespace WebSupervisor.Controllers
                         string str = string.Format("{0}{1}", clnum[i], clnum[j]);
                         foreach (var sp in spareclass)
                         {
-                            if (sp.Contains(str))
+                            if (sp==str)
                             {
                                 list.Add(int.Parse(sp));
                             }
