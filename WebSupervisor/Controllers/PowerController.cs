@@ -59,7 +59,7 @@ namespace WebSupervisor.Controllers
             }
             else
             {
-                return Json(new jsondata(1, "添加失败！"), JsonRequestBehavior.AllowGet);
+                return Json(new mkjson("添加失败！", 1), JsonRequestBehavior.AllowGet);
             }
 
 
@@ -94,11 +94,11 @@ namespace WebSupervisor.Controllers
                     DBHelper.ExecuteNonQuery(delete_admin, CommandType.Text, null);
                 }
 
-                return this.Json(new jsondata(0, "删除成功"), JsonRequestBehavior.AllowGet);
+                return this.Json(new mkjson("删除成功", 0), JsonRequestBehavior.AllowGet);
             }
             catch (Exception)
             {
-                return this.Json(new jsondata(1, "删除失败"), JsonRequestBehavior.AllowGet);
+                return this.Json(new mkjson("删除失败", 1), JsonRequestBehavior.AllowGet);
             }
         }
         public ActionResult UpdateAdmin(string uid,string property,string value)
@@ -110,9 +110,9 @@ namespace WebSupervisor.Controllers
                     string updateteachers = string.Format("update admin set {0}='{1}' where uid='{2}'", property, value, uid);
                     DBHelper.ExecuteNonQuery(updateteachers, CommandType.Text, null);
                 }
-                return Json(new jsondata(0, "更新成功"));
+                return Json(new mkjson("更新成功", 0));
             }
-            catch (Exception) { return Json(new jsondata(1, "更新失败")); }
+            catch (Exception) { return Json(new mkjson("更新失败", 1)); }
         }
     }
 }

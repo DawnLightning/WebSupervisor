@@ -220,18 +220,18 @@ namespace WebSupervisor.Controllers
         /// <param name="tid">默认值为测试所用</param>
         /// <returns></returns>
         public string ShowSpareTime(string tid)
-        {            
+        {
             //-----freetime----------
             try
             {
-                List<string> sl=new List<string>();
-                
+                List<string> sl = new List<string>();
+
                 Dictionary<int, object> d = new Dictionary<int, object>();
                 for (int week = 1; week <= 20; week++)
                 {
                     for (int i = 1; i < 8; i++)
                     {
-						//classnol 里的数据有问题
+                        //classnol 里的数据有问题
                         string selectsparetime = string.Format("select classnumber from sparetime where tid='{0}' and week='{1}' and day='{2}'", tid, week, i);
                         var classnol = (from sp in splist
                                         where sp.Week == week && sp.Tid == tid && sp.Day == i
@@ -249,19 +249,19 @@ namespace WebSupervisor.Controllers
                     string freetime = string.Format("{{{0}}}", s);
                     d.Add(week, Newtonsoft.Json.JsonConvert.DeserializeObject(freetime));
                 }
-                return mkjson.show(0, d);
+                return mkjson.show("success", 0, d);
             }
-            catch (Exception ex) { return mkjson.show(1, null, "获取失败！\n" + ex.Message); }
+            catch (Exception ex) { return mkjson.show("获取失败！\n" + ex.Message); }
 
         }
-        public ActionResult SaveSpareTime(string tid, string week, string freetime)
+        public string SaveSpareTime(string tid, string week, string freetime)
         {
             try
             {
                 foreach (int w in Newtonsoft.Json.JsonConvert.DeserializeObject<int[]>(week))
                 {
                     var ft = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<int, int[]>>(freetime);
-                 
+
                     //-----sparetime-----------
                     foreach (var f in ft)
                     {
@@ -274,9 +274,9 @@ namespace WebSupervisor.Controllers
                     }
                     //-----sparetime end-----------
                 }
-                return Json(new mkjson());
+                return mkjson.show("success", 0);
             }
-            catch (Exception ex) { return Json(new jsondata(0, "遇到错误保存失败！！" + ex.Message)); }
+            catch (Exception ex) { return mkjson.show("遇到错误保存失败！！" + ex.Message); }
         }
         //自动填补空闲时间
         [AllowAnonymous]
@@ -417,9 +417,9 @@ namespace WebSupervisor.Controllers
                     DBHelper.ExecuteNonQuery(updateteachers, CommandType.Text, null);
                     DBHelper.ExecuteNonQuery(delectsparetime, CommandType.Text, null);
                 }
-                return this.Json(new jsondata(0, "删除成功"), JsonRequestBehavior.AllowGet);
+                return this.Json(new mkjson("删除成功", 0), JsonRequestBehavior.AllowGet);
             }
-            catch (Exception) { return this.Json(new jsondata(1, "删除失败"), JsonRequestBehavior.AllowGet); }
+            catch (Exception) { return this.Json(new mkjson("删除失败", 1), JsonRequestBehavior.AllowGet); }
         }
         /// <summary>
         /// 删除教师
@@ -455,11 +455,11 @@ namespace WebSupervisor.Controllers
                     DBHelper.ExecuteNonQuery(delete_checkclass, CommandType.Text, null);
                 }
 
-                return this.Json(new jsondata(0, "删除成功"), JsonRequestBehavior.AllowGet);
+                return this.Json(new mkjson("删除成功", 0), JsonRequestBehavior.AllowGet);
             }
             catch (Exception)
             {
-                return this.Json(new jsondata(1, "删除失败"), JsonRequestBehavior.AllowGet);
+                return this.Json(new mkjson("删除失败", 1), JsonRequestBehavior.AllowGet);
             }
 
 
