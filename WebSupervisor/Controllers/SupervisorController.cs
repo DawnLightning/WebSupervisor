@@ -221,20 +221,24 @@ namespace WebSupervisor.Controllers
         /// <returns></returns>
         public string ShowSpareTime(string tid)
         {
+            //Encoding e = Encoding.GetEncoding(tid);
             //-----freetime----------
             try
             {
                 List<string> sl = new List<string>();
-
+                var weeks = (from s in splist
+                            where  s.Tid ==tid.ToString()
+                            select s.Week).Distinct();
                 Dictionary<int, object> d = new Dictionary<int, object>();
-                for (int week = 1; week <= 20; week++)
+                foreach (var week in weeks)
                 {
                     for (int i = 1; i < 8; i++)
                     {
+                        
                         //classnol 里的数据有问题
                         string selectsparetime = string.Format("select classnumber from sparetime where tid='{0}' and week='{1}' and day='{2}'", tid, week, i);
                         var classnol = (from sp in splist
-                                        where sp.Week == week && sp.Tid == tid && sp.Day == i
+                                        where sp.Week == week && sp.Tid == tid.ToString() && sp.Day == i
                                         select sp.ClassNumber).ToList();
                         //List<int> classnol = DBHelper.ExecuteList<int>(selectsparetime, CommandType.Text, null);
                         if (classnol.Count > 0)

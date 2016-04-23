@@ -275,7 +275,7 @@ $(document).ready(function () {
                 url: '/Supervisor/ShowSpareTime',
                 type: 'get',
                 dataType: "json",
-                data: { tid: _this.data.tid },
+                data: { tid:  _this.data.tid},
                 success: function (data) {
                     _this.data.free_time_data = data.data;
                     //_this.show_free_time_by_week();
