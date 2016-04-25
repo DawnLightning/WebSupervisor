@@ -255,7 +255,7 @@ namespace WebSupervisor.Controllers
             IPagedList<TeachersModel> Iteachers = teacherlist.ToPagedList(page, 10);
             return PartialView(Iteachers);
         }
-        public ActionResult UpdateTeacher(string tid,string property,string value)
+        public ActionResult UpdateTeacher(string tid, string property, string value)
         {
             try
             {
@@ -263,7 +263,7 @@ namespace WebSupervisor.Controllers
                 {
                     string updateteachers = string.Format("update teachers set {0}='{1}' where tid='{2}'", property, value, tid);
                     DBHelper.ExecuteNonQuery(updateteachers, CommandType.Text, null);
-                    if (property == "indentify"&&value=="1")
+                    if (property == "indentify" && value == "1")
                     {
                         CheckClassModel c = new CheckClassModel();
                         c.Tid = tid;
@@ -271,7 +271,7 @@ namespace WebSupervisor.Controllers
                         c.WeekNumber = 0;
                         c.total = 0;
                         DBHelper.Insert<CheckClassModel>(c);
-                    } 
+                    }
                 }
                 return Json(new mkjson("更新成功", 0));
             }
@@ -351,7 +351,7 @@ namespace WebSupervisor.Controllers
                 DBHelper.ExecuteNonQuery(insertarrage, CommandType.Text, null);
                 return Json(new mkjson("保存成功！", 0));
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 if (ex.ToString().Contains("插入重复键"))
                 {
@@ -446,6 +446,34 @@ namespace WebSupervisor.Controllers
             ExcelHelper exh = new ExcelHelper();
             exh.Export(expel, filename, fullFileName);
             return File(fullFileName, "application/zip-x-compressed", filename + ".xls");
+        }
+        public string SendArrage(SendArrageModel sendmodel)
+        {
+            try
+            {
+                ArrageMessage am = new ArrageMessage();
+                string[] teachernames;
+                if (sendmodel.SuperVisors.Contains(","))
+                {
+                    teachernames = sendmodel.SuperVisors.Split(',');
+                }
+                else
+                {
+                    teachernames = new string[] { sendmodel.SuperVisors };
+                }
+                am.Phone = new List<string>();
+                foreach (var teachername in teachernames)
+                {
+                    var phone = (from t in teacherlist
+                                 where t.TeacherName == teachername.ToString()
+                                 select t.Phone).First();
+                    am.Phone.Add(phone);
+                }
+                am.Message = string.Format("督导员须知：请于{0}到{1}听取{2}老师的{3}，上课内容为{4},督导员有{5}，{6}为督导组长。",
+                    sendmodel.Time, sendmodel.Address, sendmodel.TeacherName, sendmodel.ClassName, sendmodel.ClassContent, sendmodel.SuperVisors, teachernames[0]);
+                return mkjson.show("成功！", 0, am);
+            }
+            catch(Exception ex) { return mkjson.show("失败！",1, ex.Message); }
         }
     }
 }

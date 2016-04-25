@@ -10,7 +10,7 @@
         <button type="button" class="button red" name="btntddelete" formaction="/Home/DeleteArrage" formmethod="post">
             删除
         </button>
-        <a href="#" class="button blue" onclick="sendMsg();">
+        <a href="#" class="button blue" id="sendarrage">
             发送安排
         </a>
         <a href="#" class="button green" onclick="sendResult();">
@@ -96,7 +96,7 @@
                             int nowday = item.Day;
                             int nowWeeks = item.Week;
                             string time = CalendarTools.getdata(Common.Year, nowWeeks, nowday - CalendarTools.weekdays(CalendarTools.CaculateWeekDay(Common.Year, Common.Month, Common.Day)), Common.Month, Common.Day).ToLongDateString() + "" + com.AddSeparator(item.ClassNumber)+"节";
-                            <tr>
+                            <tr id="@checkname">
                                 <td width=2%>
                                     <input type="hidden" name="idname" value="Cid">
                                     <input type="hidden" name="id" value="@item.Cid">

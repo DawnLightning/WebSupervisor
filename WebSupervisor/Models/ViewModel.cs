@@ -58,6 +58,7 @@ namespace WebSupervisor.Models
     /// </summary>
     public class ConfirmModel
     {
+        public string Pid { set; get; }
         public string Cid { set; get; }
         public string ClassName { set; get; }
         public string ClassContent { set; get; }
@@ -195,5 +196,21 @@ namespace WebSupervisor.Models
     public class ReportFileStatusModel{
         public int code { set; get; }
         public string msg { set; get; }
+    }
+    /// <summary>
+    /// 发送安排
+    /// </summary>
+    public class SendArrageModel
+    {
+        public string Pid { set; get; }
+        public string Cid { set; get; }
+        public string ClassName { set; get; }
+        public string ClassContent { set; get; }
+        public string ClassType { set; get; }
+        public string Major { set; get; }
+        public string Address { set; get; }
+        public string TeacherName { set; get; }
+        public string SuperVisors { set; get; }
+        public string Time { set; get; }
     }
 }

@@ -617,7 +617,7 @@ $(document).ready(function () {
     });
     //---------Home/ConfirmSure-----------
     $(document).on("click", "#exportarrage", function () {
-        swal({ title: "Waiting", text: "The file is downloading.", type: "info", timer: 2000, showConfirmButton: false });
+        swal({ title: "Waiting", text: "The file is downloading.", type: "info", timer: 3000, showConfirmButton: false });
         var array = new Array()
         $("input[id='checkconfirmsure']:checked").each(function () {
             array.push($(this).val())
@@ -633,6 +633,40 @@ $(document).ready(function () {
                 swal('错误！', '下载失败！', 'error');
             }
         });
+    });
+    $(document).on("click", "#sendarrage", function () {
+        var array = new Array();
+        $("input[id='checkconfirmsure']:checked").each(function () {
+            var obj=$(this).parent("td").parent("tr");
+            var model = {
+                "Pid": $(this).val(),
+                "Cid": $(this).attr("name"),
+                "ClassName": $(obj).children("td:eq(1)").text().trim(),
+                "ClassContent": $(obj).children("td:eq(2)").text().trim(),
+                "ClassType": $(obj).children("td:eq(3)").text().trim(),
+                "Major": $(obj).children("td:eq(4)").text().trim(),
+                "Address": $(obj).children("td:eq(5)").text().trim(),
+                "TeacherName": $(obj).children("td:eq(6)").text().trim(),
+                "Time": $(obj).children("td:eq(8)").text().trim(),
+                "Supervisors": $(obj).children("td:eq(9)").text().trim()
+            }
+            array.push(model)
+        });
+        for (i in array)
+        {
+            $.ajax({
+                url: '/Home/SendArrage',
+                type: 'post',
+                dataType: "json",
+                data: array[i],
+                success: function (data) {
+
+                },
+                error: function () {
+                    alert("出错了");
+                }
+            });
+        }
     });
     //---------Home/Teacher-----------
     $(document).on("click", "#teachertable tr[id!='addtr'] td[width!='2%']", function () {
