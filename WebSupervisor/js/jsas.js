@@ -308,6 +308,7 @@ $(document).ready(function () {
                     alert(data._msg);
                 }
                 else {
+				    alert("成功保存！");
                     free_time.show_free_time_by_tid(data.tid);
                 }
                 //这里
