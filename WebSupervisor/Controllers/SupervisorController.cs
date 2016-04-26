@@ -265,7 +265,8 @@ namespace WebSupervisor.Controllers
                 foreach (int w in Newtonsoft.Json.JsonConvert.DeserializeObject<int[]>(week))
                 {
                     var ft = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<int, int[]>>(freetime);
-
+                    string deletesql = string.Format("delete from sparetime where tid='{0}' and week='{1}'",tid, w);
+                    DBHelper.ExecuteNonQuery(deletesql, CommandType.Text, null);
                     //-----sparetime-----------
                     foreach (var f in ft)
                     {
@@ -291,7 +292,7 @@ namespace WebSupervisor.Controllers
                     }
                     //-----sparetime end-----------
                 }
-                return RedirectToAction("ShowSparetime",new { tid=tid});
+                return Json( new { tid=tid});
             }
             catch (Exception ex) { return Json( new { _code = 1,_msg="保存失败" } ); }
         }

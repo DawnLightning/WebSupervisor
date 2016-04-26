@@ -281,5 +281,6 @@
     });})
     $("li[name='del']").click(function(){
         free_time.show_free_time_by_tid($(this).attr("value"));
+        $("#submit_freetime").attr("value",$(this).attr("value"));
     })
 </script>

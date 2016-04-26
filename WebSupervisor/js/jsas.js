@@ -2,6 +2,7 @@
 
 //-------------------Ready------------------------
 $(document).ready(function () {
+    var globaltid;
     //----------------checkbox----------------
     $(document).on("click", "input[type='checkbox']", function () {
         var checked = $(this).attr("checked");
@@ -229,7 +230,7 @@ $(document).ready(function () {
             if (typeof _this.data.free_time_data === "undefined") {
                 return;
             }
-            var weekdata = _this.data.free_time_data[_this.data.week];
+            var weekdata = _this.data.free_time_data[Number(_this.data.week)];
             if (typeof weekdata === "undefined") {
                 return;
             }
@@ -297,7 +298,7 @@ $(document).ready(function () {
             type: 'post',
             dataType: "json",
             data: {
-                tid: free_time.get_cur_tid,
+                tid:$(this).val(),
                 freetime: JSON.stringify(free_time.get_free_time_by_table()),
                 week: JSON.stringify(free_time.get_week_to_save())
             },
@@ -307,9 +308,7 @@ $(document).ready(function () {
                     alert(data._msg);
                 }
                 else {
-                    _this.data.free_time_data = data.data;
-                    //_this.show_free_time_by_week();
-                    $(free_time_config.week_load_selector + " .divbutton").eq(_this.data.week - 1).click();
+                    free_time.show_free_time_by_tid(data.tid);
                 }
                 //这里
             },
