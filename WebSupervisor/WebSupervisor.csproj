@@ -43,9 +43,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Deepleo.Weixin.SDK">
-      <HintPath>DLL\Deepleo.Weixin.SDK.dll</HintPath>
-    </Reference>
     <Reference Include="DocX">
       <HintPath>DLL\DocX.dll</HintPath>
     </Reference>
