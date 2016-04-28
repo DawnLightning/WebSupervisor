@@ -20,5 +20,6 @@ namespace WebSupervisor.Models
         public int Islimit { get; set; }
         public string Password { get; set; }
         public string TeacherRoom { set; get; }
+        public string WeChatId { set; get; }
     }
 }

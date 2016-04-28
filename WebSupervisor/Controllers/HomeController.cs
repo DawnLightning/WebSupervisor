@@ -447,11 +447,19 @@ namespace WebSupervisor.Controllers
             exh.Export(expel, filename, fullFileName);
             return File(fullFileName, "application/zip-x-compressed", filename + ".xls");
         }
+        /// <summary>
+        /// 发送安排
+        /// </summary>
+        /// <param name="sendmodel"></param>
+        /// <returns></returns>
         public string SendArrage(SendArrageModel sendmodel)
         {
             try
             {
-                ArrageMessage am = new ArrageMessage();
+                string corpid = "wx57e50bcaf2502c90".ToString();
+                string secrect = "IvQDJakAU5HCRBmwHMCdlPqRvsIElp3UGW7p7SAdXlSOSqqVPDuNLf0z9Vyd9RYT".ToString();
+                var accesstoken = Senparc.Weixin.QY.CommonAPIs.AccessTokenContainer.TryGetToken(corpid, secrect);
+                //ArrageMessage am = new ArrageMessage();
                 string[] teachernames;
                 if (sendmodel.SuperVisors.Contains(","))
                 {
@@ -461,19 +469,48 @@ namespace WebSupervisor.Controllers
                 {
                     teachernames = new string[] { sendmodel.SuperVisors };
                 }
-                am.Phone = new List<string>();
+                //am.Phone = new List<string>();
                 foreach (var teachername in teachernames)
                 {
-                    var phone = (from t in teacherlist
+                    var tid = (from t in teacherlist
                                  where t.TeacherName == teachername.ToString()
                                  select t.Phone).First();
-                    am.Phone.Add(phone);
-                }
-                am.Message = string.Format("督导员须知：请于{0}到{1}听取{2}老师的{3}，上课内容为{4},督导员有{5}，{6}为督导组长。",
+                    string Message = string.Format("督导员须知：请于{0}到{1}听取{2}老师的{3}，上课内容为{4},督导员有{5}，{6}为督导组长。",
                     sendmodel.Time, sendmodel.Address, sendmodel.TeacherName, sendmodel.ClassName, sendmodel.ClassContent, sendmodel.SuperVisors, teachernames[0]);
-                return mkjson.show("成功！", 0, am);
+                    Senparc.Weixin.QY.AdvancedAPIs.MassApi.SendText(accesstoken, tid, null, null, "0", Message);
+                }                               
+                return mkjson.show("成功！", 0, null);
             }
             catch(Exception ex) { return mkjson.show("失败！",1, ex.Message); }
+        }
+        public string SyncWeChat()
+        {
+            //try
+            //{
+                int i=0;
+                string corpid = "wx57e50bcaf2502c90".ToString();
+                string secrect = "IvQDJakAU5HCRBmwHMCdlPqRvsIElp3UGW7p7SAdXlSOSqqVPDuNLf0z9Vyd9RYT".ToString();
+                var accesstoken = Senparc.Weixin.QY.CommonAPIs.AccessTokenContainer.TryGetToken(corpid, secrect);
+                List<TeachersModel> tlist = DBHelper.ExecuteList<TeachersModel>("select * from teachers where islimit=1", CommandType.Text, null);
+                foreach (var teacher in teacherlist)
+                {
+                    try
+                    {
+                        Senparc.Weixin.QY.AdvancedAPIs.MailListApi.CreateMember(accesstoken, teacher.Tid, teacher.TeacherName, new int[] { 10 + teacher.Indentify }, teacher.College, teacher.Phone);
+                    }
+                    catch
+                    {
+                        i++;
+                        continue;
+                    }                    
+                }
+                string msg = string.Format("{0}条记录同步失败", i);
+                return msg; 
+            //}
+            //catch(Exception ex)
+            //{
+            //    return mkjson.show("同步失败！！",1, ex.Message);
+            //}
         }
     }
 }

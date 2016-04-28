@@ -4,13 +4,22 @@
 
 <div class="row">
     <div class="col-lg-5 col-sm-12 col-xs-12">
-        <button id="upload" type="button" class="button blue" ></button>
+        <button id="upload" type="button" class="button blue"></button>
+        @{
+            if (Session["Power"] == "超级管理员")
+           {
+                <button type="button" class="button blue" id="btnsync">
+                    同步微信
+                </button>
+           }
+        }
         <button type="button" class="button green" onClick="$('#addtr').show()">
             添加
         </button>
         <button type="button" name="btntddelete" class="button red" formaction="/Supervisor/DeleteTeacher" formmethod="post">
             删除
         </button>
+
     </div>
 </div>
 <!-- /.row -->
@@ -64,10 +73,10 @@
                     </p>
                 </th>
                 @*<th>
-                    <p>
-                       操作
-                    </p>
-                </th>*@
+                        <p>
+                           操作
+                        </p>
+                    </th>*@
                 <th>
                     <p>
                         已审核
@@ -131,74 +140,74 @@
                         {
                             islimit = "是";
                         }
-                        <tr value="@item.Tid">
-                            <td width=2%>
+                <tr value="@item.Tid">
+                    <td width=2%>
 
-                                <input type="checkbox" name="tdcbid" value=@item.Tid>
+                        <input type="checkbox" name="tdcbid" value=@item.Tid>
 
-                            </td>
-                            <td id="tid">
-                                @item.Tid
-                            </td>
-                            <td id="teachername">
-                                @item.TeacherName
-                            </td>
-                            <td id="title">
-                                @item.Title
-                            </td>
-                            <td id="teacherroom">
-                                @item.TeacherRoom
-                            </td>
-                            <td id="phone">
-                                @item.Phone
-                            </td>
-                            <td id="email">
-                                @item.Email
-                            </td>
-                            <td id="indentify">
+                    </td>
+                    <td id="tid">
+                        @item.Tid
+                    </td>
+                    <td id="teachername">
+                        @item.TeacherName
+                    </td>
+                    <td id="title">
+                        @item.Title
+                    </td>
+                    <td id="teacherroom">
+                        @item.TeacherRoom
+                    </td>
+                    <td id="phone">
+                        @item.Phone
+                    </td>
+                    <td id="email">
+                        @item.Email
+                    </td>
+                    <td id="indentify">
 
-                                @identify
+                        @identify
 
-                            </td>
-                            <td id="islimit">
-                                @islimit
-                            </td>
-                        </tr>
+                    </td>
+                    <td id="islimit">
+                        @islimit
+                    </td>
+                </tr>
                     }
                     else
                     {
-                        <tr>
-                            <td width=2%>
-                                &nbsp;
+                <tr>
+                    <td width=2%>
+                        &nbsp;
 
-                            </td>
-                            <td>
-                                &nbsp;
-                            </td>
-                            <td>
-                                &nbsp;
-                            </td>
-                            <td>
-                                &nbsp;
-                            </td>
-                            <td>
-                                &nbsp;
-                            </td>
-                            <td>
-                                &nbsp;
-                            </td>
-                            <td>
-                                &nbsp;
-                            </td>
-                            <td>
+                    </td>
+                    <td>
+                        &nbsp;
+                    </td>
+                    <td>
+                        &nbsp;
+                    </td>
+                    <td>
+                        &nbsp;
+                    </td>
+                    <td>
+                        &nbsp;
+                    </td>
+                    <td>
+                        &nbsp;
+                    </td>
+                    <td>
+                        &nbsp;
+                    </td>
+                    <td>
 
-                                &nbsp;
-                            </td>
-                            <td>
-                                &nbsp;
-                            </td>
+                        &nbsp;
+                    </td>
+                    <td>
+                        &nbsp;
+                    </td>
 
-                        </tr>
+                </tr>
                     }
                 }
             }
@@ -253,7 +262,7 @@
             onUploadSuccess: function (state) {
             },
             onUploadComplete: function () {
-                curhref.replacetag({url:"/Home/TeacherList",tag:"#tab1"});
+                curhref.replacetag({ url: "/Home/TeacherList", tag: "#tab1" });
             }
         })
     });

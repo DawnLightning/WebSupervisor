@@ -104,12 +104,12 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Senparc.Weixin, Version=4.4.1.27274, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Senparc.Weixin.4.4.0\lib\net45\Senparc.Weixin.dll</HintPath>
-      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\Senparc.Weixin.dll</HintPath>
     </Reference>
-    <Reference Include="Senparc.Weixin.QY, Version=3.2.1.27274, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Senparc.Weixin.QY.3.2.0\lib\net45\Senparc.Weixin.QY.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Senparc.Weixin.QY, Version=3.3.5.40025, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\Senparc.Weixin.QY.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -246,6 +246,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Code\Classes\CalendarTools.cs" />
     <Compile Include="Code\Classes\Common.cs" />
+    <Compile Include="Code\Classes\WechatHelper.cs" />
     <Compile Include="Code\Excel\ExcelHelper.cs" />
     <Compile Include="Code\Placement\MakePlacement.cs" />
     <Compile Include="Code\Placement\MakeSpareTime.cs" />

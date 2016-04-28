@@ -696,6 +696,31 @@ $(document).ready(function () {
     }, function () {
         $(this).removeClass('hover');
     });
+    $(document).on("click", "#btnsync", function () {
+        swal({ title: "Waiting", text: "正在同步！！", type: "info", timer: 10000, showConfirmButton: false });
+        $.post("/Home/SyncWeChat","",
+            function (data) {
+                //if (data.code == 0) {
+                    //swal({
+                    //    title: data.msg,//放js显示乱码 所以放这里
+                    //    text:data.data,
+                    //    timer: 1500,
+                    //    showConfirmButton: false,
+                    //    type: "success"
+                    //});
+                    alert(data);
+                //}
+                //else {
+                //    //swal({
+                //    //    title: data.msg,//放js显示乱码 所以放这里
+                //    //    timer: 1500,
+                //    //    showConfirmButton: false,
+                //    //    type: "error"
+                //    //});
+                //    alert(data.msg);
+                //}
+            });
+    });
     //---------Power/Key-----------
     $(document).on("click", "#admintable tr[id!='addadmin'] td[width!='2%']", function () {
         //$('table td').click(function(){    
