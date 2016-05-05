@@ -22,6 +22,8 @@ namespace WebSupervisor.Code.Placement
         private int Day;//上课天
         private int Index = 0;//数组spareclass的索引
         private ArrageConfigModel config = null;
+        Random r;
+
         public MakePlacement(ArrageConfigModel config)
         {
             this.config = config;
@@ -101,7 +103,7 @@ namespace WebSupervisor.Code.Placement
         /// </summary>
         public void ReCreatPlan(string college)
         {
-            if (ResetArrageData()>0)
+            if (ResetArrageData()>=0)
             {
                
                 CreatPlan(college);
@@ -154,11 +156,12 @@ namespace WebSupervisor.Code.Placement
                                         }
                                         else if (count >=config.MaxPeople)
                                         {
-                                            Random r = new Random();
+                                            long tick = DateTime.Now.Ticks;
+                                            r = new Random((int)(tick & 0xffffffffL) | (int)(tick >> 32));
                                             int numpeople = r.Next(config.MinPeople,config.MaxPeople);
-                                         
+                                            
                                             List<SpareTimeModel> tempsparetime = new List<SpareTimeModel>();
-                                            for (int i = 0; i <numpeople; i++)
+                                            for (int i = 0; i < numpeople; i++)
                                             {
                                                 group = group + "," + IdToName(sptlist[i].Tid);
                                                 tempsparetime.Add(sptlist[i]);

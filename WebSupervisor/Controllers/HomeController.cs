@@ -44,6 +44,7 @@ namespace WebSupervisor.Controllers
                                   join b in classlist on a.Cid equals b.Cid
                                   join t in teacherlist on b.TeacherName equals t.TeacherName
                                   where a.Stauts == 0 && t.College == Session["College"].ToString()
+                                  orderby b.Week
                                   select new ConfirmModel
                                   {
                                       Cid = a.Cid,
@@ -65,6 +66,7 @@ namespace WebSupervisor.Controllers
                                   join b in classlist on a.Cid equals b.Cid
                                   join t in teacherlist on b.TeacherName equals t.TeacherName
                                   where a.Stauts == 0
+                                  orderby b.Week
                                   select new ConfirmModel
                                   {
                                       Cid = a.Cid,
@@ -109,6 +111,7 @@ namespace WebSupervisor.Controllers
                                   join b in classlist on a.Cid equals b.Cid
                                   join t in teacherlist on b.TeacherName equals t.TeacherName
                                   where a.Stauts == 1 && t.College == Session["College"].ToString()
+                                  orderby b.Week
                                   select new ConfirmModel
                                   {
                                       Cid = a.Cid,
@@ -130,6 +133,7 @@ namespace WebSupervisor.Controllers
                                   join b in classlist on a.Cid equals b.Cid
                                   //join t in teacherlist on b.TeacherName equals t.TeacherName
                                   where a.Stauts == 1
+                                  orderby b.Week
                                   select new ConfirmModel
                                   {
                                       Cid = a.Cid,

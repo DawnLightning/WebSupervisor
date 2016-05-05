@@ -659,8 +659,8 @@ $(document).ready(function () {
                 type: 'post',
                 dataType: "json",
                 data: array[i],
-                success: function (data) {
-
+                success: function () {
+                    alert("发送成功！！");
                 },
                 error: function () {
                     alert("出错了");
