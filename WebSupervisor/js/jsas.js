@@ -659,8 +659,13 @@ $(document).ready(function () {
                 type: 'post',
                 dataType: "json",
                 data: array[i],
-                success: function () {
-                    alert("发送成功！！");
+                success: function (data) {
+                    swal({
+                        title: "发送成功",//放js显示乱码 所以放这里
+                        timer: 1500,
+                        showConfirmButton: false,
+                        type: "success"
+                    });
                 },
                 error: function () {
                     alert("出错了");

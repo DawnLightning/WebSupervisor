@@ -5,6 +5,7 @@ using System.Web;
 using WebDAL;
 using WebSupervisor.Models;
 using System.Data;
+using WebSupervisor.Code.Classes;
 namespace WebSupervisor.Code.Placement
 {
     public class MakePlacement
@@ -22,7 +23,7 @@ namespace WebSupervisor.Code.Placement
         private int Day;//上课天
         private int Index = 0;//数组spareclass的索引
         private ArrageConfigModel config = null;
-        Random r;
+        //Random r;
 
         public MakePlacement(ArrageConfigModel config)
         {
@@ -157,8 +158,8 @@ namespace WebSupervisor.Code.Placement
                                         else if (count >=config.MaxPeople)
                                         {
                                             long tick = DateTime.Now.Ticks;
-                                            r = new Random((int)(tick & 0xffffffffL) | (int)(tick >> 32));
-                                            int numpeople = r.Next(config.MinPeople,config.MaxPeople);
+                                            //r = new Random((int)(tick & 0xffffffffL) | (int)(tick >> 32));
+                                            int numpeople =RNG.Next(config.MinPeople,config.MaxPeople);
                                             
                                             List<SpareTimeModel> tempsparetime = new List<SpareTimeModel>();
                                             for (int i = 0; i < numpeople; i++)

@@ -246,6 +246,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Code\Classes\CalendarTools.cs" />
     <Compile Include="Code\Classes\Common.cs" />
+    <Compile Include="Code\Classes\Rand.cs" />
     <Compile Include="Code\Classes\WechatHelper.cs" />
     <Compile Include="Code\Excel\ExcelHelper.cs" />
     <Compile Include="Code\Placement\MakePlacement.cs" />

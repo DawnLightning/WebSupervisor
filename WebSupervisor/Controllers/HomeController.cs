@@ -478,7 +478,7 @@ namespace WebSupervisor.Controllers
                 {
                     var tid = (from t in teacherlist
                                  where t.TeacherName == teachername.ToString()
-                                 select t.Phone).First();
+                                 select t.Tid).First();
                     string Message = string.Format("督导员须知：请于{0}到{1}听取{2}老师的{3}，上课内容为{4},督导员有{5}，{6}为督导组长。",
                     sendmodel.Time, sendmodel.Address, sendmodel.TeacherName, sendmodel.ClassName, sendmodel.ClassContent, sendmodel.SuperVisors, teachernames[0]);
                     Senparc.Weixin.QY.AdvancedAPIs.MassApi.SendText(accesstoken, tid, null, null, "0", Message);
